@@ -1,1 +1,1 @@
-This is a place holder README for the initial commit
+This project is a collaboration of work done by Joshua Kennedy,
