@@ -1,1 +1,1 @@
-This project is a collaboration of work done by Joshua Kennedy, Colin Thomas
+This project is a collaboration of work done by Joshua Kennedy, Colin Thomas, Spencer Naugler
