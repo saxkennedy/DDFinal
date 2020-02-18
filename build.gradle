@@ -32,6 +32,9 @@ test {
 }
 
 dependencies {
+    //junit
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
+    // pdfbox
+    compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.1'
 }
