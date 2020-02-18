@@ -36,5 +36,9 @@ public class PdfTest {
         catch( IOException e) {
             e.printStackTrace();
         }
+        // ideas for refactoring
+            // Class PdfFactory takes in a string
+            // methods for editing each part of the pdf (stats etc)
+            // single method that writes new character guide
     }
 }
