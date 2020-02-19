@@ -110,6 +110,8 @@ public class View extends Application {
         });
 
 
+
+
         stage.setScene(scene0);
         stage.setTitle("Dungeons and Dragons Fighter Generator");
         stage.show();
