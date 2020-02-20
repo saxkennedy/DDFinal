@@ -1,11 +1,18 @@
 package edu.bsu.cs222.dndcharactergenerator;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.beans.EventHandler;
 
 public class View extends Application {
 
@@ -58,15 +65,44 @@ public class View extends Application {
         races.getItems().addAll("Dragonborn","Dwarf","Elf","Gnome","Half-Elf","Halfling","Half-Orc","Human","Tiefling");
         vbox1.getChildren().addAll(raceSelection,races,statGeneration,diceRoller,rolledStats,strLabel,strBox,dexLabel,dexBox,conLabel,conBox,intLabel,intBox,wisLabel,wisBox,chaLabel,chaBox,nextToRacial,back);
 
-        //DragonBorn Scene
-        VBox dragonbornVbox= new VBox();
-        Scene dragonBornScene=new Scene(dragonbornVbox, 600,600);
-        Label racialAttributes=new Label("Dragonborn Racial Options");
+        //Racial Scene
+        VBox racialVbox= new VBox();
+        Scene racialScene=new Scene(racialVbox, 600,600);
+        Group racialGroup=new Group();
+        Label racialAttributes=new Label(character.getRace()+" Racial Options");
+        Button back2=new Button("Back (Core Attributes)");
+        racialVbox.getChildren().addAll(racialAttributes,racialGroup,back2);
+
+        //Dragonborn Racial Group
         ComboBox breathWeaponSelection = new ComboBox();
         breathWeaponSelection.getItems().addAll("Black Dragon: Acid","Blue Dragon: Lightning","Brass Dragon: Fire","Bronze Dragon: Lightning","Copper Dragon: Acid",
                 "Gold Dragon: Fire","Green Dragon: Poison","Red Dragon: Fire","Silver Dragon: Cold","White Dragon: Cold");
-        Button back2=new Button("Back (Core Attributes)");
-        dragonbornVbox.getChildren().addAll(racialAttributes,breathWeaponSelection,back2);
+
+        //Half-Elf Racial Group
+        Label halfElfRacialAbilityBonus= new Label("Choose which two ability scores to increase by 1");
+        Group halfElfCheckBoxGroup=new Group();
+        CheckBox strCheckBox = new CheckBox("STR");
+        CheckBox dexCheckBox=new CheckBox("DEX");
+        CheckBox conCheckBox= new CheckBox("CON");
+        CheckBox intCheckBox=new CheckBox("INT");
+        CheckBox wisCheckBox = new CheckBox("WIS");
+        CheckBox chaCheckBox = new CheckBox("CHA");
+
+        CheckBox[]halfElfCheckboxes={strCheckBox,dexCheckBox,conCheckBox,intCheckBox,wisCheckBox,chaCheckBox};
+        for (int i=0; i<halfElfCheckboxes.length;i++) {
+            halfElfCheckboxes[i].selectedProperty().addListener((x,oldS,newS) ->
+            {
+                if(newS){
+                    int selected=0;
+                    for(CheckBox option : halfElfCheckboxes) {
+                        if (option.isSelected())
+                            selected++;
+                    }
+                    x.equals(selected <= 2);
+                }
+            });
+        }
+        halfElfCheckBoxGroup.getChildren().addAll(strCheckBox,dexCheckBox,conCheckBox,intCheckBox,wisCheckBox,chaCheckBox);
 
 
         //GO! button
@@ -87,18 +123,21 @@ public class View extends Application {
         //Next to Racial Button
         nextToRacial.setOnAction(actionEvent->{
             if (character.getRace().equals(Race.DRAGONBORN))
-                stage.setScene(dragonBornScene);
-           // if character.getRace().equals(Race.DWARF)
+                racialGroup.getChildren().add(breathWeaponSelection);
+
+            if (character.getRace().equals(Race.HALFELF))
+                racialGroup.getChildren().addAll(halfElfRacialAbilityBonus,halfElfCheckBoxGroup);
+            stage.setScene(racialScene);
         });
         //Back to Core Attributes
         back2.setOnAction(actionEvent->{
+            racialGroup.getChildren().clear();
             stage.setScene(scene1);
         });
+
         //Dice Roller Button
         diceRoller.setOnAction(actionEvent->{
-            //character.setStats();
             rolledStats.setText(character.statRoll().toString());
-            //Populate dice rolls.  This is where I stopped 2/18/2020 Joshua Kennedy
         });
 
         //Stat Buttons
@@ -120,6 +159,8 @@ public class View extends Application {
         chaBox.setOnAction(actionEvent->{
             character.setCHA((int)chaBox.getValue());
         });
+
+
 
 
 
