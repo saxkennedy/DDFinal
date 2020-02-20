@@ -117,7 +117,8 @@ public class Character {
         this.race = enumRace;
         this.race.addRaceModifier(this);
         System.out.println("Race changed to " + race);
-        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n", this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
+        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
+                this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
     public void setName(String name) {

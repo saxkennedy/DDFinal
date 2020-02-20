@@ -16,7 +16,8 @@ public class View extends Application {
 
         //First Scene
         VBox vbox0 = new VBox();
-        Label enterName = new Label("Enter your name below, bold adventurer!  Then press 'GO!'\n\n *Leaving this blank is fine, you can always change it later!");
+        Label enterName = new Label("Enter your name below, bold adventurer!  Then press 'GO!'\n\n" +
+                " *Leaving this blank is fine, you can always change it later!");
         TextField characterName = new TextField();
         Button go = new Button("GO!");
         Scene scene0=new Scene(vbox0,600,600);
@@ -27,7 +28,9 @@ public class View extends Application {
         VBox vbox1= new VBox();
         Scene scene1=new Scene(vbox1, 600,600);
         Label raceSelection=new Label("Choose from one of the below races!");
-        Label statGeneration = new Label("Fill out your rolled stats below.\nWe have provided a dice roller that uses standard rules,\nFeel free to insert your own values, or take ours!");
+        Label statGeneration = new Label("Fill out your rolled stats below.\n" +
+                "We have provided a dice roller that uses standard rules,\n" +
+                "Feel free to insert your own values, or take ours!");
         Button nextToRacial =new Button("Next");
         Button diceRoller=new Button("Roll the Dice!");
 
