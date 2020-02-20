@@ -58,10 +58,14 @@ public class View extends Application {
         races.getItems().addAll("Dragonborn","Dwarf","Elf","Gnome","Half-Elf","Halfling","Half-Orc","Human","Tiefling");
         vbox1.getChildren().addAll(raceSelection,races,statGeneration,diceRoller,rolledStats,strLabel,strBox,dexLabel,dexBox,conLabel,conBox,intLabel,intBox,wisLabel,wisBox,chaLabel,chaBox,nextToRacial,back);
 
-        //Scene 3
+        //Third Scene
         VBox vbox2= new VBox();
         Scene scene2=new Scene(vbox2, 600,600);
         Label racialAttributes=new Label("Racial Options!");
+        Button back2=new Button("Back (Core Attributes)");
+        vbox2.getChildren().addAll(racialAttributes,back2);
+        //THIS IS WHERE I STOPPED 2/19.  Intend to add a set of grouped buttons and fields that very dependent upon race chosen on screen
+        //prior to handle racial stuff like breath attacks, half-elf variant stats, and languages.
 
         //GO! button
         go.setOnAction(actionEvent-> {
@@ -78,10 +82,14 @@ public class View extends Application {
         back.setOnAction(actionEvent->{
             stage.setScene(scene0);
         });
+        //Next to Racial Button
         nextToRacial.setOnAction(actionEvent->{
             stage.setScene(scene2);
         });
-
+        //Back to Core Attributes
+        back2.setOnAction(actionEvent->{
+            stage.setScene(scene1);
+        });
         //Dice Roller Button
         diceRoller.setOnAction(actionEvent->{
             //character.setStats();

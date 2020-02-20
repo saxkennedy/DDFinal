@@ -12,13 +12,44 @@ public class Character {
     int INT;
     int WIS;
     int CHA;
+    int AC;
 
+    int strMod;
+    int dexMod;
+    int conMod;
+    int intMod;
+    int wisMod;
+    int chaMod;
+
+    public int getStrMod() {
+        return strMod;
+    }
+    public int getDexMod() {
+        return dexMod;
+    }
+    public int getConMod() {
+        return conMod;
+    }
+    public int getIntMod() {
+        return intMod;
+    }
+    public int getWisMod() {
+        return wisMod;
+    }
+    public int getChaMod() {
+        return chaMod;
+    }
+
+    public void updateArmorClass(int AC){
+        this.AC=10+AC;
+    }
     public int getSTR() {
         return STR;
     }
 
     public void setSTR(int STR) {
         this.STR = STR;
+        strMod=(int)(Math.floor((this.STR-10)/2));
     }
 
     public int getDEX() {
@@ -27,14 +58,14 @@ public class Character {
 
     public void setDEX(int DEX) {
         this.DEX = DEX;
+        dexMod=(int)(Math.floor((this.DEX-10)/2));
     }
 
-    public int getCON() {
-        return CON;
-    }
+    public int getCON() { return CON;}
 
     public void setCON(int CON) {
         this.CON = CON;
+        conMod=(int)(Math.floor((this.CON-10)/2));
     }
 
     public int getINT() {
@@ -43,6 +74,7 @@ public class Character {
 
     public void setINT(int INT) {
         this.INT = INT;
+        intMod=(int)(Math.floor((this.INT-10)/2));
     }
 
     public int getWIS() {
@@ -51,6 +83,7 @@ public class Character {
 
     public void setWIS(int WIS) {
         this.WIS = WIS;
+        wisMod=(int)(Math.floor((this.WIS-10)/2));
     }
 
     public int getCHA() {
@@ -59,6 +92,7 @@ public class Character {
 
     public void setCHA(int CHA) {
         this.CHA = CHA;
+        chaMod=(int)(Math.floor((this.CHA-10)/2));
     }
 
 
@@ -74,7 +108,7 @@ public class Character {
     }
 
     public void setRace(String race) {
-        if(this.race != null) {
+        if (this.race != null) {
             System.out.println("Old race bonus removed");
             this.race.removeRaceModifier(this);
         }
@@ -83,7 +117,7 @@ public class Character {
         this.race = enumRace;
         this.race.addRaceModifier(this);
         System.out.println("Race changed to " + race);
-        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",this.STR,this.DEX,this.CON,this.INT,this.WIS,this.CHA);
+        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n", this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
     public void setName(String name) {
@@ -96,7 +130,7 @@ public class Character {
     }
 
     public Race assignEnumRace(String race) {
-        switch(race) {
+        switch (race) {
             case "Half-Orc":
                 return Race.HALFORC;
             case "Dragonborn":
