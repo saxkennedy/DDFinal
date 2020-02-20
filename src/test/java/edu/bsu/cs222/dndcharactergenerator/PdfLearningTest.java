@@ -14,15 +14,14 @@ import java.io.InputStream;
 import java.util.List;
 
 public class PdfLearningTest {
-    // personal api reference
-
-    //RandomAccessFile (stream type to put PDF File into)
-    //PDFParser (used to get PDDocument from PDF file)
-    //PDDocument (in memory pdf document)
-    //PDDocument.getDocument() (gets low level document, whatever that means)
-    //COSDocument (low level used for copying a document)
-    // todo: find fix for pathing
-    // todo: remember to close document when no longer needed
+    // todo: uncomment when functionality is finished
+//    PdfGenerator generator = new PdfGenerator.Builder()
+//            .setArmorClass()
+//            .setCharacterName()
+//            .setRace()
+//            .setSavingThrows()
+//            .setSkills()
+//            .build();
 
     @Test
     @DisplayName("setup")
