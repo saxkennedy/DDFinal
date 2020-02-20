@@ -38,3 +38,7 @@ dependencies {
     // pdfbox
     compile group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.1'
 }
+
+application {
+    mainClassName = 'edu.bsu.cs222.dndcharactergenerator.View'
+}
