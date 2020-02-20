@@ -58,14 +58,16 @@ public class View extends Application {
         races.getItems().addAll("Dragonborn","Dwarf","Elf","Gnome","Half-Elf","Halfling","Half-Orc","Human","Tiefling");
         vbox1.getChildren().addAll(raceSelection,races,statGeneration,diceRoller,rolledStats,strLabel,strBox,dexLabel,dexBox,conLabel,conBox,intLabel,intBox,wisLabel,wisBox,chaLabel,chaBox,nextToRacial,back);
 
-        //Third Scene
-        VBox vbox2= new VBox();
-        Scene scene2=new Scene(vbox2, 600,600);
-        Label racialAttributes=new Label("Racial Options!");
+        //DragonBorn Scene
+        VBox dragonbornVbox= new VBox();
+        Scene dragonBornScene=new Scene(dragonbornVbox, 600,600);
+        Label racialAttributes=new Label("Dragonborn Racial Options");
+        ComboBox breathWeaponSelection = new ComboBox();
+        breathWeaponSelection.getItems().addAll("Black Dragon: Acid","Blue Dragon: Lightning","Brass Dragon: Fire","Bronze Dragon: Lightning","Copper Dragon: Acid",
+                "Gold Dragon: Fire","Green Dragon: Poison","Red Dragon: Fire","Silver Dragon: Cold","White Dragon: Cold");
         Button back2=new Button("Back (Core Attributes)");
-        vbox2.getChildren().addAll(racialAttributes,back2);
-        //THIS IS WHERE I STOPPED 2/19.  Intend to add a set of grouped buttons and fields that very dependent upon race chosen on screen
-        //prior to handle racial stuff like breath attacks, half-elf variant stats, and languages.
+        dragonbornVbox.getChildren().addAll(racialAttributes,breathWeaponSelection,back2);
+
 
         //GO! button
         go.setOnAction(actionEvent-> {
@@ -84,7 +86,9 @@ public class View extends Application {
         });
         //Next to Racial Button
         nextToRacial.setOnAction(actionEvent->{
-            stage.setScene(scene2);
+            if (character.getRace().equals(Race.DRAGONBORN))
+                stage.setScene(dragonBornScene);
+           // if character.getRace().equals(Race.DWARF)
         });
         //Back to Core Attributes
         back2.setOnAction(actionEvent->{
