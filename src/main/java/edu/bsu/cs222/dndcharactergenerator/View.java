@@ -44,7 +44,7 @@ public class View extends Application {
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
                 "Feel free to insert your own values, or take ours!");
-        Button nextToRacial = new Button("Next");
+        Button nextToSkillsBackground = new Button("Next (to Skills and Background");
         Button diceRoller = new Button("Roll the Dice!");
 
         Integer[] statNums = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
@@ -72,46 +72,20 @@ public class View extends Application {
         ComboBox races = new ComboBox();
         Button back = new Button("Back (Name Screen)");
         races.getItems().addAll("Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling");
-        vbox1.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, nextToRacial, back);
+        vbox1.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, nextToSkillsBackground, back);
 
-        //Racial Scene
+        //3rd (Skills and Background)
+        VBox skillBackground = new VBox();
+        Scene skillsAndBackground= new Scene(skillBackground, 600,600);
+        Label skillBackgroundLabel=new Label("Choose your skills and Background");
+        Button nextToRacial = new Button("Next (To racial");
+        Button backToCore =new Button("Back (to Core Attributes");
+
+        //4th (Racial Scene)
         VBox racialVbox = new VBox();
         Scene racialScene = new Scene(racialVbox, 600, 600);
-        Group racialGroup = new Group();
-        Label racialAttributes = new Label(character.getRace() + " Racial Options");
-        Button back2 = new Button("Back (Core Attributes)");
-
-        //Dragonborn Racial Group
-        ComboBox breathWeaponSelection = new ComboBox();
-        breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
-                "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
-
-        //Half-Elf Racial Group
-        Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
-        /*CheckBox strCheckBox = new CheckBox("STR");
-        CheckBox dexCheckBox = new CheckBox("DEX");
-        CheckBox conCheckBox = new CheckBox("CON");
-        CheckBox intCheckBox = new CheckBox("INT");
-        CheckBox wisCheckBox = new CheckBox("WIS");
-        CheckBox chaCheckBox = new CheckBox("CHA");*/
-        String[] statsForBoxes = new String[]{"STR","DEX","CON","INT","WIS","CHA"};
-        final int maxBoxCount=2;
-        final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
-        ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
-            private int listenedCount=0;
-
-            public void changes(ObservableValue<? extends Boolean> o, Boolean oldV, Boolean newV){
-                if (newV){
-                    listenedCount++;
-                    if(listenedCount == maxBoxCount) {
-                        for(CheckBox selBox : halfElfCheckboxes){
-
-                        }
-                    }
-                }
-            }
-        }
-
+        Label racialAttributes = new Label("Specific Racial Options");
+        Button backToSkillsBackground = new Button("Back (to Skills and Background)");
 
 
         //GO! button
@@ -132,17 +106,56 @@ public class View extends Application {
         //Next to Racial Button
         nextToRacial.setOnAction(actionEvent -> {
             if (character.getRace().equals(Race.DRAGONBORN)) {
-                racialVbox.getChildren().addAll(racialAttributes, breathWeaponSelection, back2);
+                ComboBox breathWeaponSelection = new ComboBox();
+                breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
+                        "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
+                racialVbox.getChildren().addAll(racialAttributes, breathWeaponSelection, backToSkillsBackground);
             }
             if (character.getRace().equals(Race.DWARF)){}
-            if (character.getRace().equals(Race.HALFELF)) {
+            if (character.getRace().equals(Race.HALFELF)){
+                Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
+                String[] statsForBoxes = new String[]{"STR","DEX","CON","INT","WIS","CHA"};
+                final int maxBoxCount=2;
+                final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
+                ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+                    private int listenedCount=0;
 
-                racialVbox.getChildren().addAll(racialAttributes, halfElfRacialAbilityBonus, strCheckBox, dexCheckBox, conCheckBox, intCheckBox, wisCheckBox, chaCheckBox, back2);
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        if (newValue){
+                            listenedCount++;
+                            if(listenedCount == maxBoxCount) {
+                                for(CheckBox selBox : halfElfCheckboxes){
+                                    if (!selBox.isSelected()) {
+                                        selBox.setDisable(true);
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            if (listenedCount == maxBoxCount){
+                                for (CheckBox selBox : halfElfCheckboxes){
+                                    selBox.setDisable(false);
+                                }
+                            }
+                            listenedCount--;
+                        }
+                    }
+                };
+                racialVbox.getChildren().addAll(racialAttributes,halfElfRacialAbilityBonus);
+                for(int i =0; i< statsForBoxes.length;i++){
+                    CheckBox selBox = new CheckBox(statsForBoxes[i]);
+                    selBox.selectedProperty().addListener(listener);
+                    racialVbox.getChildren().add(selBox);
+                    halfElfCheckboxes[i]=selBox;
+                }
             }
+
             stage.setScene(racialScene);
+
+
         });
         //Back to Core Attributes
-        back2.setOnAction(actionEvent -> {
+        backToSkillsBackground.setOnAction(actionEvent -> {
             racialVbox.getChildren().clear();
             stage.setScene(scene1);
         });
