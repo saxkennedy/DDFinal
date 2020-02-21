@@ -1,6 +1,8 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -86,13 +88,31 @@ public class View extends Application {
 
         //Half-Elf Racial Group
         Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
-        CheckBox strCheckBox = new CheckBox("STR");
+        /*CheckBox strCheckBox = new CheckBox("STR");
         CheckBox dexCheckBox = new CheckBox("DEX");
         CheckBox conCheckBox = new CheckBox("CON");
         CheckBox intCheckBox = new CheckBox("INT");
         CheckBox wisCheckBox = new CheckBox("WIS");
-        CheckBox chaCheckBox = new CheckBox("CHA");
-        CheckBox[] halfElfCheckboxes = {strCheckBox, dexCheckBox, conCheckBox, intCheckBox, wisCheckBox, chaCheckBox};
+        CheckBox chaCheckBox = new CheckBox("CHA");*/
+        String[] statsForBoxes = new String[]{"STR","DEX","CON","INT","WIS","CHA"};
+        final int maxBoxCount=2;
+        final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
+        ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+            private int listenedCount=0;
+
+            public void changes(ObservableValue<? extends Boolean> o, Boolean oldV, Boolean newV){
+                if (newV){
+                    listenedCount++;
+                    if(listenedCount == maxBoxCount) {
+                        for(CheckBox selBox : halfElfCheckboxes){
+
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         //GO! button
         go.setOnAction(actionEvent -> {
@@ -111,26 +131,15 @@ public class View extends Application {
         });
         //Next to Racial Button
         nextToRacial.setOnAction(actionEvent -> {
-            if (character.getRace().equals(Race.DRAGONBORN))
-                racialVbox.getChildren().addAll(racialAttributes, racialGroup, back2);
-                stage.setScene(racialScene);
-            if (character.getRace().equals(Race.DWARF))
-            if (character.getRace().equals(Race.HALFELF))
-                for (int i = 0; i < halfElfCheckboxes.length; i++) {
-                    halfElfCheckboxes[i].selectedProperty().addListener((x, oldS, newS) ->
-                    {
-                        if (newS) {
-                            int selected = 0;
-                            for (CheckBox option : halfElfCheckboxes) {
-                                if (option.isSelected())
-                                    selected++;
-                            }
-                            x.equals(selected <= 2);
-                        }
-                    });
-                }
-                racialVbox.getChildren().addAll(racialAttributes, halfElfRacialAbilityBonus, strCheckBox, dexCheckBox, conCheckBox, intCheckBox, wisCheckBox, chaCheckBox, back2);
+            if (character.getRace().equals(Race.DRAGONBORN)) {
+                racialVbox.getChildren().addAll(racialAttributes, breathWeaponSelection, back2);
+            }
+            if (character.getRace().equals(Race.DWARF)){}
+            if (character.getRace().equals(Race.HALFELF)) {
 
+                racialVbox.getChildren().addAll(racialAttributes, halfElfRacialAbilityBonus, strCheckBox, dexCheckBox, conCheckBox, intCheckBox, wisCheckBox, chaCheckBox, back2);
+            }
+            stage.setScene(racialScene);
         });
         //Back to Core Attributes
         back2.setOnAction(actionEvent -> {
