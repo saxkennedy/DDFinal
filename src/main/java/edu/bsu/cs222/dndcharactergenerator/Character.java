@@ -1,6 +1,8 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 
+import com.sun.media.sound.InvalidDataException;
+
 import java.util.ArrayList;
 
 public class Character {
@@ -107,17 +109,21 @@ public class Character {
         return race;
     }
 
-    public void setRace(String race) {
+    public void setRace(String race) throws InvalidDataException{
         if (this.race != null) {
             System.out.println("Old race bonus removed");
             this.race.removeRaceModifier(this);
+        }
+        else {
+            throw new InvalidDataException();
         }
 
         Race enumRace = assignEnumRace(race);
         this.race = enumRace;
         this.race.addRaceModifier(this);
         System.out.println("Race changed to " + race);
-        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n", this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
+        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
+                this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
     public void setName(String name) {
