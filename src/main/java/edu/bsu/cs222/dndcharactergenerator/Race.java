@@ -28,7 +28,7 @@ public enum Race {
         this.chr = chr;
     }
 
-    public void addRaceModifier(Character man) {
+    public void addRacialAbilityScoreBonus(Character man) {
         man.setSTR(man.getSTR()+man.getRace().str);
         man.setDEX(man.getDEX()+man.getRace().dex);
         man.setCON(man.getCON()+man.getRace().con);
@@ -37,7 +37,7 @@ public enum Race {
         man.setCHA(man.getCHA()+man.getRace().chr);
     }
 
-    public void removeRaceModifier(Character man) {
+    public void removeRacialAbilityScoreBonus(Character man) {
         man.setSTR(man.getSTR()-man.getRace().str);
         man.setDEX(man.getDEX()-man.getRace().dex);
         man.setCON(man.getCON()-man.getRace().con);

@@ -6,37 +6,37 @@ import java.util.ArrayList;
 public class Character {
     private String name;
     private Race race;
-    private Integer STR;
-    private Integer DEX;
-    private Integer CON;
-    private Integer INT;
-    private Integer WIS;
-    private Integer CHA;
-    private Integer AC;
+    private int STR;
+    private int DEX;
+    private int CON;
+    private int INT;
+    private int WIS;
+    private int CHA;
+    private int AC;
 
-    private Integer strMod;
-    private Integer dexMod;
-    private Integer conMod;
-    private Integer intMod;
-    private Integer wisMod;
-    private Integer chaMod;
+    private int strMod;
+    private int dexMod;
+    private int conMod;
+    private int intMod;
+    private int wisMod;
+    private int chaMod;
 
-    public Integer getStrMod() {
+    public int getStrMod() {
         return strMod;
     }
-    public Integer getDexMod() {
+    public int getDexMod() {
         return dexMod;
     }
-    public Integer getConMod() {
+    public int getConMod() {
         return conMod;
     }
-    public Integer getIntMod() {
+    public int getIntMod() {
         return intMod;
     }
-    public Integer getWisMod() {
+    public int getWisMod() {
         return wisMod;
     }
-    public Integer getChaMod() {
+    public int getChaMod() {
         return chaMod;
     }
 
@@ -44,11 +44,11 @@ public class Character {
         this.AC=10+AC;
     }
 
-    public Integer getAC() {
+    public int getAC() {
         return this.AC;
     }
 
-    public Integer getSTR() {
+    public int getSTR() {
         return STR;
     }
 
@@ -57,7 +57,7 @@ public class Character {
         strMod=(int)(Math.floor((this.STR-10)/2));
     }
 
-    public Integer getDEX() {
+    public int getDEX() {
         return DEX;
     }
 
@@ -66,14 +66,14 @@ public class Character {
         dexMod=(int)(Math.floor((this.DEX-10)/2));
     }
 
-    public Integer getCON() { return CON;}
+    public int getCON() { return CON;}
 
     public void setCON(int CON) {
         this.CON = CON;
         conMod=(int)(Math.floor((this.CON-10)/2));
     }
 
-    public Integer getINT() {
+    public int getINT() {
         return INT;
     }
 
@@ -82,7 +82,7 @@ public class Character {
         intMod=(int)(Math.floor((this.INT-10)/2));
     }
 
-    public Integer getWIS() {
+    public int getWIS() {
         return WIS;
     }
 
@@ -91,7 +91,7 @@ public class Character {
         wisMod=(int)(Math.floor((this.WIS-10)/2));
     }
 
-    public Integer getCHA() {
+    public int getCHA() {
         return CHA;
     }
 
@@ -113,14 +113,14 @@ public class Character {
     }
 
     public void setRace(String race) {
+
         if (this.race != null) {
             System.out.println("Old race bonus removed");
-            this.race.removeRaceModifier(this);
+            this.race.removeRacialAbilityScoreBonus(this);
         }
-
         Race enumRace = assignEnumRace(race);
         this.race = enumRace;
-        this.race.addRaceModifier(this);
+        this.race.addRacialAbilityScoreBonus(this);
         System.out.println("Race changed to " + race);
         System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
                 this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
