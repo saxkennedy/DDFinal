@@ -1,51 +1,54 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 
-import com.sun.media.sound.InvalidDataException;
-
 import java.util.ArrayList;
 
 public class Character {
-    String name;
-    Race race;
-    int STR;
-    int DEX;
-    int CON;
-    int INT;
-    int WIS;
-    int CHA;
-    int AC;
+    private String name;
+    private Race race;
+    private Integer STR;
+    private Integer DEX;
+    private Integer CON;
+    private Integer INT;
+    private Integer WIS;
+    private Integer CHA;
+    private Integer AC;
 
-    int strMod;
-    int dexMod;
-    int conMod;
-    int intMod;
-    int wisMod;
-    int chaMod;
+    private Integer strMod;
+    private Integer dexMod;
+    private Integer conMod;
+    private Integer intMod;
+    private Integer wisMod;
+    private Integer chaMod;
 
-    public int getStrMod() {
+    public Integer getStrMod() {
         return strMod;
     }
-    public int getDexMod() {
+    public Integer getDexMod() {
         return dexMod;
     }
-    public int getConMod() {
+    public Integer getConMod() {
         return conMod;
     }
-    public int getIntMod() {
+    public Integer getIntMod() {
         return intMod;
     }
-    public int getWisMod() {
+    public Integer getWisMod() {
         return wisMod;
     }
-    public int getChaMod() {
+    public Integer getChaMod() {
         return chaMod;
     }
 
     public void updateArmorClass(int AC){
         this.AC=10+AC;
     }
-    public int getSTR() {
+
+    public Integer getAC() {
+        return this.AC;
+    }
+
+    public Integer getSTR() {
         return STR;
     }
 
@@ -54,7 +57,7 @@ public class Character {
         strMod=(int)(Math.floor((this.STR-10)/2));
     }
 
-    public int getDEX() {
+    public Integer getDEX() {
         return DEX;
     }
 
@@ -63,14 +66,14 @@ public class Character {
         dexMod=(int)(Math.floor((this.DEX-10)/2));
     }
 
-    public int getCON() { return CON;}
+    public Integer getCON() { return CON;}
 
     public void setCON(int CON) {
         this.CON = CON;
         conMod=(int)(Math.floor((this.CON-10)/2));
     }
 
-    public int getINT() {
+    public Integer getINT() {
         return INT;
     }
 
@@ -79,7 +82,7 @@ public class Character {
         intMod=(int)(Math.floor((this.INT-10)/2));
     }
 
-    public int getWIS() {
+    public Integer getWIS() {
         return WIS;
     }
 
@@ -88,7 +91,7 @@ public class Character {
         wisMod=(int)(Math.floor((this.WIS-10)/2));
     }
 
-    public int getCHA() {
+    public Integer getCHA() {
         return CHA;
     }
 
@@ -109,13 +112,10 @@ public class Character {
         return race;
     }
 
-    public void setRace(String race) throws InvalidDataException{
+    public void setRace(String race) {
         if (this.race != null) {
             System.out.println("Old race bonus removed");
             this.race.removeRaceModifier(this);
-        }
-        else {
-            throw new InvalidDataException();
         }
 
         Race enumRace = assignEnumRace(race);
