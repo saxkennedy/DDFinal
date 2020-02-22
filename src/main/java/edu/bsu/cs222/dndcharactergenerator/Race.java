@@ -12,12 +12,12 @@ public enum Race {
     TIEFLING(0,0,0,1,0,2);
 
 
-    private final int str;
-    private final int dex;
-    private final int con;
-    private final int intel;
-    private final int wis;
-    private final int chr;
+    public final int str;
+    public final int dex;
+    public final int con;
+    public final int intel;
+    public final int wis;
+    public final int chr;
 
     Race(int str,int dex,int con, int intel, int wis, int chr) {
         this.str = str;
@@ -26,24 +26,6 @@ public enum Race {
         this.intel = intel;
         this.wis = wis;
         this.chr = chr;
-    }
-
-    public void addRacialAbilityScoreBonus(Character man) {
-        man.setSTR(man.getSTR()+man.getRace().str);
-        man.setDEX(man.getDEX()+man.getRace().dex);
-        man.setCON(man.getCON()+man.getRace().con);
-        man.setINT(man.getINT()+man.getRace().intel);
-        man.setWIS(man.getWIS()+man.getRace().wis);
-        man.setCHA(man.getCHA()+man.getRace().chr);
-    }
-
-    public void removeRacialAbilityScoreBonus(Character man) {
-        man.setSTR(man.getSTR()-man.getRace().str);
-        man.setDEX(man.getDEX()-man.getRace().dex);
-        man.setCON(man.getCON()-man.getRace().con);
-        man.setINT(man.getINT()-man.getRace().intel);
-        man.setWIS(man.getWIS()-man.getRace().wis);
-        man.setCHA(man.getCHA()-man.getRace().chr);
     }
 
 }

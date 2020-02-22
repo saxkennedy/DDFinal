@@ -116,11 +116,11 @@ public class Character {
 
         if (this.race != null) {
             System.out.println("Old race bonus removed");
-            this.race.removeRacialAbilityScoreBonus(this);
+            this.removeRacialAbilityScoreBonus();
         }
         Race enumRace = assignEnumRace(race);
         this.race = enumRace;
-        this.race.addRacialAbilityScoreBonus(this);
+        this.addRacialAbilityScoreBonus();
         System.out.println("Race changed to " + race);
         System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
                 this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
@@ -159,5 +159,24 @@ public class Character {
                 return Race.HUMAN;
         }
     }
+
+    public void addRacialAbilityScoreBonus() {
+        this.setSTR(this.getSTR()+this.getRace().str);
+        this.setDEX(this.getDEX()+this.getRace().dex);
+        this.setCON(this.getCON()+this.getRace().con);
+        this.setINT(this.getINT()+this.getRace().intel);
+        this.setWIS(this.getWIS()+this.getRace().wis);
+        this.setCHA(this.getCHA()+this.getRace().chr);
+    }
+
+    public void removeRacialAbilityScoreBonus() {
+        this.setSTR(this.getSTR()-this.getRace().str);
+        this.setDEX(this.getDEX()-this.getRace().dex);
+        this.setCON(this.getCON()-this.getRace().con);
+        this.setINT(this.getINT()-this.getRace().intel);
+        this.setWIS(this.getWIS()-this.getRace().wis);
+        this.setCHA(this.getCHA()-this.getRace().chr);
+    }
+
 
 }

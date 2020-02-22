@@ -19,6 +19,8 @@ import java.beans.EventHandler;
 
 public class View extends Application {
 
+    private String pubRace;
+
     public static void main(String[] args) {
         launch((args));
     }
@@ -95,8 +97,10 @@ public class View extends Application {
         });
 
         //Race Selection
+
         races.setOnAction(actionEvent -> {
             character.setRace(races.getValue().toString());
+            pubRace = races.getValue().toString();
         });
 
         //Back to Name Button
@@ -168,21 +172,27 @@ public class View extends Application {
         //Stat Buttons
         strBox.setOnAction(actionEvent -> {
             character.setSTR((int) strBox.getValue());
+            character.addRacialAbilityScoreBonus();
         });
         dexBox.setOnAction(actionEvent -> {
             character.setDEX((int) dexBox.getValue());
+            character.addRacialAbilityScoreBonus();
         });
         conBox.setOnAction(actionEvent -> {
             character.setCON((int) conBox.getValue());
+            character.addRacialAbilityScoreBonus();
         });
         intBox.setOnAction(actionEvent -> {
             character.setINT((int) intBox.getValue());
+            character.addRacialAbilityScoreBonus();
         });
         wisBox.setOnAction(actionEvent -> {
             character.setWIS((int) wisBox.getValue());
+            character.addRacialAbilityScoreBonus();
         });
         chaBox.setOnAction(actionEvent -> {
             character.setCHA((int) chaBox.getValue());
+            character.addRacialAbilityScoreBonus();
         });
 
 
