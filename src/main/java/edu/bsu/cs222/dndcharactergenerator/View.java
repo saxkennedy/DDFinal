@@ -24,8 +24,6 @@ import java.net.URL;
 
 public class View extends Application {
 
-    private String pubRace;
-
     public static void main(String[] args) {
         launch((args));
     }
@@ -119,12 +117,26 @@ public class View extends Application {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (styleGroup.getSelectedToggle() != null){
-                    String style=styleGroup.getSelectedToggle().getUserData().toString();//COLIN USE THIS!!!!!!!!!!!!!!!!
+                    String style =styleGroup.getSelectedToggle().getUserData().toString();
+                    character.setfStyle(style);
                     System.out.println(style);
+
+                    switch(style) {
+                        case "Archery": combatStyleLabel.setText("+2 bonus to attack rolls made with ranged weapons"); break;
+                        case "Defense": combatStyleLabel.setText("+1 bonus to AC while wearing armor"); break;
+                        case "Dueling": combatStyleLabel.setText("+2 bonus to damage rolls when holding a single weapon"); break;
+                        case "Great Weapon Fighting": combatStyleLabel.setText("You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2"); break;
+                        case "Protection": combatStyleLabel.setText("When wielding a shield, you may impose a disadvantage " +
+                                "on an enemy creature's attack roll when it attacks\na target" +
+                                " other than you that is both within 5 feet of you and in your sight"); break;
+                        case "Two-Weapon Fighting": combatStyleLabel.setText("When you engage in two weapon fighting you can add you ability modifier to the damage of the second attack"); break;
+                        default: combatStyleLabel.setText("No style found"); break;
+                    }
                 }
             }
         });
         combatStyle.getChildren().addAll(combatStyleLabel,archery,defense,dueling,greatWeaponFighting,protection,twoWeaponFighting,styleDescription,backToCore,nextToRacial);
+
         //Button nextToSkillsBackground = new Button("Next (Skills and Background"); For iteration 2
 
         /*4th (Skills and Background)    //THIS IS FOR ITERATION 2
@@ -154,7 +166,6 @@ public class View extends Application {
         //Race Selection
         races.setOnAction(actionEvent -> {
             character.setRace(races.getValue().toString());
-            pubRace = races.getValue().toString();
         });
 
         //Back to Name Button

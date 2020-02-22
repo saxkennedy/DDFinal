@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 public class Character {
     private String name;
+    private String fStyle;
     private Race race;
+
     private int STR;
     private int DEX;
     private int CON;
@@ -24,24 +26,29 @@ public class Character {
     public int getStrMod() {
         return strMod;
     }
+
     public int getDexMod() {
         return dexMod;
     }
+
     public int getConMod() {
         return conMod;
     }
+
     public int getIntMod() {
         return intMod;
     }
+
     public int getWisMod() {
         return wisMod;
     }
+
     public int getChaMod() {
         return chaMod;
     }
 
-    public void updateArmorClass(int AC){
-        this.AC=10+AC;
+    public void updateArmorClass(int AC) {
+        this.AC = 10 + AC;
     }
 
     public int getAC() {
@@ -54,7 +61,7 @@ public class Character {
 
     public void setSTR(int STR) {
         this.STR = STR;
-        strMod=(int)(Math.floor((this.STR-10)/2));
+        strMod = (int) (Math.floor(((float) this.STR - 10) / 2));
     }
 
     public int getDEX() {
@@ -63,14 +70,16 @@ public class Character {
 
     public void setDEX(int DEX) {
         this.DEX = DEX;
-        dexMod=(int)(Math.floor((this.DEX-10)/2));
+        dexMod = (int) (Math.floor(((float) this.DEX - 10) / 2));
     }
 
-    public int getCON() { return CON;}
+    public int getCON() {
+        return CON;
+    }
 
     public void setCON(int CON) {
         this.CON = CON;
-        conMod=(int)(Math.floor((this.CON-10)/2));
+        conMod = (int) (Math.floor(((float) this.CON - 10) / 2));
     }
 
     public int getINT() {
@@ -79,7 +88,7 @@ public class Character {
 
     public void setINT(int INT) {
         this.INT = INT;
-        intMod=(int)(Math.floor((this.INT-10)/2));
+        intMod = (int) (Math.floor((float) (this.INT - 10) / 2));
     }
 
     public int getWIS() {
@@ -88,7 +97,7 @@ public class Character {
 
     public void setWIS(int WIS) {
         this.WIS = WIS;
-        wisMod=(int)(Math.floor((this.WIS-10)/2));
+        wisMod = (int) (Math.floor((float) (this.WIS - 10) / 2));
     }
 
     public int getCHA() {
@@ -97,7 +106,7 @@ public class Character {
 
     public void setCHA(int CHA) {
         this.CHA = CHA;
-        chaMod=(int)(Math.floor((this.CHA-10)/2));
+        chaMod = (int) (Math.floor((float) (this.CHA - 10) / 2));
     }
 
 
@@ -135,6 +144,13 @@ public class Character {
         return name;
     }
 
+    public String getfStyle(){return fStyle; }
+
+    public void setfStyle(String fStyle) {
+        this.fStyle = fStyle;
+        System.out.println("Style changed to " + this.fStyle);
+    }
+
     public Race assignEnumRace(String race) {
         switch (race) {
             case "Half-Orc":
@@ -161,21 +177,21 @@ public class Character {
     }
 
     public void addRacialAbilityScoreBonus() {
-        this.setSTR(this.getSTR()+this.getRace().str);
-        this.setDEX(this.getDEX()+this.getRace().dex);
-        this.setCON(this.getCON()+this.getRace().con);
-        this.setINT(this.getINT()+this.getRace().intel);
-        this.setWIS(this.getWIS()+this.getRace().wis);
-        this.setCHA(this.getCHA()+this.getRace().chr);
+        this.setSTR(this.getSTR() + this.getRace().str);
+        this.setDEX(this.getDEX() + this.getRace().dex);
+        this.setCON(this.getCON() + this.getRace().con);
+        this.setINT(this.getINT() + this.getRace().intel);
+        this.setWIS(this.getWIS() + this.getRace().wis);
+        this.setCHA(this.getCHA() + this.getRace().chr);
     }
 
     public void removeRacialAbilityScoreBonus() {
-        this.setSTR(this.getSTR()-this.getRace().str);
-        this.setDEX(this.getDEX()-this.getRace().dex);
-        this.setCON(this.getCON()-this.getRace().con);
-        this.setINT(this.getINT()-this.getRace().intel);
-        this.setWIS(this.getWIS()-this.getRace().wis);
-        this.setCHA(this.getCHA()-this.getRace().chr);
+        this.setSTR(this.getSTR() - this.getRace().str);
+        this.setDEX(this.getDEX() - this.getRace().dex);
+        this.setCON(this.getCON() - this.getRace().con);
+        this.setINT(this.getINT() - this.getRace().intel);
+        this.setWIS(this.getWIS() - this.getRace().wis);
+        this.setCHA(this.getCHA() - this.getRace().chr);
     }
 
 
