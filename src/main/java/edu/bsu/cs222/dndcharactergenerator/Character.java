@@ -1,12 +1,14 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Character {
     private String name;
     private String fStyle;
     private Race race;
+    private RacialAttribute racialAttribute;
 
     private int STR;
     private int DEX;
@@ -135,6 +137,21 @@ public class Character {
                 this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
+    public void setRacialAttribute(String racialAttribute) {
+
+        if (this.racialAttribute != null) {
+            System.out.println("Old racialAbility bonus removed");
+            this.removeRacialAttributeScoreBonus();
+        }
+        this.assignEnumRacialAttribute(racialAttribute);
+        this.addRacialAttributeScoreBonus();
+        System.out.println("Racial Attribute changed to " + this.racialAttribute.getAttributeName());
+        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
+                this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
+    }
+
+
+
     public void setName(String name) {
         this.name = name;
         System.out.println("Name changed to " + name);
@@ -144,7 +161,9 @@ public class Character {
         return name;
     }
 
-    public String getfStyle(){return fStyle; }
+    public String getfStyle() {
+        return fStyle;
+    }
 
     public void setfStyle(String fStyle) {
         this.fStyle = fStyle;
@@ -172,27 +191,81 @@ public class Character {
             case "Tiefling":
                 return Race.TIEFLING;
             default:
-                return Race.HUMAN;
+                return null;
         }
     }
 
+    public void assignEnumRacialAttribute(String racialAttribute) {
+        switch (racialAttribute) {
+            case "Hill Dwarf: +1 WIS":
+                this.racialAttribute = RacialAttribute.HILLDWARF;
+                break;
+            case "Mountain Dwarf: +2 STR":
+                this.racialAttribute = RacialAttribute.MOUNTAINDWARF;
+                break;
+            case "High Elf: +1 INT":
+                this.racialAttribute = RacialAttribute.HIGHELF;
+                break;
+            case "Wood Elf: +1 WIS":
+                this.racialAttribute = RacialAttribute.WOODELF;
+                break;
+            case "Drow: +1 CHA":
+                this.racialAttribute = RacialAttribute.DROW;
+                break;
+            case "Forest Gnome: +1 DEX":
+                this.racialAttribute = RacialAttribute.FORESTGNOME;
+                break;
+            case "Rock Gnome: +1 CON":
+                this.racialAttribute = RacialAttribute.ROCKGNOME;
+                break;
+            case "Lightfoot: +1 CHA":
+                this.racialAttribute = RacialAttribute.LIGHTFOOT;
+                break;
+            case "Stout: +1 CON":
+                this.racialAttribute = RacialAttribute.STOUT;
+                break;
+            default:
+                    throw new NullPointerException();
+        }
+        this.racialAttribute.setAttributeName(racialAttribute);
+    }
+
     public void addRacialAbilityScoreBonus() {
-        this.setSTR(this.getSTR() + this.getRace().str);
-        this.setDEX(this.getDEX() + this.getRace().dex);
-        this.setCON(this.getCON() + this.getRace().con);
-        this.setINT(this.getINT() + this.getRace().intel);
-        this.setWIS(this.getWIS() + this.getRace().wis);
-        this.setCHA(this.getCHA() + this.getRace().chr);
+        this.setSTR(this.getSTR() + this.race.str);
+        this.setDEX(this.getDEX() + this.race.dex);
+        this.setCON(this.getCON() + this.race.con);
+        this.setINT(this.getINT() + this.race.intel);
+        this.setWIS(this.getWIS() + this.race.wis);
+        this.setCHA(this.getCHA() + this.race.chr);
     }
 
     public void removeRacialAbilityScoreBonus() {
-        this.setSTR(this.getSTR() - this.getRace().str);
-        this.setDEX(this.getDEX() - this.getRace().dex);
-        this.setCON(this.getCON() - this.getRace().con);
-        this.setINT(this.getINT() - this.getRace().intel);
-        this.setWIS(this.getWIS() - this.getRace().wis);
-        this.setCHA(this.getCHA() - this.getRace().chr);
+        this.setSTR(this.getSTR() - this.race.str);
+        this.setDEX(this.getDEX() - this.race.dex);
+        this.setCON(this.getCON() - this.race.con);
+        this.setINT(this.getINT() - this.race.intel);
+        this.setWIS(this.getWIS() - this.race.wis);
+        this.setCHA(this.getCHA() - this.race.chr);
     }
+
+    public void addRacialAttributeScoreBonus() {
+        this.setSTR(this.getSTR() + this.racialAttribute.str);
+        this.setDEX(this.getDEX() + this.racialAttribute.dex);
+        this.setCON(this.getCON() + this.racialAttribute.con);
+        this.setINT(this.getINT() + this.racialAttribute.intel);
+        this.setWIS(this.getWIS() + this.racialAttribute.wis);
+        this.setCHA(this.getCHA() + this.racialAttribute.chr);
+    }
+
+    public void removeRacialAttributeScoreBonus() {
+        this.setSTR(this.getSTR() - this.racialAttribute.str);
+        this.setDEX(this.getDEX() - this.racialAttribute.dex);
+        this.setCON(this.getCON() - this.racialAttribute.con);
+        this.setINT(this.getINT() - this.racialAttribute.intel);
+        this.setWIS(this.getWIS() - this.racialAttribute.wis);
+        this.setCHA(this.getCHA() - this.racialAttribute.chr);
+    }
+
 
 
 }
