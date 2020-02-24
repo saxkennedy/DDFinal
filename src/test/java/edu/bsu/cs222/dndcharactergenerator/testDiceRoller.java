@@ -8,7 +8,13 @@ import java.util.ArrayList;
 public class testDiceRoller {
 
     DiceRoller diceRoller = new DiceRoller();
+    Character player = new Character();
     ArrayList<Integer> diceRolls = diceRoller.getStats();
+
+    @Test
+    public void testRollsStats(){
+        Assertions.assertNotNull(player.statRoll());
+    }
 
     @Test
     public void testHasStats(){
@@ -21,8 +27,8 @@ public class testDiceRoller {
         for(Integer stat: diceRolls){
             if (stat <= 18 && stat >= 3){
                 withinBounds = true;
-                Assertions.assertTrue(withinBounds);
             }
         }
+        Assertions.assertTrue(withinBounds);
     }
 }
