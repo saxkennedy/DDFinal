@@ -25,15 +25,15 @@ public class View extends Application {
 
         //1st Name Scene
         VBox vbox0 = new VBox();
-        Image fighterImage = new Image("/fighterimage.png", true);
-        ImageView fighterImageView = new ImageView();
+        Image fighterImage= new Image("/fighterimage.png",true);
+        ImageView fighterImageView=new ImageView();
         fighterImageView.setImage(fighterImage);
         Label enterName = new Label("Enter your name below, bold adventurer!  Then press 'GO!'\n\n" +
                 " *Leaving this blank is fine, you can always change it later!");
         TextField characterName = new TextField();
         Button go = new Button("GO!");
-        Scene openAndNameScene = new Scene(vbox0, 600, 800);
-        vbox0.getChildren().addAll(fighterImageView, enterName, characterName, go);
+        Scene openAndNameScene = new Scene(vbox0,600,800);
+        vbox0.getChildren().addAll(fighterImageView,enterName, characterName, go);
 
 
         //2nd Core Stats/Race Selection Scene
@@ -43,7 +43,7 @@ public class View extends Application {
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
                 "Feel free to insert your own values, or take ours!");
-        Button nextToCombatStyle = new Button("Next (Combat Style");
+        Button nextToCombatStyle=new Button("Next (Combat Style");
         Button diceRoller = new Button("Roll the Dice!");
         Integer[] statNums = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
         Label rolledStats = new Label("");
@@ -72,7 +72,7 @@ public class View extends Application {
 
         //3rd Scene Combat Style
         VBox combatStyle = new VBox();
-        Scene combatStyleScene = new Scene(combatStyle, 800, 800);
+        Scene combatStyleScene = new Scene(combatStyle,800,800);
         Label combatStyleLabel = new Label("Select a combat style!");
         Label styleDescription = new Label("");
         Button nextToRacial = new Button("Next (Racial)");
@@ -100,47 +100,33 @@ public class View extends Application {
         protection.setUserData("Protection");
         protection.setToggleGroup(styleGroup);
 
-        RadioButton twoWeaponFighting = new RadioButton("Two-Weapon Fighting");
+        RadioButton twoWeaponFighting=new RadioButton("Two-Weapon Fighting");
         twoWeaponFighting.setUserData("Two-Weapon Fighting");
         twoWeaponFighting.setToggleGroup(styleGroup);
 
         styleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                if (styleGroup.getSelectedToggle() != null) {
-                    String style = styleGroup.getSelectedToggle().getUserData().toString();
-                    character.setfStyle(style);
+                if (styleGroup.getSelectedToggle() != null){
+                    String style =styleGroup.getSelectedToggle().getUserData().toString();
+                    character.setStyleLiteral(style);
                     System.out.println(style);
 
-                    switch (style) {
-                        case "Archery":
-                            styleDescription.setText("+2 bonus to attack rolls made with ranged weapons");
-                            break;
-                        case "Defense":
-                            styleDescription.setText("+1 bonus to AC while wearing armor");
-                            break;
-                        case "Dueling":
-                            styleDescription.setText("+2 bonus to damage rolls when holding a single weapon");
-                            break;
-                        case "Great Weapon Fighting":
-                            styleDescription.setText("You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2");
-                            break;
-                        case "Protection":
-                            styleDescription.setText("When wielding a shield, you may impose a disadvantage " +
-                                    "on an enemy creature's attack roll when it attacks\na target" +
-                                    " other than you that is both within 5 feet of you and in your sight");
-                            break;
-                        case "Two-Weapon Fighting":
-                            styleDescription.setText("When you engage in two weapon fighting you can add you ability modifier to the damage of the second attack");
-                            break;
-                        default:
-                            styleDescription.setText("No style found");
-                            break;
+                    switch(style) {
+                        case "Archery": styleDescription.setText("+2 bonus to attack rolls made with ranged weapons"); break;
+                        case "Defense": styleDescription.setText("+1 bonus to AC while wearing armor"); break;
+                        case "Dueling": styleDescription.setText("+2 bonus to damage rolls when holding a single weapon"); break;
+                        case "Great Weapon Fighting": styleDescription.setText("You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2"); break;
+                        case "Protection": styleDescription.setText("When wielding a shield, you may impose a disadvantage " +
+                                "on an enemy creature's attack roll when it attacks\na target" +
+                                " other than you that is both within 5 feet of you and in your sight"); break;
+                        case "Two-Weapon Fighting": styleDescription.setText("When you engage in two weapon fighting you can add you ability modifier to the damage of the second attack"); break;
+                        default: styleDescription.setText("No style found"); break;
                     }
                 }
             }
         });
-        combatStyle.getChildren().addAll(combatStyleLabel, archery, defense, dueling, greatWeaponFighting, protection, twoWeaponFighting, styleDescription, backToCore, nextToRacial);
+        combatStyle.getChildren().addAll(combatStyleLabel,archery,defense,dueling,greatWeaponFighting,protection,twoWeaponFighting,styleDescription,backToCore,nextToRacial);
 
         //Button nextToSkillsBackground = new Button("Next (Skills and Background"); For iteration 2
 
@@ -158,7 +144,7 @@ public class View extends Application {
         Label racialAttributesHeader = new Label("Specific Racial Options");
         Label racialInformation = new Label("COLIN PUT STUFF HERE");
         //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
-        Button backToCombatStyle = new Button("Back (to Core Attributes");//Will go away iteration 2.
+        Button backToCombatStyle =new Button("Back (to Core Attributes");//Will go away iteration 2.
         Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will \n cause Fortitude save, contitution modifier, and hit points fields to remain empty, or reflect only your racial modifiers!\n No one wants a Constition score of 0,1, or 2!");
         Button finish = new Button("Finish");
 
@@ -179,121 +165,116 @@ public class View extends Application {
         });
 
         //Next to Combat Style Button
-        nextToCombatStyle.setOnAction(actionEvent -> {
+        nextToCombatStyle.setOnAction(actionEvent ->{
             stage.setScene(combatStyleScene);
         });
         //Next to Racial Button
         nextToRacial.setOnAction(Event -> {
-            racialVbox.getChildren().addAll(racialAttributesHeader);
-            if (character.getRace().equals(null)) {
-                Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
-                racialVbox.getChildren().addAll(noRaceSelected);
-            }
+                    racialVbox.getChildren().addAll(racialAttributesHeader);
+                    if (character.getRace().equals(null)) {
+                        Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
+                        racialVbox.getChildren().addAll(noRaceSelected);
+                    }
 
-            if (character.getRace().equals(Race.DRAGONBORN)) {
-                ComboBox breathWeaponSelection = new ComboBox();
-                breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
-                        "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
-                racialVbox.getChildren().addAll(breathWeaponSelection);
-                breathWeaponSelection.setOnAction(actionEvent -> {
+                    if (character.getRace().equals(Race.DRAGONBORN)) {
+                        ComboBox breathWeaponSelection = new ComboBox();
+                        breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
+                                "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
+                        racialVbox.getChildren().addAll(breathWeaponSelection);
+                        breathWeaponSelection.setOnAction(actionEvent -> {
+                            character.setRacialAttribute(breathWeaponSelection.getValue().toString());
+                        });
+                    }
+                    if (character.getRace().equals(Race.DWARF)) {
+                        ComboBox dwarfSubRace = new ComboBox();
+                        dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
+                        racialVbox.getChildren().addAll(dwarfSubRace);
+                        dwarfSubRace.setOnAction(actionEvent -> {
+                            character.setRacialAttribute(dwarfSubRace.getValue().toString());
+                        });
 
-                });
-            }
-            if (character.getRace().equals(Race.DWARF)) {
-                ComboBox dwarfSubRace = new ComboBox();
-                dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
-                racialVbox.getChildren().addAll(dwarfSubRace);
-                dwarfSubRace.setOnAction(actionEvent -> {
+                    }
+                    if (character.getRace().equals(Race.ELF)) {
+                        ComboBox elfSubRace = new ComboBox();
+                        elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
+                        racialVbox.getChildren().addAll(elfSubRace);
+                        elfSubRace.setOnAction(actionEvent -> {
+                            character.setRacialAttribute(elfSubRace.getValue().toString());
+                        });
 
-                });
+                    }
+                    if (character.getRace().equals(Race.GNOME)) {
+                        ComboBox gnomeSubRace = new ComboBox();
+                        gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
+                        racialVbox.getChildren().addAll(gnomeSubRace);
+                        gnomeSubRace.setOnAction(actionEvent -> {
+                            character.setRacialAttribute(gnomeSubRace.getValue().toString());
+                        });
 
-            }
-            if (character.getRace().equals(Race.ELF)) {
-                ComboBox elfSubRace = new ComboBox();
-                elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
-                racialVbox.getChildren().addAll(elfSubRace);
-                elfSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(elfSubRace.getValue().toString());
-                });
+                    }
+                    if (character.getRace().equals(Race.HALFELF)) {
+                        Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
+                        String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
+                        final int maxBoxCount = 2;
+                        final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
+                        ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+                            private int listenedCount = 0;
 
-            }
-            if (character.getRace().equals(Race.GNOME)) {
-                ComboBox gnomeSubRace = new ComboBox();
-                gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
-                racialVbox.getChildren().addAll(gnomeSubRace);
-                gnomeSubRace.setOnAction(actionEvent -> {
-
-                });
-
-            }
-            if (character.getRace().equals(Race.HALFELF)) {
-                Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
-                String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
-                final int maxBoxCount = 2;
-                final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
-                ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
-                    private int listenedCount = 0;
-
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        if (newValue) {
-                            listenedCount++;
-                            if (listenedCount == maxBoxCount) {
-                                for (CheckBox selBox : halfElfCheckboxes) {
-                                    if (!selBox.isSelected()) {
-                                        selBox.setDisable(true);
+                            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                                if (newValue) {
+                                    listenedCount++;
+                                    if (listenedCount == maxBoxCount) {
+                                        for (CheckBox selBox : halfElfCheckboxes) {
+                                            if (!selBox.isSelected()) {
+                                                selBox.setDisable(true);
+                                            }
+                                        }
                                     }
-                                }
-                            }
 
-                        } else {
-                            if (listenedCount == maxBoxCount) {
-                                for (CheckBox selBox : halfElfCheckboxes) {
-                                    selBox.setDisable(false);
+                                } else {
+                                    if (listenedCount == maxBoxCount) {
+                                        for (CheckBox selBox : halfElfCheckboxes) {
+                                            selBox.setDisable(false);
+                                        }
+                                    }
+                                    listenedCount--;
                                 }
                             }
-                            listenedCount--;
+                        };
+                        racialVbox.getChildren().addAll(halfElfRacialAbilityBonus);
+                        for (int i = 0; i < statsForBoxes.length; i++) {
+                            CheckBox selBox = new CheckBox(statsForBoxes[i]);
+                            selBox.selectedProperty().addListener(listener);
+                            racialVbox.getChildren().add(selBox);
+                            halfElfCheckboxes[i] = selBox;
                         }
                     }
-                };
-                racialVbox.getChildren().addAll(halfElfRacialAbilityBonus);
-                for (int i = 0; i < statsForBoxes.length; i++) {
-                    CheckBox selBox = new CheckBox(statsForBoxes[i]);
-                    selBox.selectedProperty().addListener(listener);
-                    racialVbox.getChildren().add(selBox);
-                    halfElfCheckboxes[i] = selBox;
-                }
-            }
-            if (character.getRace().equals(Race.HALFLING)) {
-                ComboBox halflingSubRace = new ComboBox();
-                halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
-                racialVbox.getChildren().addAll(halflingSubRace);
-                halflingSubRace.setOnAction(actionEvent -> {
-
-
+                    if (character.getRace().equals(Race.HALFLING)) {
+                        ComboBox halflingSubRace = new ComboBox();
+                        halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
+                        racialVbox.getChildren().addAll(halflingSubRace);
+                        halflingSubRace.setOnAction(actionEvent -> {
+                            character.setRacialAttribute(halflingSubRace.getValue().toString());
+                        });
+                    }
+                    if (character.getRace().equals(Race.HALFORC)) {
+                        Label noSelectionForOrc = new Label("You're a mighty half-orc, you smash good! \nAlso you don't need to wrack that surely massive brain to select further details!");
+                        racialVbox.getChildren().addAll(noSelectionForOrc);
+                    }
+                    if (character.getRace().equals(Race.HUMAN)) {
+                        Label noSelectionForHuman = new Label("You are a human.  Congratulations.");
+                        racialVbox.getChildren().addAll(noSelectionForHuman);
+                    }
+                    if (character.getRace().equals(Race.TIEFLING)) {
+                        Label noSelectionForTiefling = new Label("You are a tiefling; try not to burn yourself or others!");
+                        racialVbox.getChildren().addAll(noSelectionForTiefling);
+                    }
+                    racialVbox.getChildren().addAll(racialInformation, makeSure, backToCombatStyle, finish);
+                    stage.setScene(racialScene);
                 });
 
-            }
-            if (character.getRace().equals(Race.HALFORC)) {
-                Label noSelectionForOrc = new Label("You're a mighty half-orc, you smash good! \nAlso you don't need to wrack that surely massive brain to select further details!");
-                racialVbox.getChildren().addAll(noSelectionForOrc);
-
-
-            }
-            if (character.getRace().equals(Race.HUMAN)) {
-                Label noSelectionForHuman = new Label("You are a human.  Congratulations.");
-                racialVbox.getChildren().addAll(noSelectionForHuman);
-
-            }
-            if (character.getRace().equals(Race.TIEFLING)) {
-                Label noSelectionForTiefling = new Label("You are a tiefling; try not to burn yourself or others!");
-                racialVbox.getChildren().addAll(noSelectionForTiefling);
-            }
-            racialVbox.getChildren().addAll(racialInformation, makeSure, backToCombatStyle, finish);
-            stage.setScene(racialScene);
-        });
-
         //Back to Core
-        backToCore.setOnAction(actionEvent -> {
+        backToCore.setOnAction(actionEvent ->{
             stage.setScene(coreAttributesScene);
         });
         //Back to Combat Style
@@ -310,27 +291,27 @@ public class View extends Application {
         //Stat Buttons
         strBox.setOnAction(actionEvent -> {
             character.setSTR((int) strBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         dexBox.setOnAction(actionEvent -> {
             character.setDEX((int) dexBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         conBox.setOnAction(actionEvent -> {
             character.setCON((int) conBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         intBox.setOnAction(actionEvent -> {
             character.setINT((int) intBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         wisBox.setOnAction(actionEvent -> {
             character.setWIS((int) wisBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         chaBox.setOnAction(actionEvent -> {
             character.setCHA((int) chaBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
 
 
