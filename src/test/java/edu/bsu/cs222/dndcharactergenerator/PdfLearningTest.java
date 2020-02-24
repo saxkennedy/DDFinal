@@ -50,6 +50,5 @@ public class PdfLearningTest {
         PDField firstField = fields.get(0);
         Assertions.assertEquals("ClassLevel", firstField.getPartialName());
         Assertions.assertEquals("", firstField.getValueAsString());
-
     }
 }
