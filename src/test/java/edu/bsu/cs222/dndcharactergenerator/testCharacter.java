@@ -35,8 +35,8 @@ public class testCharacter {
 
     @Test
     public void testSetsFightingStyle(){
-        player.setfStyle("Archery");
-        Assertions.assertEquals("Archery", player.getfStyle());
+        player.setStyleLiteral("Archery");
+        Assertions.assertEquals("Archery", player.getStyleLiteral());
 
 
     }

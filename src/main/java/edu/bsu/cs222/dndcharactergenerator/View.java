@@ -109,7 +109,7 @@ public class View extends Application {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (styleGroup.getSelectedToggle() != null){
                     String style =styleGroup.getSelectedToggle().getUserData().toString();
-                    character.setfStyle(style);
+                    character.setStyleLiteral(style);
                     System.out.println(style);
 
                     switch(style) {
@@ -182,7 +182,7 @@ public class View extends Application {
                                 "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
                         racialVbox.getChildren().addAll(breathWeaponSelection);
                         breathWeaponSelection.setOnAction(actionEvent -> {
-
+                            character.setRacialAttribute(breathWeaponSelection.getValue().toString());
                         });
                     }
                     if (character.getRace().equals(Race.DWARF)) {
@@ -190,7 +190,7 @@ public class View extends Application {
                         dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
                         racialVbox.getChildren().addAll(dwarfSubRace);
                         dwarfSubRace.setOnAction(actionEvent -> {
-
+                            character.setRacialAttribute(dwarfSubRace.getValue().toString());
                         });
 
                     }
@@ -208,7 +208,7 @@ public class View extends Application {
                         gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
                         racialVbox.getChildren().addAll(gnomeSubRace);
                         gnomeSubRace.setOnAction(actionEvent -> {
-
+                            character.setRacialAttribute(gnomeSubRace.getValue().toString());
                         });
 
                     }
@@ -254,21 +254,16 @@ public class View extends Application {
                         halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
                         racialVbox.getChildren().addAll(halflingSubRace);
                         halflingSubRace.setOnAction(actionEvent -> {
-
-
+                            character.setRacialAttribute(halflingSubRace.getValue().toString());
                         });
-
                     }
                     if (character.getRace().equals(Race.HALFORC)) {
                         Label noSelectionForOrc = new Label("You're a mighty half-orc, you smash good! \nAlso you don't need to wrack that surely massive brain to select further details!");
                         racialVbox.getChildren().addAll(noSelectionForOrc);
-
-
                     }
                     if (character.getRace().equals(Race.HUMAN)) {
                         Label noSelectionForHuman = new Label("You are a human.  Congratulations.");
                         racialVbox.getChildren().addAll(noSelectionForHuman);
-
                     }
                     if (character.getRace().equals(Race.TIEFLING)) {
                         Label noSelectionForTiefling = new Label("You are a tiefling; try not to burn yourself or others!");
@@ -296,27 +291,27 @@ public class View extends Application {
         //Stat Buttons
         strBox.setOnAction(actionEvent -> {
             character.setSTR((int) strBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         dexBox.setOnAction(actionEvent -> {
             character.setDEX((int) dexBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         conBox.setOnAction(actionEvent -> {
             character.setCON((int) conBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         intBox.setOnAction(actionEvent -> {
             character.setINT((int) intBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         wisBox.setOnAction(actionEvent -> {
             character.setWIS((int) wisBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         chaBox.setOnAction(actionEvent -> {
             character.setCHA((int) chaBox.getValue());
-            character.addRacialAbilityScoreBonus();
+            //character.addRacialAbilityScoreBonusIfNotNull();
         });
 
 

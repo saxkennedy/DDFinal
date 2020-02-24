@@ -1,12 +1,12 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Character {
     private String name;
-    private String fStyle;
+    private String styleLiteral;
+    private String raceLiteral;
     private Race race;
     private RacialAttribute racialAttribute;
 
@@ -128,6 +128,7 @@ public class Character {
         if (this.race != null) {
             System.out.println("Old race bonus removed");
             this.removeRacialAbilityScoreBonus();
+            this.removeRacialAttributeScoreBonus();
         }
         this.assignEnumRace(race);
         this.addRacialAbilityScoreBonus();
@@ -160,16 +161,17 @@ public class Character {
         return name;
     }
 
-    public String getfStyle() {
-        return fStyle;
+    public String getStyleLiteral() {
+        return styleLiteral;
     }
 
-    public void setfStyle(String fStyle) {
-        this.fStyle = fStyle;
-        System.out.println("Style changed to " + this.fStyle);
+    public void setStyleLiteral(String styleLiteral) {
+        this.styleLiteral = styleLiteral;
+        System.out.println("Style changed to " + this.styleLiteral);
     }
 
     public void assignEnumRace(String race) {
+        raceLiteral = race;
         switch (race) {
             case "Half-Orc":
                 this.race = Race.HALFORC;
@@ -267,12 +269,16 @@ public class Character {
     }
 
     public void removeRacialAttributeScoreBonus() {
-        this.setSTR(this.getSTR() - this.racialAttribute.str);
-        this.setDEX(this.getDEX() - this.racialAttribute.dex);
-        this.setCON(this.getCON() - this.racialAttribute.con);
-        this.setINT(this.getINT() - this.racialAttribute.intel);
-        this.setWIS(this.getWIS() - this.racialAttribute.wis);
-        this.setCHA(this.getCHA() - this.racialAttribute.chr);
+        if(this.racialAttribute != null) {
+            this.setSTR(this.getSTR() - this.racialAttribute.str);
+            this.setDEX(this.getDEX() - this.racialAttribute.dex);
+            this.setCON(this.getCON() - this.racialAttribute.con);
+            this.setINT(this.getINT() - this.racialAttribute.intel);
+            this.setWIS(this.getWIS() - this.racialAttribute.wis);
+            this.setCHA(this.getCHA() - this.racialAttribute.chr);
+
+            this.racialAttribute = null;
+        }
     }
 
 
