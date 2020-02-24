@@ -1,0 +1,334 @@
+ClassLevel{type: PDTextField value: null}
+Background{type: PDTextField value: null}
+PlayerName{type: PDTextField value: null}
+CharacterName{type: PDTextField value: null}
+Race {type: PDTextField value: null}
+Alignment{type: PDTextField value: null}
+XP{type: PDTextField value: null}
+Inspiration{type: PDTextField value: null}
+STR{type: PDTextField value: null}
+ProfBonus{type: PDTextField value: null}
+AC{type: PDTextField value: null}
+Initiative{type: PDTextField value: null}
+Speed{type: PDTextField value: null}
+PersonalityTraits {type: PDTextField value: null}
+STRmod{type: PDTextField value: null}
+HPMax{type: PDTextField value: null}
+ST Strength{type: PDTextField value: null}
+DEX{type: PDTextField value: null}
+HPCurrent{type: PDTextField value: null}
+Ideals{type: PDTextField value: null}
+DEXmod {type: PDTextField value: null}
+HPTemp{type: PDTextField value: null}
+Bonds{type: PDTextField value: null}
+CON{type: PDTextField value: null}
+HDTotal{type: PDTextField value: null}
+Check Box 12{type: PDCheckBox value: null}
+Check Box 13{type: PDCheckBox value: null}
+Check Box 14{type: PDCheckBox value: null}
+CONmod{type: PDTextField value: null}
+Check Box 15{type: PDCheckBox value: null}
+Check Box 16{type: PDCheckBox value: null}
+Check Box 17{type: PDCheckBox value: null}
+HD{type: PDTextField value: null}
+Flaws{type: PDTextField value: null}
+INT{type: PDTextField value: null}
+ST Dexterity{type: PDTextField value: null}
+ST Constitution{type: PDTextField value: null}
+ST Intelligence{type: PDTextField value: null}
+ST Wisdom{type: PDTextField value: null}
+ST Charisma{type: PDTextField value: null}
+Acrobatics{type: PDTextField value: null}
+Animal{type: PDTextField value: null}
+Athletics{type: PDTextField value: null}
+Deception {type: PDTextField value: null}
+History {type: PDTextField value: null}
+Insight{type: PDTextField value: null}
+Intimidation{type: PDTextField value: null}
+Check Box 11{type: PDCheckBox value: null}
+Check Box 18{type: PDCheckBox value: null}
+Check Box 19{type: PDCheckBox value: null}
+Check Box 20{type: PDCheckBox value: null}
+Check Box 21{type: PDCheckBox value: null}
+Check Box 22{type: PDCheckBox value: null}
+Wpn Name{type: PDTextField value: null}
+Wpn1 AtkBonus{type: PDTextField value: null}
+Wpn1 Damage{type: PDTextField value: null}
+INTmod{type: PDTextField value: null}
+Wpn Name 2{type: PDTextField value: null}
+Wpn2 AtkBonus {type: PDTextField value: null}
+Wpn2 Damage {type: PDTextField value: null}
+Investigation {type: PDTextField value: null}
+WIS{type: PDTextField value: null}
+Wpn Name 3{type: PDTextField value: null}
+Wpn3 AtkBonus  {type: PDTextField value: null}
+Arcana{type: PDTextField value: null}
+Wpn3 Damage {type: PDTextField value: null}
+Perception {type: PDTextField value: null}
+WISmod{type: PDTextField value: null}
+CHA{type: PDTextField value: null}
+Nature{type: PDTextField value: null}
+Performance{type: PDTextField value: null}
+Medicine{type: PDTextField value: null}
+Religion{type: PDTextField value: null}
+Stealth {type: PDTextField value: null}
+Check Box 23{type: PDCheckBox value: null}
+Check Box 24{type: PDCheckBox value: null}
+Check Box 25{type: PDCheckBox value: null}
+Check Box 26{type: PDCheckBox value: null}
+Check Box 27{type: PDCheckBox value: null}
+Check Box 28{type: PDCheckBox value: null}
+Check Box 29{type: PDCheckBox value: null}
+Check Box 30{type: PDCheckBox value: null}
+Check Box 31{type: PDCheckBox value: null}
+Check Box 32{type: PDCheckBox value: null}
+Check Box 33{type: PDCheckBox value: null}
+Check Box 34{type: PDCheckBox value: null}
+Check Box 35{type: PDCheckBox value: null}
+Check Box 36{type: PDCheckBox value: null}
+Check Box 37{type: PDCheckBox value: null}
+Check Box 38{type: PDCheckBox value: null}
+Check Box 39{type: PDCheckBox value: null}
+Check Box 40{type: PDCheckBox value: null}
+Persuasion{type: PDTextField value: null}
+SleightofHand{type: PDTextField value: null}
+CHamod{type: PDTextField value: null}
+Survival{type: PDTextField value: null}
+AttacksSpellcasting{type: PDTextField value: null}
+Passive{type: PDTextField value: null}
+CP{type: PDTextField value: null}
+ProficienciesLang{type: PDTextField value: null}
+SP{type: PDTextField value: null}
+EP{type: PDTextField value: null}
+GP{type: PDTextField value: null}
+PP{type: PDTextField value: null}
+Equipment{type: PDTextField value: null}
+Features and Traits{type: PDTextField value: null}
+CharacterName 2{type: PDTextField value: COSString{}}
+Age{type: PDTextField value: COSString{}}
+Height{type: PDTextField value: COSString{}}
+Weight{type: PDTextField value: COSString{}}
+Eyes{type: PDTextField value: COSString{}}
+Skin{type: PDTextField value: COSString{}}
+Hair{type: PDTextField value: COSString{}}
+Faction Symbol Image{type: PDPushButton value: null}
+Allies{type: PDTextField value: COSString{}}
+FactionName{type: PDTextField value: COSString{}}
+Backstory{type: PDTextField value: COSString{}}
+Feat+Traits{type: PDTextField value: COSString{}}
+Treasure{type: PDTextField value: COSString{}}
+CHARACTER IMAGE{type: PDPushButton value: null}
+Spellcasting Class 2{type: PDTextField value: COSString{}}
+SpellcastingAbility 2{type: PDTextField value: COSString{}}
+SpellSaveDC  2{type: PDTextField value: COSString{}}
+SpellAtkBonus 2{type: PDTextField value: COSString{}}
+SlotsTotal 19{type: PDTextField value: COSString{}}
+SlotsRemaining 19{type: PDTextField value: COSString{}}
+Spells 1014{type: PDTextField value: COSString{}}
+Spells 1015{type: PDTextField value: COSString{}}
+Spells 1016{type: PDTextField value: COSString{}}
+Spells 1017{type: PDTextField value: COSString{}}
+Spells 1018{type: PDTextField value: COSString{}}
+Spells 1019{type: PDTextField value: COSString{}}
+Spells 1020{type: PDTextField value: COSString{}}
+Spells 1021{type: PDTextField value: COSString{}}
+Spells 1022{type: PDTextField value: COSString{}}
+Check Box 314{type: PDCheckBox value: COSName{Off}}
+Check Box 3031{type: PDCheckBox value: COSName{Off}}
+Check Box 3032{type: PDCheckBox value: COSName{Off}}
+Check Box 3033{type: PDCheckBox value: COSName{Off}}
+Check Box 3034{type: PDCheckBox value: COSName{Off}}
+Check Box 3035{type: PDCheckBox value: COSName{Off}}
+Check Box 3036{type: PDCheckBox value: COSName{Off}}
+Check Box 3037{type: PDCheckBox value: COSName{Off}}
+Check Box 3038{type: PDCheckBox value: COSName{Off}}
+Check Box 3039{type: PDCheckBox value: COSName{Off}}
+Check Box 3040{type: PDCheckBox value: null}
+Check Box 321{type: PDCheckBox value: null}
+Check Box 320{type: PDCheckBox value: null}
+Check Box 3060{type: PDCheckBox value: null}
+Check Box 3061{type: PDCheckBox value: null}
+Check Box 3062{type: PDCheckBox value: null}
+Check Box 3063{type: PDCheckBox value: null}
+Check Box 3064{type: PDCheckBox value: null}
+Check Box 3065{type: PDCheckBox value: null}
+Check Box 3066{type: PDCheckBox value: null}
+Check Box 315{type: PDCheckBox value: null}
+Check Box 3041{type: PDCheckBox value: COSName{Off}}
+Spells 1023{type: PDTextField value: COSString{}}
+Check Box 251{type: PDCheckBox value: null}
+Check Box 309{type: PDCheckBox value: null}
+Check Box 3010{type: PDCheckBox value: null}
+Check Box 3011{type: PDCheckBox value: COSName{Off}}
+Check Box 3012{type: PDCheckBox value: COSName{Off}}
+Check Box 3013{type: PDCheckBox value: COSName{Off}}
+Check Box 3014{type: PDCheckBox value: COSName{Off}}
+Check Box 3015{type: PDCheckBox value: COSName{Off}}
+Check Box 3016{type: PDCheckBox value: COSName{Off}}
+Check Box 3017{type: PDCheckBox value: COSName{Off}}
+Check Box 3018{type: PDCheckBox value: COSName{Off}}
+Check Box 3019{type: PDCheckBox value: COSName{Off}}
+Spells 1024{type: PDTextField value: COSString{}}
+Spells 1025{type: PDTextField value: COSString{}}
+Spells 1026{type: PDTextField value: COSString{}}
+Spells 1027{type: PDTextField value: COSString{}}
+Spells 1028{type: PDTextField value: COSString{}}
+Spells 1029{type: PDTextField value: COSString{}}
+Spells 1030{type: PDTextField value: COSString{}}
+Spells 1031{type: PDTextField value: COSString{}}
+Spells 1032{type: PDTextField value: COSString{}}
+Spells 1033{type: PDTextField value: COSString{}}
+SlotsTotal 20{type: PDTextField value: COSString{}}
+SlotsRemaining 20{type: PDTextField value: COSString{}}
+Spells 1034{type: PDTextField value: COSString{}}
+Spells 1035{type: PDTextField value: COSString{}}
+Spells 1036{type: PDTextField value: COSString{}}
+Spells 1037{type: PDTextField value: COSString{}}
+Spells 1038{type: PDTextField value: COSString{}}
+Spells 1039{type: PDTextField value: COSString{}}
+Spells 1040{type: PDTextField value: COSString{}}
+Spells 1041{type: PDTextField value: COSString{}}
+Spells 1042{type: PDTextField value: COSString{}}
+Spells 1043{type: PDTextField value: COSString{}}
+Spells 1044{type: PDTextField value: COSString{}}
+Spells 1045{type: PDTextField value: COSString{}}
+Spells 1046{type: PDTextField value: COSString{}}
+SlotsTotal 21{type: PDTextField value: COSString{}}
+SlotsRemaining 21{type: PDTextField value: COSString{}}
+Spells 1047{type: PDTextField value: COSString{}}
+Spells 1048{type: PDTextField value: COSString{}}
+Spells 1049{type: PDTextField value: COSString{}}
+Spells 1050{type: PDTextField value: COSString{}}
+Spells 1051{type: PDTextField value: COSString{}}
+Spells 1052{type: PDTextField value: COSString{}}
+Spells 1053{type: PDTextField value: COSString{}}
+Spells 1054{type: PDTextField value: COSString{}}
+Spells 1055{type: PDTextField value: COSString{}}
+Spells 1056{type: PDTextField value: COSString{}}
+Spells 1057{type: PDTextField value: COSString{}}
+Spells 1058{type: PDTextField value: COSString{}}
+Spells 1059{type: PDTextField value: COSString{}}
+SlotsTotal 22{type: PDTextField value: COSString{}}
+SlotsRemaining 22{type: PDTextField value: COSString{}}
+Spells 1060{type: PDTextField value: COSString{}}
+Spells 1061{type: PDTextField value: COSString{}}
+Spells 1062{type: PDTextField value: COSString{}}
+Spells 1063{type: PDTextField value: COSString{}}
+Spells 1064{type: PDTextField value: COSString{}}
+Check Box 323{type: PDCheckBox value: COSName{Off}}
+Check Box 322{type: PDCheckBox value: COSName{Off}}
+Check Box 3067{type: PDCheckBox value: COSName{Off}}
+Check Box 3068{type: PDCheckBox value: COSName{Off}}
+Check Box 3069{type: PDCheckBox value: null}
+Check Box 3070{type: PDCheckBox value: null}
+Check Box 3071{type: PDCheckBox value: COSName{Off}}
+Check Box 3072{type: PDCheckBox value: null}
+Check Box 3073{type: PDCheckBox value: null}
+Spells 1065{type: PDTextField value: COSString{}}
+Spells 1066{type: PDTextField value: COSString{}}
+Spells 1067{type: PDTextField value: COSString{}}
+Spells 1068{type: PDTextField value: COSString{}}
+Spells 1069{type: PDTextField value: COSString{}}
+Spells 1070{type: PDTextField value: COSString{}}
+Spells 1071{type: PDTextField value: COSString{}}
+Check Box 317{type: PDCheckBox value: COSName{Off}}
+Spells 1072{type: PDTextField value: COSString{}}
+SlotsTotal 23{type: PDTextField value: COSString{}}
+SlotsRemaining 23{type: PDTextField value: COSString{}}
+Spells 1073{type: PDTextField value: COSString{}}
+Spells 1074{type: PDTextField value: COSString{}}
+Spells 1075{type: PDTextField value: COSString{}}
+Spells 1076{type: PDTextField value: COSString{}}
+Spells 1077{type: PDTextField value: COSString{}}
+Spells 1078{type: PDTextField value: COSString{}}
+Spells 1079{type: PDTextField value: COSString{}}
+Spells 1080{type: PDTextField value: COSString{}}
+Spells 1081{type: PDTextField value: COSString{}}
+SlotsTotal 24{type: PDTextField value: null}
+SlotsRemaining 24{type: PDTextField value: COSString{}}
+Spells 1082{type: PDTextField value: COSString{}}
+Spells 1083{type: PDTextField value: COSString{}}
+Spells 1084{type: PDTextField value: COSString{}}
+Spells 1085{type: PDTextField value: COSString{}}
+Spells 1086{type: PDTextField value: COSString{}}
+Spells 1087{type: PDTextField value: COSString{}}
+Spells 1088{type: PDTextField value: COSString{}}
+Spells 1089{type: PDTextField value: COSString{}}
+Spells 1090{type: PDTextField value: COSString{}}
+SlotsTotal 25{type: PDTextField value: COSString{}}
+SlotsRemaining 25{type: PDTextField value: COSString{}}
+Spells 1091{type: PDTextField value: COSString{}}
+Spells 1092{type: PDTextField value: COSString{}}
+Spells 1093{type: PDTextField value: COSString{}}
+Spells 1094{type: PDTextField value: COSString{}}
+Spells 1095{type: PDTextField value: COSString{}}
+Spells 1096{type: PDTextField value: COSString{}}
+Spells 1097{type: PDTextField value: COSString{}}
+Spells 1098{type: PDTextField value: COSString{}}
+Spells 1099{type: PDTextField value: COSString{}}
+SlotsTotal 26{type: PDTextField value: COSString{}}
+SlotsRemaining 26{type: PDTextField value: COSString{}}
+Spells 10100{type: PDTextField value: COSString{}}
+Spells 10101{type: PDTextField value: COSString{}}
+Spells 10102{type: PDTextField value: COSString{}}
+Spells 10103{type: PDTextField value: COSString{}}
+Check Box 316{type: PDCheckBox value: COSName{Off}}
+Check Box 3042{type: PDCheckBox value: COSName{Off}}
+Check Box 3043{type: PDCheckBox value: COSName{Off}}
+Check Box 3044{type: PDCheckBox value: COSName{Off}}
+Check Box 3045{type: PDCheckBox value: COSName{Off}}
+Check Box 3046{type: PDCheckBox value: COSName{Off}}
+Check Box 3047{type: PDCheckBox value: COSName{Off}}
+Check Box 3048{type: PDCheckBox value: COSName{Off}}
+Check Box 3049{type: PDCheckBox value: COSName{Off}}
+Check Box 3050{type: PDCheckBox value: COSName{Off}}
+Check Box 3051{type: PDCheckBox value: COSName{Off}}
+Check Box 3052{type: PDCheckBox value: COSName{Off}}
+Spells 10104{type: PDTextField value: COSString{}}
+Check Box 325{type: PDCheckBox value: null}
+Check Box 324{type: PDCheckBox value: COSName{Off}}
+Check Box 3074{type: PDCheckBox value: COSName{Off}}
+Check Box 3075{type: PDCheckBox value: COSName{Off}}
+Check Box 3076{type: PDCheckBox value: COSName{Off}}
+Check Box 3077{type: PDCheckBox value: COSName{Off}}
+Spells 10105{type: PDTextField value: COSString{}}
+Spells 10106{type: PDTextField value: COSString{}}
+Check Box 3078{type: PDCheckBox value: COSName{Off}}
+SlotsTotal 27{type: PDTextField value: COSString{}}
+SlotsRemaining 27{type: PDTextField value: COSString{}}
+Check Box 313{type: PDCheckBox value: COSName{Off}}
+Check Box 310{type: PDCheckBox value: COSName{Off}}
+Check Box 3020{type: PDCheckBox value: COSName{Off}}
+Check Box 3021{type: PDCheckBox value: COSName{Off}}
+Check Box 3022{type: PDCheckBox value: COSName{Off}}
+Check Box 3023{type: PDCheckBox value: COSName{Off}}
+Check Box 3024{type: PDCheckBox value: COSName{Off}}
+Check Box 3025{type: PDCheckBox value: COSName{Off}}
+Check Box 3026{type: PDCheckBox value: COSName{Off}}
+Check Box 3027{type: PDCheckBox value: COSName{Off}}
+Check Box 3028{type: PDCheckBox value: COSName{Off}}
+Check Box 3029{type: PDCheckBox value: COSName{Off}}
+Check Box 3030{type: PDCheckBox value: COSName{Off}}
+Spells 10107{type: PDTextField value: COSString{}}
+Spells 10108{type: PDTextField value: COSString{}}
+Spells 10109{type: PDTextField value: COSString{}}
+Spells 101010{type: PDTextField value: COSString{}}
+Spells 101011{type: PDTextField value: COSString{}}
+Spells 101012{type: PDTextField value: COSString{}}
+Check Box 319{type: PDCheckBox value: COSName{Off}}
+Check Box 318{type: PDCheckBox value: COSName{Off}}
+Check Box 3053{type: PDCheckBox value: COSName{Off}}
+Check Box 3054{type: PDCheckBox value: COSName{Off}}
+Check Box 3055{type: PDCheckBox value: COSName{Off}}
+Check Box 3056{type: PDCheckBox value: COSName{Off}}
+Check Box 3057{type: PDCheckBox value: COSName{Off}}
+Check Box 3058{type: PDCheckBox value: COSName{Off}}
+Check Box 3059{type: PDCheckBox value: COSName{Off}}
+Check Box 327{type: PDCheckBox value: null}
+Check Box 326{type: PDCheckBox value: null}
+Check Box 3079{type: PDCheckBox value: COSName{Off}}
+Check Box 3080{type: PDCheckBox value: COSName{Off}}
+Check Box 3081{type: PDCheckBox value: COSName{Off}}
+Check Box 3082{type: PDCheckBox value: COSName{Off}}
+Spells 101013{type: PDTextField value: COSString{}}
+Check Box 3083{type: PDCheckBox value: COSName{Off}}

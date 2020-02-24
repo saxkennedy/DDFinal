@@ -4,60 +4,31 @@ import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
+import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class PdfGenerator {
-    private String characterName;
-    private Race race;
-    private Integer armorClass;
-    private List<Integer> savingThrows;
-    private List<Integer> skills;
+    private Character character;
     private PDDocument newCharacterSheet; // in memory pdf
     private PDAcroForm form; // edits newCharacterSheet's forms
 
-    public class Builder {
-        private String characterName;
-        private Race race;
-        private Integer armorClass;
-        private List<Integer> savingThrows;
-        private List<Integer> skills;
 
-        public Builder setCharacterName(String characterName) {
-            this.characterName = characterName;
-            return this;
-        }
-        public Builder setRace(Race race) {
-            this.race = race;
-            return this;
-        }
-        public Builder setArmorClass(Integer armorClass) {
-            this.armorClass = armorClass;
-            return this;
-        }
-        public Builder setSavingThrows(List<Integer> savingThrows) {
-            this.savingThrows = savingThrows;
-            return this;
-        }
-        public Builder setSkills(List<Integer> skills) {
-            this.skills = skills;
+    public static final class Builder {
+        private Character character;
+        public Builder setCharacter(Character character) {
+            this.character = character;
             return this;
         }
         public PdfGenerator build() {
             return new PdfGenerator(this);
         }
-
-
     }
 
     public PdfGenerator(Builder builder) {
-        this.characterName = builder.characterName;
-        this.race = builder.race;
-        this.armorClass = builder.armorClass;
-        this.savingThrows = builder.savingThrows;
-        this.skills = builder.skills;
+        this.character = builder.character;
 
         try {
             getPDDocumentFromTemplate();
@@ -67,7 +38,43 @@ public class PdfGenerator {
         }
         getAcroFormFromTemplate();
 
-        // todo: edit the pdf for each piece of info
+        try {
+            writeCharacterName();
+            writeRace();
+            writeArmorClass();
+            writeSavingTrows();
+            writeSkills();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // todo: edit writeSkills and Saving Throws when implementation is figured out
+    private void writeSkills() throws IOException {
+
+    }
+
+    private void writeSavingTrows() throws IOException {
+
+    }
+
+    private void writeArmorClass() throws IOException {
+        PDField armorClass = form.getField("AC");
+        PDTextField textField = (PDTextField) armorClass;
+        textField.setValue(Integer.toString(character.getAC()));
+    }
+
+    private void writeRace() throws IOException {
+        PDField race = form.getField("Race ");
+        PDTextField raceTextField = (PDTextField) race;
+        raceTextField.setValue(character.getRace().raceName);
+    }
+
+    private void writeCharacterName() throws IOException {
+        PDField charName = form.getField("CharacterName");
+        PDTextField charTextField = (PDTextField) charName;
+        charTextField.setValue(character.getName());
     }
 
     private void getPDDocumentFromTemplate() throws IOException{
@@ -75,8 +82,6 @@ public class PdfGenerator {
         PDDocument template = PDDocument.load(stream);
         COSDocument lowTemplate = template.getDocument();
         newCharacterSheet = new PDDocument(lowTemplate);
-        lowTemplate.close(); // not needed anymore
-        template.close(); // not needed anymore
     }
 
     private void getAcroFormFromTemplate() {
@@ -84,7 +89,7 @@ public class PdfGenerator {
         form = catalog.getAcroForm();
     }
 
-    public void writeNewCharacterSheet() throws IOException{
+    public void writeNewCharacterSheet() throws IOException {
         newCharacterSheet.save("new_character_sheet.pdf");
         newCharacterSheet.close();
     }
