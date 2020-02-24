@@ -129,8 +129,7 @@ public class Character {
             System.out.println("Old race bonus removed");
             this.removeRacialAbilityScoreBonus();
         }
-        Race enumRace = assignEnumRace(race);
-        this.race = enumRace;
+        this.assignEnumRace(race);
         this.addRacialAbilityScoreBonus();
         System.out.println("Race changed to " + race);
         System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
@@ -170,28 +169,38 @@ public class Character {
         System.out.println("Style changed to " + this.fStyle);
     }
 
-    public Race assignEnumRace(String race) {
+    public void assignEnumRace(String race) {
         switch (race) {
             case "Half-Orc":
-                return Race.HALFORC;
+                this.race = Race.HALFORC;
+                break;
             case "Dragonborn":
-                return Race.DRAGONBORN;
+                this.race = Race.DRAGONBORN;
+                break;
             case "Dwarf":
-                return Race.DWARF;
+                this.race = Race.DWARF;
+                break;
             case "Elf":
-                return Race.ELF;
+                this.race = Race.ELF;
+                break;
             case "Gnome":
-                return Race.GNOME;
+                this.race = Race.GNOME;
+                break;
             case "Half-Elf":
-                return Race.HALFELF;
+                this.race = Race.HALFELF;
+                break;
             case "Halfling":
-                return Race.HALFLING;
+                this.race = Race.HALFLING;
+                break;
             case "Human":
-                return Race.HUMAN;
+                this.race = Race.HUMAN;
+                break;
             case "Tiefling":
-                return Race.TIEFLING;
+                this.race = Race.TIEFLING;
+                break;
             default:
-                return null;
+                this.race = null;
+                break;
         }
     }
 
