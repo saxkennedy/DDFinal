@@ -18,10 +18,12 @@ public class PdfGenerator {
 
     public static final class Builder {
         private Character character;
+
         public Builder setCharacter(Character character) {
             this.character = character;
             return this;
         }
+
         public PdfGenerator build() {
             return new PdfGenerator(this);
         }
@@ -32,8 +34,7 @@ public class PdfGenerator {
 
         try {
             getPDDocumentFromTemplate();
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         getAcroFormFromTemplate();
@@ -43,20 +44,25 @@ public class PdfGenerator {
             writeRace();
             writeArmorClass();
             writeSavingTrows();
-            writeSkills();
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // todo: edit writeSkills and Saving Throws when implementation is figured out
-    private void writeSkills() throws IOException {
-
-    }
-
     private void writeSavingTrows() throws IOException {
+        PDTextField strField = (PDTextField) form.getField("ST Strength");
+        PDTextField dexField = (PDTextField) form.getField("ST Dexterity");
+        PDTextField conField = (PDTextField) form.getField("ST Constitution");
+        PDTextField intField = (PDTextField) form.getField("ST Intelligence");
+        PDTextField wisField = (PDTextField) form.getField("ST Wisdom");
+        PDTextField chaField = (PDTextField) form.getField("ST Charisma");
 
+        strField.setValue(Integer.toString(character.getStrMod()));
+        dexField.setValue(Integer.toString(character.getDexMod()));
+        conField.setValue(Integer.toString(character.getConMod()));
+        intField.setValue(Integer.toString(character.getIntMod()));
+        wisField.setValue(Integer.toString(character.getWisMod()));
+        chaField.setValue(Integer.toString(character.getChaMod()));
     }
 
     private void writeArmorClass() throws IOException {
@@ -77,7 +83,7 @@ public class PdfGenerator {
         charTextField.setValue(character.getName());
     }
 
-    private void getPDDocumentFromTemplate() throws IOException{
+    private void getPDDocumentFromTemplate() throws IOException {
         InputStream stream = getClass().getClassLoader().getResourceAsStream("blank_character.pdf");
         PDDocument template = PDDocument.load(stream);
         COSDocument lowTemplate = template.getDocument();

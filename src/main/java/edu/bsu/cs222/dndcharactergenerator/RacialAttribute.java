@@ -1,15 +1,15 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 public enum RacialAttribute {
-    HILLDWARF(0,0,0,0,1,0),
-    MOUNTAINDWARF(2,0,0,0,0,0),
-    HIGHELF(0,0,0,1,0,0),
-    WOODELF(0,0,0,0,1,0),
-    DROW(0,0,0,0,0,1),
-    FORESTGNOME(0,1,0,0,0,0),
-    ROCKGNOME(0,0,1,0,0,0),
-    LIGHTFOOT(0,0,0,0,0,1),
-    STOUT(0,0,1,0,0,0);
+    HILLDWARF(0, 0, 0, 0, 1, 0),
+    MOUNTAINDWARF(2, 0, 0, 0, 0, 0),
+    HIGHELF(0, 0, 0, 1, 0, 0),
+    WOODELF(0, 0, 0, 0, 1, 0),
+    DROW(0, 0, 0, 0, 0, 1),
+    FORESTGNOME(0, 1, 0, 0, 0, 0),
+    ROCKGNOME(0, 0, 1, 0, 0, 0),
+    LIGHTFOOT(0, 0, 0, 0, 0, 1),
+    STOUT(0, 0, 1, 0, 0, 0);
 
     public final int str;
     public final int dex;
@@ -28,7 +28,7 @@ public enum RacialAttribute {
         this.chr = chr;
     }
 
-    public void setAttributeName(String name){
+    public void setAttributeName(String name) {
         this.attributeName = name;
     }
 

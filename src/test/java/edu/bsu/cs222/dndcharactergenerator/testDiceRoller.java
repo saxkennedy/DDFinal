@@ -12,20 +12,20 @@ public class testDiceRoller {
     ArrayList<Integer> diceRolls = diceRoller.getStats();
 
     @Test
-    public void testRollsStats(){
+    public void testRollsStats() {
         Assertions.assertNotNull(player.statRoll());
     }
 
     @Test
-    public void testHasStats(){
+    public void testHasStats() {
         Assertions.assertNotNull(diceRolls);
     }
 
     @Test
-    public void testRollsInBounds(){
+    public void testRollsInBounds() {
         boolean withinBounds = false;
-        for(Integer stat: diceRolls){
-            if (stat <= 18 && stat >= 3){
+        for (Integer stat : diceRolls) {
+            if (stat <= 18 && stat >= 3) {
                 withinBounds = true;
             }
         }

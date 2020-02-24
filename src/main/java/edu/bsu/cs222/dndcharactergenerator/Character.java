@@ -149,7 +149,6 @@ public class Character {
     }
 
 
-
     public void setName(String name) {
         this.name = name;
         System.out.println("Name changed to " + name);
@@ -233,7 +232,7 @@ public class Character {
                 this.racialAttribute = RacialAttribute.STOUT;
                 break;
             default:
-                    throw new NullPointerException();
+                throw new NullPointerException();
         }
         this.racialAttribute.setAttributeName(racialAttribute);
     }
@@ -273,7 +272,6 @@ public class Character {
         this.setWIS(this.getWIS() - this.racialAttribute.wis);
         this.setCHA(this.getCHA() - this.racialAttribute.chr);
     }
-
 
 
 }

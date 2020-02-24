@@ -25,7 +25,7 @@ public class PdfLearningTest {
 
     @Test
     @DisplayName("setup")
-    public void setup(){
+    public void setup() {
         PDAcroForm acroForm = null;
         try {
             InputStream stream = getClass().getClassLoader().getResourceAsStream("blank_character.pdf");
@@ -36,8 +36,7 @@ public class PdfLearningTest {
             template.close();
             PDDocumentCatalog catalog = newCharacterSheet.getDocumentCatalog();
             acroForm = catalog.getAcroForm();
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         Assertions.assertNotNull(acroForm);
