@@ -14,14 +14,6 @@ import java.io.InputStream;
 import java.util.List;
 
 public class PdfLearningTest {
-    // todo: uncomment when functionality is finished
-//    PdfGenerator generator = new PdfGenerator.Builder()
-//            .setArmorClass()
-//            .setCharacterName()
-//            .setRace()
-//            .setSavingThrows()
-//            .setSkills()
-//            .build();
 
     @Test
     @DisplayName("setup")

@@ -3,7 +3,7 @@ package edu.bsu.cs222.dndcharactergenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class testCharacter {
+public class CharacterTest {
 
     Character player = new Character();
 

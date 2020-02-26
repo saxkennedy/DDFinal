@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-public class testDiceRoller {
+public class DiceRollerTest {
 
     DiceRoller diceRoller = new DiceRoller();
     Character player = new Character();
