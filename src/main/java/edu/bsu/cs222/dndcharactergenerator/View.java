@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 
@@ -25,7 +26,7 @@ public class View extends Application {
 
         //1st Name Scene
         VBox vbox0 = new VBox();
-        Image fighterImage= new Image("/fighterimage.png",true);
+        Image fighterImage= new Image("/dwarfImage.png",true);
         ImageView fighterImageView=new ImageView();
         fighterImageView.setImage(fighterImage);
         Label enterName = new Label("Enter your name below, bold adventurer!  Then press 'GO!'\n\n" +
@@ -148,6 +149,13 @@ public class View extends Application {
         Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will \n cause Fortitude save, contitution modifier, and hit points fields to remain empty, or reflect only your racial modifiers!\n No one wants a Constition score of 0,1, or 2!");
         Button finish = new Button("Finish");
 
+        //6th Save Scene
+        VBox saveLocationVbox = new VBox();
+        Scene saveScene = new Scene(saveLocationVbox,800,800);
+        Label saveLabel = new Label("Please select a path to save your PDF to.");
+        DirectoryChooser saveLocation=new DirectoryChooser();
+
+
         //GO! button
         go.setOnAction(actionEvent -> {
             character.setName(characterName.getText());
@@ -170,6 +178,8 @@ public class View extends Application {
         });
         //Next to Racial Button
         nextToRacial.setOnAction(Event -> {
+                    ImageView racialImageView = new ImageView();
+                    Image racialImage = new Image("");
                     racialVbox.getChildren().addAll(racialAttributesHeader);
                     if (character.getRace().equals(null)) {
                         Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
@@ -186,6 +196,7 @@ public class View extends Application {
                         });
                     }
                     if (character.getRace().equals(Race.DWARF)) {
+
                         ComboBox dwarfSubRace = new ComboBox();
                         dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
                         racialVbox.getChildren().addAll(dwarfSubRace);
@@ -269,7 +280,8 @@ public class View extends Application {
                         Label noSelectionForTiefling = new Label("You are a tiefling; try not to burn yourself or others!");
                         racialVbox.getChildren().addAll(noSelectionForTiefling);
                     }
-                    racialVbox.getChildren().addAll(racialInformation, makeSure, backToCombatStyle, finish);
+                    racialImageView.setImage(racialImage);
+                    racialVbox.getChildren().addAll(racialImageView,racialInformation, makeSure, backToCombatStyle, finish);
                     stage.setScene(racialScene);
                 });
 
