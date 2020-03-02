@@ -107,39 +107,36 @@ public class View extends Application {
         twoWeaponFighting.setUserData("Two-Weapon Fighting");
         twoWeaponFighting.setToggleGroup(styleGroup);
 
-        styleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                if (styleGroup.getSelectedToggle() != null) {
-                    String style = styleGroup.getSelectedToggle().getUserData().toString();
-                    character.setStyleLiteral(style);
-                    System.out.println(style);
+        styleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (styleGroup.getSelectedToggle() != null) {
+                String style = styleGroup.getSelectedToggle().getUserData().toString();
+                character.setStyleLiteral(style);
+                System.out.println(style);
 
-                    switch (style) {
-                        case "Archery":
-                            styleDescription.setText("+2 bonus to attack rolls made with ranged weapons");
-                            break;
-                        case "Defense":
-                            styleDescription.setText("+1 bonus to AC while wearing armor");
-                            break;
-                        case "Dueling":
-                            styleDescription.setText("+2 bonus to damage rolls when holding a single weapon");
-                            break;
-                        case "Great Weapon Fighting":
-                            styleDescription.setText("You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2");
-                            break;
-                        case "Protection":
-                            styleDescription.setText("When wielding a shield, you may impose a disadvantage " +
-                                    "on an enemy creature's attack roll when it attacks\na target" +
-                                    " other than you that is both within 5 feet of you and in your sight");
-                            break;
-                        case "Two-Weapon Fighting":
-                            styleDescription.setText("When you engage in two weapon fighting you can add you ability modifier to the damage of the second attack");
-                            break;
-                        default:
-                            styleDescription.setText("No style found");
-                            break;
-                    }
+                switch (style) {
+                    case "Archery":
+                        styleDescription.setText("+2 bonus to attack rolls made with ranged weapons");
+                        break;
+                    case "Defense":
+                        styleDescription.setText("+1 bonus to AC while wearing armor");
+                        break;
+                    case "Dueling":
+                        styleDescription.setText("+2 bonus to damage rolls when holding a single weapon");
+                        break;
+                    case "Great Weapon Fighting":
+                        styleDescription.setText("You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2");
+                        break;
+                    case "Protection":
+                        styleDescription.setText("When wielding a shield, you may impose a disadvantage " +
+                                "on an enemy creature's attack roll when it attacks\na target" +
+                                " other than you that is both within 5 feet of you and in your sight");
+                        break;
+                    case "Two-Weapon Fighting":
+                        styleDescription.setText("When you engage in two weapon fighting you can add you ability modifier to the damage of the second attack");
+                        break;
+                    default:
+                        styleDescription.setText("No style found");
+                        break;
                 }
             }
         });
@@ -215,7 +212,7 @@ public class View extends Application {
                         "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
                 racialVbox.getChildren().addAll(breathWeaponSelection);
                 breathWeaponSelection.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(breathWeaponSelection.getValue().toString());
+                    character.setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue().toString()));
                 });
             }
             if (character.getRace().equals(Race.DWARF)) {
@@ -224,7 +221,7 @@ public class View extends Application {
                 dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
                 racialVbox.getChildren().addAll(dwarfSubRace);
                 dwarfSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(dwarfSubRace.getValue().toString());
+                    character.setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue().toString()));
                 });
 
             }
@@ -233,7 +230,7 @@ public class View extends Application {
                 elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
                 racialVbox.getChildren().addAll(elfSubRace);
                 elfSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(elfSubRace.getValue().toString());
+                    character.setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue().toString()));
                 });
 
             }
@@ -243,7 +240,7 @@ public class View extends Application {
                 gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
                 racialVbox.getChildren().addAll(gnomeSubRace);
                 gnomeSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(gnomeSubRace.getValue().toString());
+                    character.setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue().toString()));
                 });
 
             }
@@ -290,7 +287,7 @@ public class View extends Application {
                 halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
                 racialVbox.getChildren().addAll(halflingSubRace);
                 halflingSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(halflingSubRace.getValue().toString());
+                    character.setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue().toString()));
                 });
             }
             if (character.getRace().equals(Race.HALFORC)) {
@@ -374,4 +371,37 @@ public class View extends Application {
 
     }
 
+    public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
+        RacialAttribute newAttribute = null;
+        switch (racialAttribute) {
+            case "Hill Dwarf: +1 WIS":
+                newAttribute = RacialAttribute.HILLDWARF;
+                break;
+            case "Mountain Dwarf: +2 STR":
+                newAttribute = RacialAttribute.MOUNTAINDWARF;
+                break;
+            case "High Elf: +1 INT":
+                newAttribute = RacialAttribute.HIGHELF;
+                break;
+            case "Wood Elf: +1 WIS":
+                newAttribute = RacialAttribute.WOODELF;
+                break;
+            case "Drow: +1 CHA":
+                newAttribute = RacialAttribute.DROW;
+                break;
+            case "Forest Gnome: +1 DEX":
+                newAttribute = RacialAttribute.FORESTGNOME;
+                break;
+            case "Rock Gnome: +1 CON":
+                newAttribute = RacialAttribute.ROCKGNOME;
+                break;
+            case "Lightfoot: +1 CHA":
+                newAttribute = RacialAttribute.LIGHTFOOT;
+                break;
+            case "Stout: +1 CON":
+                newAttribute = RacialAttribute.STOUT;
+                break;
+        }
+        return newAttribute;
+    }
 }

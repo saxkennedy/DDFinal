@@ -95,8 +95,8 @@ public class PdfGenerator {
         form = catalog.getAcroForm();
     }
 
-    public void writeNewCharacterSheet() throws IOException {
-        newCharacterSheet.save("new_character_sheet.pdf");
+    public void writeNewCharacterSheet(String fileName) throws IOException {
+        newCharacterSheet.save(fileName);
         newCharacterSheet.close();
     }
 }

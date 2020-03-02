@@ -2,7 +2,6 @@ package edu.bsu.cs222.dndcharactergenerator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 public class PdfGeneratorTest {
     private static Character character = new Character();
@@ -19,7 +18,7 @@ public class PdfGeneratorTest {
         character.setSTR(1);
         character.setWIS(1);
 
-        character.setRacialAttribute("Mountain Dwarf: +2 STR");
+        character.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
         character.setStyleLiteral("foo-bar");
 
         generator = new PdfGenerator.Builder()
@@ -29,8 +28,13 @@ public class PdfGeneratorTest {
         Assertions.assertNotNull(generator);
     }
 
-    @Test
-    public void testGenerator() {
-
-    }
+//    @Test
+//    public void testGenerator() {
+//        try {
+//            generator.writeNewCharacterSheet("sheet_test.pdf");
+//        }
+//        catch(IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

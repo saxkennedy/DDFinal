@@ -137,13 +137,18 @@ public class Character {
                 this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
-    public void setRacialAttribute(String racialAttribute) {
+    public void setRacialAttribute(RacialAttribute attribute) {
 
         if (this.racialAttribute != null) {
             System.out.println("Old racialAbility bonus removed");
             this.removeRacialAttributeScoreBonus();
         }
-        this.assignEnumRacialAttribute(racialAttribute);
+        try {
+            this.racialAttribute = attribute;
+        }
+        catch(NullPointerException e) {
+            e.printStackTrace();
+        }
         this.addRacialAttributeScoreBonus();
         System.out.println("Racial Attribute changed to " + this.racialAttribute.getAttributeName());
         System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
@@ -203,41 +208,6 @@ public class Character {
                 this.race = null;
                 break;
         }
-    }
-
-    public void assignEnumRacialAttribute(String racialAttribute) {
-        switch (racialAttribute) {
-            case "Hill Dwarf: +1 WIS":
-                this.racialAttribute = RacialAttribute.HILLDWARF;
-                break;
-            case "Mountain Dwarf: +2 STR":
-                this.racialAttribute = RacialAttribute.MOUNTAINDWARF;
-                break;
-            case "High Elf: +1 INT":
-                this.racialAttribute = RacialAttribute.HIGHELF;
-                break;
-            case "Wood Elf: +1 WIS":
-                this.racialAttribute = RacialAttribute.WOODELF;
-                break;
-            case "Drow: +1 CHA":
-                this.racialAttribute = RacialAttribute.DROW;
-                break;
-            case "Forest Gnome: +1 DEX":
-                this.racialAttribute = RacialAttribute.FORESTGNOME;
-                break;
-            case "Rock Gnome: +1 CON":
-                this.racialAttribute = RacialAttribute.ROCKGNOME;
-                break;
-            case "Lightfoot: +1 CHA":
-                this.racialAttribute = RacialAttribute.LIGHTFOOT;
-                break;
-            case "Stout: +1 CON":
-                this.racialAttribute = RacialAttribute.STOUT;
-                break;
-            default:
-                throw new NullPointerException();
-        }
-        this.racialAttribute.setAttributeName(racialAttribute);
     }
 
     public void addRacialAbilityScoreBonus() {

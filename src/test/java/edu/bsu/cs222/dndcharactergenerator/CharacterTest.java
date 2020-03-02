@@ -28,8 +28,8 @@ public class CharacterTest {
 
     @Test
     public void testRacialAttributeScoreBonus(){
-        player.setRacialAttribute("Hill Dwarf: +1 WIS");
-        player.setRacialAttribute("Mountain Dwarf: +2 STR");
+        player.setRacialAttribute(RacialAttribute.HILLDWARF);
+        player.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
         Assertions.assertEquals(0, player.getWIS());
         Assertions.assertEquals(2, player.getSTR());
     }
