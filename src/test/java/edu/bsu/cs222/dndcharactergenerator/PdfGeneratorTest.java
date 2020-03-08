@@ -2,6 +2,9 @@ package edu.bsu.cs222.dndcharactergenerator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 public class PdfGeneratorTest {
     private static Character character = new Character();
@@ -11,12 +14,12 @@ public class PdfGeneratorTest {
     public void setup() {
         character.setName("Hellen");
         character.setRace("Dwarf");
-        character.setCHA(1);
-        character.setCON(1);
-        character.setDEX(1);
-        character.setINT(1);
-        character.setSTR(1);
-        character.setWIS(1);
+        character.setCHA(20);
+        character.setCON(20);
+        character.setDEX(20);
+        character.setINT(20);
+        character.setSTR(20);
+        character.setWIS(20);
 
         character.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
         character.setStyleLiteral("foo-bar");
@@ -28,13 +31,13 @@ public class PdfGeneratorTest {
         Assertions.assertNotNull(generator);
     }
 
-//    @Test
-//    public void testGenerator() {
-//        try {
-//            generator.writeNewCharacterSheet("sheet_test.pdf");
-//        }
-//        catch(IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    public void testGenerator() {
+        try {
+            generator.writeNewCharacterSheet("sheet_test.pdf");
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
