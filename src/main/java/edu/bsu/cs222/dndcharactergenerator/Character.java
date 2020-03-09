@@ -205,7 +205,7 @@ public class Character {
                 this.race = Race.TIEFLING;
                 break;
             default:
-                this.race = null;
+                this.race = Race.ZEROMAN;
                 break;
         }
     }

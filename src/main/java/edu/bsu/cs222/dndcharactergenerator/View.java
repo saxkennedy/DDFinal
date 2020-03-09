@@ -201,7 +201,8 @@ public class View extends Application {
             Image halfElfImage = new Image("/halfElfImage.png");
             Image halfOrcImage = new Image("/halfOrcImage.png");
             racialVbox.getChildren().addAll(racialAttributesHeader);
-            if (character.getRace() == null) {
+            if (character.getRace()==null) {
+                character.setRace("zeroman");
                 Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
                 racialVbox.getChildren().addAll(noRaceSelected);
             }
