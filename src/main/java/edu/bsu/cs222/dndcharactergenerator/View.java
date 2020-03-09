@@ -48,27 +48,27 @@ public class View extends Application {
                 "Feel free to insert your own values, or take ours!");
         Button nextToCombatStyle = new Button("Next (Combat Style");
         Button diceRoller = new Button("Roll the Dice!");
-        Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
+        Integer[] statNumbers = new Integer[] {3,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
         Label rolledStats = new Label("");
         Label strLabel = new Label("Strength");
-        ComboBox strBox = new ComboBox();
+        ComboBox<Integer> strBox = new ComboBox<>();
         strBox.getItems().addAll(statNumbers);
         Label dexLabel = new Label("Dexterity");
-        ComboBox dexBox = new ComboBox();
+        ComboBox<Integer> dexBox = new ComboBox<>();
         dexBox.getItems().addAll(statNumbers);
         Label conLabel = new Label("Constitution");
-        ComboBox conBox = new ComboBox();
+        ComboBox<Integer> conBox = new ComboBox<Integer>();
         conBox.getItems().addAll(statNumbers);
         Label intLabel = new Label("Intelligence");
-        ComboBox intBox = new ComboBox();
+        ComboBox<Integer> intBox = new ComboBox<Integer>();
         intBox.getItems().addAll(statNumbers);
         Label wisLabel = new Label("Wisdom");
-        ComboBox wisBox = new ComboBox();
+        ComboBox<Integer> wisBox = new ComboBox<Integer>();
         wisBox.getItems().addAll(statNumbers);
         Label chaLabel = new Label("Charisma");
-        ComboBox chaBox = new ComboBox();
+        ComboBox<Integer> chaBox = new ComboBox<>();
         chaBox.getItems().addAll(statNumbers);
-        ComboBox races = new ComboBox();
+        ComboBox<String> races = new ComboBox<>();
         Button backToName = new Button("Back (Name Screen)");
         races.getItems().addAll("Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling");
         coreStatsVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, nextToCombatStyle, backToName);
@@ -207,7 +207,7 @@ public class View extends Application {
             }
 
             if (character.getRace().equals(Race.DRAGONBORN)) {
-                ComboBox breathWeaponSelection = new ComboBox();
+                ComboBox<String> breathWeaponSelection = new ComboBox<>();
                 breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
                         "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
                 racialVbox.getChildren().addAll(breathWeaponSelection);
@@ -217,7 +217,7 @@ public class View extends Application {
             }
             if (character.getRace().equals(Race.DWARF)) {
                 racialImageView.setImage(dwarfImage);
-                ComboBox dwarfSubRace = new ComboBox();
+                ComboBox<String> dwarfSubRace = new ComboBox<>();
                 dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
                 racialVbox.getChildren().addAll(dwarfSubRace);
                 dwarfSubRace.setOnAction(actionEvent -> {
@@ -226,7 +226,7 @@ public class View extends Application {
 
             }
             if (character.getRace().equals(Race.ELF)) {
-                ComboBox elfSubRace = new ComboBox();
+                ComboBox<String> elfSubRace = new ComboBox<>();
                 elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
                 racialVbox.getChildren().addAll(elfSubRace);
                 elfSubRace.setOnAction(actionEvent -> {
@@ -236,7 +236,7 @@ public class View extends Application {
             }
             if (character.getRace().equals(Race.GNOME)) {
                 racialImageView.setImage(gnomeImage);
-                ComboBox gnomeSubRace = new ComboBox();
+                ComboBox<String> gnomeSubRace = new ComboBox<String>();
                 gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
                 racialVbox.getChildren().addAll(gnomeSubRace);
                 gnomeSubRace.setOnAction(actionEvent -> {
@@ -283,7 +283,7 @@ public class View extends Application {
                 }
             }
             if (character.getRace().equals(Race.HALFLING)) {
-                ComboBox halflingSubRace = new ComboBox();
+                ComboBox<String> halflingSubRace = new ComboBox<>();
                 halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
                 racialVbox.getChildren().addAll(halflingSubRace);
                 halflingSubRace.setOnAction(actionEvent -> {
@@ -325,27 +325,27 @@ public class View extends Application {
 
         //Stat Buttons
         strBox.setOnAction(actionEvent -> {
-            character.setSTR((int) strBox.getValue());
+            character.setSTR(strBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
         dexBox.setOnAction(actionEvent -> {
-            character.setDEX((int) dexBox.getValue());
+            character.setDEX(dexBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
         conBox.setOnAction(actionEvent -> {
-            character.setCON((int) conBox.getValue());
+            character.setCON(conBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
         intBox.setOnAction(actionEvent -> {
-            character.setINT((int) intBox.getValue());
+            character.setINT(intBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
         wisBox.setOnAction(actionEvent -> {
-            character.setWIS((int) wisBox.getValue());
+            character.setWIS(wisBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
         chaBox.setOnAction(actionEvent -> {
-            character.setCHA((int) chaBox.getValue());
+            character.setCHA(chaBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
 
