@@ -3,6 +3,7 @@ package edu.bsu.cs222.dndcharactergenerator;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,6 +29,7 @@ public class View extends Application {
 
         //1st Name Scene
         VBox nameVbox = new VBox();
+        nameVbox.setAlignment(Pos.CENTER);
         Image fighterImage = new Image("/dwarfImage.png", true);
         ImageView fighterImageView = new ImageView();
         fighterImageView.setImage(fighterImage);
@@ -35,12 +37,14 @@ public class View extends Application {
                 " *Leaving this blank is fine, you can always change it later!");
         TextField characterName = new TextField();
         Button go = new Button("GO!");
-        Scene openAndNameScene = new Scene(nameVbox, 600, 800);
+        Scene openAndNameScene = new Scene(nameVbox, 550, 850);
         nameVbox.getChildren().addAll(fighterImageView, enterName, characterName, go);
 
         //2nd Core Stats/Race Selection Scene
         VBox coreStatsVbox = new VBox();
-        Scene coreAttributesScene = new Scene(coreStatsVbox, 800, 800);
+        coreStatsVbox.setAlignment(Pos.CENTER);
+        coreStatsVbox.setSpacing(10);
+        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850);
         Label raceSelection = new Label("Choose from one of the below races!");
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
@@ -74,7 +78,9 @@ public class View extends Application {
 
         //3rd Scene Combat Style
         VBox combatStyle = new VBox();
-        Scene combatStyleScene = new Scene(combatStyle, 800, 800);
+        combatStyle.setAlignment(Pos.CENTER);
+        combatStyle.setSpacing(15);
+        Scene combatStyleScene = new Scene(combatStyle, 550, 850);
         Label combatStyleLabel = new Label("Select a combat style!");
         Label styleDescription = new Label("");
         Button nextToRacial = new Button("Next (Racial)");
@@ -153,17 +159,18 @@ public class View extends Application {
 
         //5th (Racial Scene)
         VBox racialVbox = new VBox();
-        Scene racialScene = new Scene(racialVbox, 1000, 1000);
+        racialVbox.setAlignment(Pos.CENTER);
+        Scene racialScene = new Scene(racialVbox, 550, 850);
         Label racialAttributesHeader = new Label("Specific Racial Options");
-        Label racialInformation = new Label("COLIN PUT STUFF HERE");
         //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
         Button backToCombatStyle = new Button("Back (to Core Attributes");//Will go away iteration 2.
-        Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will \n cause Fortitude save, contitution modifier, and hit points fields to remain empty, or reflect only your racial modifiers!\n No one wants a Constition score of 0,1, or 2!");
+        Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will zero values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
         Button finish = new Button("Finish");
 
         //6th Save Scene
         VBox saveLocationVbox = new VBox();
-        Scene saveScene = new Scene(saveLocationVbox, 200, 200);
+        saveLocationVbox.setAlignment(Pos.CENTER);
+        Scene saveScene = new Scene(saveLocationVbox, 550, 850);
         Label saveLabel = new Label("Please select a path to save your PDF to.");
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
@@ -281,7 +288,7 @@ public class View extends Application {
                 Label noSelectionForTiefling = new Label("You are a tiefling; try not to burn yourself or others!");
                 racialVbox.getChildren().addAll(noSelectionForTiefling);
             }
-            racialVbox.getChildren().addAll(racialImageView, racialInformation, makeSure, backToCombatStyle, finish);
+            racialVbox.getChildren().addAll(racialImageView, makeSure, backToCombatStyle, finish);
             stage.setScene(racialScene);
         });
 
