@@ -48,7 +48,7 @@ public class View extends Application {
                 "Feel free to insert your own values, or take ours!");
         Button nextToCombatStyle = new Button("Next (Combat Style");
         Button diceRoller = new Button("Roll the Dice!");
-        Integer[] statNumbers = new Integer[] {3,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
+        Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
         Label rolledStats = new Label("");
         Label strLabel = new Label("Strength");
         ComboBox<Integer> strBox = new ComboBox<>();
@@ -57,13 +57,13 @@ public class View extends Application {
         ComboBox<Integer> dexBox = new ComboBox<>();
         dexBox.getItems().addAll(statNumbers);
         Label conLabel = new Label("Constitution");
-        ComboBox<Integer> conBox = new ComboBox<Integer>();
+        ComboBox<Integer> conBox = new ComboBox<>();
         conBox.getItems().addAll(statNumbers);
         Label intLabel = new Label("Intelligence");
-        ComboBox<Integer> intBox = new ComboBox<Integer>();
+        ComboBox<Integer> intBox = new ComboBox<>();
         intBox.getItems().addAll(statNumbers);
         Label wisLabel = new Label("Wisdom");
-        ComboBox<Integer> wisBox = new ComboBox<Integer>();
+        ComboBox<Integer> wisBox = new ComboBox<>();
         wisBox.getItems().addAll(statNumbers);
         Label chaLabel = new Label("Charisma");
         ComboBox<Integer> chaBox = new ComboBox<>();
@@ -180,19 +180,13 @@ public class View extends Application {
         });
 
         //Race Selection
-        races.setOnAction(actionEvent -> {
-            character.setRace(races.getValue().toString());
-        });
+        races.setOnAction(actionEvent -> character.setRace(races.getValue()));
 
         //Back to Name Button
-        backToName.setOnAction(actionEvent -> {
-            stage.setScene(openAndNameScene);
-        });
+        backToName.setOnAction(actionEvent -> stage.setScene(openAndNameScene));
 
         //Next to Combat Style Button
-        nextToCombatStyle.setOnAction(actionEvent -> {
-            stage.setScene(combatStyleScene);
-        });
+        nextToCombatStyle.setOnAction(actionEvent -> stage.setScene(combatStyleScene));
         //Next to Racial Button
         nextToRacial.setOnAction(Event -> {
             ImageView racialImageView = new ImageView();
@@ -201,47 +195,38 @@ public class View extends Application {
             Image halfElfImage = new Image("/halfElfImage.png");
             Image halfOrcImage = new Image("/halfOrcImage.png");
             racialVbox.getChildren().addAll(racialAttributesHeader);
-            if (character.getRace().equals(null)) {
+            if (character.getRace()==null) {
                 Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
                 racialVbox.getChildren().addAll(noRaceSelected);
             }
-
             if (character.getRace().equals(Race.DRAGONBORN)) {
                 ComboBox<String> breathWeaponSelection = new ComboBox<>();
                 breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
                         "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
                 racialVbox.getChildren().addAll(breathWeaponSelection);
-                breathWeaponSelection.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue().toString()));
-                });
+                breathWeaponSelection.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue())));
             }
             if (character.getRace().equals(Race.DWARF)) {
                 racialImageView.setImage(dwarfImage);
                 ComboBox<String> dwarfSubRace = new ComboBox<>();
                 dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
                 racialVbox.getChildren().addAll(dwarfSubRace);
-                dwarfSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue().toString()));
-                });
+                dwarfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
 
             }
             if (character.getRace().equals(Race.ELF)) {
                 ComboBox<String> elfSubRace = new ComboBox<>();
                 elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
                 racialVbox.getChildren().addAll(elfSubRace);
-                elfSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue().toString()));
-                });
+                elfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue())));
 
             }
             if (character.getRace().equals(Race.GNOME)) {
                 racialImageView.setImage(gnomeImage);
-                ComboBox<String> gnomeSubRace = new ComboBox<String>();
+                ComboBox<String> gnomeSubRace = new ComboBox<>();
                 gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
                 racialVbox.getChildren().addAll(gnomeSubRace);
-                gnomeSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue().toString()));
-                });
+                gnomeSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
 
             }
             if (character.getRace().equals(Race.HALFELF)) {
@@ -263,8 +248,8 @@ public class View extends Application {
                                     }
                                 }
                             }
-
-                        } else {
+                        }
+                        else {
                             if (listenedCount == maxBoxCount) {
                                 for (CheckBox selBox : halfElfCheckboxes) {
                                     selBox.setDisable(false);
@@ -286,9 +271,7 @@ public class View extends Application {
                 ComboBox<String> halflingSubRace = new ComboBox<>();
                 halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
                 racialVbox.getChildren().addAll(halflingSubRace);
-                halflingSubRace.setOnAction(actionEvent -> {
-                    character.setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue().toString()));
-                });
+                halflingSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
             }
             if (character.getRace().equals(Race.HALFORC)) {
                 racialImageView.setImage(halfOrcImage);
@@ -303,15 +286,12 @@ public class View extends Application {
                 Label noSelectionForTiefling = new Label("You are a tiefling; try not to burn yourself or others!");
                 racialVbox.getChildren().addAll(noSelectionForTiefling);
             }
-
             racialVbox.getChildren().addAll(racialImageView, racialInformation, makeSure, backToCombatStyle, finish);
             stage.setScene(racialScene);
         });
 
         //Back to Core
-        backToCore.setOnAction(actionEvent -> {
-            stage.setScene(coreAttributesScene);
-        });
+        backToCore.setOnAction(actionEvent -> stage.setScene(coreAttributesScene));
         //Back to Combat Style
         backToCombatStyle.setOnAction(actionEvent -> {
             racialVbox.getChildren().clear();
@@ -319,9 +299,7 @@ public class View extends Application {
         });
 
         //Dice Roller Button
-        diceRoller.setOnAction(actionEvent -> {
-            rolledStats.setText(character.statRoll().toString());
-        });
+        diceRoller.setOnAction(actionEvent -> rolledStats.setText(character.statRoll().toString()));
 
         //Stat Buttons
         strBox.setOnAction(actionEvent -> {
@@ -348,11 +326,8 @@ public class View extends Application {
             character.setCHA(chaBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
-
         //Finish Button
-        finish.setOnAction(actionEvent -> {
-            stage.setScene(saveScene);
-        });
+        finish.setOnAction(actionEvent -> stage.setScene(saveScene));
         //Save Button
         save.setOnAction(actionEvent -> {
             File saveFile = saveLocation.showDialog(stage);
@@ -368,7 +343,6 @@ public class View extends Application {
         stage.setScene(openAndNameScene);
         stage.setTitle("Dungeons and Dragons Fighter Generator");
         stage.show();
-
     }
 
     public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
