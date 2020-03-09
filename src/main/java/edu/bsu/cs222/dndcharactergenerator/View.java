@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 
 import java.io.File;
+import java.io.IOException;
 
 public class View extends Application {
 
@@ -336,8 +337,12 @@ public class View extends Application {
         //Save Button
         save.setOnAction(actionEvent -> {
             File saveFile = saveLocation.showDialog(stage);
-            String filePath = saveFile.getAbsolutePath();
-            System.out.println(filePath);
+            PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
+            try {
+                generator.writeNewCharacterSheet(saveFile);
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
         });
 
         //Back to Racial Button
