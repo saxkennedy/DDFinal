@@ -38,7 +38,6 @@ public class View extends Application {
         Scene openAndNameScene = new Scene(nameVbox, 600, 800);
         nameVbox.getChildren().addAll(fighterImageView, enterName, characterName, go);
 
-
         //2nd Core Stats/Race Selection Scene
         VBox coreStatsVbox = new VBox();
         Scene coreAttributesScene = new Scene(coreStatsVbox, 800, 800);
@@ -172,7 +171,6 @@ public class View extends Application {
         Button backToRacial = new Button("Back (to Racial");
         saveLocationVbox.getChildren().addAll(saveLabel, save, backToRacial);
 
-
         //GO! button
         go.setOnAction(actionEvent -> {
             character.setName(characterName.getText());
@@ -187,6 +185,7 @@ public class View extends Application {
 
         //Next to Combat Style Button
         nextToCombatStyle.setOnAction(actionEvent -> stage.setScene(combatStyleScene));
+
         //Next to Racial Button
         nextToRacial.setOnAction(Event -> {
             ImageView racialImageView = new ImageView();
@@ -195,7 +194,7 @@ public class View extends Application {
             Image halfElfImage = new Image("/halfElfImage.png");
             Image halfOrcImage = new Image("/halfOrcImage.png");
             racialVbox.getChildren().addAll(racialAttributesHeader);
-            if (character.getRace()==null) {
+            if (character.getRace() == null) {
                 Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
                 racialVbox.getChildren().addAll(noRaceSelected);
             }
@@ -212,14 +211,12 @@ public class View extends Application {
                 dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
                 racialVbox.getChildren().addAll(dwarfSubRace);
                 dwarfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
-
             }
             if (character.getRace().equals(Race.ELF)) {
                 ComboBox<String> elfSubRace = new ComboBox<>();
                 elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
                 racialVbox.getChildren().addAll(elfSubRace);
                 elfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue())));
-
             }
             if (character.getRace().equals(Race.GNOME)) {
                 racialImageView.setImage(gnomeImage);
@@ -227,7 +224,6 @@ public class View extends Application {
                 gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
                 racialVbox.getChildren().addAll(gnomeSubRace);
                 gnomeSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
-
             }
             if (character.getRace().equals(Race.HALFELF)) {
                 racialImageView.setImage(halfElfImage);
@@ -237,7 +233,6 @@ public class View extends Application {
                 final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
                 ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
                     private int listenedCount = 0;
-
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         if (newValue) {
                             listenedCount++;
@@ -326,14 +321,17 @@ public class View extends Application {
             character.setCHA(chaBox.getValue());
             //character.addRacialAbilityScoreBonusIfNotNull();
         });
+
         //Finish Button
         finish.setOnAction(actionEvent -> stage.setScene(saveScene));
+
         //Save Button
         save.setOnAction(actionEvent -> {
             File saveFile = saveLocation.showDialog(stage);
             String filePath = saveFile.getAbsolutePath();
             System.out.println(filePath);
         });
+
         //Back to Racial Button
         backToRacial.setOnAction(actionEvent -> {
             saveLocationVbox.getChildren().clear();
