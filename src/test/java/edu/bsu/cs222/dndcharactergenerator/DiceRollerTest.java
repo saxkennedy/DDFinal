@@ -27,6 +27,7 @@ public class DiceRollerTest {
         for (Integer stat : diceRolls) {
             if (stat <= 18 && stat >= 3) {
                 withinBounds = true;
+                break;
             }
         }
         Assertions.assertTrue(withinBounds);

@@ -35,8 +35,7 @@ public class PdfGeneratorTest {
     public void testGenerator() {
         try {
             generator.writeNewCharacterSheet("sheet_test.pdf");
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
