@@ -50,7 +50,8 @@ public class View extends Application {
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
                 "Feel free to insert your own values, or take ours!");
-        Button nextToCombatStyle = new Button("Next (Combat Style");
+        Button nextToCombatStyle = new Button("Next (Combat Style)");
+        Button backToName = new Button("Back (Name Screen)");
         Button diceRoller = new Button("Roll the Dice!");
         Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
         Label rolledStats = new Label("");
@@ -73,7 +74,6 @@ public class View extends Application {
         ComboBox<Integer> chaBox = new ComboBox<>();
         chaBox.getItems().addAll(statNumbers);
         ComboBox<String> races = new ComboBox<>();
-        Button backToName = new Button("Back (Name Screen)");
         races.getItems().addAll("Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling");
         coreStatsVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, nextToCombatStyle, backToName);
 
@@ -133,12 +133,11 @@ public class View extends Application {
                         styleDescription.setText("You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2");
                         break;
                     case "Protection":
-                        styleDescription.setText("When wielding a shield, you may impose a disadvantage " +
-                                "on an enemy creature's attack roll when it attacks\na target" +
+                        styleDescription.setText("When wielding a shield, you may impose a disadvantage on an enemy\n creature's attack roll when it attacks\na target" +
                                 " other than you that is both within 5 feet of you and in your sight");
                         break;
                     case "Two-Weapon Fighting":
-                        styleDescription.setText("When you engage in two weapon fighting you can add you ability modifier to the damage of the second attack");
+                        styleDescription.setText("When you engage in two weapon fighting,\n you can add you ability modifier to the damage of the second attack");
                         break;
                     default:
                         styleDescription.setText("No style found");
@@ -164,7 +163,7 @@ public class View extends Application {
         Scene racialScene = new Scene(racialVbox, 550, 850);
         Label racialAttributesHeader = new Label("Specific Racial Options");
         //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
-        Button backToCombatStyle = new Button("Back (to Core Attributes");//Will go away iteration 2.
+        Button backToCombatStyle = new Button("Back (to Core Attributes)");//Will go away iteration 2.
         Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will zero values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
         Button finish = new Button("Finish");
 
@@ -176,7 +175,7 @@ public class View extends Application {
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
         Button save = new Button("Select Save Location");
-        Button backToRacial = new Button("Back (to Racial");
+        Button backToRacial = new Button("Back (to Racial)");
         saveLocationVbox.getChildren().addAll(saveLabel, save, backToRacial);
 
         //GO! button
