@@ -7,6 +7,7 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -112,8 +113,8 @@ public class PdfGenerator {
         form = catalog.getAcroForm();
     }
 
-    public void writeNewCharacterSheet(String fileName) throws IOException {
-        newCharacterSheet.save(fileName);
+    public void writeNewCharacterSheet(File file) throws IOException {
+        newCharacterSheet.save(file);
         newCharacterSheet.close();
     }
 }

@@ -9,7 +9,8 @@ public enum Race {
     HALFELF(0, 0, 0, 0, 0, 2, "Half-Elf"),
     HALFLING(0, 2, 0, 0, 0, 0, "Halfling"),
     HUMAN(1, 1, 1, 1, 1, 1, "Human"),
-    TIEFLING(0, 0, 0, 1, 0, 2, "Tiefling");
+    TIEFLING(0, 0, 0, 1, 0, 2, "Tiefling"),
+    ZEROMAN(0,0,0,0,0,0,"Zeroman");
 
 
     public final int str;
