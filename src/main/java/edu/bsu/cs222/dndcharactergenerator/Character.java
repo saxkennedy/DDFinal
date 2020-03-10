@@ -155,7 +155,6 @@ public class Character {
                 this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
-
     public void setName(String name) {
         this.name = name;
         System.out.println("Name changed to " + name);
