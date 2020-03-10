@@ -10,11 +10,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import javafx.stage.StageStyle;
 
+import javax.swing.plaf.ColorUIResource;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,6 +37,9 @@ public class View extends Application {
         //1st Name Scene
         VBox nameVbox = new VBox();
         nameVbox.setAlignment(Pos.CENTER);
+        nameVbox.setSpacing(20);
+        nameVbox.setBackground(Background.EMPTY);
+        Scene openAndNameScene = new Scene(nameVbox, 550, 850,Color.CRIMSON);
         Image fighterImage = new Image("/dwarfImage.png", true);
         ImageView fighterImageView = new ImageView();
         fighterImageView.setImage(fighterImage);
@@ -38,21 +47,24 @@ public class View extends Application {
                 " *Leaving this blank is fine, you can always change it later!");
         TextField characterName = new TextField();
         Button go = new Button("GO!");
-        Scene openAndNameScene = new Scene(nameVbox, 550, 850);
         nameVbox.getChildren().addAll(fighterImageView, enterName, characterName, go);
 
         //2nd Core Stats/Race Selection Scene
         VBox coreStatsVbox = new VBox();
         coreStatsVbox.setAlignment(Pos.CENTER);
         coreStatsVbox.setSpacing(10);
-        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850);
+        coreStatsVbox.setBackground(Background.EMPTY);
+        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850,Color.CRIMSON);
         Label raceSelection = new Label("Choose from one of the below races!");
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
                 "Feel free to insert your own values, or take ours!");
+        Button diceRoller = new Button("Roll the Dice!");
         Button nextToCombatStyle = new Button("Next (Combat Style)");
         Button backToName = new Button("Back (Name Screen)");
-        Button diceRoller = new Button("Roll the Dice!");
+        HBox coreStatsButtons = new HBox(backToName, nextToCombatStyle);
+        coreStatsButtons.setAlignment(Pos.CENTER);
+        coreStatsButtons.setSpacing(25);
         Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
         Label rolledStats = new Label("");
         Label strLabel = new Label("Strength");
@@ -75,17 +87,21 @@ public class View extends Application {
         chaBox.getItems().addAll(statNumbers);
         ComboBox<String> races = new ComboBox<>();
         races.getItems().addAll("Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling");
-        coreStatsVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, nextToCombatStyle, backToName);
+        coreStatsVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, coreStatsButtons);
 
         //3rd Scene Combat Style
         VBox combatStyle = new VBox();
         combatStyle.setAlignment(Pos.CENTER);
         combatStyle.setSpacing(15);
-        Scene combatStyleScene = new Scene(combatStyle, 550, 850);
+        combatStyle.setBackground(Background.EMPTY);
+        Scene combatStyleScene = new Scene(combatStyle, 550, 850,Color.CRIMSON);
         Label combatStyleLabel = new Label("Select a combat style!");
         Label styleDescription = new Label("");
         Button nextToRacial = new Button("Next (Racial)");
         Button backToCore = new Button("Back (Core and Race Selection)");
+        HBox combatStyleButtons = new HBox(backToCore, nextToRacial);
+        combatStyleButtons.setAlignment(Pos.CENTER);
+        combatStyleButtons.setSpacing(25);
 
         ToggleGroup styleGroup = new ToggleGroup();
 
@@ -145,7 +161,7 @@ public class View extends Application {
                 }
             }
         });
-        combatStyle.getChildren().addAll(combatStyleLabel, archery, defense, dueling, greatWeaponFighting, protection, twoWeaponFighting, styleDescription, backToCore, nextToRacial);
+        combatStyle.getChildren().addAll(combatStyleLabel, archery, defense, dueling, greatWeaponFighting, protection, twoWeaponFighting, styleDescription, combatStyleButtons);
 
         //Button nextToSkillsBackground = new Button("Next (Skills and Background"); For iteration 2
 
@@ -160,17 +176,24 @@ public class View extends Application {
         //5th (Racial Scene)
         VBox racialVbox = new VBox();
         racialVbox.setAlignment(Pos.CENTER);
-        Scene racialScene = new Scene(racialVbox, 550, 850);
+        racialVbox.setSpacing(10);
+        racialVbox.setBackground(Background.EMPTY);
+        Scene racialScene = new Scene(racialVbox, 550, 850,Color.CRIMSON);
         Label racialAttributesHeader = new Label("Specific Racial Options");
         //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
         Button backToCombatStyle = new Button("Back (to Core Attributes)");//Will go away iteration 2.
         Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will zero values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
         Button finish = new Button("Finish");
+        HBox racialButtons = new HBox(backToCombatStyle, finish);
+        racialButtons.setAlignment(Pos.BOTTOM_CENTER);
+        racialButtons.setSpacing(25);
 
         //6th Save Scene
         VBox saveLocationVbox = new VBox();
         saveLocationVbox.setAlignment(Pos.CENTER);
-        Scene saveScene = new Scene(saveLocationVbox, 550, 850);
+        saveLocationVbox.setSpacing(40);
+        saveLocationVbox.setBackground(Background.EMPTY);
+        Scene saveScene = new Scene(saveLocationVbox, 550, 850,Color.CRIMSON);
         Label saveLabel = new Label("Please select a path to save your PDF to.");
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
@@ -200,13 +223,19 @@ public class View extends Application {
             Image gnomeImage = new Image("/gnomeImage.png");
             Image halfElfImage = new Image("/halfElfImage.png");
             Image halfOrcImage = new Image("/halfOrcImage.png");
+            Image dragonbornImage = new Image("/dragonbornImage.png");
+            Image elfImage = new Image("/elfImage.png");
+            Image humanImage = new Image("/humanImage.png");
+            Image tieflingImage = new Image("/tieflingImage.png");
+            Image halflingImage = new Image("/halflingImage.png");
             racialVbox.getChildren().addAll(racialAttributesHeader);
-            if (character.getRace()==null) {
+            if (character.getRace() == null) {
                 character.setRace("zeroman");
                 Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
                 racialVbox.getChildren().addAll(noRaceSelected);
             }
             if (character.getRace().equals(Race.DRAGONBORN)) {
+                racialImageView.setImage(dragonbornImage);
                 ComboBox<String> breathWeaponSelection = new ComboBox<>();
                 breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
                         "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
@@ -221,6 +250,7 @@ public class View extends Application {
                 dwarfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
             }
             if (character.getRace().equals(Race.ELF)) {
+                racialImageView.setImage(elfImage);
                 ComboBox<String> elfSubRace = new ComboBox<>();
                 elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
                 racialVbox.getChildren().addAll(elfSubRace);
@@ -237,10 +267,13 @@ public class View extends Application {
                 racialImageView.setImage(halfElfImage);
                 Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
                 String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
+                HBox halfElfHbox = new HBox();
+                halfElfHbox.setAlignment(Pos.CENTER);
                 final int maxBoxCount = 2;
                 final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
                 ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
                     private int listenedCount = 0;
+
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         if (newValue) {
                             listenedCount++;
@@ -251,8 +284,7 @@ public class View extends Application {
                                     }
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             if (listenedCount == maxBoxCount) {
                                 for (CheckBox selBox : halfElfCheckboxes) {
                                     selBox.setDisable(false);
@@ -262,15 +294,16 @@ public class View extends Application {
                         }
                     }
                 };
-                racialVbox.getChildren().addAll(halfElfRacialAbilityBonus);
                 for (int i = 0; i < statsForBoxes.length; i++) {
                     CheckBox selBox = new CheckBox(statsForBoxes[i]);
                     selBox.selectedProperty().addListener(listener);
-                    racialVbox.getChildren().add(selBox);
+                    halfElfHbox.getChildren().add(selBox);
                     halfElfCheckboxes[i] = selBox;
                 }
+                racialVbox.getChildren().addAll(halfElfRacialAbilityBonus, halfElfHbox);
             }
             if (character.getRace().equals(Race.HALFLING)) {
+                racialImageView.setImage(halflingImage);
                 ComboBox<String> halflingSubRace = new ComboBox<>();
                 halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
                 racialVbox.getChildren().addAll(halflingSubRace);
@@ -282,14 +315,16 @@ public class View extends Application {
                 racialVbox.getChildren().addAll(noSelectionForOrc);
             }
             if (character.getRace().equals(Race.HUMAN)) {
+                racialImageView.setImage(humanImage);
                 Label noSelectionForHuman = new Label("You are a human.  Congratulations.");
                 racialVbox.getChildren().addAll(noSelectionForHuman);
             }
             if (character.getRace().equals(Race.TIEFLING)) {
+                racialImageView.setImage(tieflingImage);
                 Label noSelectionForTiefling = new Label("You are a tiefling; try not to burn yourself or others!");
                 racialVbox.getChildren().addAll(noSelectionForTiefling);
             }
-            racialVbox.getChildren().addAll(racialImageView, makeSure, backToCombatStyle, finish);
+            racialVbox.getChildren().addAll(racialImageView, makeSure, racialButtons);
             stage.setScene(racialScene);
         });
 
@@ -339,7 +374,7 @@ public class View extends Application {
             PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
             try {
                 generator.writeNewCharacterSheet(saveFile);
-            } catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         });
