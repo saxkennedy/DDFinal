@@ -5,9 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -16,11 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
-import javafx.stage.StageStyle;
 
-import javax.swing.plaf.ColorUIResource;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -132,7 +126,7 @@ public class View extends Application {
         styleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (styleGroup.getSelectedToggle() != null) {
                 String style = styleGroup.getSelectedToggle().getUserData().toString();
-                character.setStyleLiteral(style);
+                character.setStyle(style);
                 System.out.println(style);
 
                 switch (style) {
@@ -392,66 +386,11 @@ public class View extends Application {
     }
 
     public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
-        RacialAttribute newAttribute = null;
-        switch (racialAttribute) {
-            case "Hill Dwarf: +1 WIS":
-                newAttribute = RacialAttribute.HILLDWARF;
-                break;
-            case "Mountain Dwarf: +2 STR":
-                newAttribute = RacialAttribute.MOUNTAINDWARF;
-                break;
-            case "High Elf: +1 INT":
-                newAttribute = RacialAttribute.HIGHELF;
-                break;
-            case "Wood Elf: +1 WIS":
-                newAttribute = RacialAttribute.WOODELF;
-                break;
-            case "Drow: +1 CHA":
-                newAttribute = RacialAttribute.DROW;
-                break;
-            case "Forest Gnome: +1 DEX":
-                newAttribute = RacialAttribute.FORESTGNOME;
-                break;
-            case "Rock Gnome: +1 CON":
-                newAttribute = RacialAttribute.ROCKGNOME;
-                break;
-            case "Lightfoot: +1 CHA":
-                newAttribute = RacialAttribute.LIGHTFOOT;
-                break;
-            case "Stout: +1 CON":
-                newAttribute = RacialAttribute.STOUT;
-                break;
-            case "Black Dragon: Acid":
-                newAttribute = RacialAttribute.BLACKDRAGON;
-                break;
-            case "Blue Dragon: Lightning":
-                newAttribute = RacialAttribute.BLUEDRAGON;
-                break;
-            case "Brass Dragon: Fire":
-                newAttribute = RacialAttribute.BRASSDRAGON;
-                break;
-            case "Bronze Dragon: Lightning":
-                newAttribute = RacialAttribute.BRONZEDRAGON;
-                break;
-            case "Copper Dragon: Acid":
-                newAttribute = RacialAttribute.COPPERDRAGON;
-                break;
-            case "Gold Dragon: Fire":
-                newAttribute = RacialAttribute.GOLDDRAGON;
-                break;
-            case "Green Dragon: Poison":
-                newAttribute = RacialAttribute.GREENDRAGON;
-                break;
-            case "Red Dragon: Fire":
-                newAttribute = RacialAttribute.REDDRAGON;
-                break;
-            case "Silver Dragon: Cold":
-                newAttribute = RacialAttribute.SILVERDRAGON;
-                break;
-            case "White Dragon: Cold":
-                newAttribute = RacialAttribute.WHITEDRAGON;
-                break;
+        for(RacialAttribute attribute : RacialAttribute.values()) {
+            if(attribute.attributeName.equals(racialAttribute)) {
+                return attribute;
+            }
         }
-        return newAttribute;
+        return null;
     }
 }
