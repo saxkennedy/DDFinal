@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class View extends Application {
 
@@ -286,7 +287,7 @@ public class View extends Application {
                             }
                             listenedCount--;
                         }
-                        System.out.println(halfElfCheckboxes.toString());
+                        System.out.println(Arrays.toString(halfElfCheckboxes));
                     }
                 };
                 for (int i = 0; i < statsForBoxes.length; i++) {
