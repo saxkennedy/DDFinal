@@ -5,7 +5,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -14,10 +16,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.stage.StageStyle;
 
+import javax.swing.plaf.ColorUIResource;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class View extends Application {
 
@@ -260,7 +265,8 @@ public class View extends Application {
             }
             if (character.getRace().equals(Race.HALFELF)) {
                 racialImageView.setImage(halfElfImage);
-                Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
+                Label halfElfRacialAbilityBonus = new Label("As a Half-Elf, you may choose two skills to increase by one point each.");
+                Label halfElfRacialAbilityBonusLine2 = new Label("Go back and do so to the scores of your choice");
                 String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
                 HBox halfElfHbox = new HBox();
                 halfElfHbox.setAlignment(Pos.CENTER);
@@ -287,7 +293,7 @@ public class View extends Application {
                             }
                             listenedCount--;
                         }
-                        System.out.println(Arrays.toString(halfElfCheckboxes));
+                        //System.out.println(halfElfCheckboxes.toString());
                     }
                 };
                 for (int i = 0; i < statsForBoxes.length; i++) {
@@ -296,7 +302,7 @@ public class View extends Application {
                     halfElfHbox.getChildren().add(selBox);
                     halfElfCheckboxes[i] = selBox;
                 }
-                racialVbox.getChildren().addAll(halfElfRacialAbilityBonus, halfElfHbox);
+                racialVbox.getChildren().addAll(halfElfRacialAbilityBonus, halfElfRacialAbilityBonusLine2);
             }
             if (character.getRace().equals(Race.HALFLING)) {
                 racialImageView.setImage(halflingImage);
