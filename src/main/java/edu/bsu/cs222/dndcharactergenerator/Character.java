@@ -173,31 +173,31 @@ public class Character {
 
     public void assignEnumRace(String race) {
         switch (race) {
-            case "Half-Orc":
+            case "Half-Orc: +2 STR, +1 CON":
                 this.race = Race.HALFORC;
                 break;
-            case "Dragonborn":
+            case "Dragonborn: +2 STR, +1 CHA":
                 this.race = Race.DRAGONBORN;
                 break;
-            case "Dwarf":
+            case "Dwarf: +2 CON":
                 this.race = Race.DWARF;
                 break;
-            case "Elf":
+            case "Elf: +2 DEX":
                 this.race = Race.ELF;
                 break;
-            case "Gnome":
+            case "Gnome: +2 INT":
                 this.race = Race.GNOME;
                 break;
-            case "Half-Elf":
+            case "Half-Elf: +2 CHA":
                 this.race = Race.HALFELF;
                 break;
-            case "Halfling":
+            case "Halfling: +2 DEX":
                 this.race = Race.HALFLING;
                 break;
-            case "Human":
+            case "Human: +1 All Stats":
                 this.race = Race.HUMAN;
                 break;
-            case "Tiefling":
+            case "Tiefling: +2 CHA, +1 INT":
                 this.race = Race.TIEFLING;
                 break;
             default:

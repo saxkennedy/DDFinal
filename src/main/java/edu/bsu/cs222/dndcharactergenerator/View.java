@@ -33,7 +33,7 @@ public class View extends Application {
         nameVbox.setAlignment(Pos.CENTER);
         nameVbox.setSpacing(20);
         nameVbox.setBackground(Background.EMPTY);
-        Scene openAndNameScene = new Scene(nameVbox, 550, 850,Color.CRIMSON);
+        Scene openAndNameScene = new Scene(nameVbox, 550, 850,Color.NAVAJOWHITE);
         Image fighterImage = new Image("/dwarfImage.png", true);
         ImageView fighterImageView = new ImageView();
         fighterImageView.setImage(fighterImage);
@@ -48,7 +48,7 @@ public class View extends Application {
         coreStatsVbox.setAlignment(Pos.CENTER);
         coreStatsVbox.setSpacing(10);
         coreStatsVbox.setBackground(Background.EMPTY);
-        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850,Color.CRIMSON);
+        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850,Color.NAVAJOWHITE);
         Label raceSelection = new Label("Choose from one of the below races!");
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
@@ -80,7 +80,7 @@ public class View extends Application {
         ComboBox<Integer> chaBox = new ComboBox<>();
         chaBox.getItems().addAll(statNumbers);
         ComboBox<String> races = new ComboBox<>();
-        races.getItems().addAll("Dragonborn +2 STR, +1 CHA", "Dwarf +2 CON", "Elf +2 DEX", "Gnome +2 INT", "Half-Elf +2 CHA", "Halfling +2 DEX", "Half-Orc +2 STR, +1 CON", "Human +1 TO ALL STATS", "Tiefling +2 CHA, +1 INT");
+        races.getItems().addAll("Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Half-Orc: +2 STR, +1 CON", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT");
         coreStatsVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, coreStatsButtons);
 
         //3rd Scene Combat Style
@@ -88,7 +88,7 @@ public class View extends Application {
         combatStyle.setAlignment(Pos.CENTER);
         combatStyle.setSpacing(15);
         combatStyle.setBackground(Background.EMPTY);
-        Scene combatStyleScene = new Scene(combatStyle, 550, 850,Color.CRIMSON);
+        Scene combatStyleScene = new Scene(combatStyle, 550, 850,Color.BEIGE);
         Label combatStyleLabel = new Label("Select a combat style!");
         Label styleDescription = new Label("");
         Button nextToRacial = new Button("Next (Racial)");
@@ -172,7 +172,7 @@ public class View extends Application {
         racialVbox.setAlignment(Pos.CENTER);
         racialVbox.setSpacing(10);
         racialVbox.setBackground(Background.EMPTY);
-        Scene racialScene = new Scene(racialVbox, 550, 850,Color.CRIMSON);
+        Scene racialScene = new Scene(racialVbox, 550, 850,Color.BEIGE);
         Label racialAttributesHeader = new Label("Specific Racial Options");
         //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
         Button backToCombatStyle = new Button("Back (to Core Attributes)");//Will go away iteration 2.
