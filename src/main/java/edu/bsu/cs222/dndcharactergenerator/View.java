@@ -366,7 +366,8 @@ public class View extends Application {
 
         //Save Button
         save.setOnAction(actionEvent -> {
-            File saveFile = saveLocation.showDialog(stage);
+            File saveFile = new File(saveLocation.showDialog(stage) + "\\"+character.getName());
+            System.out.println(saveFile.toString());
             PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
             try {
                 generator.writeNewCharacterSheet(saveFile);
