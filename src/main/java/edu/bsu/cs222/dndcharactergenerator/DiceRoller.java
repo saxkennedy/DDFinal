@@ -8,7 +8,8 @@ public class DiceRoller {
     public ArrayList<Integer> getStats() {
         ArrayList<Integer> stats = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            ArrayList<Integer> sorter = new ArrayList<>();
+            ArrayList<Integer> sorter;
+            sorter = new ArrayList<>();
             sorter.add((int) (Math.random() * 6 + 1));
             sorter.add((int) (Math.random() * 6 + 1));
             sorter.add((int) (Math.random() * 6 + 1));
