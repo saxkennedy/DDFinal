@@ -265,7 +265,8 @@ public class View extends Application {
             }
             if (character.getRace().equals(Race.HALFELF)) {
                 racialImageView.setImage(halfElfImage);
-                Label halfElfRacialAbilityBonus = new Label("Choose which two ability scores to increase by 1");
+                Label halfElfRacialAbilityBonus = new Label("As a Half-Elf, you may choose two skills to increase by one point each.");
+                Label halfElfRacialAbilityBonusLine2 = new Label("Go back and do so to the scores of your choice");
                 String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
                 HBox halfElfHbox = new HBox();
                 halfElfHbox.setAlignment(Pos.CENTER);
@@ -292,7 +293,7 @@ public class View extends Application {
                             }
                             listenedCount--;
                         }
-                        System.out.println(halfElfCheckboxes.toString());
+                        //System.out.println(halfElfCheckboxes.toString());
                     }
                 };
                 for (int i = 0; i < statsForBoxes.length; i++) {
@@ -301,7 +302,7 @@ public class View extends Application {
                     halfElfHbox.getChildren().add(selBox);
                     halfElfCheckboxes[i] = selBox;
                 }
-                racialVbox.getChildren().addAll(halfElfRacialAbilityBonus, halfElfHbox);
+                racialVbox.getChildren().addAll(halfElfRacialAbilityBonus, halfElfRacialAbilityBonusLine2);
             }
             if (character.getRace().equals(Race.HALFLING)) {
                 racialImageView.setImage(halflingImage);
