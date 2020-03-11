@@ -10,6 +10,7 @@ public enum RacialAttribute {
     ROCKGNOME(0, 0, 1, 0, 0, 0, "Rock Gnome: +1 CON"),
     LIGHTFOOT(0, 0, 0, 0, 0, 1, "Lightfoot: +1 CHA"),
     STOUT(0, 0, 1, 0, 0, 0, "Stout: +1 CON"),
+
     BLACKDRAGON(0,0,0,0,0,0,"Black Dragon: Acid"),
     BLUEDRAGON(0,0,0,0,0,0,"Blue Dragon: Lightning"),
     BRASSDRAGON(0,0,0,0,0,0,"Brass Dragon: Fire"),
