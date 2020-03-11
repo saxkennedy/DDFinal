@@ -292,6 +292,7 @@ public class View extends Application {
                             }
                             listenedCount--;
                         }
+                        System.out.println(halfElfCheckboxes.toString());
                     }
                 };
                 for (int i = 0; i < statsForBoxes.length; i++) {
@@ -419,6 +420,36 @@ public class View extends Application {
                 break;
             case "Stout: +1 CON":
                 newAttribute = RacialAttribute.STOUT;
+                break;
+            case "Black Dragon: Acid":
+                newAttribute = RacialAttribute.BLACKDRAGON;
+                break;
+            case "Blue Dragon: Lightning":
+                newAttribute = RacialAttribute.BLUEDRAGON;
+                break;
+            case "Brass Dragon: Fire":
+                newAttribute = RacialAttribute.BRASSDRAGON;
+                break;
+            case "Bronze Dragon: Lightning":
+                newAttribute = RacialAttribute.BRONZEDRAGON;
+                break;
+            case "Copper Dragon: Acid":
+                newAttribute = RacialAttribute.COPPERDRAGON;
+                break;
+            case "Gold Dragon: Fire":
+                newAttribute = RacialAttribute.GOLDDRAGON;
+                break;
+            case "Green Dragon: Poison":
+                newAttribute = RacialAttribute.GREENDRAGON;
+                break;
+            case "Red Dragon: Fire":
+                newAttribute = RacialAttribute.REDDRAGON;
+                break;
+            case "Silver Dragon: Cold":
+                newAttribute = RacialAttribute.SILVERDRAGON;
+                break;
+            case "White Dragon: Cold":
+                newAttribute = RacialAttribute.WHITEDRAGON;
                 break;
         }
         return newAttribute;

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Character {
     private String name;
     private String styleLiteral;
-    private String raceLiteral;
     private Race race;
     private RacialAttribute racialAttribute;
 
@@ -174,7 +173,6 @@ public class Character {
     }
 
     public void assignEnumRace(String race) {
-        raceLiteral = race;
         switch (race) {
             case "Half-Orc":
                 this.race = Race.HALFORC;
@@ -228,6 +226,7 @@ public class Character {
     }
 
     public void addRacialAttributeScoreBonus() {
+
         this.setSTR(this.getSTR() + this.racialAttribute.str);
         this.setDEX(this.getDEX() + this.racialAttribute.dex);
         this.setCON(this.getCON() + this.racialAttribute.con);
