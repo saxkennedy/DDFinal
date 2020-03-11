@@ -51,7 +51,7 @@ public class PdfGenerator {
         }
     }
 
-    private void writeStats() throws IOException{
+    private void writeStats() throws IOException {
         PDTextField strField = (PDTextField) form.getField("STR");
         PDTextField dexField = (PDTextField) form.getField("DEX");
         PDTextField conField = (PDTextField) form.getField("CON");

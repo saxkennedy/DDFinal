@@ -11,13 +11,14 @@ public enum RacialAttribute {
     LIGHTFOOT(0, 0, 0, 0, 0, 1, "Lightfoot: +1 CHA"),
     STOUT(0, 0, 1, 0, 0, 0, "Stout: +1 CON");
 
+
     public final int str;
     public final int dex;
     public final int con;
     public final int intel;
     public final int wis;
     public final int chr;
-    private String attributeName;
+    public final String attributeName;
 
     RacialAttribute(int str, int dex, int con, int intel, int wis, int chr, String attributeName) {
         this.str = str;
@@ -27,14 +28,6 @@ public enum RacialAttribute {
         this.wis = wis;
         this.chr = chr;
         this.attributeName = attributeName;
-    }
-
-    public void setAttributeName(String name) {
-        this.attributeName = name;
-    }
-
-    public String getAttributeName() {
-        return this.attributeName;
     }
 
 }

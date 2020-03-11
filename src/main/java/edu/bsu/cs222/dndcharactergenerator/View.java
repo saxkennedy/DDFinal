@@ -116,7 +116,7 @@ public class View extends Application {
         styleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (styleGroup.getSelectedToggle() != null) {
                 String style = styleGroup.getSelectedToggle().getUserData().toString();
-                character.setStyleLiteral(style);
+                character.setStyle(style);
                 System.out.println(style);
 
                 switch (style) {
@@ -202,7 +202,7 @@ public class View extends Application {
             Image halfElfImage = new Image("/halfElfImage.png");
             Image halfOrcImage = new Image("/halfOrcImage.png");
             racialVbox.getChildren().addAll(racialAttributesHeader);
-            if (character.getRace()==null) {
+            if (character.getRace() == null) {
                 character.setRace("zeroman");
                 Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
                 racialVbox.getChildren().addAll(noRaceSelected);
@@ -212,27 +212,27 @@ public class View extends Application {
                 breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
                         "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
                 racialVbox.getChildren().addAll(breathWeaponSelection);
-                breathWeaponSelection.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue())));
+                breathWeaponSelection.setOnAction(actionEvent -> character.setRacialAttribute(getRacialAttribute(breathWeaponSelection.getValue())));
             }
             if (character.getRace().equals(Race.DWARF)) {
                 racialImageView.setImage(dwarfImage);
                 ComboBox<String> dwarfSubRace = new ComboBox<>();
                 dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
                 racialVbox.getChildren().addAll(dwarfSubRace);
-                dwarfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
+                dwarfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(getRacialAttribute(dwarfSubRace.getValue())));
             }
             if (character.getRace().equals(Race.ELF)) {
                 ComboBox<String> elfSubRace = new ComboBox<>();
                 elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
                 racialVbox.getChildren().addAll(elfSubRace);
-                elfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue())));
+                elfSubRace.setOnAction(actionEvent -> character.setRacialAttribute(getRacialAttribute(elfSubRace.getValue())));
             }
             if (character.getRace().equals(Race.GNOME)) {
                 racialImageView.setImage(gnomeImage);
                 ComboBox<String> gnomeSubRace = new ComboBox<>();
                 gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
                 racialVbox.getChildren().addAll(gnomeSubRace);
-                gnomeSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
+                gnomeSubRace.setOnAction(actionEvent -> character.setRacialAttribute(getRacialAttribute(gnomeSubRace.getValue())));
             }
             if (character.getRace().equals(Race.HALFELF)) {
                 racialImageView.setImage(halfElfImage);
@@ -242,6 +242,7 @@ public class View extends Application {
                 final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
                 ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
                     private int listenedCount = 0;
+
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         if (newValue) {
                             listenedCount++;
@@ -252,8 +253,7 @@ public class View extends Application {
                                     }
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             if (listenedCount == maxBoxCount) {
                                 for (CheckBox selBox : halfElfCheckboxes) {
                                     selBox.setDisable(false);
@@ -275,7 +275,7 @@ public class View extends Application {
                 ComboBox<String> halflingSubRace = new ComboBox<>();
                 halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
                 racialVbox.getChildren().addAll(halflingSubRace);
-                halflingSubRace.setOnAction(actionEvent -> character.setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
+                halflingSubRace.setOnAction(actionEvent -> character.setRacialAttribute(getRacialAttribute(halflingSubRace.getValue())));
             }
             if (character.getRace().equals(Race.HALFORC)) {
                 racialImageView.setImage(halfOrcImage);
@@ -340,7 +340,7 @@ public class View extends Application {
             PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
             try {
                 generator.writeNewCharacterSheet(saveFile);
-            } catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         });
@@ -356,37 +356,11 @@ public class View extends Application {
         stage.show();
     }
 
-    public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
-        RacialAttribute newAttribute = null;
-        switch (racialAttribute) {
-            case "Hill Dwarf: +1 WIS":
-                newAttribute = RacialAttribute.HILLDWARF;
-                break;
-            case "Mountain Dwarf: +2 STR":
-                newAttribute = RacialAttribute.MOUNTAINDWARF;
-                break;
-            case "High Elf: +1 INT":
-                newAttribute = RacialAttribute.HIGHELF;
-                break;
-            case "Wood Elf: +1 WIS":
-                newAttribute = RacialAttribute.WOODELF;
-                break;
-            case "Drow: +1 CHA":
-                newAttribute = RacialAttribute.DROW;
-                break;
-            case "Forest Gnome: +1 DEX":
-                newAttribute = RacialAttribute.FORESTGNOME;
-                break;
-            case "Rock Gnome: +1 CON":
-                newAttribute = RacialAttribute.ROCKGNOME;
-                break;
-            case "Lightfoot: +1 CHA":
-                newAttribute = RacialAttribute.LIGHTFOOT;
-                break;
-            case "Stout: +1 CON":
-                newAttribute = RacialAttribute.STOUT;
-                break;
+    public static RacialAttribute getRacialAttribute(String racialAttribute) {
+        for (RacialAttribute attribute : RacialAttribute.values()) {
+            if (attribute.attributeName.equals(racialAttribute))
+                return attribute;
         }
-        return newAttribute;
+        return null;
     }
 }

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class Character {
     private String name;
-    private String styleLiteral;
-    private String raceLiteral;
+    private String style;
     private Race race;
     private RacialAttribute racialAttribute;
 
@@ -114,8 +113,7 @@ public class Character {
 
     public ArrayList statRoll() {
         DiceRoller stats = new DiceRoller();
-        ArrayList statBlock = stats.getStats();
-        return statBlock;
+        return stats.getStats();
     }
 
 
@@ -145,12 +143,11 @@ public class Character {
         }
         try {
             this.racialAttribute = attribute;
-        }
-        catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         this.addRacialAttributeScoreBonus();
-        System.out.println("Racial Attribute changed to " + this.racialAttribute.getAttributeName());
+        System.out.println("Racial Attribute changed to " + this.racialAttribute.attributeName);
         System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
                 this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
@@ -165,17 +162,16 @@ public class Character {
         return name;
     }
 
-    public String getStyleLiteral() {
-        return styleLiteral;
+    public String getStyle() {
+        return style;
     }
 
-    public void setStyleLiteral(String styleLiteral) {
-        this.styleLiteral = styleLiteral;
-        System.out.println("Style changed to " + this.styleLiteral);
+    public void setStyle(String style) {
+        this.style = style;
+        System.out.println("Style changed to " + this.style);
     }
 
     public void assignEnumRace(String race) {
-        raceLiteral = race;
         switch (race) {
             case "Half-Orc":
                 this.race = Race.HALFORC;
@@ -238,17 +234,14 @@ public class Character {
     }
 
     public void removeRacialAttributeScoreBonus() {
-        if(this.racialAttribute != null) {
+        if (this.racialAttribute != null) {
             this.setSTR(this.getSTR() - this.racialAttribute.str);
             this.setDEX(this.getDEX() - this.racialAttribute.dex);
             this.setCON(this.getCON() - this.racialAttribute.con);
             this.setINT(this.getINT() - this.racialAttribute.intel);
             this.setWIS(this.getWIS() - this.racialAttribute.wis);
             this.setCHA(this.getCHA() - this.racialAttribute.chr);
-
             this.racialAttribute = null;
         }
     }
-
-
 }
