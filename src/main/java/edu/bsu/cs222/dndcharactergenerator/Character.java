@@ -225,6 +225,7 @@ public class Character {
     }
 
     public void addRacialAttributeScoreBonus() {
+
         this.setSTR(this.getSTR() + this.racialAttribute.str);
         this.setDEX(this.getDEX() + this.racialAttribute.dex);
         this.setCON(this.getCON() + this.racialAttribute.con);
