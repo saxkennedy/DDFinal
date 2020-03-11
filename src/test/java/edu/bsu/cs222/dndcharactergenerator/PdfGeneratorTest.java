@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 public class PdfGeneratorTest {
@@ -14,15 +15,15 @@ public class PdfGeneratorTest {
     public void setup() {
         character.setName("Hellen");
         character.setRace("Dwarf");
-        character.setCHA(20);
-        character.setCON(20);
-        character.setDEX(20);
-        character.setINT(20);
-        character.setSTR(20);
-        character.setWIS(20);
+        character.setCHA(3);
+        character.setCON(3);
+        character.setDEX(3);
+        character.setINT(3);
+        character.setSTR(3);
+        character.setWIS(3);
 
         character.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
-        character.setStyleLiteral("foo-bar");
+        character.setStyle("foo-bar");
 
         generator = new PdfGenerator.Builder()
                 .setCharacter(character)
@@ -34,7 +35,8 @@ public class PdfGeneratorTest {
     @Test
     public void testGenerator() {
         try {
-            generator.writeNewCharacterSheet("sheet_test.pdf");
+            File file = new File("sheet_test.pdf");
+            generator.writeNewCharacterSheet(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
