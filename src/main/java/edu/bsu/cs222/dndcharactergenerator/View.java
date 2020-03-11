@@ -81,7 +81,7 @@ public class View extends Application {
         ComboBox<Integer> chaBox = new ComboBox<>();
         chaBox.getItems().addAll(statNumbers);
         ComboBox<String> races = new ComboBox<>();
-        races.getItems().addAll("Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Halfling", "Half-Orc", "Human", "Tiefling");
+        races.getItems().addAll("Dragonborn +2 STR, +1 CHA", "Dwarf +2 CON", "Elf +2 DEX", "Gnome +2 INT", "Half-Elf +2 CHA", "Halfling +2 DEX", "Half-Orc +2 STR, +1 CON", "Human +1 TO ALL STATS", "Tiefling +2 CHA, +1 INT");
         coreStatsVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, coreStatsButtons);
 
         //3rd Scene Combat Style
