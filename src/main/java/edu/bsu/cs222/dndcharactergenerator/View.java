@@ -190,7 +190,7 @@ public class View extends Application {
         saveLocationVbox.setAlignment(Pos.CENTER);
         saveLocationVbox.setSpacing(40);
         saveLocationVbox.setBackground(Background.EMPTY);
-        Scene saveScene = new Scene(saveLocationVbox, 550, 850,Color.CRIMSON);
+        Scene saveScene = new Scene(saveLocationVbox, 550, 850,bgColor);
         Label saveLabel = new Label("Please select a path to save your PDF to.");
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
