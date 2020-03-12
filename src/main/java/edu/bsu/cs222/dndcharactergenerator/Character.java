@@ -16,7 +16,7 @@ public class Character {
     private int WIS;
     private int CHA;
     private int AC;
-
+    private int maxHitPoints;
     private int strMod;
     private int dexMod;
     private int conMod;
@@ -48,14 +48,20 @@ public class Character {
         return chaMod;
     }
 
-    public void updateArmorClass(int AC) {
-        this.AC = 10 + AC;
+    public void updateArmorClass(int dexToAc) {
+        this.AC = 10 + dexToAc;
     }
 
     public int getAC() {
         return this.AC;
     }
 
+    public void updateMaxHitPoints(int conToHitPoints){
+        this.maxHitPoints=10+conToHitPoints;
+    }
+    public int getMaxHitPoints(){
+        return maxHitPoints;
+    }
     public int getSTR() {
         return STR;
     }
@@ -72,6 +78,7 @@ public class Character {
     public void setDEX(int DEX) {
         this.DEX = DEX;
         dexMod = (int) (Math.floor(((float) this.DEX - 10) / 2));
+        updateArmorClass(dexMod);
     }
 
     public int getCON() {
@@ -81,6 +88,7 @@ public class Character {
     public void setCON(int CON) {
         this.CON = CON;
         conMod = (int) (Math.floor(((float) this.CON - 10) / 2));
+        updateMaxHitPoints(conMod);
     }
 
     public int getINT() {
@@ -194,7 +202,7 @@ public class Character {
             case "Halfling: +2 DEX":
                 this.race = Race.HALFLING;
                 break;
-            case "Human: +1 All Stats":
+            case "Human: +1 TO ALL STATS":
                 this.race = Race.HUMAN;
                 break;
             case "Tiefling: +2 CHA, +1 INT":

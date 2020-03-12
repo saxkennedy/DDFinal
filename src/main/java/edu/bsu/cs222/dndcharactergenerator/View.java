@@ -179,7 +179,7 @@ public class View extends Application {
         Label racialAttributesHeader = new Label("Specific Racial Options");
         //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
         Button backToCombatStyle = new Button("Back (to Core Attributes)");//Will go away iteration 2.
-        Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will zero values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
+        Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will affect values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
         Button finish = new Button("Finish");
         HBox racialButtons = new HBox(backToCombatStyle, finish);
         racialButtons.setAlignment(Pos.BOTTOM_CENTER);
@@ -190,13 +190,13 @@ public class View extends Application {
         //6th Save Scene
         VBox saveLocationVbox = new VBox();
         saveLocationVbox.setAlignment(Pos.CENTER);
-        saveLocationVbox.setSpacing(40);
+        saveLocationVbox.setSpacing(50);
         saveLocationVbox.setBackground(Background.EMPTY);
         Scene saveScene = new Scene(saveLocationVbox, 550, 850,bgColor);
         Label saveLabel = new Label("Please select a path to save your PDF to.");
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
-        Button save = new Button("Select Save Location");
+        Button save = new Button("Select Save Location (Program then closes)");
         Button backToRacial = new Button("Back (to Racial)");
         saveLocationVbox.getChildren().addAll(saveLabel, save, backToRacial);
 
@@ -379,6 +379,7 @@ public class View extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            stage.close();
         });
 
         //Back to Racial Button
