@@ -213,7 +213,10 @@ public class View extends Application {
         backToName.setOnAction(actionEvent -> stage.setScene(openAndNameScene));
 
         //Next to Combat Style Button
-        nextToCombatStyle.setOnAction(actionEvent -> stage.setScene(combatStyleScene));
+        nextToCombatStyle.setOnAction(actionEvent -> {
+            stage.setScene(combatStyleScene);
+            if(character.getRace()!=null) character.addRacialAbilityScoreBonus();
+        });
 
         //Next to Racial Button
         nextToRacial.setOnAction(Event -> {
@@ -330,7 +333,12 @@ public class View extends Application {
         });
 
         //Back to Core
-        backToCore.setOnAction(actionEvent -> stage.setScene(coreAttributesScene));
+        backToCore.setOnAction(actionEvent -> {
+            stage.setScene(coreAttributesScene);
+            if(character.getRace()!= null){
+                character.removeRacialAbilityScoreBonus();
+            }
+        });
         //Back to Combat Style
         backToCombatStyle.setOnAction(actionEvent -> {
             racialVbox.getChildren().clear();
@@ -343,27 +351,22 @@ public class View extends Application {
         //Stat Buttons
         strBox.setOnAction(actionEvent -> {
             character.setSTR(strBox.getValue());
-            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         dexBox.setOnAction(actionEvent -> {
             character.setDEX(dexBox.getValue());
-            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         conBox.setOnAction(actionEvent -> {
             character.setCON(conBox.getValue());
-            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         intBox.setOnAction(actionEvent -> {
             character.setINT(intBox.getValue());
-            //character.addRacialAbilityScoreBonusIfNotNull();
         });
         wisBox.setOnAction(actionEvent -> {
             character.setWIS(wisBox.getValue());
-            //character.addRacialAbilityScoreBonusIfNotNull();
+
         });
         chaBox.setOnAction(actionEvent -> {
             character.setCHA(chaBox.getValue());
-            //character.addRacialAbilityScoreBonusIfNotNull();
         });
 
         //Finish Button

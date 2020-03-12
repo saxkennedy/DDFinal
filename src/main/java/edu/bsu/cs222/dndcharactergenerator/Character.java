@@ -130,14 +130,7 @@ public class Character {
     }
 
     public void setRace(String race) {
-
-        if (this.race != null) {
-            System.out.println("Old race bonus removed");
-            this.removeRacialAbilityScoreBonus();
-            this.removeRacialAttributeScoreBonus();
-        }
         this.assignEnumRace(race);
-        this.addRacialAbilityScoreBonus();
         System.out.println("Race changed to " + race);
         System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
                 this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
