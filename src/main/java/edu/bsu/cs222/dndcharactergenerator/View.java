@@ -127,7 +127,6 @@ public class View extends Application {
         styleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (styleGroup.getSelectedToggle() != null) {
                 String style = styleGroup.getSelectedToggle().getUserData().toString();
-                character.setStyle(style);
                 System.out.println(style);
 
                 switch (style) {
@@ -154,6 +153,9 @@ public class View extends Application {
                         styleDescription.setText("No style found");
                         break;
                 }
+                String fullStyle=style+":\n"+styleDescription.getText();
+                character.setStyle(fullStyle);
+                System.out.println(fullStyle);
             }
         });
         combatStyle.getChildren().addAll(combatStyleLabel, archery, defense, dueling, greatWeaponFighting, protection, twoWeaponFighting, styleDescription, combatStyleButtons);
@@ -369,7 +371,7 @@ public class View extends Application {
 
         //Save Button
         save.setOnAction(actionEvent -> {
-            File saveFile = new File(saveLocation.showDialog(stage) + "\\"+character.getName());
+            File saveFile = new File(saveLocation.showDialog(stage) + "\\"+character.getName()+".pdf");
             System.out.println(saveFile.toString());
             PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
             try {

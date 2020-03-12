@@ -45,7 +45,9 @@ public class PdfGenerator {
             writeRace();
             writeArmorClass();
             writeStats();
+            writeModifiers();
             writeSavingTrows();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,21 +68,36 @@ public class PdfGenerator {
         wisField.setValue(Integer.toString(character.getWIS()));
         chaField.setValue(Integer.toString(character.getCON()));
     }
+    private void writeModifiers() throws IOException {
+        PDTextField strMod = (PDTextField) form.getField("STRmod");
+        PDTextField dexMod = (PDTextField) form.getField("DEXmod");
+        PDTextField conMod = (PDTextField) form.getField("CONmod");
+        PDTextField intMod = (PDTextField) form.getField("INTmod");
+        PDTextField wisMod = (PDTextField) form.getField("WISmod");
+        PDTextField chaMod = (PDTextField) form.getField("CHAmod");
+
+        strMod.setValue(Integer.toString(character.getStrMod()));
+//        dexMod.setValue(Integer.toString(character.getDexMod()));
+        conMod.setValue(Integer.toString(character.getConMod()));
+        intMod.setValue(Integer.toString(character.getIntMod()));
+        wisMod.setValue(Integer.toString(character.getWisMod()));
+        //chaMod.setValue(Integer.toString(character.getChaMod()));
+    }
 
     private void writeSavingTrows() throws IOException {
-        PDTextField strModField = (PDTextField) form.getField("ST Strength");
-        PDTextField dexModField = (PDTextField) form.getField("ST Dexterity");
-        PDTextField conModField = (PDTextField) form.getField("ST Constitution");
-        PDTextField intModField = (PDTextField) form.getField("ST Intelligence");
-        PDTextField wisModField = (PDTextField) form.getField("ST Wisdom");
-        PDTextField chaModField = (PDTextField) form.getField("ST Charisma");
+        PDTextField strSavingThrow = (PDTextField) form.getField("ST Strength");
+        PDTextField dexSavingThrow = (PDTextField) form.getField("ST Dexterity");
+        PDTextField conSavingthrow = (PDTextField) form.getField("ST Constitution");
+        PDTextField intSavingThrow = (PDTextField) form.getField("ST Intelligence");
+        PDTextField wisSavingThrow = (PDTextField) form.getField("ST Wisdom");
+        PDTextField chaSavingThrow = (PDTextField) form.getField("ST Charisma");
 
-        strModField.setValue(Integer.toString(character.getStrMod()));
-        dexModField.setValue(Integer.toString(character.getDexMod()));
-        conModField.setValue(Integer.toString(character.getConMod()));
-        intModField.setValue(Integer.toString(character.getIntMod()));
-        wisModField.setValue(Integer.toString(character.getWisMod()));
-        chaModField.setValue(Integer.toString(character.getChaMod()));
+        strSavingThrow.setValue(Integer.toString(character.getStrMod()+2));
+        dexSavingThrow.setValue(Integer.toString(character.getDexMod()));
+        conSavingthrow.setValue(Integer.toString(character.getConMod()+2));
+        intSavingThrow.setValue(Integer.toString(character.getIntMod()));
+        wisSavingThrow.setValue(Integer.toString(character.getWisMod()));
+        chaSavingThrow.setValue(Integer.toString(character.getChaMod()));
     }
 
     private void writeArmorClass() throws IOException {
