@@ -15,14 +15,14 @@ public class CharacterTest {
 
     @Test
     public void testGetsRace() {
-        player.setRace("Human");
+        player.setRace("Human: +1 TO ALL STATS");
         Assertions.assertEquals(Race.HUMAN, player.getRace());
     }
 
     @Test
     public void testRemoveRaceModifier() {
-        player.setRace("Dragonborn");
-        player.setRace("Human");
+        player.setRace("Dragonborn: +2 STR, +1 CHA");
+        player.setRace("Human: +1 TO ALL STATS");
         Assertions.assertEquals(1, player.getSTR());
     }
 
@@ -36,8 +36,8 @@ public class CharacterTest {
 
     @Test
     public void testSetsFightingStyle() {
-        player.setStyle("Archery");
-        Assertions.assertEquals("Archery", player.getStyle());
+        player.setStyle("Archery"+":\n"+"+2 bonus to attack rolls made with ranged weapons");
+        Assertions.assertEquals("Archery"+":\n"+"+2 bonus to attack rolls made with ranged weapons", player.getStyle());
     }
 
 }
