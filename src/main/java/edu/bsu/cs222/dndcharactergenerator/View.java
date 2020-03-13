@@ -34,7 +34,7 @@ public class View extends Application {
         nameVbox.setAlignment(Pos.CENTER);
         nameVbox.setSpacing(20);
         nameVbox.setBackground(Background.EMPTY);
-        Scene openAndNameScene = new Scene(nameVbox, 550, 850,bgColor);
+        Scene openAndNameScene = new Scene(nameVbox, 550, 850, bgColor);
         Image fighterImage = new Image("/dwarfImage.png", true);
         ImageView fighterImageView = new ImageView();
         fighterImageView.setImage(fighterImage);
@@ -49,7 +49,7 @@ public class View extends Application {
         coreStatsVbox.setAlignment(Pos.CENTER);
         coreStatsVbox.setSpacing(10);
         coreStatsVbox.setBackground(Background.EMPTY);
-        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850,bgColor);
+        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850, bgColor);
         Label raceSelection = new Label("Choose from one of the below races!");
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
@@ -89,7 +89,7 @@ public class View extends Application {
         combatStyle.setAlignment(Pos.CENTER);
         combatStyle.setSpacing(15);
         combatStyle.setBackground(Background.EMPTY);
-        Scene combatStyleScene = new Scene(combatStyle, 550, 850,bgColor);
+        Scene combatStyleScene = new Scene(combatStyle, 550, 850, bgColor);
         Label combatStyleLabel = new Label("Select a combat style!");
         Label styleDescription = new Label("");
         Button nextToRacial = new Button("Next (Racial)");
@@ -127,7 +127,6 @@ public class View extends Application {
         styleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (styleGroup.getSelectedToggle() != null) {
                 String style = styleGroup.getSelectedToggle().getUserData().toString();
-                System.out.println(style);
 
                 switch (style) {
                     case "Archery":
@@ -153,9 +152,8 @@ public class View extends Application {
                         styleDescription.setText("No style found");
                         break;
                 }
-                String fullStyle=style+":\n"+styleDescription.getText();
+                String fullStyle = style + ":\n" + styleDescription.getText();
                 character.setStyle(fullStyle);
-                System.out.println(fullStyle);
             }
         });
         combatStyle.getChildren().addAll(combatStyleLabel, archery, defense, dueling, greatWeaponFighting, protection, twoWeaponFighting, styleDescription, combatStyleButtons);
@@ -175,7 +173,7 @@ public class View extends Application {
         racialVbox.setAlignment(Pos.CENTER);
         racialVbox.setSpacing(10);
         racialVbox.setBackground(Background.EMPTY);
-        Scene racialScene = new Scene(racialVbox, 550, 850,bgColor);
+        Scene racialScene = new Scene(racialVbox, 550, 850, bgColor);
         Label racialAttributesHeader = new Label("Specific Racial Options");
         //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
         Button backToCombatStyle = new Button("Back (to Core Attributes)");//Will go away iteration 2.
@@ -186,13 +184,12 @@ public class View extends Application {
         racialButtons.setSpacing(25);
 
 
-
         //6th Save Scene
         VBox saveLocationVbox = new VBox();
         saveLocationVbox.setAlignment(Pos.CENTER);
         saveLocationVbox.setSpacing(50);
         saveLocationVbox.setBackground(Background.EMPTY);
-        Scene saveScene = new Scene(saveLocationVbox, 550, 850,bgColor);
+        Scene saveScene = new Scene(saveLocationVbox, 550, 850, bgColor);
         Label saveLabel = new Label("Please select a path to save your PDF to.");
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
@@ -215,7 +212,8 @@ public class View extends Application {
         //Next to Combat Style Button
         nextToCombatStyle.setOnAction(actionEvent -> {
             stage.setScene(combatStyleScene);
-            if(character.getRace()!=null) character.addRacialAbilityScoreBonus();
+            if (character.getRace() != null)
+                character.addRacialAbilityScoreBonus();
         });
 
         //Next to Racial Button
@@ -335,7 +333,7 @@ public class View extends Application {
         //Back to Core
         backToCore.setOnAction(actionEvent -> {
             stage.setScene(coreAttributesScene);
-            if(character.getRace()!= null){
+            if (character.getRace() != null) {
                 character.removeRacialAbilityScoreBonus();
             }
         });
@@ -349,33 +347,19 @@ public class View extends Application {
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(character.statRoll().toString()));
 
         //Stat Buttons
-        strBox.setOnAction(actionEvent -> {
-            character.setSTR(strBox.getValue());
-        });
-        dexBox.setOnAction(actionEvent -> {
-            character.setDEX(dexBox.getValue());
-        });
-        conBox.setOnAction(actionEvent -> {
-            character.setCON(conBox.getValue());
-        });
-        intBox.setOnAction(actionEvent -> {
-            character.setINT(intBox.getValue());
-        });
-        wisBox.setOnAction(actionEvent -> {
-            character.setWIS(wisBox.getValue());
-
-        });
-        chaBox.setOnAction(actionEvent -> {
-            character.setCHA(chaBox.getValue());
-        });
+        strBox.setOnAction(actionEvent -> character.setSTR(strBox.getValue()));
+        dexBox.setOnAction(actionEvent -> character.setDEX(dexBox.getValue()));
+        conBox.setOnAction(actionEvent -> character.setCON(conBox.getValue()));
+        intBox.setOnAction(actionEvent -> character.setINT(intBox.getValue()));
+        wisBox.setOnAction(actionEvent -> character.setWIS(wisBox.getValue()));
+        chaBox.setOnAction(actionEvent -> character.setCHA(chaBox.getValue()));
 
         //Finish Button
         finish.setOnAction(actionEvent -> stage.setScene(saveScene));
 
         //Save Button
         save.setOnAction(actionEvent -> {
-            File saveFile = new File(saveLocation.showDialog(stage) + "\\"+character.getName()+".pdf");
-            System.out.println(saveFile.toString());
+            File saveFile = new File(saveLocation.showDialog(stage) + "\\" + character.getName() + ".pdf");
             PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
             try {
                 generator.writeNewCharacterSheet(saveFile);
@@ -397,8 +381,8 @@ public class View extends Application {
     }
 
     public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
-        for(RacialAttribute attribute : RacialAttribute.values()) {
-            if(attribute.attributeName.equals(racialAttribute)) {
+        for (RacialAttribute attribute : RacialAttribute.values()) {
+            if (attribute.attributeName.equals(racialAttribute)) {
                 return attribute;
             }
         }

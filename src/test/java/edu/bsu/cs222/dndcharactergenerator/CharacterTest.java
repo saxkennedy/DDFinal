@@ -39,8 +39,8 @@ public class CharacterTest {
 
     @Test
     public void testSetsFightingStyle() {
-        player.setStyle("Archery"+":\n"+"+2 bonus to attack rolls made with ranged weapons");
-        Assertions.assertEquals("Archery"+":\n"+"+2 bonus to attack rolls made with ranged weapons", player.getStyle());
+        player.setStyle("Archery" + ":\n" + "+2 bonus to attack rolls made with ranged weapons");
+        Assertions.assertEquals("Archery" + ":\n" + "+2 bonus to attack rolls made with ranged weapons", player.getStyle());
     }
 
 }

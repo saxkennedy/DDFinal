@@ -56,12 +56,14 @@ public class Character {
         return this.AC;
     }
 
-    public void updateMaxHitPoints(int conToHitPoints){
-        this.maxHitPoints=10+conToHitPoints;
+    public void updateMaxHitPoints(int conToHitPoints) {
+        this.maxHitPoints = 10 + conToHitPoints;
     }
-    public int getMaxHitPoints(){
+
+    public int getMaxHitPoints() {
         return maxHitPoints;
     }
+
     public int getSTR() {
         return STR;
     }
@@ -131,15 +133,11 @@ public class Character {
 
     public void setRace(String race) {
         this.assignEnumRace(race);
-        System.out.println("Race changed to " + race);
-        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
-                this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
     public void setRacialAttribute(RacialAttribute attribute) {
 
         if (this.racialAttribute != null) {
-            System.out.println("Old racialAbility bonus removed");
             this.removeRacialAttributeScoreBonus();
         }
         try {
@@ -148,15 +146,11 @@ public class Character {
             e.printStackTrace();
         }
         this.addRacialAttributeScoreBonus();
-        System.out.println("Racial Attribute changed to " + this.racialAttribute.attributeName);
-        System.out.printf("STR: %d DEX: %d CON: %d INT: %d WIS: %d CHR: %d\n",
-                this.STR, this.DEX, this.CON, this.INT, this.WIS, this.CHA);
     }
 
 
     public void setName(String name) {
         this.name = name;
-        System.out.println("Name changed to " + name);
     }
 
     public String getName() {
@@ -169,7 +163,6 @@ public class Character {
 
     public void setStyle(String style) {
         this.style = style;
-        System.out.println("Style changed to " + this.style);
     }
 
     public void assignEnumRace(String race) {
