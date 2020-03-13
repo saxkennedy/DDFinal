@@ -64,7 +64,7 @@ public class PdfGenerator {
         conField.setValue(Integer.toString(character.getCON()));
         intField.setValue(Integer.toString(character.getINT()));
         wisField.setValue(Integer.toString(character.getWIS()));
-        chaField.setValue(Integer.toString(character.getCON()));
+        chaField.setValue(Integer.toString(character.getCHA()));
     }
 
     private void writeModifiers() throws IOException {
