@@ -22,7 +22,10 @@ public class CharacterTest {
     @Test
     public void testRemoveRaceModifier() {
         player.setRace("Dragonborn: +2 STR, +1 CHA");
+        player.addRacialAbilityScoreBonus();
+        player.removeRacialAbilityScoreBonus();
         player.setRace("Human: +1 TO ALL STATS");
+        player.addRacialAbilityScoreBonus();
         Assertions.assertEquals(1, player.getSTR());
     }
 
