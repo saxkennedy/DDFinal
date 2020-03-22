@@ -1,6 +1,9 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-public enum Race {
+import java.util.HashMap;
+import java.util.Map;
+
+public enum Race implements StatChanger {
     HALFORC(2, 0, 1, 0, 0, 0, "Half-Orc"),
     DRAGONBORN(2, 0, 0, 0, 0, 1, "DragonBorn"),
     DWARF(0, 0, 2, 0, 0, 0, "Dwarf"),
@@ -12,23 +15,22 @@ public enum Race {
     TIEFLING(0, 0, 0, 1, 0, 2, "Tiefling"),
     ZEROMAN(0, 0, 0, 0, 0, 0, "Zeroman");
 
-
-    public final int str;
-    public final int dex;
-    public final int con;
-    public final int intel;
-    public final int wis;
-    public final int chr;
+    private Map<StatSpecifier, Integer> attributes;
     public final String raceName;
 
-    Race(int str, int dex, int con, int intel, int wis, int chr, String raceName) {
-        this.str = str;
-        this.dex = dex;
-        this.con = con;
-        this.intel = intel;
-        this.wis = wis;
-        this.chr = chr;
+    Race(int str, int dex, int con, int intel, int wis, int cha, String raceName) {
+        attributes = new HashMap<>();
+        attributes.put(StatSpecifier.STR, str);
+        attributes.put(StatSpecifier.DEX, dex);
+        attributes.put(StatSpecifier.CON, con);
+        attributes.put(StatSpecifier.INT, intel);
+        attributes.put(StatSpecifier.WIS, wis);
+        attributes.put(StatSpecifier.CHA, cha);
         this.raceName = raceName;
     }
 
+    @Override
+    public Map<StatSpecifier, Integer> getStatAdditions() {
+        return attributes;
+    }
 }
