@@ -10,106 +10,28 @@ public class Character {
     private RacialAttribute racialAttribute;
     private Stats stats;
 
-    public int getStrMod() {
-        return stats.getStat(StatSpecifier.STR_MOD);
+    public int getStat(StatSpecifier specifier) {
+        return stats.getStat(specifier);
     }
 
-    public int getDexMod() {
-        return stats.getStat(StatSpecifier.DEX_MOD);
-    }
-
-    public int getConMod() {
-        return stats.getStat(StatSpecifier.CON_MOD);
-    }
-
-    public int getIntMod() {
-        return stats.getStat(StatSpecifier.INT_MOD);
-    }
-
-    public int getWisMod() {
-        return stats.getStat(StatSpecifier.WIS_MOD);
-    }
-
-    public int getChaMod() {
-        return stats.getStat(StatSpecifier.CHA_MOD);
+    public void setStat(StatSpecifier specifier, int value) {
+        if(specifier.isMain) {
+            StatSpecifier modifier = specifier.givenMainGetMod(specifier);
+            stats.setStat(specifier, value);
+            int modifierValue = (int) (Math.floor(((float) stats.getStat(modifier) - 10) / 2));
+            stats.setStat(modifier, modifierValue);
+        } else {
+            stats.setStat(specifier, value);
+        }
     }
 
     public void updateArmorClass(int dexToAc) {
         stats.setStat(StatSpecifier.ARMOR_CLASS, 10 + dexToAc);
     }
 
-    public int getAC() {
-        return stats.getStat(StatSpecifier.ARMOR_CLASS);
-    }
-
     public void updateMaxHitPoints(int conToHitPoints) {
         stats.setStat(StatSpecifier.MAX_HP, 10 + conToHitPoints);
     }
-
-    public int getMaxHitPoints() {
-        return stats.getStat(StatSpecifier.MAX_HP);
-    }
-
-    public int getSTR() {
-        return stats.getStat(StatSpecifier.STR);
-    }
-
-    public void setSTR(int STR) {
-        int strMod = (int) (Math.floor(((float) stats.getStat(StatSpecifier.STR) - 10) / 2));
-        stats.setStat(StatSpecifier.STR, STR);
-        stats.setStat(StatSpecifier.STR_MOD, strMod);
-    }
-
-    public int getDEX() {
-        return stats.getStat(StatSpecifier.DEX);
-    }
-
-    public void setDEX(int DEX) {
-        stats.setStat(StatSpecifier.DEX, DEX);
-        int dexMod = (int) (Math.floor(((float) stats.getStat(StatSpecifier.DEX) - 10) / 2));
-        updateArmorClass(dexMod);
-    }
-
-    public int getCON() {
-        return stats.getStat(StatSpecifier.CON);
-    }
-
-    public void setCON(int CON) {
-        stats.setStat(StatSpecifier.CON, CON);
-        int conMod = (int) (Math.floor(((float) stats.getStat(StatSpecifier.CON) - 10) / 2));
-        updateMaxHitPoints(conMod);
-    }
-
-    public int getINT() {
-        return stats.getStat(StatSpecifier.INT);
-    }
-
-    public void setINT(int INT) {
-        stats.setStat(StatSpecifier.INT, INT);
-        int intMod = (int) (Math.floor((float) (stats.getStat(StatSpecifier.INT) - 10) / 2));
-        stats.setStat(StatSpecifier.INT_MOD, intMod);
-    }
-
-    public int getWIS() {
-        return stats.getStat(StatSpecifier.WIS);
-    }
-
-    public void setWIS(int WIS) {
-        stats.setStat(StatSpecifier.WIS, WIS);
-        int wisMod = (int) (Math.floor((float) (stats.getStat(StatSpecifier.WIS) - 10) / 2));
-        stats.setStat(StatSpecifier.WIS_MOD, wisMod);
-    }
-
-    public int getCHA() {
-        return stats.getStat(StatSpecifier.CHA);
-    }
-
-    public void setCHA(int CHA) {
-        stats.setStat(StatSpecifier.CHA, CHA);
-        int chaMod = (int) (Math.floor((float) (stats.getStat(StatSpecifier.CHA) - 10) / 2));
-        stats.setStat(StatSpecifier.CHA_MOD, chaMod);
-    }
-
 
     public ArrayList statRoll() {
         DiceRoller randomStats = new DiceRoller();

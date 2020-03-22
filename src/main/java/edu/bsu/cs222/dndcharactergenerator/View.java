@@ -26,7 +26,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) {
-        Character character = new Character();
+        Character character = new Character(stats);
         Color bgColor = Color.NAVAJOWHITE;
 
         //1st Name Scene
