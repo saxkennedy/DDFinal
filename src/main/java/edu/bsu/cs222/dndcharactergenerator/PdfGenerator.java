@@ -10,24 +10,12 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 public class PdfGenerator {
     private Character character;
     private PDDocument newCharacterSheet; // in memory pdf
     private PDAcroForm form; // edits newCharacterSheet's forms
-
-    private String[] statsFieldNames = {"STR", "DEX", "CON", "INT", "WIS", "CHA"};
-    private String[] modifierFieldNames = {"STRmod", "DEXmod ", "CONmod", "INTmod", "WISmod", "CHamod"};
-    private String[] savingThrowsNames = {
-            "ST Strength",
-            "ST Dexterity",
-            "ST Constitution",
-            "ST Intelligence",
-            "ST Wisdom",
-            "ST Charisma"
-    };
-    private String[] hitPointFieldNames = {"HPMax", "HPCurrent", "HDTotal"};
-
 
     public static final class Builder {
         private Character character;
@@ -53,50 +41,19 @@ public class PdfGenerator {
         try {
             writeCharacterName();
             writeRace();
-            writeArmorClass();
             writeStyle();
-            writeInitiative();
-            writeModifiers();
-            writeSavingTrows();
             writeStats();
-            writeHitPoints();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void writeStats() throws IOException {
-        for(String field : statsFieldNames) {
-            setFieldValue(field, getCharacterValueFromFieldName(field));
+        Map<StatSpecifier, Integer> stats = character.getStats();
+        for(Map.Entry<StatSpecifier, Integer> entry : stats.entrySet()) {
+            PDField fieldToSet = form.getField(entry.getKey().pdfGeneratorName);
+            fieldToSet.setValue(String.valueOf(entry.getValue()));
         }
-    }
-
-    private void writeModifiers() throws IOException {
-        for(String field : modifierFieldNames) {
-            setFieldValue(field, getCharacterValueFromFieldName(field));
-        }
-    }
-
-    private void writeInitiative() throws IOException {
-        PDTextField initiative = (PDTextField) form.getField("Initiative");
-        initiative.setValue(Integer.toString(character.getDexMod()));
-    }
-
-    private void writeHitPoints() throws IOException {
-        for(String field : hitPointFieldNames) {
-            setFieldValue(field, getCharacterValueFromFieldName(field));
-        }
-    }
-
-    private void writeSavingTrows() throws IOException {
-        for(String field : savingThrowsNames) {
-            setFieldValue(field, getCharacterValueFromFieldName(field));
-        }
-    }
-
-    private void writeArmorClass() throws IOException {
-        PDTextField armorClass = (PDTextField) form.getField("AC");
-        armorClass.setValue(Integer.toString(character.getAC()));
     }
 
     private void writeStyle() throws IOException {
@@ -133,65 +90,8 @@ public class PdfGenerator {
         newCharacterSheet.close();
     }
 
-    private void setFieldValue(String fieldName, int valueToWrite) throws IOException {
-        PDField fieldToSet = form.getField(fieldName);
-        fieldToSet.setValue(String.valueOf(valueToWrite));
-    }
-
-    private int getCharacterValueFromFieldName(String fieldName) {
-        int valueFromCharacter = 0;
-        switch(fieldName) {
-            case "STR":
-                valueFromCharacter = character.getSTR();
-                break;
-            case "CON":
-                valueFromCharacter = character.getCON();
-                break;
-            case "INT":
-                valueFromCharacter = character.getINT();
-                break;
-            case "WIS":
-                valueFromCharacter = character.getWIS();
-                break;
-            case "CHA":
-                valueFromCharacter = character.getCHA();
-                break;
-            case "DEX":
-                valueFromCharacter = character.getDEX();
-                break;
-            case "STRmod":
-                valueFromCharacter = character.getStrMod();
-                break;
-            case "DEXmod":
-            case "ST Dexterity":
-                valueFromCharacter = character.getDexMod();
-                break;
-            case "CONmod":
-                valueFromCharacter = character.getConMod();
-                break;
-            case "WISmod":
-            case "ST Wisdom":
-                valueFromCharacter = character.getWisMod();
-                break;
-            case "CHamod":
-            case "ST Charisma":
-                valueFromCharacter = character.getChaMod();
-                break;
-            case "ST Strength":
-                valueFromCharacter = character.getStrMod() + 2;
-                break;
-            case "ST Constitution":
-                valueFromCharacter = character.getConMod() + 2;
-                break;
-            case "ST Intelligence":
-                valueFromCharacter = character.getIntMod();
-                break;
-            case "HPCurrent":
-            case "HPMax":
-            case "HDTotal":
-                valueFromCharacter = character.getMaxHitPoints();
-                break;
-        }
-        return valueFromCharacter;
+    private void setFieldValue(StatSpecifier specifier) throws IOException {
+        PDField fieldToSet = form.getField(specifier.pdfGeneratorName);
+        fieldToSet.setValue(String.valueOf(character.getStats().get(specifier.pdfGeneratorName)));
     }
 }

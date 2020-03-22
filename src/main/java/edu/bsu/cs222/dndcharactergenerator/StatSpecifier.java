@@ -21,12 +21,13 @@ public enum StatSpecifier {
     CHA_SAVTHROW("ST Charisma"),
     MAX_HP("HPMax"),
     CURRENT_HP("HPCurrent"),
-    TOTAL_HP("HDTotal");
+    TOTAL_HP("HDTotal"),
+    ARMOR_CLASS("AC");
 
 
-    StatSpecifier(String name) {
-        this.name = name;
+    StatSpecifier(String pdfGeneratorName) {
+        this.pdfGeneratorName = pdfGeneratorName;
     }
 
-    public final String name;
+    public final String pdfGeneratorName;
 }

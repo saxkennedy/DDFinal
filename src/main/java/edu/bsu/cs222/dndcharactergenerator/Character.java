@@ -2,128 +2,119 @@ package edu.bsu.cs222.dndcharactergenerator;
 
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Character {
     private String name;
     private String style;
     private Race race;
     private RacialAttribute racialAttribute;
-
-    private int STR;
-    private int DEX;
-    private int CON;
-    private int INT;
-    private int WIS;
-    private int CHA;
-    private int AC;
-    private int maxHitPoints;
-    private int strMod;
-    private int dexMod;
-    private int conMod;
-    private int intMod;
-    private int wisMod;
-    private int chaMod;
+    private Stats stats;
 
     public int getStrMod() {
-        return strMod;
+        return stats.getStat(StatSpecifier.STR_MOD);
     }
 
     public int getDexMod() {
-        return dexMod;
+        return stats.getStat(StatSpecifier.DEX_MOD);
     }
 
     public int getConMod() {
-        return conMod;
+        return stats.getStat(StatSpecifier.CON_MOD);
     }
 
     public int getIntMod() {
-        return intMod;
+        return stats.getStat(StatSpecifier.INT_MOD);
     }
 
     public int getWisMod() {
-        return wisMod;
+        return stats.getStat(StatSpecifier.WIS_MOD);
     }
 
     public int getChaMod() {
-        return chaMod;
+        return stats.getStat(StatSpecifier.CHA_MOD);
     }
 
     public void updateArmorClass(int dexToAc) {
-        this.AC = 10 + dexToAc;
+        stats.setStat(StatSpecifier.ARMOR_CLASS, 10 + dexToAc);
     }
 
     public int getAC() {
-        return this.AC;
+        return stats.getStat(StatSpecifier.ARMOR_CLASS);
     }
 
     public void updateMaxHitPoints(int conToHitPoints) {
-        this.maxHitPoints = 10 + conToHitPoints;
+        stats.setStat(StatSpecifier.MAX_HP, 10 + conToHitPoints);
     }
 
     public int getMaxHitPoints() {
-        return maxHitPoints;
+        return stats.getStat(StatSpecifier.MAX_HP);
     }
 
     public int getSTR() {
-        return STR;
+        return stats.getStat(StatSpecifier.STR);
     }
 
     public void setSTR(int STR) {
-        this.STR = STR;
-        strMod = (int) (Math.floor(((float) this.STR - 10) / 2));
+        int strMod = (int) (Math.floor(((float) stats.getStat(StatSpecifier.STR) - 10) / 2));
+        stats.setStat(StatSpecifier.STR, STR);
+        stats.setStat(StatSpecifier.STR_MOD, strMod);
     }
 
     public int getDEX() {
-        return DEX;
+        return stats.getStat(StatSpecifier.DEX);
     }
 
     public void setDEX(int DEX) {
-        this.DEX = DEX;
-        dexMod = (int) (Math.floor(((float) this.DEX - 10) / 2));
+        stats.setStat(StatSpecifier.DEX, DEX);
+        int dexMod = (int) (Math.floor(((float) stats.getStat(StatSpecifier.DEX) - 10) / 2));
         updateArmorClass(dexMod);
     }
 
     public int getCON() {
-        return CON;
+        return stats.getStat(StatSpecifier.CON);
     }
 
     public void setCON(int CON) {
-        this.CON = CON;
-        conMod = (int) (Math.floor(((float) this.CON - 10) / 2));
+        stats.setStat(StatSpecifier.CON, CON);
+        int conMod = (int) (Math.floor(((float) stats.getStat(StatSpecifier.CON) - 10) / 2));
         updateMaxHitPoints(conMod);
     }
 
     public int getINT() {
-        return INT;
+        return stats.getStat(StatSpecifier.INT);
     }
 
     public void setINT(int INT) {
-        this.INT = INT;
-        intMod = (int) (Math.floor((float) (this.INT - 10) / 2));
+        stats.setStat(StatSpecifier.INT, INT);
+        int intMod = (int) (Math.floor((float) (stats.getStat(StatSpecifier.INT) - 10) / 2));
+        stats.setStat(StatSpecifier.INT_MOD, intMod);
     }
 
     public int getWIS() {
-        return WIS;
+        return stats.getStat(StatSpecifier.WIS);
     }
 
     public void setWIS(int WIS) {
-        this.WIS = WIS;
-        wisMod = (int) (Math.floor((float) (this.WIS - 10) / 2));
+        stats.setStat(StatSpecifier.WIS, WIS);
+        int wisMod = (int) (Math.floor((float) (stats.getStat(StatSpecifier.WIS) - 10) / 2));
+        stats.setStat(StatSpecifier.WIS_MOD, wisMod);
     }
 
     public int getCHA() {
-        return CHA;
+        return stats.getStat(StatSpecifier.CHA);
     }
 
     public void setCHA(int CHA) {
-        this.CHA = CHA;
-        chaMod = (int) (Math.floor((float) (this.CHA - 10) / 2));
+        stats.setStat(StatSpecifier.CHA, CHA);
+        int chaMod = (int) (Math.floor((float) (stats.getStat(StatSpecifier.CHA) - 10) / 2));
+        stats.setStat(StatSpecifier.CHA_MOD, chaMod);
     }
 
 
     public ArrayList statRoll() {
-        DiceRoller stats = new DiceRoller();
-        return stats.getStats();
+        DiceRoller randomStats = new DiceRoller();
+        return randomStats.getStats();
     }
 
 
@@ -131,28 +122,24 @@ public class Character {
         return race;
     }
 
-    public void setRace(String race) {
-        this.assignEnumRace(race);
-    }
+    public void setRace(Race race) {
+        this.race = race;
+    } //todo: clean this function, have it take in Race enum -> move assignEnumRace to view -> add view name in race enum
 
     public void setRacialAttribute(RacialAttribute attribute) {
 
         if (this.racialAttribute != null) {
-            this.removeRacialAttributeScoreBonus();
+            try {
+                this.racialAttribute = attribute;
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            this.racialAttribute = attribute;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        this.addRacialAttributeScoreBonus();
     }
-
 
     public void setName(String name) {
         this.name = name;
     }
-
     public String getName() {
         return name;
     }
@@ -160,83 +147,11 @@ public class Character {
     public String getStyle() {
         return style;
     }
-
     public void setStyle(String style) {
         this.style = style;
     }
 
-    public void assignEnumRace(String race) {
-        switch (race) {
-            case "Half-Orc: +2 STR, +1 CON":
-                this.race = Race.HALFORC;
-                break;
-            case "Dragonborn: +2 STR, +1 CHA":
-                this.race = Race.DRAGONBORN;
-                break;
-            case "Dwarf: +2 CON":
-                this.race = Race.DWARF;
-                break;
-            case "Elf: +2 DEX":
-                this.race = Race.ELF;
-                break;
-            case "Gnome: +2 INT":
-                this.race = Race.GNOME;
-                break;
-            case "Half-Elf: +2 CHA":
-                this.race = Race.HALFELF;
-                break;
-            case "Halfling: +2 DEX":
-                this.race = Race.HALFLING;
-                break;
-            case "Human: +1 TO ALL STATS":
-                this.race = Race.HUMAN;
-                break;
-            case "Tiefling: +2 CHA, +1 INT":
-                this.race = Race.TIEFLING;
-                break;
-            default:
-                this.race = Race.ZEROMAN;
-                break;
-        }
-    }
-
-    public void addRacialAbilityScoreBonus() {
-        this.setSTR(this.getSTR() + this.race.str);
-        this.setDEX(this.getDEX() + this.race.dex);
-        this.setCON(this.getCON() + this.race.con);
-        this.setINT(this.getINT() + this.race.intel);
-        this.setWIS(this.getWIS() + this.race.wis);
-        this.setCHA(this.getCHA() + this.race.chr);
-    }
-
-    public void removeRacialAbilityScoreBonus() {
-        this.setSTR(this.getSTR() - this.race.str);
-        this.setDEX(this.getDEX() - this.race.dex);
-        this.setCON(this.getCON() - this.race.con);
-        this.setINT(this.getINT() - this.race.intel);
-        this.setWIS(this.getWIS() - this.race.wis);
-        this.setCHA(this.getCHA() - this.race.chr);
-    }
-
-    public void addRacialAttributeScoreBonus() {
-
-        this.setSTR(this.getSTR() + this.racialAttribute.str);
-        this.setDEX(this.getDEX() + this.racialAttribute.dex);
-        this.setCON(this.getCON() + this.racialAttribute.con);
-        this.setINT(this.getINT() + this.racialAttribute.intel);
-        this.setWIS(this.getWIS() + this.racialAttribute.wis);
-        this.setCHA(this.getCHA() + this.racialAttribute.chr);
-    }
-
-    public void removeRacialAttributeScoreBonus() {
-        if (this.racialAttribute != null) {
-            this.setSTR(this.getSTR() - this.racialAttribute.str);
-            this.setDEX(this.getDEX() - this.racialAttribute.dex);
-            this.setCON(this.getCON() - this.racialAttribute.con);
-            this.setINT(this.getINT() - this.racialAttribute.intel);
-            this.setWIS(this.getWIS() - this.racialAttribute.wis);
-            this.setCHA(this.getCHA() - this.racialAttribute.chr);
-            this.racialAttribute = null;
-        }
+    public Map<StatSpecifier, Integer> getStats() {
+        return stats.getStats();
     }
 }
