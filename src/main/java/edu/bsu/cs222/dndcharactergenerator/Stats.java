@@ -6,11 +6,6 @@ import java.util.Map;
 public class Stats {
     private Map<StatSpecifier, Integer> stats;
 
-    public Stats() {
-        stats = new HashMap<>();
-        zeroOutStats();
-    }
-
     private void zeroOutStats() {
         for(StatSpecifier specifier : StatSpecifier.values()) {
             stats.put(specifier, 0);
@@ -33,6 +28,9 @@ public class Stats {
 
     public void changeStatsViaStatModifier(StatModifier statModifier) {
         Map<StatSpecifier, Integer> statsFromChanger = statModifier.getStatAdditions();
+        if(stats.isEmpty()) {
+            zeroOutStats();
+        }
         addToCurrentStats(statsFromChanger);
     }
 

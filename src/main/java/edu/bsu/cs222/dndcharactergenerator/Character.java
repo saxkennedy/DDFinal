@@ -1,6 +1,5 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -117,29 +116,28 @@ public class Character {
         return randomStats.getStats();
     }
 
-
     public Race getRace() {
         return race;
     }
 
     public void setRace(Race race) {
-        this.race = race;
-    } //todo: clean this function, have it take in Race enum -> move assignEnumRace to view -> add view name in race enum
+        if (this.race != null) {
+            this.race = race;
+            stats.changeStatsViaStatModifier(race);
+        }
+    }
 
     public void setRacialAttribute(RacialAttribute attribute) {
-
         if (this.racialAttribute != null) {
-            try {
-                this.racialAttribute = attribute;
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
+            this.racialAttribute = attribute;
+            stats.changeStatsViaStatModifier(attribute);
         }
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
@@ -147,6 +145,7 @@ public class Character {
     public String getStyle() {
         return style;
     }
+
     public void setStyle(String style) {
         this.style = style;
     }
