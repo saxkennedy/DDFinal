@@ -1,6 +1,5 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class Character {
@@ -8,7 +7,7 @@ public class Character {
     private String style;
     private Race race;
     private RacialAttribute racialAttribute;
-    private Stats stats;
+    private Stats stats = new Stats();
 
     public int getStat(StatSpecifier specifier) {
         return stats.getStat(specifier);
@@ -16,7 +15,7 @@ public class Character {
 
     public void setStat(StatSpecifier specifier, int value) {
         if(specifier.isMain) {
-            StatSpecifier modifier = specifier.givenMainGetMod(specifier);
+            StatSpecifier modifier = specifier.givenStatGetModifier(specifier);
             stats.setStat(specifier, value);
             int modifierValue = (int) (Math.floor(((float) stats.getStat(modifier) - 10) / 2));
             stats.setStat(modifier, modifierValue);
@@ -31,11 +30,6 @@ public class Character {
 
     public void updateMaxHitPoints(int conToHitPoints) {
         stats.setStat(StatSpecifier.MAX_HP, 10 + conToHitPoints);
-    }
-
-    public ArrayList statRoll() {
-        DiceRoller randomStats = new DiceRoller();
-        return randomStats.getStats();
     }
 
     public Race getRace() {

@@ -36,7 +36,7 @@ public enum StatSpecifier {
     public final boolean isMod;
     public final String pdfGeneratorName;
 
-    public StatSpecifier givenMainGetMod(StatSpecifier specifier) {
+    public StatSpecifier givenStatGetModifier(StatSpecifier specifier) {
         StatSpecifier mainMod = null;
         switch(specifier) {
             case STR: mainMod = STR_MOD; break;

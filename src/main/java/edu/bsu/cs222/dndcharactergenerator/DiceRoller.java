@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class DiceRoller {
 
-    public ArrayList<Integer> getStats() {
+    public static ArrayList<Integer> getStats() {
         ArrayList<Integer> stats = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             ArrayList<Integer> sorter;
