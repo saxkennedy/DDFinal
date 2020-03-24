@@ -1,6 +1,6 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-public enum StatName {
+public enum Stats {
     STR("STR", false, true, false),
     DEX("DEX", false, true, false),
     CON("CON", false, true, false),
@@ -25,7 +25,7 @@ public enum StatName {
     ARMOR_CLASS("AC", false, false, false);
     //todo: refactor into mainstats, saving throws, and otherStats seperate enums but loopable as one
 
-    StatName(String pdfGeneratorName, boolean isMod, boolean isMain, boolean isST) {
+    Stats(String pdfGeneratorName, boolean isMod, boolean isMain, boolean isST) {
         this.pdfGeneratorName = pdfGeneratorName;
         this.isMod = isMod;
         this.isMain = isMain;
@@ -37,15 +37,28 @@ public enum StatName {
     public final boolean isMod;
     public final String pdfGeneratorName;
 
-    public StatName givenMainGetStatMod(StatName statName) {
-        StatName newMod = null;
-        switch(statName) {
+    public Stats givenMainStatGetMod(Stats mainStat) {
+        Stats newMod = null;
+        switch(mainStat) {
             case STR: newMod = STR_MOD; break;
             case DEX: newMod = DEX_MOD; break;
             case INT: newMod = INT_MOD; break;
             case WIS: newMod = WIS_MOD; break;
             case CHA: newMod = CHA_MOD; break;
             case CON: newMod = CON_MOD; break;
+        }
+        return newMod;
+    }
+
+    public Stats givenModStatGetMain(Stats modStat) {
+        Stats newMod = null;
+        switch(modStat) {
+            case STR_MOD: newMod = STR; break;
+            case DEX_MOD: newMod = DEX; break;
+            case INT_MOD: newMod = INT; break;
+            case WIS_MOD: newMod = WIS; break;
+            case CHA_MOD: newMod = CHA; break;
+            case CON_MOD: newMod = CON; break;
         }
         return newMod;
     }

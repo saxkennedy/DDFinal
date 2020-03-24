@@ -15,24 +15,24 @@ public enum Race implements StatChanger {
     TIEFLING(0, 0, 0, 1, 0, 2, "Tiefling", "Tiefling: +2 CHA, +1 INT"),
     ZEROMAN(0, 0, 0, 0, 0, 0, "Zeroman", null);
 
-    private Map<StatName, Integer> attributes;
+    private Map<Stats, Integer> attributes;
     public final String raceName;
     private final String viewName;
 
     Race(int str, int dex, int con, int intel, int wis, int cha, String raceName, String viewName) {
         attributes = new HashMap<>();
-        attributes.put(StatName.STR, str);
-        attributes.put(StatName.DEX, dex);
-        attributes.put(StatName.CON, con);
-        attributes.put(StatName.INT, intel);
-        attributes.put(StatName.WIS, wis);
-        attributes.put(StatName.CHA, cha);
+        attributes.put(Stats.STR, str);
+        attributes.put(Stats.DEX, dex);
+        attributes.put(Stats.CON, con);
+        attributes.put(Stats.INT, intel);
+        attributes.put(Stats.WIS, wis);
+        attributes.put(Stats.CHA, cha);
         this.raceName = raceName;
         this.viewName = viewName;
     }
 
     @Override
-    public Map<StatName, Integer> getStatChanges() {
+    public Map<Stats, Integer> getStatChanges() {
         return attributes;
     }
 }

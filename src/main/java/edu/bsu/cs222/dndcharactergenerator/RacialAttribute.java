@@ -26,22 +26,22 @@ public enum RacialAttribute implements StatChanger {
     WHITEDRAGON(0, 0, 0, 0, 0, 0, "White Dragon: Cold");
 
 
-    private Map<StatName, Integer> attributes;
+    private Map<Stats, Integer> attributes;
     public final String attributeName;
 
     RacialAttribute(int str, int dex, int con, int intel, int wis, int cha, String attributeName) {
         attributes = new HashMap<>();
-        attributes.put(StatName.STR, str);
-        attributes.put(StatName.DEX, dex);
-        attributes.put(StatName.CON, con);
-        attributes.put(StatName.INT, intel);
-        attributes.put(StatName.WIS, wis);
-        attributes.put(StatName.CHA, cha);
+        attributes.put(Stats.STR, str);
+        attributes.put(Stats.DEX, dex);
+        attributes.put(Stats.CON, con);
+        attributes.put(Stats.INT, intel);
+        attributes.put(Stats.WIS, wis);
+        attributes.put(Stats.CHA, cha);
         this.attributeName = attributeName;
     }
 
     @Override
-    public Map<StatName, Integer> getStatChanges() {
+    public Map<Stats, Integer> getStatChanges() {
         return attributes;
     }
 }

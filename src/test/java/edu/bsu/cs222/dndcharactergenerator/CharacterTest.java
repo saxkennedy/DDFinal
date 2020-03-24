@@ -23,15 +23,15 @@ public class CharacterTest {
     public void testRemoveRaceModifier() {
         player.setRace(Race.DRAGONBORN);
         player.setRace(Race.HUMAN);
-        Assertions.assertEquals(1, player.getStat(StatName.STR));
+        Assertions.assertEquals(1, player.getStat(Stats.STR));
     }
 
     @Test
     public void testRacialAttributeScoreBonus() {
         player.setRacialAttribute(RacialAttribute.HILLDWARF);
         player.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
-        Assertions.assertEquals(0, player.getStat(StatName.WIS));
-        Assertions.assertEquals(2, player.getStat(StatName.STR));
+        Assertions.assertEquals(0, player.getStat(Stats.WIS));
+        Assertions.assertEquals(2, player.getStat(Stats.STR));
     }
 
     @Test

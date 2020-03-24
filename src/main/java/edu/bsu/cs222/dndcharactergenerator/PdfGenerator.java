@@ -49,8 +49,8 @@ public class PdfGenerator {
     }
 
     private void writeStats() throws IOException {
-        Map<StatName, Integer> stats = character.getCharacterStats();
-        for(Map.Entry<StatName, Integer> entry : stats.entrySet()) {
+        Map<Stats, Integer> stats = character.getCharacterStats();
+        for(Map.Entry<Stats, Integer> entry : stats.entrySet()) {
             PDField fieldToSet = form.getField(entry.getKey().pdfGeneratorName);
             fieldToSet.setValue(String.valueOf(entry.getValue()));
         }
@@ -90,7 +90,7 @@ public class PdfGenerator {
         newCharacterSheet.close();
     }
 
-    private void setFieldValue(StatName name) throws IOException {
+    private void setFieldValue(Stats name) throws IOException {
         PDField fieldToSet = form.getField(name.pdfGeneratorName);
         fieldToSet.setValue(String.valueOf(character.getCharacterStats().get(name.pdfGeneratorName)));
     }
