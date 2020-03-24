@@ -14,27 +14,24 @@ public class CharacterTest {
     }
 
     @Test
-    public void testGetsRace() {
-        player.setRace("Human: +1 TO ALL STATS");
+    public void testGetRace() {
+        player.setRace(Race.HUMAN);
         Assertions.assertEquals(Race.HUMAN, player.getRace());
     }
 
     @Test
     public void testRemoveRaceModifier() {
-        player.setRace("Dragonborn: +2 STR, +1 CHA");
-        player.addRacialAbilityScoreBonus();
-        player.removeRacialAbilityScoreBonus();
-        player.setRace("Human: +1 TO ALL STATS");
-        player.addRacialAbilityScoreBonus();
-        Assertions.assertEquals(1, player.getSTR());
+        player.setRace(Race.DRAGONBORN);
+        player.setRace(Race.HUMAN);
+        Assertions.assertEquals(1, player.getStat(StatName.STR));
     }
 
     @Test
     public void testRacialAttributeScoreBonus() {
         player.setRacialAttribute(RacialAttribute.HILLDWARF);
         player.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
-        Assertions.assertEquals(0, player.getWIS());
-        Assertions.assertEquals(2, player.getSTR());
+        Assertions.assertEquals(0, player.getStat(StatName.WIS));
+        Assertions.assertEquals(2, player.getStat(StatName.STR));
     }
 
     @Test

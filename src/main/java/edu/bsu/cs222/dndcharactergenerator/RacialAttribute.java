@@ -3,7 +3,7 @@ package edu.bsu.cs222.dndcharactergenerator;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum RacialAttribute implements StatModifier {
+public enum RacialAttribute implements StatChanger {
     HILLDWARF(0, 0, 0, 0, 1, 0, "Hill Dwarf: +1 WIS"),
     MOUNTAINDWARF(2, 0, 0, 0, 0, 0, "Mountain Dwarf: +2 STR"),
     HIGHELF(0, 0, 0, 1, 0, 0, "High Elf: +1 INT"),
@@ -26,22 +26,22 @@ public enum RacialAttribute implements StatModifier {
     WHITEDRAGON(0, 0, 0, 0, 0, 0, "White Dragon: Cold");
 
 
-    private Map<StatSpecifier, Integer> attributes;
+    private Map<StatName, Integer> attributes;
     public final String attributeName;
 
     RacialAttribute(int str, int dex, int con, int intel, int wis, int cha, String attributeName) {
         attributes = new HashMap<>();
-        attributes.put(StatSpecifier.STR, str);
-        attributes.put(StatSpecifier.DEX, dex);
-        attributes.put(StatSpecifier.CON, con);
-        attributes.put(StatSpecifier.INT, intel);
-        attributes.put(StatSpecifier.WIS, wis);
-        attributes.put(StatSpecifier.CHA, cha);
+        attributes.put(StatName.STR, str);
+        attributes.put(StatName.DEX, dex);
+        attributes.put(StatName.CON, con);
+        attributes.put(StatName.INT, intel);
+        attributes.put(StatName.WIS, wis);
+        attributes.put(StatName.CHA, cha);
         this.attributeName = attributeName;
     }
 
     @Override
-    public Map<StatSpecifier, Integer> getStatAdditions() {
+    public Map<StatName, Integer> getStatChanges() {
         return attributes;
     }
 }

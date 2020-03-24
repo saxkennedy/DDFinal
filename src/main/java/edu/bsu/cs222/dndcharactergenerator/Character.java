@@ -7,29 +7,33 @@ public class Character {
     private String style;
     private Race race;
     private RacialAttribute racialAttribute;
-    private Stats stats = new Stats();
+    private CharacterStats characterStats = new CharacterStats();
 
-    public int getStat(StatSpecifier specifier) {
-        return stats.getStat(specifier);
+    public int getStat(StatName specifier) {
+        return characterStats.getStat(specifier);
     }
 
-    public void setStat(StatSpecifier specifier, int value) {
-        if(specifier.isMain) {
-            StatSpecifier modifier = specifier.givenStatGetModifier(specifier);
-            stats.setStat(specifier, value);
-            int modifierValue = (int) (Math.floor(((float) stats.getStat(modifier) - 10) / 2));
-            stats.setStat(modifier, modifierValue);
+    public void setStat(StatName statName, int value) {
+        if (statName.isMain) {
+            StatName modifier = statName.givenMainGetStatMod(statName);
+            characterStats.setStat(statName, value);
+            setModFromStat(modifier);
         } else {
-            stats.setStat(specifier, value);
+            characterStats.setStat(statName, value);
         }
     }
 
+    private void setModFromStat(StatName mainStat) {
+        int modifierValue = (int) (Math.floor(((float) characterStats.getStat(mainStat) - 10) / 2));
+        characterStats.setStat(mainStat, modifierValue);
+    }
+
     public void updateArmorClass(int dexToAc) {
-        stats.setStat(StatSpecifier.ARMOR_CLASS, 10 + dexToAc);
+        characterStats.setStat(StatName.ARMOR_CLASS, 10 + dexToAc);
     }
 
     public void updateMaxHitPoints(int conToHitPoints) {
-        stats.setStat(StatSpecifier.MAX_HP, 10 + conToHitPoints);
+        characterStats.setStat(StatName.MAX_HP, 10 + conToHitPoints);
     }
 
     public Race getRace() {
@@ -37,16 +41,18 @@ public class Character {
     }
 
     public void setRace(Race race) {
+        if (this.race == race) return;
         if (this.race != null) {
-            this.race = race;
-            stats.changeStatsViaStatModifier(race);
+            characterStats.removeModifier(this.race);
         }
+        this.race = race;
+        characterStats.addModifier(race);
     }
 
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute != null) {
             this.racialAttribute = attribute;
-            stats.changeStatsViaStatModifier(attribute);
+            characterStats.addModifier(attribute);
         }
     }
 
@@ -66,7 +72,7 @@ public class Character {
         this.style = style;
     }
 
-    public Map<StatSpecifier, Integer> getStats() {
-        return stats.getStats();
+    public Map<StatName, Integer> getCharacterStats() {
+        return characterStats.getFinalStatMap();
     }
 }
