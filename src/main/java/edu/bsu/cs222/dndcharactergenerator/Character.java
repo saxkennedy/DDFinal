@@ -1,5 +1,7 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
+import java.util.ArrayList;
+
 public class Character {
     private String name;
     private String style;
@@ -85,5 +87,10 @@ public class Character {
             e.printStackTrace();
         }
         return statsToReturn;
+    }
+
+    public ArrayList statRoll() {
+        DiceRoller stats = new DiceRoller();
+        return stats.getStats();
     }
 }

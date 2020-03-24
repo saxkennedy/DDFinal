@@ -26,7 +26,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) {
-        Character character = new Character(stats);
+        Character character = new Character();
         Color bgColor = Color.NAVAJOWHITE;
 
         //1st Name Scene
@@ -204,7 +204,13 @@ public class View extends Application {
         });
 
         //Race Selection
-        races.setOnAction(actionEvent -> character.setRace(races.getValue()));
+        races.setOnAction(actionEvent -> {
+            for (Race race : Race.values()) {
+                if (races.getValue().equals(race.raceName)) {
+                    character.setRace(race);
+                }
+            }
+        });
 
         //Back to Name Button
         backToName.setOnAction(actionEvent -> stage.setScene(openAndNameScene));
@@ -212,8 +218,8 @@ public class View extends Application {
         //Next to Combat Style Button
         nextToCombatStyle.setOnAction(actionEvent -> {
             stage.setScene(combatStyleScene);
-            if (character.getRace() != null)
-                character.addRacialAbilityScoreBonus();
+            //if (character.getRace() != null)
+            //  character.addRacialAbilityScoreBonus();
         });
 
         //Next to Racial Button
@@ -230,7 +236,7 @@ public class View extends Application {
             Image halflingImage = new Image("/halflingImage.png");
             racialVbox.getChildren().addAll(racialAttributesHeader);
             if (character.getRace() == null) {
-                character.setRace("zeroman");
+                //character.setRace("zeroman");
                 Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
                 racialVbox.getChildren().addAll(noRaceSelected);
             }
@@ -333,9 +339,9 @@ public class View extends Application {
         //Back to Core
         backToCore.setOnAction(actionEvent -> {
             stage.setScene(coreAttributesScene);
-            if (character.getRace() != null) {
-                character.removeRacialAbilityScoreBonus();
-            }
+            //if (character.getRace() != null) {
+            //   character.removeRacialAbilityScoreBonus();
+            //   }
         });
         //Back to Combat Style
         backToCombatStyle.setOnAction(actionEvent -> {
@@ -347,12 +353,12 @@ public class View extends Application {
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(character.statRoll().toString()));
 
         //Stat Buttons
-        strBox.setOnAction(actionEvent -> character.setSTR(strBox.getValue()));
-        dexBox.setOnAction(actionEvent -> character.setDEX(dexBox.getValue()));
-        conBox.setOnAction(actionEvent -> character.setCON(conBox.getValue()));
-        intBox.setOnAction(actionEvent -> character.setINT(intBox.getValue()));
-        wisBox.setOnAction(actionEvent -> character.setWIS(wisBox.getValue()));
-        chaBox.setOnAction(actionEvent -> character.setCHA(chaBox.getValue()));
+        strBox.setOnAction(actionEvent -> character.setStat(Stats.STR,strBox.getValue()));
+        dexBox.setOnAction(actionEvent -> character.setStat(Stats.DEX,dexBox.getValue()));
+        conBox.setOnAction(actionEvent -> character.setStat(Stats.CON,conBox.getValue()));
+        intBox.setOnAction(actionEvent -> character.setStat(Stats.INT,intBox.getValue()));
+        wisBox.setOnAction(actionEvent -> character.setStat(Stats.WIS,wisBox.getValue()));
+        chaBox.setOnAction(actionEvent -> character.setStat(Stats.CHA,chaBox.getValue()));
 
         //Finish Button
         finish.setOnAction(actionEvent -> stage.setScene(saveScene));

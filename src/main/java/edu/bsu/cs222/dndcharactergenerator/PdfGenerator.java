@@ -49,7 +49,7 @@ public class PdfGenerator {
     }
 
     private void writeStats() throws IOException {
-        Map<Stats, Integer> stats = character.getCharacterStats();
+        Map<Stats, Integer> stats = (Map<Stats, Integer>) character.getCharacterStats();
         for(Map.Entry<Stats, Integer> entry : stats.entrySet()) {
             PDField fieldToSet = form.getField(entry.getKey().pdfGeneratorName);
             fieldToSet.setValue(String.valueOf(entry.getValue()));
