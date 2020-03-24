@@ -36,36 +36,36 @@ public class Character {
     public void setRace(Race race) {
         if (this.race == race) return;
         if (this.race != null) {
-            characterStats.removeModifier(this.race);
+            characterStats.changeStatsWithStatChanger(this.race, -1);
         }
         this.race = race;
-        characterStats.addModifier(race);
+        characterStats.changeStatsWithStatChanger(race, 1);
+    }
+
+    public RacialAttribute getRacialAttribute() {
+        return racialAttribute;
     }
 
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute == attribute) return;
         if (this.racialAttribute != null) {
-            characterStats.removeModifier(this.racialAttribute);
+            characterStats.changeStatsWithStatChanger(attribute, -1);
         }
         this.racialAttribute = attribute;
-        characterStats.addModifier(attribute);
+        characterStats.changeStatsWithStatChanger(attribute, 1);
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    private void addStatChangerToStats(StatChanger changer) {
-        //todo: finish implementation, designed to simplify setRace and setRacialAttribute
-    }
-
     private void setModStatFromMainStat(Stats mainStat) {
         Stats modStat = mainStat.givenMainStatGetMod(mainStat);
-        int modValue = doModifierMath(characterStats.getStat(mainStat));
+        int modValue = getModifierValue(characterStats.getStat(mainStat));
         characterStats.setStat(modStat, modValue);
     }
 
-    private int doModifierMath(int mainStatValue) {
+    private int getModifierValue(int mainStatValue) {
         return (int) (Math.floor(((float) mainStatValue - 10) / 2));
     }
 
