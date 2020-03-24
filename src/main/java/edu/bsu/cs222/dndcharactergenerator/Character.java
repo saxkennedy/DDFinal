@@ -12,10 +12,12 @@ public class Character {
     }
 
     public void setStat(Stats stat, int value) {
-        if (stat.isMain) {
+        if (stat.modifier != null && stat.main == null) {
             characterStats.setStat(stat, value);
-            Stats modifier = stat.givenMainStatGetMod(stat);
-            setModStatFromMainStat(modifier);
+            Stats modifier = stat.modifier;
+            characterStats.setStat(modifier, modifierCalculation(characterStats.getStat(modifier)));
+        } else if(stat.modifier == null && stat.main != null) {
+            characterStats.setStat(stat, value);
         } else {
             characterStats.setStat(stat, value);
         }
@@ -59,14 +61,8 @@ public class Character {
         this.name = name;
     }
 
-    private void setModStatFromMainStat(Stats mainStat) {
-        Stats modStat = mainStat.givenMainStatGetMod(mainStat);
-        int modValue = getModifierValue(characterStats.getStat(mainStat));
-        characterStats.setStat(modStat, modValue);
-    }
-
-    private int getModifierValue(int mainStatValue) {
-        return (int) (Math.floor(((float) mainStatValue - 10) / 2));
+    private int modifierCalculation(int modifierValue) {
+        return (int) (Math.floor(((float) modifierValue - 10) / 2));
     }
 
     public String getName() {

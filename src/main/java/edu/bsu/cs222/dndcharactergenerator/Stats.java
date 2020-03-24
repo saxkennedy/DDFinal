@@ -1,65 +1,37 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 public enum Stats {
-    STR("STR", false, true, false),
-    DEX("DEX", false, true, false),
-    CON("CON", false, true, false),
-    INT("INT", false, true, false),
-    WIS("WIS", false, true, false),
-    CHA("CHA", false, true, false),
-    STR_MOD("STRmod", true, false, false),
-    DEX_MOD("DEXmod ", true, false, false),
-    CON_MOD("CONmod", true, false, false),
-    INT_MOD("INTmod", true, false, false),
-    WIS_MOD("WISmod", true, false, false),
-    CHA_MOD("CHAmod", true, false, false),
-    STR_SAVTHROW("ST Strength", false, false, true),
-    DEX_SAVTHROW("ST Dexterity", false, false, true),
-    CON_SAVTHROW("ST Constitution", false, false, true),
-    INT_SAVTHROW("ST Intelligence", false, false, true),
-    WIS_SAVTHROW("ST Wisdom", false, false, true),
-    CHA_SAVTHROW("ST Charisma", false, false, true),
-    MAX_HP("HPMax", false, false, false),
-    CURRENT_HP("HPCurrent", false, false, false),
-    TOTAL_HP("HDTotal", false, false, false),
-    ARMOR_CLASS("AC", false, false, false);
-    //todo: refactor into mainstats, saving throws, and otherStats seperate enums but loopable as one
+    STR("STR", Stats.STR_MOD,null),
+    DEX("DEX", Stats.DEX_MOD ,null),
+    CON("CON", Stats.CON_MOD ,null),
+    INT("INT", Stats.INT_MOD ,null),
+    WIS("WIS", Stats.WIS_MOD ,null),
+    CHA("CHA", Stats.CHA_MOD ,null),
+    STR_MOD("STRmod",  null, Stats.STR),
+    DEX_MOD("DEXmod ", null, Stats.DEX),
+    CON_MOD("CONmod",  null, Stats.CON),
+    INT_MOD("INTmod",  null, Stats.INT),
+    WIS_MOD("WISmod",  null, Stats.WIS),
+    CHA_MOD("CHAmod",  null, Stats.CHA),
+    STR_SAVTHROW("ST Strength",     null, null),
+    DEX_SAVTHROW("ST Dexterity",    null, null),
+    CON_SAVTHROW("ST Constitution", null, null),
+    INT_SAVTHROW("ST Intelligence", null, null),
+    WIS_SAVTHROW("ST Wisdom",       null, null),
+    CHA_SAVTHROW("ST Charisma",     null, null),
+    MAX_HP("HPMax",                 null, null),
+    CURRENT_HP("HPCurrent",         null, null),
+    TOTAL_HP("HDTotal",             null, null),
+    ARMOR_CLASS("AC",               null, null);
+    //todo: refactor into mainstats, saving throws, and otherStats. i.e seperate enums but loopable as one
 
-    Stats(String pdfGeneratorName, boolean isMod, boolean isMain, boolean isST) {
+    Stats(String pdfGeneratorName, Stats modifier, Stats main) {
         this.pdfGeneratorName = pdfGeneratorName;
-        this.isMod = isMod;
-        this.isMain = isMain;
-        this.isST = isST;
+        this.modifier = modifier;
+        this.main = main;
     }
 
-    public final boolean isMain;
-    public final boolean isST;
-    public final boolean isMod;
     public final String pdfGeneratorName;
-
-    public Stats givenMainStatGetMod(Stats mainStat) {
-        Stats newMod = null;
-        switch(mainStat) {
-            case STR: newMod = STR_MOD; break;
-            case DEX: newMod = DEX_MOD; break;
-            case INT: newMod = INT_MOD; break;
-            case WIS: newMod = WIS_MOD; break;
-            case CHA: newMod = CHA_MOD; break;
-            case CON: newMod = CON_MOD; break;
-        }
-        return newMod;
-    }
-
-    public Stats givenModStatGetMain(Stats modStat) {
-        Stats newMod = null;
-        switch(modStat) {
-            case STR_MOD: newMod = STR; break;
-            case DEX_MOD: newMod = DEX; break;
-            case INT_MOD: newMod = INT; break;
-            case WIS_MOD: newMod = WIS; break;
-            case CHA_MOD: newMod = CHA; break;
-            case CON_MOD: newMod = CON; break;
-        }
-        return newMod;
-    }
+    public final Stats modifier;
+    public final Stats main;
 }
