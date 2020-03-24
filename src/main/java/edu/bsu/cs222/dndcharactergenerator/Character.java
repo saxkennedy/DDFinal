@@ -19,7 +19,7 @@ public class Character {
             characterStats.setAttribute(abilityScore, value);
             AbilityScoreModifier modifier = AbilityScore.getAbilityScoreModifier(abilityScore);
             characterStats.setAttribute(modifier, modifierCalculation(characterStats.getAttribute(modifier)));
-        }else {
+        } else {
             characterStats.setAttribute(attribute, value);
         }
     }
