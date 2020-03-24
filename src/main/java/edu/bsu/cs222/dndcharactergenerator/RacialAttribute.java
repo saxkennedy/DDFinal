@@ -3,7 +3,7 @@ package edu.bsu.cs222.dndcharactergenerator;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum RacialAttribute implements StatChanger {
+public enum RacialAttribute implements AbilityScoreAffecter {
     HILLDWARF(0, 0, 0, 0, 1, 0, "Hill Dwarf: +1 WIS"),
     MOUNTAINDWARF(2, 0, 0, 0, 0, 0, "Mountain Dwarf: +2 STR"),
     HIGHELF(0, 0, 0, 1, 0, 0, "High Elf: +1 INT"),
@@ -26,22 +26,22 @@ public enum RacialAttribute implements StatChanger {
     WHITEDRAGON(0, 0, 0, 0, 0, 0, "White Dragon: Cold");
 
 
-    private Map<Stats, Integer> attributes;
+    private Map<AbilityScore, Integer> attributes;
     public final String attributeName;
 
     RacialAttribute(int str, int dex, int con, int intel, int wis, int cha, String attributeName) {
         attributes = new HashMap<>();
-        attributes.put(Stats.STR, str);
-        attributes.put(Stats.DEX, dex);
-        attributes.put(Stats.CON, con);
-        attributes.put(Stats.INT, intel);
-        attributes.put(Stats.WIS, wis);
-        attributes.put(Stats.CHA, cha);
+        attributes.put(AbilityScore.STR, str);
+        attributes.put(AbilityScore.DEX, dex);
+        attributes.put(AbilityScore.CON, con);
+        attributes.put(AbilityScore.INT, intel);
+        attributes.put(AbilityScore.WIS, wis);
+        attributes.put(AbilityScore.CHA, cha);
         this.attributeName = attributeName;
     }
 
     @Override
-    public Map<Stats, Integer> getStatChanges() {
+    public Map<AbilityScore, Integer> getAbilityScoreChanges() {
         return attributes;
     }
 }

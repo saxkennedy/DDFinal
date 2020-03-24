@@ -4,38 +4,48 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CharacterStats {
-    private Map<Stats, Integer> stats = new HashMap<>();
+    private Map<CharacterAttribute, Integer> characterAttributes = new HashMap<>();
 
-    public void changeStatsWithStatChanger(StatChanger changer, int additionOrSubtraction) {
-        Map<Stats, Integer> statMap = changer.getStatChanges();
-        for (Map.Entry<Stats, Integer> entry : statMap.entrySet()) {
-            Stats specifier = entry.getKey();
-            stats.put(specifier, stats.get(specifier) + (additionOrSubtraction * entry.getValue()));
+    public void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
+        populateAttributesWithZero();
+        Map<AbilityScore, Integer> abilityScoreIntegerMap = affecter.getAbilityScoreChanges();
+        for (Map.Entry<AbilityScore, Integer> entry : abilityScoreIntegerMap.entrySet()) {
+            CharacterAttribute specifier = entry.getKey();
+            characterAttributes.put(specifier, characterAttributes.get(specifier) + (additionOrSubtraction * entry.getValue()));
         }
     }
 
-    public Map<Stats, Integer> getFinalStatMap() {
-        return new HashMap<>(stats);
+    public Map<CharacterAttribute, Integer> getFinalAttributeMap() {
+        return new HashMap<>(characterAttributes);
     }
 
-    public void setStat(Stats specifier, int value) {
-        if (stats.isEmpty()) {
-            populateStatsWithZero();
+    public void setAttribute(CharacterAttribute specifier, int value) {
+        if (characterAttributes.isEmpty()) {
+            populateAttributesWithZero();
         }
-        stats.put(specifier, value);
+        characterAttributes.put(specifier, value);
     }
 
-    public int getStat(Stats specifier) {
-        return stats.get(specifier);
+    public int getAttribute(CharacterAttribute specifier) {
+        return characterAttributes.get(specifier);
     }
 
-    private void populateStatsWithZero() {
-        for (Stats specifier : Stats.values()) {
-            stats.put(specifier, 0);
+    private void populateAttributesWithZero() {
+        for(CharacterAttribute abilityScore : AbilityScore.values()) {
+            characterAttributes.put(abilityScore, 0);
+        }
+        for(CharacterAttribute abilityScoreModifier : AbilityScoreModifier.values()) {
+            characterAttributes.put(abilityScoreModifier, 0);
+        }
+        for(CharacterAttribute abilityScore : AbilityScoreSavingThrow.values()) {
+            characterAttributes.put(abilityScore, 0);
+        }
+        for(CharacterAttribute vitalityModifier : VitalityModifier.values()) {
+            characterAttributes.put(vitalityModifier, 0);
         }
     }
 
-    public static CharacterStats makeStatsCopy(CharacterStats oldStats) throws CloneNotSupportedException {
+    public static CharacterStats makeAttributesCopy(CharacterStats oldStats) throws CloneNotSupportedException {
         return (CharacterStats) oldStats.clone();
     }
 }

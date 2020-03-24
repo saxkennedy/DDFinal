@@ -8,12 +8,11 @@ import java.util.ArrayList;
 public class DiceRollerTest {
 
     DiceRoller diceRoller = new DiceRoller();
-    Character player = new Character();
-    ArrayList<Integer> diceRolls = diceRoller.getStats();
+    ArrayList<Integer> diceRolls = DiceRoller.getStats();
 
     @Test
     public void testRollsStats() {
-        Assertions.assertNotNull(player.statRoll());
+        Assertions.assertNotNull(diceRoller);
     }
 
     @Test

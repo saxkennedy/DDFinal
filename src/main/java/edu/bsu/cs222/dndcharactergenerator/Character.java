@@ -9,28 +9,27 @@ public class Character {
     private RacialAttribute racialAttribute;
     private CharacterStats characterStats = new CharacterStats();
 
-    public int getStat(Stats specifier) {
-        return characterStats.getStat(specifier);
+    public int getCharacterAttribute(CharacterAttribute attribute) {
+        return characterStats.getAttribute(attribute);
     }
 
-    public void setStat(Stats stat, int value) {
-        if (stat.modifier != null && stat.main == null) {
-            characterStats.setStat(stat, value);
-            Stats modifier = stat.modifier;
-            characterStats.setStat(modifier, modifierCalculation(characterStats.getStat(modifier)));
-        } else if(stat.modifier == null && stat.main != null) {
-            characterStats.setStat(stat, value);
-        } else {
-            characterStats.setStat(stat, value);
+    public void setCharacterAttribute(CharacterAttribute attribute, int value) {
+        if (attribute instanceof AbilityScore) {
+            AbilityScore abilityScore = (AbilityScore) attribute;
+            characterStats.setAttribute(abilityScore, value);
+            AbilityScoreModifier modifier = AbilityScore.getAbilityScoreModifier(abilityScore);
+            characterStats.setAttribute(modifier, modifierCalculation(characterStats.getAttribute(modifier)));
+        }else {
+            characterStats.setAttribute(attribute, value);
         }
     }
 
     public void updateArmorClass(int dexToAc) {
-        characterStats.setStat(Stats.ARMOR_CLASS, 10 + dexToAc);
+        characterStats.setAttribute(VitalityModifier.ARMOR_CLASS , 10 + dexToAc);
     }
 
     public void updateMaxHitPoints(int conToHitPoints) {
-        characterStats.setStat(Stats.MAX_HP, 10 + conToHitPoints);
+        characterStats.setAttribute(VitalityModifier.MAX_HP, 10 + conToHitPoints);
     }
 
     public Race getRace() {
@@ -40,10 +39,10 @@ public class Character {
     public void setRace(Race race) {
         if (this.race == race) return;
         if (this.race != null) {
-            characterStats.changeStatsWithStatChanger(this.race, -1);
+            characterStats.implementAbilityScoreAffector(this.race, -1);
         }
         this.race = race;
-        characterStats.changeStatsWithStatChanger(race, 1);
+        characterStats.implementAbilityScoreAffector(race, 1);
     }
 
     public RacialAttribute getRacialAttribute() {
@@ -53,10 +52,10 @@ public class Character {
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute == attribute) return;
         if (this.racialAttribute != null) {
-            characterStats.changeStatsWithStatChanger(attribute, -1);
+            characterStats.implementAbilityScoreAffector(attribute, -1);
         }
         this.racialAttribute = attribute;
-        characterStats.changeStatsWithStatChanger(attribute, 1);
+        characterStats.implementAbilityScoreAffector(attribute, 1);
     }
 
     public void setName(String name) {
@@ -82,7 +81,7 @@ public class Character {
     public CharacterStats getCharacterStats() {
         CharacterStats statsToReturn = null;
         try {
-            statsToReturn = CharacterStats.makeStatsCopy(characterStats);
+            statsToReturn = CharacterStats.makeAttributesCopy(characterStats);
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }

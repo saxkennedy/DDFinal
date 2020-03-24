@@ -49,11 +49,11 @@ public class PdfGenerator {
     }
 
     private void writeStats() throws IOException {
-        Map<Stats, Integer> stats = (Map<Stats, Integer>) character.getCharacterStats();
-        for(Map.Entry<Stats, Integer> entry : stats.entrySet()) {
-            PDField fieldToSet = form.getField(entry.getKey().pdfGeneratorName);
-            fieldToSet.setValue(String.valueOf(entry.getValue()));
-        }
+//        Map<AbilityScore, Integer> stats = character.getCharacterStats();
+//        for(Map.Entry<AbilityScore, Integer> entry : stats.entrySet()) {
+//            PDField fieldToSet = form.getField(entry.getKey().pdfGeneratorName);
+//            fieldToSet.setValue(String.valueOf(entry.getValue()));
+//        }
     }
 
     private void writeStyle() throws IOException {
@@ -90,8 +90,8 @@ public class PdfGenerator {
         newCharacterSheet.close();
     }
 
-    private void setFieldValue(Stats name) throws IOException {
-        PDField fieldToSet = form.getField(name.pdfGeneratorName);
-        fieldToSet.setValue(String.valueOf(character.getCharacterStats().get(name.pdfGeneratorName)));
+    private void setFieldValue(CharacterAttribute attribute) throws IOException {
+        PDField fieldToSet = form.getField(attribute.getPdfGeneratorName());
+        fieldToSet.setValue(String.valueOf(character.getCharacterStats().getAttribute(attribute)));
     }
 }

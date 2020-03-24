@@ -206,7 +206,7 @@ public class View extends Application {
         //Race Selection
         races.setOnAction(actionEvent -> {
             for (Race race : Race.values()) {
-                if (races.getValue().equals(race.raceName)) {
+                if (races.getValue().equals(race.viewName)) {
                     character.setRace(race);
                 }
             }
@@ -353,12 +353,12 @@ public class View extends Application {
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(character.statRoll().toString()));
 
         //Stat Buttons
-        strBox.setOnAction(actionEvent -> character.setStat(Stats.STR,strBox.getValue()));
-        dexBox.setOnAction(actionEvent -> character.setStat(Stats.DEX,dexBox.getValue()));
-        conBox.setOnAction(actionEvent -> character.setStat(Stats.CON,conBox.getValue()));
-        intBox.setOnAction(actionEvent -> character.setStat(Stats.INT,intBox.getValue()));
-        wisBox.setOnAction(actionEvent -> character.setStat(Stats.WIS,wisBox.getValue()));
-        chaBox.setOnAction(actionEvent -> character.setStat(Stats.CHA,chaBox.getValue()));
+        strBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.STR,strBox.getValue()));
+        dexBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.DEX,dexBox.getValue()));
+        conBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.CON,conBox.getValue()));
+        intBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.INT,intBox.getValue()));
+        wisBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.WIS,wisBox.getValue()));
+        chaBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.CHA,chaBox.getValue()));
 
         //Finish Button
         finish.setOnAction(actionEvent -> stage.setScene(saveScene));
