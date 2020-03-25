@@ -45,11 +45,11 @@ public class View extends Application {
         nameVbox.getChildren().addAll(fighterImageView, enterName, characterName, go);
 
         //2nd Core Stats/Race Selection Scene
-        VBox coreStatsVbox = new VBox();
-        coreStatsVbox.setAlignment(Pos.CENTER);
-        coreStatsVbox.setSpacing(10);
-        coreStatsVbox.setBackground(Background.EMPTY);
-        Scene coreAttributesScene = new Scene(coreStatsVbox, 550, 850, bgColor);
+        VBox coreInfoVbox = new VBox();
+        coreInfoVbox.setAlignment(Pos.CENTER);
+        coreInfoVbox.setSpacing(10);
+        coreInfoVbox.setBackground(Background.EMPTY);
+        Scene coreAttributesScene = new Scene(coreInfoVbox, 550, 850, bgColor);
         Label raceSelection = new Label("Choose from one of the below races!");
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
@@ -60,29 +60,22 @@ public class View extends Application {
         HBox coreStatsButtons = new HBox(backToName, nextToCombatStyle);
         coreStatsButtons.setAlignment(Pos.CENTER);
         coreStatsButtons.setSpacing(25);
-        Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
         Label rolledStats = new Label("");
-        Label strLabel = new Label("Strength");
-        ComboBox<Integer> strBox = new ComboBox<>();
-        strBox.getItems().addAll(statNumbers);
-        Label dexLabel = new Label("Dexterity");
-        ComboBox<Integer> dexBox = new ComboBox<>();
-        dexBox.getItems().addAll(statNumbers);
-        Label conLabel = new Label("Constitution");
-        ComboBox<Integer> conBox = new ComboBox<>();
-        conBox.getItems().addAll(statNumbers);
-        Label intLabel = new Label("Intelligence");
-        ComboBox<Integer> intBox = new ComboBox<>();
-        intBox.getItems().addAll(statNumbers);
-        Label wisLabel = new Label("Wisdom");
-        ComboBox<Integer> wisBox = new ComboBox<>();
-        wisBox.getItems().addAll(statNumbers);
-        Label chaLabel = new Label("Charisma");
-        ComboBox<Integer> chaBox = new ComboBox<>();
-        chaBox.getItems().addAll(statNumbers);
+        VBox coreStatsVbox = new VBox();
+        coreStatsVbox.setAlignment(Pos.CENTER);
+        coreStatsVbox.setSpacing(10);
+        coreStatsVbox.setBackground(Background.EMPTY);
+        for (String abilityName: character.statNames) {
+            Label abilityLabel = new Label(abilityName);
+            ComboBox<Integer> abilityInQuestion = new ComboBox();
+            abilityInQuestion.getItems().addAll(character.statNumbers);
+            coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
+            abilityInQuestion.setOnAction(e -> character.setCharacterAttribute(AbilityScore.getAbilityScoreFromString(abilityName),abilityInQuestion.getValue()));
+        }
+
         ComboBox<String> races = new ComboBox<>();
         races.getItems().addAll("Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Half-Orc: +2 STR, +1 CON", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT");
-        coreStatsVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, strLabel, strBox, dexLabel, dexBox, conLabel, conBox, intLabel, intBox, wisLabel, wisBox, chaLabel, chaBox, coreStatsButtons);
+        coreInfoVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtons);
 
         //3rd Scene Combat Style
         VBox combatStyle = new VBox();
@@ -353,12 +346,12 @@ public class View extends Application {
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(character.statRoll().toString()));
 
         //Stat Buttons
-        strBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.STR,strBox.getValue()));
+        /*strBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.STR,strBox.getValue()));
         dexBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.DEX,dexBox.getValue()));
         conBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.CON,conBox.getValue()));
         intBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.INT,intBox.getValue()));
         wisBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.WIS,wisBox.getValue()));
-        chaBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.CHA,chaBox.getValue()));
+        chaBox.setOnAction(actionEvent -> character.setCharacterAttribute(AbilityScore.CHA,chaBox.getValue()));*/
 
         //Finish Button
         finish.setOnAction(actionEvent -> stage.setScene(saveScene));

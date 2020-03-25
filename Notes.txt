@@ -1,0 +1,15 @@
+
+SEPARABLE MODEL ARCHITECTURE
+
+MODEL-VIEW-CONTROLLER ARCHITECTURE
+ - FXML
+
+
+ Race r = ... ;
+
+ if (r.hasSubrace()) {
+   List<Subrace> subraces = r.getSubraces();
+   for (Subrace s : subraces) {
+      ... add a combo box ...
+   }
+ }
