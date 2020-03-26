@@ -1,5 +1,6 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ public enum Race implements AbilityScoreAffecter {
     HUMAN(1, 1, 1, 1, 1, 1, "Human", "Human: +1 TO ALL STATS"),
     TIEFLING(0, 0, 0, 1, 0, 2, "Tiefling", "Tiefling: +2 CHA, +1 INT"),
     ZEROMAN(0, 0, 0, 0, 0, 0, "Zeroman", null);
+
 
     private Map<AbilityScore, Integer> attributes;
     public final String raceName;

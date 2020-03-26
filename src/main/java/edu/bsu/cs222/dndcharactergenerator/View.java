@@ -72,9 +72,8 @@ public class View extends Application {
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
             abilityInQuestion.setOnAction(e -> character.setCharacterAttribute(AbilityScore.getAbilityScoreFromString(abilityName),abilityInQuestion.getValue()));
         }
-
         ComboBox<String> races = new ComboBox<>();
-        races.getItems().addAll("Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Half-Orc: +2 STR, +1 CON", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT");
+        races.getItems().addAll(character.raceNames);
         coreInfoVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtons);
 
         //3rd Scene Combat Style
@@ -90,66 +89,25 @@ public class View extends Application {
         HBox combatStyleButtons = new HBox(backToCore, nextToRacial);
         combatStyleButtons.setAlignment(Pos.CENTER);
         combatStyleButtons.setSpacing(25);
-
         ToggleGroup styleGroup = new ToggleGroup();
-
-        RadioButton archery = new RadioButton("Archery");
-        archery.setUserData("Archery");
-        archery.setToggleGroup(styleGroup);
-
-        RadioButton defense = new RadioButton("Defense");
-        defense.setUserData("Defense");
-        defense.setToggleGroup(styleGroup);
-
-        RadioButton dueling = new RadioButton("Dueling");
-        dueling.setUserData("Dueling");
-        dueling.setToggleGroup(styleGroup);
-
-        RadioButton greatWeaponFighting = new RadioButton("Great Weapon Fighting");
-        greatWeaponFighting.setUserData("Great Weapon Fighting");
-        greatWeaponFighting.setToggleGroup(styleGroup);
-
-        RadioButton protection = new RadioButton("Protection");
-        protection.setUserData("Protection");
-        protection.setToggleGroup(styleGroup);
-
-        RadioButton twoWeaponFighting = new RadioButton("Two-Weapon Fighting");
-        twoWeaponFighting.setUserData("Two-Weapon Fighting");
-        twoWeaponFighting.setToggleGroup(styleGroup);
-
+        VBox combatStyleButtonVbox = new VBox();
+        combatStyleButtonVbox.setSpacing(15);
+        combatStyleButtonVbox.setAlignment(Pos.CENTER);
+        for(String style : character.styles){
+            RadioButton button = new RadioButton(style);
+            button.setUserData(style);
+            combatStyleButtonVbox.getChildren().add(button);
+            button.setToggleGroup(styleGroup);
+        }
         styleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (styleGroup.getSelectedToggle() != null) {
                 String style = styleGroup.getSelectedToggle().getUserData().toString();
-
-                switch (style) {
-                    case "Archery":
-                        styleDescription.setText("+2 bonus to attack rolls made with ranged weapons");
-                        break;
-                    case "Defense":
-                        styleDescription.setText("+1 bonus to AC while wearing armor");
-                        break;
-                    case "Dueling":
-                        styleDescription.setText("+2 bonus to damage rolls when holding a single weapon");
-                        break;
-                    case "Great Weapon Fighting":
-                        styleDescription.setText("You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2");
-                        break;
-                    case "Protection":
-                        styleDescription.setText("When wielding a shield, you may impose a disadvantage on an enemy\n creature's attack roll when it attacks\na target" +
-                                " other than you that is both within 5 feet of you and in your sight");
-                        break;
-                    case "Two-Weapon Fighting":
-                        styleDescription.setText("When you engage in two weapon fighting,\n you can add you ability modifier to the damage of the second attack");
-                        break;
-                    default:
-                        styleDescription.setText("No style found");
-                        break;
-                }
+                styleDescription.setText(character.getStyleDescription(style));
                 String fullStyle = style + ":\n" + styleDescription.getText();
                 character.setStyle(fullStyle);
             }
         });
-        combatStyle.getChildren().addAll(combatStyleLabel, archery, defense, dueling, greatWeaponFighting, protection, twoWeaponFighting, styleDescription, combatStyleButtons);
+        combatStyle.getChildren().addAll(combatStyleLabel, combatStyleButtonVbox, styleDescription, combatStyleButtons);
 
         //Button nextToSkillsBackground = new Button("Next (Skills and Background"); For iteration 2
 
@@ -229,7 +187,7 @@ public class View extends Application {
             Image halflingImage = new Image("/halflingImage.png");
             racialVbox.getChildren().addAll(racialAttributesHeader);
             if (character.getRace() == null) {
-                //character.setRace("zeroman");
+                character.setRace(Race.ZEROMAN);
                 Label noRaceSelected = new Label("NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!");
                 racialVbox.getChildren().addAll(noRaceSelected);
             }
