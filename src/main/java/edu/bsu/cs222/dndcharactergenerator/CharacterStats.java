@@ -31,16 +31,16 @@ public class CharacterStats {
     }
 
     private void populateAttributesWithZero() {
-        for(CharacterAttribute abilityScore : AbilityScore.values()) {
+        for (CharacterAttribute abilityScore : AbilityScore.values()) {
             attributeMap.put(abilityScore, 0);
         }
-        for(CharacterAttribute abilityScoreModifier : AbilityScoreModifier.values()) {
+        for (CharacterAttribute abilityScoreModifier : AbilityScoreModifier.values()) {
             attributeMap.put(abilityScoreModifier, 0);
         }
-        for(CharacterAttribute abilityScore : AbilityScoreSavingThrow.values()) {
+        for (CharacterAttribute abilityScore : AbilityScoreSavingThrow.values()) {
             attributeMap.put(abilityScore, 0);
         }
-        for(CharacterAttribute vitalityModifier : VitalityModifier.values()) {
+        for (CharacterAttribute vitalityModifier : VitalityModifier.values()) {
             attributeMap.put(vitalityModifier, 0);
         }
     }
@@ -48,4 +48,6 @@ public class CharacterStats {
     public static CharacterStats makeAttributesCopy(CharacterStats oldStats) throws CloneNotSupportedException {
         return (CharacterStats) oldStats.clone();
     }
+
+
 }
