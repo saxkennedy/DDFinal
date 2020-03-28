@@ -1,8 +1,6 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class View extends Application {
 
@@ -78,7 +75,7 @@ public class View extends Application {
         races.getItems().addAll(character.raceNames);
         coreInfoVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtons);
         //Dice Roller Button
-        diceRoller.setOnAction(actionEvent -> rolledStats.setText(character.statRoll().toString()));
+        diceRoller.setOnAction(actionEvent -> rolledStats.setText(DiceRoller.getStats().toString()));
         //Race Selection
         races.setOnAction(actionEvent -> {
             for (Race race : Race.values()) {
@@ -171,7 +168,7 @@ public class View extends Application {
         saveLocationVbox.getChildren().addAll(saveLabel, save, backToRacial);
         //Save Button
         save.setOnAction(actionEvent -> {
-            File saveFile = new File(saveLocation.showDialog(stage) + "\\" + character.getName() + ".pdf");
+            File saveFile = new File(saveLocation.showDialog(stage) + "/" + character.getName() + ".pdf");
             PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
             try {
                 generator.writeNewCharacterSheet(saveFile);
@@ -192,14 +189,10 @@ public class View extends Application {
         backToName.setOnAction(actionEvent -> stage.setScene(openAndNameScene));
 
         //Next to Combat Style Button
-        nextToCombatStyle.setOnAction(actionEvent -> {
-            stage.setScene(combatStyleScene);
-        });
+        nextToCombatStyle.setOnAction(actionEvent -> stage.setScene(combatStyleScene));
 
         //Back to Core
-        backToCore.setOnAction(actionEvent -> {
-            stage.setScene(coreAttributesScene);
-        });
+        backToCore.setOnAction(actionEvent -> stage.setScene(coreAttributesScene));
 
         //Back to Combat Style
         backToCombatStyle.setOnAction(actionEvent -> {
@@ -211,9 +204,7 @@ public class View extends Application {
         finish.setOnAction(actionEvent -> stage.setScene(saveScene));
 
         //Back to Racial Button
-        backToRacial.setOnAction(actionEvent -> {
-            stage.setScene(racialScene);
-        });
+        backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
 
         //JavaFX End Statements
         stage.setScene(openAndNameScene);

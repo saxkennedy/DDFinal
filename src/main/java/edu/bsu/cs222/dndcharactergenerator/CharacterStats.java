@@ -7,7 +7,7 @@ public class CharacterStats {
     private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     public void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
-        populateAttributesWithZero();
+        zeroOutStatsIfEmpty();
         Map<AbilityScore, Integer> abilityScoreIntegerMap = affecter.getAbilityScoreChanges();
         for (Map.Entry<AbilityScore, Integer> entry : abilityScoreIntegerMap.entrySet()) {
             CharacterAttribute specifier = entry.getKey();
@@ -20,9 +20,7 @@ public class CharacterStats {
     }
 
     public void setAttribute(CharacterAttribute specifier, int value) {
-        if (attributeMap.isEmpty()) {
-            populateAttributesWithZero();
-        }
+        zeroOutStatsIfEmpty();
         attributeMap.put(specifier, value);
     }
 
@@ -45,8 +43,10 @@ public class CharacterStats {
         }
     }
 
-    public static CharacterStats makeAttributesCopy(CharacterStats oldStats) throws CloneNotSupportedException {
-        return (CharacterStats) oldStats.clone();
+    private void zeroOutStatsIfEmpty() {
+        if(attributeMap.isEmpty()) {
+            populateAttributesWithZero();
+        }
     }
 
 

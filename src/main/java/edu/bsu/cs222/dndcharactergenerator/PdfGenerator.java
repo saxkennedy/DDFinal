@@ -5,7 +5,6 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +14,7 @@ import java.util.Map;
 public class PdfGenerator {
     private Character character;
     private PDDocument newCharacterSheet; // in memory pdf
+
     private PDAcroForm form; // edits newCharacterSheet's forms
 
     public static final class Builder {
@@ -30,47 +30,41 @@ public class PdfGenerator {
         }
     }
 
-    public PdfGenerator(Builder builder) {
+    private PdfGenerator(Builder builder) {
         this.character = builder.character;
         try {
             getPDDocumentFromTemplate();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        getAcroFormFromTemplate();
-        try {
-            writeCharacterName();
-            writeRace();
+            getAcroFormFromTemplate();
+            CharacterStats stats = character.getCharacterStats();
+            Map<CharacterAttribute, Integer> characterAttributes = stats.getFinalAttributeMap();
+            writeCharacterAttributes(characterAttributes);
+            writeCharacterName(character.getName());
             writeStyle();
-            writeStats();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void writeStats() throws IOException {
-//        Map<AbilityScore, Integer> stats = character.getCharacterStats();
-//        for(Map.Entry<AbilityScore, Integer> entry : stats.entrySet()) {
-//            PDField fieldToSet = form.getField(entry.getKey().pdfGeneratorName);
-//            fieldToSet.setValue(String.valueOf(entry.getValue()));
-//        }
+    private void writeCharacterName(String name) throws IOException {
+        setField("CharacterName", name);
+    }
+
+    private void writeCharacterAttributes(Map<CharacterAttribute, Integer> stats) throws IOException {
+        for(Map.Entry<CharacterAttribute, Integer> entry : stats.entrySet()) {
+            setField(entry.getKey().getPdfGeneratorName(), String.valueOf(entry.getValue()));
+        }
+    }
+
+    private void setField(String key, String value) throws IOException {
+        PDField fieldToWrite = form.getField(key);
+        fieldToWrite.setValue(value);
     }
 
     private void writeStyle() throws IOException {
-        PDTextField featuresAndTraits = (PDTextField) form.getField("Features and Traits");
-        featuresAndTraits.setValue(character.getStyle() + "\n\nSecond Wind:\nYou have a limited well of stamina that you can draw on to protect yourself from harm.  " +
+        String traitToWrite = character.getStyle() + "\n\nSecond Wind:\nYou have a limited well of stamina that you can draw on to protect yourself from harm.  " +
                 "On your turn, you can use a bonus action to regain hit " +
-                "points equal to 1d10+your fighter level (1).");
-    }
-
-    private void writeRace() throws IOException {
-        PDTextField race = (PDTextField) form.getField("Race ");
-        race.setValue(character.getRace().raceName);
-    }
-
-    private void writeCharacterName() throws IOException {
-        PDTextField charName1 = (PDTextField) form.getField("CharacterName");
-        charName1.setValue(character.getName());
+                "points equal to 1d10+your fighter level (1).";
+        setField("Features and Traits", traitToWrite);
     }
 
     private void getPDDocumentFromTemplate() throws IOException {
@@ -88,10 +82,5 @@ public class PdfGenerator {
     public void writeNewCharacterSheet(File file) throws IOException {
         newCharacterSheet.save(file);
         newCharacterSheet.close();
-    }
-
-    private void setFieldValue(CharacterAttribute attribute) throws IOException {
-        PDField fieldToSet = form.getField(attribute.getPdfGeneratorName());
-        fieldToSet.setValue(String.valueOf(character.getCharacterStats().getAttribute(attribute)));
     }
 }

@@ -9,8 +9,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-
 public class Character {
     private String name;
     private String style;
@@ -37,6 +35,16 @@ public class Character {
             characterStats.setAttribute(modifier, modifierCalculation(characterStats.getAttribute(modifier)));
         } else {
             characterStats.setAttribute(attribute, value);
+        }
+    }
+
+    public void setAbilityScoreAffector(AbilityScoreAffecter affector) {
+        if(affector instanceof Race) {
+            Race race = (Race) affector;
+            characterStats.implementAbilityScoreAffector(race, 1);
+        } else if( affector instanceof RacialAttribute) {
+            RacialAttribute racialAttribute = (RacialAttribute) affector;
+            characterStats.implementAbilityScoreAffector(racialAttribute, 1);
         }
     }
 
@@ -68,7 +76,7 @@ public class Character {
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute == attribute) return;
         if (this.racialAttribute != null) {
-            characterStats.implementAbilityScoreAffector(attribute, -1);
+            characterStats.implementAbilityScoreAffector(this.racialAttribute, -1);
         }
         this.racialAttribute = attribute;
         characterStats.implementAbilityScoreAffector(attribute, 1);
@@ -127,7 +135,6 @@ public class Character {
     public VBox subRaceVbox= new VBox();
 
     public void racialSceneOptionSetter (){
-        System.out.println(race);
         subRaceVbox.getChildren().clear();
         subRaceVbox.setAlignment(Pos.CENTER);
         subRaceVbox.setBackground(Background.EMPTY);
@@ -237,19 +244,9 @@ public class Character {
 
 
     public CharacterStats getCharacterStats() {
-        CharacterStats statsToReturn = null;
-        try {
-            statsToReturn = CharacterStats.makeAttributesCopy(characterStats);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return statsToReturn;
+        return characterStats;
     }
 
-    public ArrayList statRoll() {
-        DiceRoller stats = new DiceRoller();
-        return stats.getStats();
-    }
     public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
         for (RacialAttribute attribute : RacialAttribute.values()) {
             if (attribute.attributeName.equals(racialAttribute)) {
