@@ -7,7 +7,7 @@ public enum AbilityScoreModifier implements CharacterAttribute {
     CON_MOD("CONmod", AbilityScore.CON),
     INT_MOD("INTmod", AbilityScore.INT),
     WIS_MOD("WISmod", AbilityScore.WIS),
-    CHA_MOD("CHAmod", AbilityScore.CHA);
+    CHA_MOD("CHamod", AbilityScore.CHA);
 
     String pdfGeneratorName;
     AbilityScore abilityScore;
