@@ -28,14 +28,7 @@ public class Character {
     }
 
     public void setCharacterAttribute(CharacterAttribute attribute, int value) {
-        if (attribute instanceof AbilityScore) {
-            AbilityScore abilityScore = (AbilityScore) attribute;
-            characterStats.setAttribute(abilityScore, value);
-            AbilityScoreModifier modifier = AbilityScore.getAbilityScoreModifier(abilityScore);
-            characterStats.setAttribute(modifier, modifierCalculation(characterStats.getAttribute(modifier)));
-        } else {
-            characterStats.setAttribute(attribute, value);
-        }
+        characterStats.setAttribute(attribute, value);
     }
 
     public void setAbilityScoreAffector(AbilityScoreAffecter affector) {
@@ -84,10 +77,6 @@ public class Character {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    private int modifierCalculation(int modifierValue) {
-        return (int) (Math.floor(((float) modifierValue - 10) / 2));
     }
 
     public String getName() {

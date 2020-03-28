@@ -11,7 +11,8 @@ public class CharacterStats {
         Map<AbilityScore, Integer> abilityScoreIntegerMap = affecter.getAbilityScoreChanges();
         for (Map.Entry<AbilityScore, Integer> entry : abilityScoreIntegerMap.entrySet()) {
             CharacterAttribute specifier = entry.getKey();
-            attributeMap.put(specifier, attributeMap.get(specifier) + (additionOrSubtraction * entry.getValue()));
+            int valueToBeAddedOrSubtracted = additionOrSubtraction * entry.getValue();
+            attributeMap.put(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
         }
     }
 
@@ -21,7 +22,26 @@ public class CharacterStats {
 
     public void setAttribute(CharacterAttribute specifier, int value) {
         zeroOutStatsIfEmpty();
-        attributeMap.put(specifier, value);
+        if (specifier instanceof AbilityScore) {
+            AbilityScore abilityScore = (AbilityScore) specifier;
+            attributeMap.put(abilityScore, value);
+            setAttribute(abilityScore.modifier, value);
+        }
+        if(specifier instanceof AbilityScoreModifier) {
+            int modifierValue = modifierCalculation(value);
+            AbilityScoreModifier modifier = (AbilityScoreModifier) specifier;
+            if(modifier.equals(AbilityScoreModifier.CON_MOD)){
+                updateHpValues(modifierValue);
+            }
+            attributeMap.put(modifier, modifierValue);
+        }
+    }
+
+    private void updateHpValues(int conModValue) {
+        int lvl1Value = conModValue + 10;
+        attributeMap.put(VitalityModifier.MAX_HP, lvl1Value);
+        attributeMap.put(VitalityModifier.CURRENT_HP, lvl1Value);
+        attributeMap.put(VitalityModifier.TOTAL_HP, lvl1Value);
     }
 
     public int getAttribute(CharacterAttribute specifier) {
@@ -49,5 +69,10 @@ public class CharacterStats {
         }
     }
 
-
+    public int modifierCalculation(int mainStatValue) {
+        int minusTen = mainStatValue - 10;
+        float divideInHalf = (float) (minusTen / 2);
+        int floored = (int) Math.floor(divideInHalf);
+        return floored;
+    }
 }
