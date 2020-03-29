@@ -19,13 +19,13 @@ public class CharacterStatsTest {
 
 
     @BeforeEach
-    public void setupConTest() {
+    public void setupConChange() {
         stats.setAttribute(AbilityScore.CON, 20);
     }
 
 
     @Test
-    public void assertModifierSavedCorrectly() {
+    public void assertConModSavedCorrectly() {
         Assertions.assertEquals(5, stats.getAttribute(AbilityScoreModifier.CON_MOD));
     }
 
@@ -33,5 +33,20 @@ public class CharacterStatsTest {
     @Test
     public void assertHpSavedCorrectly() {
         Assertions.assertEquals(15, stats.getAttribute(VitalityModifier.MAX_HP));
+    }
+
+    @BeforeEach
+    public void setUpDexChange() {
+        stats.setAttribute(AbilityScore.DEX, 20);
+    }
+
+    @Test
+    public void assertDexModSavedCorrectly() {
+        Assertions.assertEquals(5, stats.getAttribute(AbilityScoreModifier.DEX_MOD));
+    }
+
+    @Test
+    public void assertACUpdateCorrectly() {
+        Assertions.assertEquals(15, stats.getAttribute(VitalityModifier.ARMOR_CLASS));
     }
 }

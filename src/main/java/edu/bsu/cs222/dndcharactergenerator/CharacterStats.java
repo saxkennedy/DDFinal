@@ -30,11 +30,20 @@ public class CharacterStats {
         if(specifier instanceof AbilityScoreModifier) {
             int modifierValue = modifierCalculation(value);
             AbilityScoreModifier modifier = (AbilityScoreModifier) specifier;
-            if(modifier.equals(AbilityScoreModifier.CON_MOD)){
-                updateHpValues(modifierValue);
-            }
+            runModifierTasks(modifier, modifierValue);
             attributeMap.put(modifier, modifierValue);
         }
+    }
+
+    private void runModifierTasks(AbilityScoreModifier modifier, int modifierValue) {
+        switch(modifier) {
+            case CON_MOD: updateHpValues(modifierValue); break;
+            case DEX_MOD: updateAC(modifierValue); break;
+        }
+    }
+
+    private void updateAC(int modifierValue) {
+        attributeMap.put(VitalityModifier.ARMOR_CLASS, modifierValue + 10);
     }
 
     private void updateHpValues(int conModValue) {

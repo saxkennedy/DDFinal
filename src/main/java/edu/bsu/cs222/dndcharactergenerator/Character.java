@@ -41,10 +41,6 @@ public class Character {
         }
     }
 
-    public void updateArmorClass(int dexToAc) {
-        characterStats.setAttribute(VitalityModifier.ARMOR_CLASS , 10 + dexToAc);
-    }
-
     public Race getRace() {
         return race;
     }
