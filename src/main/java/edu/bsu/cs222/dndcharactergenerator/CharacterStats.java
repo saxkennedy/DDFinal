@@ -23,12 +23,21 @@ public class CharacterStats {
         zeroOutStatsIfEmpty();
         if (specifier instanceof AbilityScore) {
             AbilityScore abilityScore = (AbilityScore) specifier;
-            attributeMap.put(abilityScore, value);
+            if(getAttribute(abilityScore) != 0) {
+                attributeMap.put(abilityScore, getAttribute(abilityScore) + value);
+            } else {
+                attributeMap.put(abilityScore, value);
+            }
             setAttribute(abilityScore.modifier, value);
         }
         if(specifier instanceof AbilityScoreModifier) {
             int modifierValue = modifierCalculation(value);
             AbilityScoreModifier modifier = (AbilityScoreModifier) specifier;
+            if(getAttribute(modifier) != 0) {
+                attributeMap.put(modifier, getAttribute(modifier) + modifierValue);
+            } else {
+                attributeMap.put(modifier, modifierValue);
+            }
             runModifierTasks(modifier, modifierValue);
             attributeMap.put(modifier, modifierValue);
         }
@@ -53,7 +62,8 @@ public class CharacterStats {
     }
 
     public int getAttribute(CharacterAttribute specifier) {
-        return attributeMap.get(specifier);
+        int value = attributeMap.get(specifier);
+        return value;
     }
 
     private void populateAttributesWithZero() {

@@ -1,14 +1,16 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CharacterTest {
 
-    Character player = new Character();
+    Character player;
 
-    @Test
+    @BeforeEach
     public void testSettingName() {
+        player = new Character();
         player.setName("Test Name");
         Assertions.assertEquals("Test Name", player.getName());
     }
@@ -17,8 +19,8 @@ public class CharacterTest {
     public void testSetRaceBeforeStats() {
         player.setRace(Race.HALFORC);
         player.setCharacterAttribute(AbilityScore.STR, 10);
-        player.setCharacterAttribute(AbilityScore.CON, 10);
-        Assertions.assertEquals(12, player.getCharacterAttribute(AbilityScore.STR));
+        int strValue = player.getCharacterAttribute(AbilityScore.STR);
+        Assertions.assertEquals(12, strValue);
     }
 
     @Test
