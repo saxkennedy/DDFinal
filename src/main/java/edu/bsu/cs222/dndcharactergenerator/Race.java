@@ -21,14 +21,14 @@ public enum Race implements AbilityScoreAffecter {
     public final String raceName;
     public final String viewName;
 
-    Race(int str, int dex, int con, int intel, int wis, int cha, String raceName, String viewName) {
+    Race(int strChanges, int dexChanges, int conChanges, int intChanges, int wisChanges, int chaChanges, String raceName, String viewName) {
         attributes = new HashMap<>();
-        attributes.put(AbilityScore.STR, str);
-        attributes.put(AbilityScore.DEX, dex);
-        attributes.put(AbilityScore.CON, con);
-        attributes.put(AbilityScore.INT, intel);
-        attributes.put(AbilityScore.WIS, wis);
-        attributes.put(AbilityScore.CHA, cha);
+        attributes.put(AbilityScore.STR, strChanges);
+        attributes.put(AbilityScore.DEX, dexChanges);
+        attributes.put(AbilityScore.CON, conChanges);
+        attributes.put(AbilityScore.INT, intChanges);
+        attributes.put(AbilityScore.WIS, wisChanges);
+        attributes.put(AbilityScore.CHA, chaChanges);
         this.raceName = raceName;
         this.viewName = viewName;
     }
