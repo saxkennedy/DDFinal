@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CharacterStats {
-    private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
+    public Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();        //RETURN TO PRIVATE
 
     public void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
         zeroOutStatsIfEmpty();

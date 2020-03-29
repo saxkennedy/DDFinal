@@ -69,7 +69,12 @@ public class View extends Application {
             ComboBox<Integer> abilityInQuestion = new ComboBox();
             abilityInQuestion.getItems().addAll(character.statNumbers);
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
-            abilityInQuestion.setOnAction(e -> character.setCharacterAttribute(AbilityScore.getAbilityScoreFromString(abilityName),abilityInQuestion.getValue()));
+            abilityInQuestion.setOnAction(e -> {
+                character.setCharacterAttribute(AbilityScore.getAbilityScoreFromString(abilityName), abilityInQuestion.getValue());
+                System.out.println("Set Character Attribute");
+                System.out.printf("STR: %s",character.getSTR());
+                System.out.println();
+            });
         }
         ComboBox<String> races = new ComboBox<>();
         races.getItems().addAll(character.raceNames);
@@ -81,6 +86,9 @@ public class View extends Application {
             for (Race race : Race.values()) {
                 if (races.getValue().equals(race.viewName)) {
                     character.setRace(race);
+                    System.out.println("Set Race");
+                    System.out.printf("STR: %s",character.getSTR());
+                    System.out.println();
                 }
             }
         });
