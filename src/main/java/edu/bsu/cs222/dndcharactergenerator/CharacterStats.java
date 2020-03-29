@@ -8,8 +8,7 @@ public class CharacterStats {
 
     public void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
         zeroOutStatsIfEmpty();
-        Map<AbilityScore, Integer> abilityScoreIntegerMap = affecter.getAbilityScoreChanges();
-        for (Map.Entry<AbilityScore, Integer> entry : abilityScoreIntegerMap.entrySet()) {
+        for (Map.Entry<AbilityScore, Integer> entry : affecter.getAbilityScoreChanges().entrySet()) {
             CharacterAttribute specifier = entry.getKey();
             int valueToBeAddedOrSubtracted = additionOrSubtraction * entry.getValue();
             attributeMap.put(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);

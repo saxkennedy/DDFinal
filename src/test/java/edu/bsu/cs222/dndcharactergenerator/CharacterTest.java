@@ -14,6 +14,14 @@ public class CharacterTest {
     }
 
     @Test
+    public void testSetRaceBeforeStats() {
+        player.setRace(Race.HALFORC);
+        player.setCharacterAttribute(AbilityScore.STR, 10);
+        player.setCharacterAttribute(AbilityScore.CON, 10);
+        Assertions.assertEquals(12, player.getCharacterAttribute(AbilityScore.STR));
+    }
+
+    @Test
     public void testGetRace() {
         player.setRace(Race.HUMAN);
         Assertions.assertEquals(Race.HUMAN, player.getRace());
