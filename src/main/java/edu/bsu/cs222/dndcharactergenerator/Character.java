@@ -45,10 +45,6 @@ public class Character {
         characterStats.setAttribute(VitalityModifier.ARMOR_CLASS , 10 + dexToAc);
     }
 
-    public void updateMaxHitPoints(int conToHitPoints) {
-        characterStats.setAttribute(VitalityModifier.MAX_HP, 10 + conToHitPoints);
-    }
-
     public Race getRace() {
         return race;
     }
