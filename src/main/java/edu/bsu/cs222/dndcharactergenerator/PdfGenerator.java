@@ -35,8 +35,7 @@ public class PdfGenerator {
         try {
             getPDDocumentFromTemplate();
             getAcroFormFromTemplate();
-            CharacterStats stats = character.getCharacterStats();
-            Map<CharacterAttribute, Integer> characterAttributes = stats.getFinalAttributeMap();
+            Map<CharacterAttribute, Integer> characterAttributes = character.getCharacterAttributes();
             writeCharacterAttributes(characterAttributes);
             writeCharacterName(character.getName());
             writeStyle();

@@ -17,14 +17,14 @@ public class Character {
     private String style;
     private Race race;
     private RacialAttribute racialAttribute;
-    public Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
+    private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     String[] statNames = new String[]{"Strength","Dexterity","Constitution","Intelligence","Wisdom","Charisma"};
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
     String [] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON","Dragonborn: +2 STR, +1 CHA","Dwarf: +2 CON","Elf: +2 DEX","Gnome: +2 INT","Half-Elf: +2 CHA","Halfling: +2 DEX","Human: +1 TO ALL STATS","Tiefling: +2 CHA, +1 INT"};
     String [] styles = new String[]{"Archery","Defense","Dueling","Great Weapon Fighting","Protection","Two-Weapon Fighting",};
     String [] styleTexts = new String[]{"+2 bonus to attack rolls made with ranged weapons","+1 bonus to AC while wearing armor","+2 bonus to damage rolls when holding a single weapon","You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2","When wielding a shield, you may impose a disadvantage on an enemy\n creature's attack roll when it attacks\na target other than you that is both within 5 feet of you and in your sight", "When you engage in two weapon fighting,\n you can add you ability modifier to the damage of the second attack","No style found"};
-    public Map<CharacterAttribute, Integer> getSTR(){      //TESTFUNCTIOIN         ###########################
+    public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
     }
 
@@ -36,7 +36,13 @@ public class Character {
 
     public void setAbilityScore(AbilityScore abilityScore, int value) {
         zeroOutStatsIfEmpty();
-        attributeMap.put(abilityScore, value);
+        if(race != null) {
+            implementAbilityScoreAffector(this.race , -1);
+            attributeMap.put(abilityScore, value);
+            implementAbilityScoreAffector(this.race, 1);
+        } else {
+            attributeMap.put(abilityScore, value);
+        }
         setAbilityScoreModifier(abilityScore, value);
     }
 

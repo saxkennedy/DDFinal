@@ -66,16 +66,15 @@ public class View extends Application {
         coreStatsVbox.setAlignment(Pos.CENTER);
         coreStatsVbox.setSpacing(10);
         coreStatsVbox.setBackground(Background.EMPTY);
-
         for (AbilityScore abilityScore: AbilityScore.values()) {
             Label abilityLabel = new Label(abilityScore.viewName);
             ComboBox<Integer> abilityInQuestion = new ComboBox();
             abilityInQuestion.getItems().addAll(character.statNumbers);
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
             abilityInQuestion.setOnAction(e -> {
-                character.setCharacterAttribute(abilityScore, abilityInQuestion.getValue());
+                character.setAbilityScore(abilityScore, abilityInQuestion.getValue());
                 System.out.println("Set Character Attribute");
-                System.out.printf("STR: %s",character.getSTR());
+                System.out.printf("STR: %s",character.getCharacterAttributes());
                 System.out.println();
             });
         }
@@ -91,7 +90,7 @@ public class View extends Application {
                 if (races.getValue().equals(race.viewName)) {
                     character.setRace(race);
                     System.out.println("Set Race");
-                    System.out.printf("STR: %s",character.getSTR());
+                    System.out.printf("STR: %s",character.getCharacterAttributes());
                     System.out.println();
                 }
             }

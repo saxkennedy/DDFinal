@@ -18,16 +18,16 @@ public class CharacterTest {
     @Test
     public void testSetRaceBeforeStats() {
         player.setRace(Race.HALFORC);
-        player.setCharacterAttribute(AbilityScore.STR, 10);
-        int strValue = player.getCharacterAttribute(AbilityScore.STR);
+        player.setAbilityScore(AbilityScore.STR, 10);
+        int strValue = player.getAttribute(AbilityScore.STR);
         Assertions.assertEquals(12, strValue);
     }
 
     @Test
     public void testSetStatsBeforeRace() {
-        player.setCharacterAttribute(AbilityScore.STR, 10);
+        player.setAbilityScore(AbilityScore.STR, 10);
         player.setRace(Race.HALFORC);
-        int strValue = player.getCharacterAttribute(AbilityScore.STR);
+        int strValue = player.getAttribute(AbilityScore.STR);
         Assertions.assertEquals(12, strValue);
     }
 
@@ -41,15 +41,15 @@ public class CharacterTest {
     public void testRemoveRaceModifier() {
         player.setRace(Race.DRAGONBORN);
         player.setRace(Race.HUMAN);
-        Assertions.assertEquals(1, player.getCharacterAttribute(AbilityScore.STR));
+        Assertions.assertEquals(1, player.getAttribute(AbilityScore.STR));
     }
 
     @Test
     public void testRacialAttributeScoreBonus() {
         player.setRacialAttribute(RacialAttribute.HILLDWARF);
         player.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
-        Assertions.assertEquals(0, player.getCharacterAttribute(AbilityScore.WIS));
-        Assertions.assertEquals(2, player.getCharacterAttribute(AbilityScore.STR));
+        Assertions.assertEquals(0, player.getAttribute(AbilityScore.WIS));
+        Assertions.assertEquals(2, player.getAttribute(AbilityScore.STR));
     }
 
     @Test
