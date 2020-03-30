@@ -1,6 +1,8 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -64,18 +66,20 @@ public class View extends Application {
         coreStatsVbox.setAlignment(Pos.CENTER);
         coreStatsVbox.setSpacing(10);
         coreStatsVbox.setBackground(Background.EMPTY);
-        for (String abilityName: character.statNames) {
-            Label abilityLabel = new Label(abilityName);
+
+        for (AbilityScore abilityScore: AbilityScore.values()) {
+            Label abilityLabel = new Label(abilityScore.viewName);
             ComboBox<Integer> abilityInQuestion = new ComboBox();
             abilityInQuestion.getItems().addAll(character.statNumbers);
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
             abilityInQuestion.setOnAction(e -> {
-                character.setCharacterAttribute(AbilityScore.getAbilityScoreFromString(abilityName), abilityInQuestion.getValue());
+                character.setCharacterAttribute(abilityScore, abilityInQuestion.getValue());
                 System.out.println("Set Character Attribute");
                 System.out.printf("STR: %s",character.getSTR());
                 System.out.println();
             });
         }
+
         ComboBox<String> races = new ComboBox<>();
         races.getItems().addAll(character.raceNames);
         coreInfoVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtons);
@@ -128,26 +132,17 @@ public class View extends Application {
 
         //Button nextToSkillsBackground = new Button("Next (Skills and Background"); For iteration 2
 
-        /*4th (Skills and Background)    //THIS IS FOR ITERATION 2
-        VBox skillBackground = new VBox();
-        Scene skillsBackgroundScene= new Scene(skillBackground, 600,600);
-        Label skillBackgroundLabel=new Label("Choose your skills and Background");
-        Button backToCombatStyle =new Button("Back (Core Attributes)");
-        Button nextToRacial = new Button("Next (To racial");*/
-
-
-        //***5th Scene Racial Options***
+         //***4th Scene Racial Options***
         VBox racialVbox = new VBox();
         racialVbox.setAlignment(Pos.CENTER);
         racialVbox.setSpacing(10);
         racialVbox.setBackground(Background.EMPTY);
         Scene racialScene = new Scene(racialVbox, 550, 850, bgColor);
         Label racialAttributesHeader = new Label("Specific Racial Options");
-        //Button backToSkillsBackground = new Button("Back (to Skills and Background)");  Will be added back in iteration 2.
-        Button backToCombatStyle = new Button("Back (to Core Attributes)");//Will go away iteration 2.
+        Button backToCombatStyle = new Button("Back (to Core Attributes)");
         Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will affect values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
-        Button finish = new Button("Finish");
-        HBox racialButtons = new HBox(backToCombatStyle, finish);
+        Button nextToBackground = new Button("Next (to Backgrounds");
+        HBox racialButtons = new HBox(backToCombatStyle, nextToBackground);
         racialButtons.setAlignment(Pos.BOTTOM_CENTER);
         racialButtons.setSpacing(25);
 
@@ -161,8 +156,79 @@ public class View extends Application {
             stage.setScene(racialScene);
         });
 
+        //***5th Scene Background****
+        VBox backgroundVbox = new VBox();
+        backgroundVbox.setAlignment(Pos.CENTER);
+        backgroundVbox.setSpacing(30);
+        backgroundVbox.setBackground(Background.EMPTY);
+        Scene backgroundScene= new Scene(backgroundVbox, 550,850,bgColor);
+        Label backgroundLabel=new Label("Choose your Background");
+        Button backToRacial =new Button("Back (to Racial Options)");
+        Button nextToFighterProficiency = new Button("Next (To Fighter Proficiencies");
+        ComboBox<String> backgroundComboBox = new ComboBox<>();
+        TextArea descriptionFeatures= new TextArea();
+        descriptionFeatures.setWrapText(true);
+        ScrollPane descriptionFeaturesScrollPane=new ScrollPane();
+        for(CharacterBackground viewName : CharacterBackground.values()){
+            backgroundComboBox.getItems().add(viewName.viewName);
+        }
+        backgroundComboBox.setOnAction(actionEvent ->{
+            descriptionFeatures.clear();
+            descriptionFeaturesScrollPane.setContent(descriptionFeatures);
+            for(CharacterBackground text : CharacterBackground.values()){
+                if (backgroundComboBox.getValue().equals(text.viewName)){
+                    descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
+//SPENCER.  LOOK.  CHANGE BACKGROUND in Character or INTERFACE Here
+                }
+            }
+        });
+        HBox skillsButtons = new HBox(backToRacial,nextToFighterProficiency);
+        skillsButtons.setAlignment(Pos.BOTTOM_CENTER);
+        skillsButtons.setSpacing(25);
+        backgroundVbox.getChildren().addAll(backgroundLabel,backgroundComboBox,descriptionFeaturesScrollPane,skillsButtons);
+        stage.setScene(backgroundScene);
 
-        //***6th Scene Save Options***
+        //***6th Scene Fighter Proficiencies***
+        VBox fighterProficiencyVBox =new VBox();
+        fighterProficiencyVBox.setAlignment(Pos.CENTER);
+        fighterProficiencyVBox.setSpacing(10);
+        fighterProficiencyVBox.setBackground(Background.EMPTY);
+        Scene fighterProficiencyScene = new Scene(fighterProficiencyVBox,550,850,bgColor);
+        Label fighterProficiencyLabel = new Label("Choose your two fighter proficiencies!\nWe have removed those you already get from your Background!");
+        Button backToBackground= new Button("Back (to Background)");
+        Button nextToSave = new Button("Next (to Save Options)");
+        HBox fighterProficiencyButtons=new HBox(backToBackground,nextToSave);
+        fighterProficiencyButtons.setAlignment(Pos.BOTTOM_CENTER);
+        fighterProficiencyButtons.setSpacing(25);
+        final int maxBoxCount=2;
+        final CheckBox[] fighterBoxes = new CheckBox[6];
+        ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+            private int listenedCount = 0;
+
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    listenedCount++;
+                    if (listenedCount == maxBoxCount) {
+                        for (CheckBox selBox : fighterBoxes) {
+                            if (!selBox.isSelected()) {
+                                selBox.setDisable(true);
+                            }
+                        }
+                    }
+                } else {
+                    if (listenedCount == maxBoxCount) {
+                        for (CheckBox selBox : fighterBoxes) {
+                            selBox.setDisable(false);
+                        }
+                    }
+                    listenedCount--;
+                }
+            }
+        };
+        fighterProficiencyVBox.getChildren().addAll(fighterProficiencyLabel,fighterProficiencyButtons);
+        stage.setScene(fighterProficiencyScene);
+
+        //***7th Scene Save Options***
         VBox saveLocationVbox = new VBox();
         saveLocationVbox.setAlignment(Pos.CENTER);
         saveLocationVbox.setSpacing(50);
@@ -172,8 +238,9 @@ public class View extends Application {
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
         Button save = new Button("Select Save Location (Program then closes)");
-        Button backToRacial = new Button("Back (to Racial)");
-        saveLocationVbox.getChildren().addAll(saveLabel, save, backToRacial);
+        Button backToFighterProficiency = new Button("Back (to Skills & Background)");
+        saveLocationVbox.getChildren().addAll(saveLabel, save, backToFighterProficiency);
+
         //Save Button
         save.setOnAction(actionEvent -> {
             File saveFile = new File(saveLocation.showDialog(stage) + "/" + character.getName() + ".pdf");
@@ -208,11 +275,27 @@ public class View extends Application {
             stage.setScene(combatStyleScene);
         });
 
-        //Finish Button
-        finish.setOnAction(actionEvent -> stage.setScene(saveScene));
+        //Next to Background Button
+        nextToBackground.setOnAction(actionEvent ->{
+            stage.setScene(backgroundScene);
+        });
+
+        //Back to Background Button
+        backToBackground.setOnAction(actionEvent ->{
+            stage.setScene(backgroundScene);
+        });
 
         //Back to Racial Button
         backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
+        //Next to Fighter Proficiency
+        nextToFighterProficiency.setOnAction(actionEvent -> stage.setScene(fighterProficiencyScene));
+
+        //Back to Fighter Proficiency
+        backToFighterProficiency.setOnAction(actionEvent ->{stage.setScene(fighterProficiencyScene);
+        });
+
+        //Next to Save Button
+        nextToSave.setOnAction(actionEvent -> stage.setScene(saveScene));
 
         //JavaFX End Statements
         stage.setScene(openAndNameScene);

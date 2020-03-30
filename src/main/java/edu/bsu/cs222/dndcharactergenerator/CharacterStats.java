@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CharacterStats {
+
     public Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();        //RETURN TO PRIVATE
 
     public void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
@@ -24,8 +25,10 @@ public class CharacterStats {
         if (specifier instanceof AbilityScore) {
             AbilityScore abilityScore = (AbilityScore) specifier;
             if(getAttribute(abilityScore) != 0) {
-                attributeMap.put(abilityScore, getAttribute(abilityScore) + value);
-            } else {
+                int temp=attributeMap.get(abilityScore);
+                attributeMap.put(abilityScore, value);
+            }
+            else {
                 attributeMap.put(abilityScore, value);
             }
             setAttribute(abilityScore.modifier, value);
