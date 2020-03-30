@@ -9,6 +9,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Character {
@@ -16,7 +17,7 @@ public class Character {
     private String style;
     private Race race;
     private RacialAttribute racialAttribute;
-    private CharacterStats characterStats = new CharacterStats();
+    public Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     String[] statNames = new String[]{"Strength","Dexterity","Constitution","Intelligence","Wisdom","Charisma"};
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
@@ -24,25 +25,72 @@ public class Character {
     String [] styles = new String[]{"Archery","Defense","Dueling","Great Weapon Fighting","Protection","Two-Weapon Fighting",};
     String [] styleTexts = new String[]{"+2 bonus to attack rolls made with ranged weapons","+1 bonus to AC while wearing armor","+2 bonus to damage rolls when holding a single weapon","You may re-roll the damage die while holding a two-handed weapon if you rolled a 1 or a 2","When wielding a shield, you may impose a disadvantage on an enemy\n creature's attack roll when it attacks\na target other than you that is both within 5 feet of you and in your sight", "When you engage in two weapon fighting,\n you can add you ability modifier to the damage of the second attack","No style found"};
     public Map<CharacterAttribute, Integer> getSTR(){      //TESTFUNCTIOIN         ###########################
-        return characterStats.attributeMap;
+        return attributeMap;
     }
 
-    public int getCharacterAttribute(CharacterAttribute attribute) {
-        return characterStats.getAttribute(attribute);
-    }
-
-    public void setCharacterAttribute(CharacterAttribute attribute, int value) {
-        characterStats.setAttribute(attribute, value);
-    }
-
-    public void setAbilityScoreAffector(AbilityScoreAffecter affector) {
-        if(affector instanceof Race) {
-            Race race = (Race) affector;
-            characterStats.implementAbilityScoreAffector(race, 1);
-        } else if( affector instanceof RacialAttribute) {
-            RacialAttribute racialAttribute = (RacialAttribute) affector;
-            characterStats.implementAbilityScoreAffector(racialAttribute, 1);
+    private void zeroOutStatsIfEmpty() {
+        if(attributeMap.isEmpty()) {
+            populateAttributesWithZero();
         }
+    }
+
+    public void setAbilityScore(AbilityScore abilityScore, int value) {
+        zeroOutStatsIfEmpty();
+        attributeMap.put(abilityScore, value);
+        setAbilityScoreModifier(abilityScore, value);
+    }
+
+    private void setAbilityScoreModifier(AbilityScore abilityScore, int mainAbilityScoreValue) {
+        AbilityScoreModifier modifier = abilityScore.modifier;
+        int modifierValue = modifierCalculation(mainAbilityScoreValue);
+        attributeMap.put(modifier, modifierValue);
+        runModifierTasks(modifier, modifierValue);
+        attributeMap.put(modifier, modifierValue);
+    }
+
+    private void runModifierTasks(AbilityScoreModifier modifier, int modifierValue) {
+        switch(modifier) {
+            case CON_MOD: updateHpValues(modifierValue); break;
+            case DEX_MOD: updateAC(modifierValue); break;
+        }
+    }
+
+    private void updateAC(int modifierValue) {
+        attributeMap.put(VitalityModifier.ARMOR_CLASS, modifierValue + 10);
+    }
+
+    private void updateHpValues(int conModValue) {
+        int lvl1Value = conModValue + 10;
+        attributeMap.put(VitalityModifier.MAX_HP, lvl1Value);
+        attributeMap.put(VitalityModifier.CURRENT_HP, lvl1Value);
+        attributeMap.put(VitalityModifier.TOTAL_HP, lvl1Value);
+    }
+
+    private void populateAttributesWithZero() {
+        for (CharacterAttribute abilityScore : AbilityScore.values()) {
+            attributeMap.put(abilityScore, 0);
+        }
+        for (CharacterAttribute abilityScoreModifier : AbilityScoreModifier.values()) {
+            attributeMap.put(abilityScoreModifier, 0);
+        }
+        for (CharacterAttribute abilityScore : AbilityScoreSavingThrow.values()) {
+            attributeMap.put(abilityScore, 0);
+        }
+        for (CharacterAttribute vitalityModifier : VitalityModifier.values()) {
+            attributeMap.put(vitalityModifier, 0);
+        }
+    }
+
+    public int modifierCalculation(int mainStatValue) {
+        int minusTen = mainStatValue - 10;
+        float divideInHalf = (float) (minusTen / 2);
+        int floored = (int) Math.floor(divideInHalf);
+        return floored;
+    }
+
+    public int getAttribute(CharacterAttribute specifier) {
+        int value = attributeMap.get(specifier);
+        return value;
     }
 
     public Race getRace() {
@@ -52,10 +100,19 @@ public class Character {
     public void setRace(Race race) {
         if (this.race == race) return;
         if (this.race != null) {
-            characterStats.implementAbilityScoreAffector(this.race, -1);
+            implementAbilityScoreAffector(this.race, -1);
         }
         this.race = race;
-        characterStats.implementAbilityScoreAffector(race, 1);
+        implementAbilityScoreAffector(race, 1);
+    }
+
+    private void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
+        zeroOutStatsIfEmpty();
+        for (Map.Entry<AbilityScore, Integer> entry : affecter.getAbilityScoreChanges().entrySet()) {
+            CharacterAttribute specifier = entry.getKey();
+            int valueToBeAddedOrSubtracted = additionOrSubtraction * entry.getValue();
+            attributeMap.put(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
+        }
     }
 
     public RacialAttribute getRacialAttribute() {
@@ -65,10 +122,10 @@ public class Character {
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute == attribute) return;
         if (this.racialAttribute != null) {
-            characterStats.implementAbilityScoreAffector(this.racialAttribute, -1);
+            implementAbilityScoreAffector(this.racialAttribute, -1);
         }
         this.racialAttribute = attribute;
-        characterStats.implementAbilityScoreAffector(attribute, 1);
+        implementAbilityScoreAffector(attribute, 1);
     }
 
     public void setName(String name) {
@@ -227,11 +284,6 @@ public class Character {
         }
     }
 
-
-    public CharacterStats getCharacterStats() {
-        return characterStats;
-    }
-
     public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
         for (RacialAttribute attribute : RacialAttribute.values()) {
             if (attribute.attributeName.equals(racialAttribute)) {
@@ -240,5 +292,4 @@ public class Character {
         }
         return null;
     }
-
 }
