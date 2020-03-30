@@ -128,15 +128,7 @@ public class View extends Application {
 
         //Button nextToSkillsBackground = new Button("Next (Skills and Background"); For iteration 2
 
-        /*4th (Skills and Background)    //THIS IS FOR ITERATION 2
-        VBox skillBackground = new VBox();
-        Scene skillsBackgroundScene= new Scene(skillBackground, 600,600);
-        Label skillBackgroundLabel=new Label("Choose your skills and Background");
-        Button backToCombatStyle =new Button("Back (Core Attributes)");
-        Button nextToRacial = new Button("Next (To racial");*/
-
-
-        //***5th Scene Racial Options***
+         //***4th Scene Racial Options***
         VBox racialVbox = new VBox();
         racialVbox.setAlignment(Pos.CENTER);
         racialVbox.setSpacing(10);
@@ -161,6 +153,12 @@ public class View extends Application {
             stage.setScene(racialScene);
         });
 
+        //5th (Skills and Background)
+        VBox skillBackground = new VBox();
+        Scene skillsBackgroundScene= new Scene(skillBackground, 550,850);
+        Label skillBackgroundLabel=new Label("Choose your skills and Background");
+        Button backToRacial =new Button("Back (Core Attributes)");
+        Button nextToSave = new Button("Next (To racial");
 
         //***6th Scene Save Options***
         VBox saveLocationVbox = new VBox();
@@ -172,7 +170,7 @@ public class View extends Application {
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
         Button save = new Button("Select Save Location (Program then closes)");
-        Button backToRacial = new Button("Back (to Racial)");
+        Button backToSkillsBackground = new Button("Back (to Skills & Background)");
         saveLocationVbox.getChildren().addAll(saveLabel, save, backToRacial);
         //Save Button
         save.setOnAction(actionEvent -> {
@@ -207,12 +205,16 @@ public class View extends Application {
             racialVbox.getChildren().clear();
             stage.setScene(combatStyleScene);
         });
+        backToSkillsBackground.setOnAction(actionEvent ->{
+            stage.setScene(skillsBackgroundScene);
+        });
 
-        //Finish Button
-        finish.setOnAction(actionEvent -> stage.setScene(saveScene));
 
         //Back to Racial Button
         backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
+
+        //Next to Save Button
+        nextToSave.setOnAction(actionEvent -> stage.setScene(saveScene));
 
         //JavaFX End Statements
         stage.setScene(openAndNameScene);
