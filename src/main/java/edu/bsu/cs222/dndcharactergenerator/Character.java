@@ -51,7 +51,6 @@ public class Character {
         int modifierValue = modifierCalculation(mainAbilityScoreValue);
         attributeMap.put(modifier, modifierValue);
         runModifierTasks(modifier, modifierValue);
-        attributeMap.put(modifier, modifierValue);
     }
 
     private void runModifierTasks(AbilityScoreModifier modifier, int modifierValue) {
@@ -115,9 +114,10 @@ public class Character {
     private void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
         zeroOutStatsIfEmpty();
         for (Map.Entry<AbilityScore, Integer> entry : affecter.getAbilityScoreChanges().entrySet()) {
-            CharacterAttribute specifier = entry.getKey();
+            AbilityScore specifier = entry.getKey();
             int valueToBeAddedOrSubtracted = additionOrSubtraction * entry.getValue();
             attributeMap.put(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
+            setAbilityScoreModifier(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
         }
     }
 
