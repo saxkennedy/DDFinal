@@ -337,7 +337,7 @@ public class Character {
         for (Skills skill : Skills.values()){
             CheckBox selbox = new CheckBox(skill.viewName);
             selbox.selectedProperty().addListener(listener0);
-            if (skill.isFighterOption)// && (!skill.equals(background.proficiency1)&&(!skill.equals(background.proficiency2))))
+            if ((skill.isFighterOption) && (!skill.equals(background.proficiency1)&&(!skill.equals(background.proficiency2))))
             {
                 innerProficiencyVbox.getChildren().add(selbox);
             }

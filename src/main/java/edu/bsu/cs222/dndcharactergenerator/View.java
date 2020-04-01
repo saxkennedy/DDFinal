@@ -28,6 +28,7 @@ public class View extends Application {
     public void start(Stage stage) {
         Character character = new Character();
         Color bgColor = Color.NAVAJOWHITE;
+        character.chosenBackground=null;
 
         //***1st Name Scene***
         VBox nameVbox = new VBox();
@@ -176,8 +177,8 @@ public class View extends Application {
                 if (backgroundComboBox.getValue().equals(text.viewName)){
                     descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
                     character.chosenBackground=text;
+                    }
                 }
-            }
         });
         HBox skillsButtons = new HBox(backToRacial,nextToFighterProficiency);
         skillsButtons.setAlignment(Pos.BOTTOM_CENTER);
@@ -203,7 +204,7 @@ public class View extends Application {
         fighterProficiencyButtons.setAlignment(Pos.BOTTOM_CENTER);
         fighterProficiencyButtons.setSpacing(25);
 
-        character.selectFighterProficiency(innerProficiencyVbox,CharacterBackground.SOLDIER);
+
 
         fighterProficiencyVBox.getChildren().addAll(fighterProficiencyLabel,innerProficiencyVbox,fighterProficiencyButtons);
         stage.setScene(fighterProficiencyScene);
@@ -269,16 +270,21 @@ public class View extends Application {
         backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
         //Next to Fighter Proficiency
         nextToFighterProficiency.setOnAction(actionEvent -> {
-//                    System.out.println(character.chosenBackground.proficiency1 + "\n" + character.chosenBackground.proficiency2);
-                    stage.setScene(fighterProficiencyScene);
-                });
+            innerProficiencyVbox.getChildren().clear();
+            character.selectFighterProficiency(innerProficiencyVbox,character.chosenBackground);
+            stage.setScene(fighterProficiencyScene);
+        });
+
         //Back to Fighter Proficiency
         backToFighterProficiency.setOnAction(actionEvent ->{
             stage.setScene(fighterProficiencyScene);
         });
 
         //Next to Save Button
-        nextToSave.setOnAction(actionEvent -> stage.setScene(saveScene));
+        nextToSave.setOnAction(actionEvent ->{
+
+                stage.setScene(saveScene);
+        });
 
         //JavaFX End Statements
         stage.setScene(openAndNameScene);
