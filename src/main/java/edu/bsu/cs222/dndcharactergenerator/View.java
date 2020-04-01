@@ -129,8 +129,6 @@ public class View extends Application {
         });
         combatStyle.getChildren().addAll(combatStyleLabel, combatStyleButtonVbox, styleDescription, combatStyleButtons);
 
-        //Button nextToSkillsBackground = new Button("Next (Skills and Background"); For iteration 2
-
          //***4th Scene Racial Options***
         VBox racialVbox = new VBox();
         racialVbox.setAlignment(Pos.CENTER);
@@ -177,6 +175,7 @@ public class View extends Application {
             for(CharacterBackground text : CharacterBackground.values()){
                 if (backgroundComboBox.getValue().equals(text.viewName)){
                     descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
+                    character.chosenBackground=text;
 //SPENCER.  LOOK.  CHANGE BACKGROUND in Character or INTERFACE Here
                 }
             }
@@ -192,6 +191,10 @@ public class View extends Application {
         fighterProficiencyVBox.setAlignment(Pos.CENTER);
         fighterProficiencyVBox.setSpacing(10);
         fighterProficiencyVBox.setBackground(Background.EMPTY);
+        VBox innerProficiencyVbox = new VBox();
+        innerProficiencyVbox.setAlignment(Pos.CENTER);
+        innerProficiencyVbox.setSpacing(20);
+        innerProficiencyVbox.setBackground(Background.EMPTY);
         Scene fighterProficiencyScene = new Scene(fighterProficiencyVBox,550,850,bgColor);
         Label fighterProficiencyLabel = new Label("Choose your two fighter proficiencies!\nWe have removed those you already get from your Background!");
         Button backToBackground= new Button("Back (to Background)");
@@ -199,9 +202,10 @@ public class View extends Application {
         HBox fighterProficiencyButtons=new HBox(backToBackground,nextToSave);
         fighterProficiencyButtons.setAlignment(Pos.BOTTOM_CENTER);
         fighterProficiencyButtons.setSpacing(25);
+
         final int maxBoxCount=2;
-        final CheckBox[] fighterBoxes = new CheckBox[6];
-        ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+        CheckBox[] fighterBoxes = new CheckBox[Skills.values().length];
+        ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
             private int listenedCount = 0;
 
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -224,7 +228,21 @@ public class View extends Application {
                 }
             }
         };
-        fighterProficiencyVBox.getChildren().addAll(fighterProficiencyLabel,fighterProficiencyButtons);
+        int counter=0;
+        for (Skills skill : Skills.values()){
+                CheckBox selbox = new CheckBox(skill.viewName);
+                selbox.selectedProperty().addListener(listener0);
+                if(skill.isFighterOption&&(!skill.equals(character.chosenBackground.proficiency1))&&(!skill.equals(character.chosenBackground.proficiency2)))
+                        {
+                        innerProficiencyVbox.getChildren().add(selbox);
+                    }
+                fighterBoxes[counter]=selbox;
+                counter++;
+
+
+
+        }
+        fighterProficiencyVBox.getChildren().addAll(fighterProficiencyLabel,innerProficiencyVbox,fighterProficiencyButtons);
         stage.setScene(fighterProficiencyScene);
 
         //***7th Scene Save Options***
@@ -287,10 +305,13 @@ public class View extends Application {
         //Back to Racial Button
         backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
         //Next to Fighter Proficiency
-        nextToFighterProficiency.setOnAction(actionEvent -> stage.setScene(fighterProficiencyScene));
-
+        nextToFighterProficiency.setOnAction(actionEvent -> {
+                    System.out.println(character.chosenBackground.proficiency1 + "\n" + character.chosenBackground.proficiency2);
+                    stage.setScene(fighterProficiencyScene);
+                });
         //Back to Fighter Proficiency
-        backToFighterProficiency.setOnAction(actionEvent ->{stage.setScene(fighterProficiencyScene);
+        backToFighterProficiency.setOnAction(actionEvent ->{
+            stage.setScene(fighterProficiencyScene);
         });
 
         //Next to Save Button

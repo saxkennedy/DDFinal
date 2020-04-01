@@ -3,7 +3,7 @@ package edu.bsu.cs222.dndcharactergenerator;
 import java.util.Map;
 
 public enum CharacterBackground implements CharacterDescriptor{
-    ACOLYTE("Acolyte","Insight","Religion",
+    ACOLYTE("Acolyte",Skills.INSIGHT,Skills.RELIGION,
             "You have spent your life in the service of a temple\n" +
                     "to a specific god or pantheon of gods. You act as an\n" +
                     "intermediary between the realm of the holy and the\n" +
@@ -38,7 +38,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "temple where you have found a new home. While near\n" +
             "your temple, you can call upon the priests for assistance,\n" +
             "provided the assistance you ask for is not"),
-    CHARLATAN("Charlatan","Deception","Sleight of Hand","You have always had a way with people. You know\n" +
+    CHARLATAN("Charlatan",Skills.DECEPTION,Skills.SLEIGHTOFHAND,"You have always had a way with people. You know\n" +
             "what makes them tick, you can tease out the desires of their\n" +
             "hearts after a few minutes of conversation, and with a\n" +
             "few leading questions you can read them like they were\n" +
@@ -60,7 +60,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "papers and personal letters, as long as you have seen an\n" +
             "example of the kind of document or the handwriting you\n" +
             "are trying to copy."),
-    CRIMINAL("Criminal","Deception","Stealth","You are an experienced criminal with a history of\n" +
+    CRIMINAL("Criminal",Skills.DECEPTION,Skills.STEALTH,"You are an experienced criminal with a history of\n" +
             "breaking the law. You have spent a lot of time among\n" +
             "other criminals and still have contacts within the\n" +
             "criminal underworld. You are far closer than m ost people\n" +
@@ -72,7 +72,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "over great distances; specifically, you know the local\n" +
             "messengers, corrupt caravan masters, and seedy sailors\n" +
             "who can deliver messages for you."),
-    ENTERTAINER("Entertainer","Acrobatics","Perfomance","You thrive in front of an audience. You know how to\n" +
+    ENTERTAINER("Entertainer",Skills.ACROBATICS,Skills.PERFORMANCE,"You thrive in front of an audience. You know how to\n" +
             "entrance them, entertain them, and even inspire them.\n" +
             "Your poetics can stir the hearts o f those who hear you,\n" +
             "awakening grief or joy, laughter or anger. Your music\n" +
@@ -87,7 +87,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "performance makes you something of a local figure.\n" +
             "When strangers recognize you in a town where you have\n" +
             "performed, they typically take a liking to you."),
-    FOLKHERO("Folk Hero","Animal Handling","Survival","You come from a humble social rank, but you are\n" +
+    FOLKHERO("Folk Hero",Skills.ANIMALHANDLING,Skills.SURVIVAL,"You come from a humble social rank, but you are\n" +
             "destined for so much more. Already the people of\n" +
             "your home village regard you as their champion, and\n" +
             "your destiny calls you to stand against the tyrants and\n" +
@@ -98,7 +98,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "them. They will shield you from the law or anyone\n" +
             "else searching for you, though they w ill not risk\n" +
             "their lives for you."),
-    GUILDARTISAN("Guild Artisan","Insight","Persuasion","You are a member of an artisan’s guild, skilled in\n" +
+    GUILDARTISAN("Guild Artisan",Skills.INSIGHT,Skills.PERSUASION,"You are a member of an artisan’s guild, skilled in\n" +
             "a particular field and closely associated with other\n" +
             "artisans. You are an established part of the\n" +
             "mercantile world, freed by talent and wealth from the\n" +
@@ -123,7 +123,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "You must pay dues of 5 gp per month to the guild. If\n" +
             "you miss payments, you must make up back dues to\n" +
             "remain in the good graces of the guild."),
-    HERMIT("Hermit","Medicine","Religion","DISCOVERY: You lived in seclusion, either in a sheltered community\n" +
+    HERMIT("Hermit",Skills.MEDICINE,Skills.RELIGION,"DISCOVERY: You lived in seclusion, either in a sheltered community\n" +
             "such as a monastery, or entirely a lone, for a formative\n" +
             "part of your life. In your time apart from the clamor of\n" +
             "society, you found quiet, solitude, and perhaps some of\n" +
@@ -140,7 +140,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "to exile, and hence the reason for your return to society.\n" +
             "Work with your DM to determine the details of your\n" +
             "discovery and its impact on the campaign."),
-    NOBLE("Noble","History","Persuasion","You understand wealth, power, and privilege. You\n" +
+    NOBLE("Noble",Skills.HISTORY,Skills.PERSUASION,"You understand wealth, power, and privilege. You\n" +
             "carry a noble title, and your family owns land, collects\n" +
             "taxes, and wields significant political influence. You\n" +
             "might be a pampered aristocrat unfamiliar with\n" +
@@ -184,7 +184,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "people of high birth treat you as a member of the same\n" +
             "social sphere. You can secure an audience with a local\n" +
             "noble if you need to."),
-    OUTLANDER("Outlander","Athletics","Survival","You grew up in the wilds, far from civilization and the\n" +
+    OUTLANDER("Outlander",Skills.ATHLETICS,Skills.SURVIVAL,"You grew up in the wilds, far from civilization and the\n" +
             "comforts of town and technology. You have witnessed the\n" +
             "migration of herds larger than forests, survived weather\n" +
             "more extreme than any city dweller could comprehend,\n" +
@@ -199,7 +199,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "you can find food and fresh water for yourself and up to\n" +
             "five other people each day, provided that the land offers\n" +
             "berries, small game, water, and so forth."),
-    SAGE("Sage","Arcana","History","You spent years learning the lore of the multiverse. You\n" +
+    SAGE("Sage",Skills.ARCANA,Skills.HISTORY,"You spent years learning the lore of the multiverse. You\n" +
             "scoured manuscripts, studied scrolls, and listened to the\n" +
             "greatest experts on the subjects that interest you. Your\n" +
             "efforts have made you a master in your fields of study.","When you attempt to learn or recall a piece of lore, if you\n" +
@@ -211,7 +211,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "almost inaccessible place, or that it simply cannot be\n" +
             "found. Unearthing the deepest secrets of the multiverse\n" +
             "can require an adventure or even a whole campaign."),
-    SAILOR("Sailor","Athletics","Perception","You sailed on a seagoing vessel for years. In that\n" +
+    SAILOR("Sailor",Skills.ATHLETICS,Skills.PERCEPTION,"You sailed on a seagoing vessel for years. In that\n" +
             "time, you faced down mighty storms, monsters of the\n" +
             "deep, and those who wanted to sink your craft to the\n" +
             "bottomless depths. Your first love is the distant line of\n" +
@@ -237,7 +237,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "you need to go. In return for your free passage, you\n" +
             "and your companions are expected to assist the crew\n" +
             "during the voyage."),
-    SOLDIER("Soldier","Athletics","Perception","War has been your life for as long as you care to\n" +
+    SOLDIER("Soldier",Skills.ATHLETICS,Skills.PERCEPTION,"War has been your life for as long as you care to\n" +
             "remember. You trained as a youth, studied the use of\n" +
             "weapons and armor, learned basic survival techniques,\n" +
             "including how to stay alive on the battlefield. You\n" +
@@ -259,7 +259,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "use. You can also usually gain access to friendly\n" +
             "military encampments and fortresses where your\n" +
             "rank is recognized."),
-    URCHIN("Urchin","Sleight of Hand","Stealth","You grew up on the streets alone, orphaned, and poor.\n" +
+    URCHIN("Urchin",Skills.SLEIGHTOFHAND,Skills.STEALTH,"You grew up on the streets alone, orphaned, and poor.\n" +
             "You had no one to watch over you or to provide for\n" +
             "you, so you learned to provide for yourself. You fought\n" +
             "fiercely over food and kept a constant watch out for other\n" +
@@ -282,13 +282,13 @@ public enum CharacterBackground implements CharacterDescriptor{
 
 
     public final String viewName;
-    public final String proficiency1;
-    public final String proficiency2;
+    public final Skills proficiency1;
+    public final Skills proficiency2;
     public final String description;
     public final String feature;
 
 
-    CharacterBackground(String viewName, String proficiency1, String proficency2,String description, String feature){
+    CharacterBackground(String viewName, Skills proficiency1, Skills proficency2,String description, String feature){
         this.viewName =viewName;
         this.proficiency1 =proficiency1;
         this.proficiency2=proficency2;
