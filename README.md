@@ -1,8 +1,9 @@
 #D&D Character Generator
-![Image](https://media.dnd.wizards.com/styles/second_hubpage_banner/public/images/characters/EN_Classes_Fighter_Header.jpg)
-
 Developers:\
 Joshua Kennedy, Colin Thomas, Spencer Naugler, Joshua Wright
+
+Photo Credits:\
+See bottom of page.
 
 ##About This Program:
 
@@ -12,16 +13,18 @@ without having to go through the hundreds of pages in the books of D&D character
 We also provide a savable pdf that will contain your filled out character sheet for your 
 newly created character!
 
-##Iteration 1:
+##Iteration 2:
 
-This Iteration may require you to change your Gradle JVM to 11 and back to 13 to
-run our application.
+#####Added Features
+- Background selection
+- Skill proficiency selection
+- Filling of associated fields on PDF
 
-This is the first iteration of the Level 1 Fighter D&D Character generator, it
-includes features such as; traversable UI, selectable races, selectable fighting
+This is the second iteration of the Level 1 Fighter D&D Character generator, it
+includes updates to features such as; traversable UI, selectable races, selectable fighting
 styles, selectable subraces, randomized dice rolling, and a pdf generator in which
 you can save your file to any location desired. Provided under "User Stories" is 
-the criteria in which we modeled our first iteration after. These are essential
+the criteria in which we modeled our second iteration after. These are essential
 features to the program and were our top priority when building a working program.
 Under the "Acceptance Test Case" is a unique test designed by us to see if the
 common person can traverse through our program and complete the requested goals.
@@ -40,18 +43,36 @@ This is insight that we will take into consideration when modeling the future it
 - I want to choose my fighting style.
 - I would like to have the option to leave customization blank if I am undecided on something
 - I would like to go back and change something if I change my mind
+
+#####New for Iteration 2: 
+- I want to choose my skills.
+- I want to choose my background.
+- I want to choose the name of my save file name.
+
 #####As a Dnd player, I require a character sheet to be filled out for me
 - I want to choose whether to save this character sheet or not
     - I want to choose the location to save this file
 
-###Acceptance Test Case:
+###Acceptance Test Case:  (Iteration 2)
+1. All items from Iteration 1 test case.
+2. Can you select and reselect skills and backgrounds?  In this case select Entertainer, then Animal Handling and Athletics.
+Then go back and change your background to Urchin, and choose acrobatics and athletics.
+3. Can you rename your save file?  Rename your save file to "Imanawesometester."
+
+###Acceptance Test Peer Thoughts (Iteration 2)
+Acceptance Tester 1:
+
+Acceptance Tester 2:
+
+Acceptance Tester 3:
+
+###Acceptance Test Case:  (Iteration 1)
 1.  Can you create a character named “Trash Boat” that is a “Hill Dwarf” with 16 dexterity 
 and has the “Archery” fighting style. Can you go back and change your character's name 
 to “Dr.Pepper” and change your race to “Dragonborn”
 2.  With a program that is already running and a character already created, can you save
  the generated pdf to the desktop
-
-###Acceptance Test Peer Thoughts
+###Acceptance Test Peer Thoughts (Iteration 1)
 Acceptance Tester 1:
 
 **Erik Arteaga**\
@@ -76,3 +97,14 @@ could select only from the randomly generated values (with a chance to override 
 later), I think it would make more sense to those unfamiliar with 5th edition D&D. I 
 do like that it plugs everything into a printable sheet for the user at the end.
 
+
+#####PHOTOGRAPHIC CONTENT:  All Images below available for unlimited non-commercial (personal use) courtesy of the listed websites.  Should the program ever be used for commercial purposes, these pictures would be discarded.
+DragonBorn Fighter:  kindpng.com\
+Dwarven Fighter: pngfind.com\
+Elven Fighter:  uihere.com\
+Gnommish Fighter: favpng.com\
+Half-Elven Fighter:  clipart.email\
+Halfling Fighter:  kindpng.com\
+Half-Orcish Fighter:  favpng.com\
+Human Fighter:  hiclipart.com\
+Tiefling Fighter:  pngguru.com
