@@ -85,14 +85,14 @@ public class View extends Application {
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(DiceRoller.getStats().toString()));
         //Race Selection
         races.setOnAction(actionEvent -> {
-            for (Race race : Race.values()) {
-                if (races.getValue().equals(race.viewName)) {
-                    character.setRace(race);
-                    System.out.println("Set Race");
-                    System.out.printf("STR: %s",character.getCharacterAttributes());
-                    System.out.println();
+                for (Race race : Race.values()) {
+                    if (races.getValue().equals(race.viewName)) {
+                        character.setRace(race);
+                        System.out.println("Set Race");
+                        System.out.printf("STR: %s",character.getCharacterAttributes());
+                        System.out.println();
+                    }
                 }
-            }
         });
 
         //***3rd Scene Combat Style***
@@ -145,9 +145,9 @@ public class View extends Application {
         nextToRacial.setOnAction(Event -> {
             character.racialSceneOptionSetter();
             ImageView racialImageView = new ImageView();
-            Image racialImage = new Image(character.imageLocationString);
+            Image racialImage = new Image(character.getRace().picture);
             racialImageView.setImage(racialImage);
-            Label racialLabel= new Label(character.racialLabelString);
+            Label racialLabel= new Label(character.getRace().label);
             racialVbox.getChildren().addAll(racialAttributesHeader,racialLabel,racialImageView, character.subRaceVbox, makeSure, racialButtons);
             stage.setScene(racialScene);
         });
@@ -246,7 +246,12 @@ public class View extends Application {
         backToName.setOnAction(actionEvent -> stage.setScene(openAndNameScene));
 
         //Next to Combat Style Button
-        nextToCombatStyle.setOnAction(actionEvent -> stage.setScene(combatStyleScene));
+        nextToCombatStyle.setOnAction(actionEvent ->{
+                if(races.getSelectionModel().isEmpty()) {
+                    character.setRace(Race.ZEROMAN);
+                }
+                stage.setScene(combatStyleScene);
+                });
 
         //Back to Core
         backToCore.setOnAction(actionEvent -> stage.setScene(coreAttributesScene));

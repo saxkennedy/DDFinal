@@ -36,9 +36,6 @@ public class Character {
 
     public Map<Skills,Integer> selectedSkillsMap = new HashMap<>();
     public CharacterBackground chosenBackground;
-    public String getImageLocationString() {
-        return imageLocationString;
-    }
 
     private void zeroOutStatsIfEmpty() {
         if (attributeMap.isEmpty()) {
@@ -218,8 +215,6 @@ public class Character {
         }
         return styleDescription;
     }
-    public String imageLocationString;
-    public String racialLabelString;
     public VBox subRaceVbox= new VBox();
 
     public void racialSceneOptionSetter (){
@@ -227,108 +222,89 @@ public class Character {
         subRaceVbox.setAlignment(Pos.CENTER);
         subRaceVbox.setBackground(Background.EMPTY);
         subRaceVbox.setSpacing(10);
-        switch (race){
-            case DWARF:
-                imageLocationString= "/dwarfImage.png";
-                racialLabelString="You're a hardy dwarf!  Choose your subrace!";
-                ComboBox<String> dwarfSubRace = new ComboBox<>();
-                dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
-                subRaceVbox.getChildren().addAll(dwarfSubRace);
-                dwarfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
-                break;
-            case GNOME:
-                imageLocationString="/gnomeImage.png";
-                racialLabelString="You have chosen to be diminutive, but (hopefully) crafty gnome!  Select a subrace!";
-                ComboBox<String> gnomeSubRace = new ComboBox<>();
-                gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
-                subRaceVbox.getChildren().addAll(gnomeSubRace);
-                gnomeSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
-                break;
-            case HALFELF:
-                imageLocationString="/halfElfImage.png";
-                racialLabelString ="As a Half-Elf, you may choose two skills to increase by one point each.";
-                String [] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
-                HBox halfElfHbox = new HBox();
-                halfElfHbox.setAlignment(Pos.CENTER);
-                final int maxBoxCount = 2;
-                final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
-                ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
-                    private int listenedCount = 0;
+            switch (race) {
+                case DWARF:
+                    ComboBox<String> dwarfSubRace = new ComboBox<>();
+                    dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
+                    subRaceVbox.getChildren().addAll(dwarfSubRace);
+                    dwarfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
+                    break;
+                case GNOME:
+                    ComboBox<String> gnomeSubRace = new ComboBox<>();
+                    gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
+                    subRaceVbox.getChildren().addAll(gnomeSubRace);
+                    gnomeSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
+                    break;
+                case HALFELF:
+                    String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
+                    HBox halfElfHbox = new HBox();
+                    halfElfHbox.setAlignment(Pos.CENTER);
+                    final int maxBoxCount = 2;
+                    final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
+                    ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+                        private int listenedCount = 0;
 
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        if (newValue) {
-                            listenedCount++;
-                            if (listenedCount == maxBoxCount) {
-                                for (CheckBox selBox : halfElfCheckboxes) {
-                                    if (!selBox.isSelected()) {
-                                        selBox.setDisable(true);
+                        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                            if (newValue) {
+                                listenedCount++;
+                                if (listenedCount == maxBoxCount) {
+                                    for (CheckBox selBox : halfElfCheckboxes) {
+                                        if (!selBox.isSelected()) {
+                                            selBox.setDisable(true);
+                                        }
                                     }
                                 }
-                            }
-                        } else {
-                            if (listenedCount == maxBoxCount) {
-                                for (CheckBox selBox : halfElfCheckboxes) {
-                                    selBox.setDisable(false);
+                            } else {
+                                if (listenedCount == maxBoxCount) {
+                                    for (CheckBox selBox : halfElfCheckboxes) {
+                                        selBox.setDisable(false);
+                                    }
                                 }
+                                listenedCount--;
                             }
-                            listenedCount--;
                         }
+                    };
+                    for (int i = 0; i < statsForBoxes.length; i++) {
+                        CheckBox selBox = new CheckBox(statsForBoxes[i]);
+                        selBox.selectedProperty().addListener(listener);
+                        halfElfHbox.getChildren().add(selBox);
+                        halfElfCheckboxes[i] = selBox;
                     }
-                };
-                for (int i = 0; i < statsForBoxes.length; i++) {
-                    CheckBox selBox = new CheckBox(statsForBoxes[i]);
-                    selBox.selectedProperty().addListener(listener);
-                    halfElfHbox.getChildren().add(selBox);
-                    halfElfCheckboxes[i] = selBox;
-                }
-                subRaceVbox.getChildren().addAll(halfElfHbox);
-                break;
-            case HALFORC:
-                imageLocationString="/halfOrcImage.png";
-                racialLabelString="You're a mighty half-orc, you smash good! \nAlso you don't need to wrack that surely massive brain to select further details!";
-                break;
-            case DRAGONBORN:
-                imageLocationString="/dragonbornImage.png";
-                racialLabelString="You're a Dragonborn, select your breath weapon!";
-                ComboBox<String> breathWeaponSelection = new ComboBox<>();
-                breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
-                        "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
-                subRaceVbox.getChildren().addAll(breathWeaponSelection);
-                breathWeaponSelection.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue())));
-                break;
-            case ELF:
-                imageLocationString="/elfImage.png";
-                racialLabelString="Choose your variant of the 'finer' folk";
-                ComboBox<String> elfSubRace = new ComboBox<>();
-                elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
-                subRaceVbox.getChildren().addAll(elfSubRace);
-                break;
-            case HUMAN:
-                imageLocationString="/humanImage.png";
-                racialLabelString="You are a human.  Congratulations.";
-                break;
-            case TIEFLING:
-                imageLocationString="/tieflingImage.png";
-                racialLabelString ="You are a tiefling; try not to burn yourself or others!";
-                break;
-            case HALFLING:
-                imageLocationString="/halflingImage.png";
-                racialLabelString="You are a surprisingly sturdy and resilient race; a halfling!";
-                ComboBox<String> halflingSubRace = new ComboBox<>();
-                halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
-                subRaceVbox.getChildren().addAll(halflingSubRace);
-                halflingSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
-                break;
+                    subRaceVbox.getChildren().addAll(halfElfHbox);
+                    break;
+                case HALFORC:
+                    break;
+                case DRAGONBORN:
+                    ComboBox<String> breathWeaponSelection = new ComboBox<>();
+                    breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
+                            "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
+                    subRaceVbox.getChildren().addAll(breathWeaponSelection);
+                    breathWeaponSelection.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue())));
+                    break;
+                case ELF:
+                    ComboBox<String> elfSubRace = new ComboBox<>();
+                    elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
+                    subRaceVbox.getChildren().addAll(elfSubRace);
+                    break;
+                case HUMAN:
+                    break;
+                case TIEFLING:
+                    break;
+                case HALFLING:
+                    ComboBox<String> halflingSubRace = new ComboBox<>();
+                    halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
+                    subRaceVbox.getChildren().addAll(halflingSubRace);
+                    halflingSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
+                    break;
             /*case ZEROMAN:
                 imageLocationString=null;
                 racialLabelString="NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!";
                 break;*/
-            default:
-                imageLocationString=null;
-                racialLabelString="NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!";
-                break;
+                case ZEROMAN:
+                    break;
+            }
         }
-    }
+
 
     public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background){
         System.out.println(background.proficiency1);
