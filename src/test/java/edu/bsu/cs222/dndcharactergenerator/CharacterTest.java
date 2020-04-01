@@ -3,104 +3,119 @@ package edu.bsu.cs222.dndcharactergenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+
+import java.lang.ref.SoftReference;
 
 public class CharacterTest {
-    private Character player;
+    Character character = new Character();
 
-    @BeforeEach
-    public void testSettingName() {
-        player = new Character();
-        player.setName("Test Name");
-        Assertions.assertEquals("Test Name", player.getName());
-    }
-
-    @ParameterizedTest
-    @CsvSource({"20,5", "10,0"})
-    public void testModifierCalculation(int input, int expected) {
-        Assertions.assertEquals(expected, player.modifierCalculation(input));
+    @Test
+    public void testSetAbilityScore(){
+        character.setAbilityScore(AbilityScore.STR,10);
+        int expected  = 10;
+        int actual = character.getAttribute(AbilityScore.STR);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    public void testSetRaceBeforeStats() {
-        player.setRace(Race.HALFORC);
-        player.setAbilityScore(AbilityScore.STR, 10);
-        int strValue = player.getAttribute(AbilityScore.STR);
-        Assertions.assertEquals(12, strValue);
+    public void testSetAbilityScoreThenSetRace(){
+        character.setAbilityScore(AbilityScore.STR,10);
+        character.setRace(Race.DRAGONBORN);
+        int expected = 12;
+        int actual = character.getAttribute(AbilityScore.STR);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    public void testSetStatsBeforeRace() {
-        player.setAbilityScore(AbilityScore.STR, 10);
-        player.setRace(Race.HALFORC);
-        int strValue = player.getAttribute(AbilityScore.STR);
-        Assertions.assertEquals(12, strValue);
+    public void testSetRaceThenSetAbilityScore(){
+        character.setRace(Race.DRAGONBORN);
+        character.setAbilityScore(AbilityScore.STR,10);
+        int expected = 12;
+        int actual = character.getAttribute(AbilityScore.STR);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    public void testGetRace() {
-        player.setRace(Race.HUMAN);
-        Assertions.assertEquals(Race.HUMAN, player.getRace());
+    public void testSetAbilityScoreModifier(){
+        character.setAbilityScore(AbilityScore.STR,20);
+        int expected = 5;
+        int actual = character.getAttribute(AbilityScore.STR.modifier);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    public void testRemoveRaceModifier() {
-        player.setRace(Race.DRAGONBORN);
-        player.setRace(Race.HUMAN);
-        Assertions.assertEquals(1, player.getAttribute(AbilityScore.STR));
+    public void testSetRacialAttribute(){
+        character.setRace(Race.HALFELF);
+        character.setRacialAttribute(RacialAttribute.HIGHELF);
+        int expected = 1;
+        int actual = character.getAttribute(AbilityScore.INT);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    public void testRacialAttributeScoreBonus() {
-        player.setRacialAttribute(RacialAttribute.HILLDWARF);
-        player.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
-        Assertions.assertEquals(0, player.getAttribute(AbilityScore.WIS));
-        Assertions.assertEquals(2, player.getAttribute(AbilityScore.STR));
+    public void testCheckBoxFlipper(){
+        character.checkCounter = 0;
+        character.checkBoxFlipper(Skills.ACROBATICS);
+        Assertions.assertEquals(Skills.ACROBATICS,character.fighterSkill1);
     }
 
     @Test
-    public void testSetsFightingStyle() {
-        player.setStyle("Archery" + ":\n" + "+2 bonus to attack rolls made with ranged weapons");
-        Assertions.assertEquals("Archery" + ":\n" + "+2 bonus to attack rolls made with ranged weapons", player.getStyle());
-    }
+    public void testsetProficiencySkillsMap(){
+        character.backgroundSkill1=Skills.ACROBATICS;
+        character.backgroundSkill2=Skills.HISTORY;
+        character.fighterSkill1=Skills.ATHLETICS;
+        character.fighterSkill2=Skills.ANIMALHANDLING;
 
-    @BeforeEach
-    public void setupConChange() {
-        player = new Character();
-        player.setName("Test Name");
-        player.setAbilityScore(AbilityScore.CON, 20);
-        player.setAbilityScore(AbilityScore.DEX, 20);
-        Assertions.assertEquals(20, player.getAttribute(AbilityScore.CON));
-    }
+        character.setProficiencySkillsMap();
 
-    @Test
-    public void assertConModSavedCorrectly() {
-        Assertions.assertEquals(5, player.getAttribute(AbilityScoreModifier.CON_MOD));
+        for(Skills s : character.selectedSkillsMap.keySet()){
+            int actual = character.selectedSkillsMap.get(s);
+            Assertions.assertEquals(2,actual);
+        }
     }
 
     @Test
-    public void assertHpSavedCorrectly() {
-        Assertions.assertEquals(15, player.getAttribute(VitalityModifier.MAX_HP));
-    }
-
-    @BeforeEach
-    public void setUpDexChange() {
-        player = new Character();
-        player.setName("Test Name");
-        Assertions.assertEquals("Test Name", player.getName());
-        player.setAbilityScore(AbilityScore.DEX, 20);
-        Assertions.assertEquals(20, player.getAttribute(AbilityScore.DEX));
+    public void testGetRace(){
+        character.setRace(Race.HALFELF);
+        Race expected = Race.HALFELF;
+        Race actual = character.getRace();
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    public void assertDexModSavedCorrectly() {
-        Assertions.assertEquals(5, player.getAttribute(AbilityScoreModifier.DEX_MOD));
+    public void testGetAttribute(){
+        character.setAbilityScore(AbilityScore.STR,100);
+        int expected = 100;
+        int actual = character.getAttribute(AbilityScore.STR);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
-    public void assertACUpdateCorrectly() {
-        Assertions.assertEquals(15, player.getAttribute(VitalityModifier.ARMOR_CLASS));
+    public void testSetAndGetName(){
+        character.setName("Pat Metheny");
+        String expected = ("Pat Metheny");
+        String actual  = character.getName();
+        Assertions.assertEquals(expected,actual);
     }
+
+    @Test
+    public void testSetAndGetStyle(){
+        character.setStyle("Defense");
+        String expected = "Defense";
+        String actual = character.getStyle();
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testGetStyleDescription(){
+        character.setStyle("Archery");
+        String expected = "+2 bonus to attack rolls made with ranged weapons";
+        String actual = character.getStyleDescription("Archery");
+        Assertions.assertEquals(expected,actual);
+    }
+
+
+
+
 
 }

@@ -123,7 +123,7 @@ public class Character {
         }
     }
 
-    public int modifierCalculation(int mainStatValue) {
+    private int modifierCalculation(int mainStatValue) {
         int minusTen = mainStatValue - 10;
         float divideInHalf = (float) (minusTen / 2);
         int floored = (int) Math.floor(divideInHalf);
@@ -158,9 +158,9 @@ public class Character {
         }
     }
 
-    public RacialAttribute getRacialAttribute() {
+    /*public RacialAttribute getRacialAttribute() {                     #####################################################################################################################################
         return racialAttribute;
-    }
+    }*/
 
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute == attribute) return;

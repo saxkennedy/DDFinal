@@ -6,6 +6,7 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +20,9 @@ public class PdfGeneratorTest {
     @Disabled
     @BeforeEach
     public void setup() {
-        character.setName("Hellen");
-        character.setRace(Race.DWARF);
-        character.setRacialAttribute(RacialAttribute.MOUNTAINDWARF);
+        character.setName("Lieutenant Data");
+        character.setRace(Race.ELF);
+        character.setRacialAttribute(RacialAttribute.HIGHELF);
         character.setStyle("foo-bar");
 
         PdfGenerator generator = new PdfGenerator.Builder()
@@ -38,5 +39,12 @@ public class PdfGeneratorTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testWriteCharacterName(){
+        String expected = "Lieutenant Data";
+        System.out.println(testForm.getField("CharacterName"));
+        Assertions.assertEquals(expected,testForm.getField("CharacterName"));
     }
 }
