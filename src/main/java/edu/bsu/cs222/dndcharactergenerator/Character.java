@@ -22,6 +22,11 @@ public class Character {
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
     String[] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON", "Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT"};
     String[] styles = new String[]{"Archery", "Defense", "Dueling", "Great Weapon Fighting", "Protection", "Two-Weapon Fighting",};
+    Skills backgroundSkill1;
+    Skills backgroundSkill2;
+    Skills fighterSkill1;
+    Skills fighterSkill2;
+    int checkCounter=0;
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
@@ -31,7 +36,6 @@ public class Character {
 
     public Map<Skills,Integer> selectedSkillsMap = new HashMap<>();
     public CharacterBackground chosenBackground;
-
     public String getImageLocationString() {
         return imageLocationString;
     }
@@ -72,10 +76,21 @@ public class Character {
                 break;
         }
     }
-
-    public void setSelectedSkillsBackground(){
-        selectedSkillsMap.put(chosenBackground.proficiency1,2);
-        selectedSkillsMap.put(chosenBackground.proficiency2,2);
+    public void checkBoxFlipper(Skills skill){
+        if (checkCounter==0 || (checkCounter>1 && checkCounter % 2 == 0)){
+            fighterSkill1=skill;
+        }
+        else{
+            fighterSkill2=skill;
+        }
+        checkCounter++;
+    }
+    public void setProficiencySkillsMap(){
+        selectedSkillsMap.clear();
+        selectedSkillsMap.put(backgroundSkill1,2);
+        selectedSkillsMap.put(backgroundSkill2,2);
+        selectedSkillsMap.put(fighterSkill1,2);
+        selectedSkillsMap.put(fighterSkill2,2);
     }
     private void setSkills(AbilityScoreModifier modifier,int modifierValue) {
         for(Skills skill : Skills.values()){
@@ -343,6 +358,7 @@ public class Character {
             }
         };
         int counter=0;
+
         for (Skills skill : Skills.values()){
             CheckBox selbox = new CheckBox(skill.viewName);
             selbox.selectedProperty().addListener(listener0);
@@ -350,8 +366,12 @@ public class Character {
             {
                 innerProficiencyVbox.getChildren().add(selbox);
                 selbox.setOnAction(actionEvent ->{
-                    selectedSkillsMap.put(skill,2);
+                    if(selbox.isSelected()){
+                    checkBoxFlipper(skill);
+                }
+                    setProficiencySkillsMap();
                 });
+
             }
             fighterBoxes[counter]=selbox;
             counter++;

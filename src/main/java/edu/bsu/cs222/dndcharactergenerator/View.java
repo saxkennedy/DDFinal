@@ -1,8 +1,6 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -177,7 +175,9 @@ public class View extends Application {
                 if (backgroundComboBox.getValue().equals(text.viewName)){
                     descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
                     character.chosenBackground=text;
-                    character.setSelectedSkillsBackground();
+                    character.backgroundSkill1=text.proficiency1;
+                    character.backgroundSkill2=text.proficiency2;
+                    character.setProficiencySkillsMap();
                     }
                 }
         });
