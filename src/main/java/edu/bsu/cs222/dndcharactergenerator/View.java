@@ -177,6 +177,7 @@ public class View extends Application {
                 if (backgroundComboBox.getValue().equals(text.viewName)){
                     descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
                     character.chosenBackground=text;
+                    character.setSelectedSkillsBackground();
                     }
                 }
         });
@@ -282,7 +283,7 @@ public class View extends Application {
 
         //Next to Save Button
         nextToSave.setOnAction(actionEvent ->{
-
+                System.out.println(character.selectedSkillsMap);
                 stage.setScene(saveScene);
         });
 

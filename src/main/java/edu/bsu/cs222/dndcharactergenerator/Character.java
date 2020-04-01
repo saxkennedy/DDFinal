@@ -20,15 +20,16 @@ public class Character {
     private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
-    String [] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON","Dragonborn: +2 STR, +1 CHA","Dwarf: +2 CON","Elf: +2 DEX","Gnome: +2 INT","Half-Elf: +2 CHA","Halfling: +2 DEX","Human: +1 TO ALL STATS","Tiefling: +2 CHA, +1 INT"};
-    String [] styles = new String[]{"Archery","Defense","Dueling","Great Weapon Fighting","Protection","Two-Weapon Fighting",};
+    String[] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON", "Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT"};
+    String[] styles = new String[]{"Archery", "Defense", "Dueling", "Great Weapon Fighting", "Protection", "Two-Weapon Fighting",};
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
     }
-    public Map<Skills,Integer> skillMap = new HashMap<>();
 
+    public Map<Skills, Integer> skillMap = new HashMap<>();
 
+    public Map<Skills,Integer> selectedSkillsMap = new HashMap<>();
     public CharacterBackground chosenBackground;
 
     public String getImageLocationString() {
@@ -36,15 +37,15 @@ public class Character {
     }
 
     private void zeroOutStatsIfEmpty() {
-        if(attributeMap.isEmpty()) {
+        if (attributeMap.isEmpty()) {
             populateAttributesWithZero();
         }
     }
 
     public void setAbilityScore(AbilityScore abilityScore, int value) {
         zeroOutStatsIfEmpty();
-        if(race != null) {
-            implementAbilityScoreAffector(this.race , -1);
+        if (race != null) {
+            implementAbilityScoreAffector(this.race, -1);
             attributeMap.put(abilityScore, value);
             implementAbilityScoreAffector(this.race, 1);
         } else {
@@ -61,13 +62,21 @@ public class Character {
     }
 
     private void runModifierTasks(AbilityScoreModifier modifier, int modifierValue) {
-        setSkills(modifier,modifierValue);
-        switch(modifier) {
-            case CON_MOD: updateHpValues(modifierValue); break;
-            case DEX_MOD: updateAC(modifierValue); break;
+        setSkills(modifier, modifierValue);
+        switch (modifier) {
+            case CON_MOD:
+                updateHpValues(modifierValue);
+                break;
+            case DEX_MOD:
+                updateAC(modifierValue);
+                break;
         }
     }
 
+    public void setSelectedSkillsBackground(){
+        selectedSkillsMap.put(chosenBackground.proficiency1,2);
+        selectedSkillsMap.put(chosenBackground.proficiency2,2);
+    }
     private void setSkills(AbilityScoreModifier modifier,int modifierValue) {
         for(Skills skill : Skills.values()){
             if (skill.abilityScoreModifier.equals(modifier)){
@@ -340,6 +349,9 @@ public class Character {
             if ((skill.isFighterOption) && (!skill.equals(background.proficiency1)&&(!skill.equals(background.proficiency2))))
             {
                 innerProficiencyVbox.getChildren().add(selbox);
+                selbox.setOnAction(actionEvent ->{
+                    selectedSkillsMap.put(skill,2);
+                });
             }
             fighterBoxes[counter]=selbox;
             counter++;
