@@ -22,10 +22,13 @@ public class Character {
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
     String [] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON","Dragonborn: +2 STR, +1 CHA","Dwarf: +2 CON","Elf: +2 DEX","Gnome: +2 INT","Half-Elf: +2 CHA","Halfling: +2 DEX","Human: +1 TO ALL STATS","Tiefling: +2 CHA, +1 INT"};
     String [] styles = new String[]{"Archery","Defense","Dueling","Great Weapon Fighting","Protection","Two-Weapon Fighting",};
+
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
     }
     public Map<Skills,Integer> skillMap = new HashMap<>();
+
+
     public CharacterBackground chosenBackground;
 
     public String getImageLocationString() {
@@ -300,6 +303,46 @@ public class Character {
                 imageLocationString=null;
                 racialLabelString="NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!";
                 break;
+        }
+    }
+
+    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background){
+        System.out.println(background.proficiency1);
+        final int maxBoxCount=2;
+        CheckBox[] fighterBoxes = new CheckBox[Skills.values().length];
+        ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
+            private int listenedCount = 0;
+
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    listenedCount++;
+                    if (listenedCount == maxBoxCount) {
+                        for (CheckBox selBox : fighterBoxes) {
+                            if (!selBox.isSelected()) {
+                                selBox.setDisable(true);
+                            }
+                        }
+                    }
+                } else {
+                    if (listenedCount == maxBoxCount) {
+                        for (CheckBox selBox : fighterBoxes) {
+                            selBox.setDisable(false);
+                        }
+                    }
+                    listenedCount--;
+                }
+            }
+        };
+        int counter=0;
+        for (Skills skill : Skills.values()){
+            CheckBox selbox = new CheckBox(skill.viewName);
+            selbox.selectedProperty().addListener(listener0);
+            if (skill.isFighterOption)// && (!skill.equals(background.proficiency1)&&(!skill.equals(background.proficiency2))))
+            {
+                innerProficiencyVbox.getChildren().add(selbox);
+            }
+            fighterBoxes[counter]=selbox;
+            counter++;
         }
     }
 

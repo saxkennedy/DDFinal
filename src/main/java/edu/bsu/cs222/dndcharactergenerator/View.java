@@ -172,11 +172,10 @@ public class View extends Application {
         backgroundComboBox.setOnAction(actionEvent ->{
             descriptionFeatures.clear();
             descriptionFeaturesScrollPane.setContent(descriptionFeatures);
-            for(CharacterBackground text : CharacterBackground.values()){
+            for( CharacterBackground text : CharacterBackground.values()) {
                 if (backgroundComboBox.getValue().equals(text.viewName)){
                     descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
                     character.chosenBackground=text;
-//SPENCER.  LOOK.  CHANGE BACKGROUND in Character or INTERFACE Here
                 }
             }
         });
@@ -195,6 +194,7 @@ public class View extends Application {
         innerProficiencyVbox.setAlignment(Pos.CENTER);
         innerProficiencyVbox.setSpacing(20);
         innerProficiencyVbox.setBackground(Background.EMPTY);
+
         Scene fighterProficiencyScene = new Scene(fighterProficiencyVBox,550,850,bgColor);
         Label fighterProficiencyLabel = new Label("Choose your two fighter proficiencies!\nWe have removed those you already get from your Background!");
         Button backToBackground= new Button("Back (to Background)");
@@ -203,45 +203,8 @@ public class View extends Application {
         fighterProficiencyButtons.setAlignment(Pos.BOTTOM_CENTER);
         fighterProficiencyButtons.setSpacing(25);
 
-        final int maxBoxCount=2;
-        CheckBox[] fighterBoxes = new CheckBox[Skills.values().length];
-        ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
-            private int listenedCount = 0;
+        character.selectFighterProficiency(innerProficiencyVbox,CharacterBackground.SOLDIER);
 
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    listenedCount++;
-                    if (listenedCount == maxBoxCount) {
-                        for (CheckBox selBox : fighterBoxes) {
-                            if (!selBox.isSelected()) {
-                                selBox.setDisable(true);
-                            }
-                        }
-                    }
-                } else {
-                    if (listenedCount == maxBoxCount) {
-                        for (CheckBox selBox : fighterBoxes) {
-                            selBox.setDisable(false);
-                        }
-                    }
-                    listenedCount--;
-                }
-            }
-        };
-        int counter=0;
-        for (Skills skill : Skills.values()){
-                CheckBox selbox = new CheckBox(skill.viewName);
-                selbox.selectedProperty().addListener(listener0);
-                if(skill.isFighterOption&&(!skill.equals(character.chosenBackground.proficiency1))&&(!skill.equals(character.chosenBackground.proficiency2)))
-                        {
-                        innerProficiencyVbox.getChildren().add(selbox);
-                    }
-                fighterBoxes[counter]=selbox;
-                counter++;
-
-
-
-        }
         fighterProficiencyVBox.getChildren().addAll(fighterProficiencyLabel,innerProficiencyVbox,fighterProficiencyButtons);
         stage.setScene(fighterProficiencyScene);
 
@@ -306,7 +269,7 @@ public class View extends Application {
         backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
         //Next to Fighter Proficiency
         nextToFighterProficiency.setOnAction(actionEvent -> {
-                    System.out.println(character.chosenBackground.proficiency1 + "\n" + character.chosenBackground.proficiency2);
+//                    System.out.println(character.chosenBackground.proficiency1 + "\n" + character.chosenBackground.proficiency2);
                     stage.setScene(fighterProficiencyScene);
                 });
         //Back to Fighter Proficiency
