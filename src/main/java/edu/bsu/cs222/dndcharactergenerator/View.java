@@ -70,9 +70,7 @@ public class View extends Application {
             ComboBox<Integer> abilityInQuestion = new ComboBox();
             abilityInQuestion.getItems().addAll(character.statNumbers);
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
-            abilityInQuestion.setOnAction(e -> {
-                character.setAbilityScore(abilityScore, abilityInQuestion.getValue());
-            });
+            abilityInQuestion.setOnAction(e -> character.setAbilityScore(abilityScore, abilityInQuestion.getValue()));
         }
 
         ComboBox<String> races = new ComboBox<>();
@@ -257,14 +255,10 @@ public class View extends Application {
         });
 
         //Next to Background Button
-        nextToBackground.setOnAction(actionEvent ->{
-            stage.setScene(backgroundScene);
-        });
+        nextToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
 
         //Back to Background Button
-        backToBackground.setOnAction(actionEvent ->{
-            stage.setScene(backgroundScene);
-        });
+        backToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
 
         //Back to Racial Button
         backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
@@ -276,14 +270,10 @@ public class View extends Application {
         });
 
         //Back to Fighter Proficiency
-        backToFighterProficiency.setOnAction(actionEvent ->{
-            stage.setScene(fighterProficiencyScene);
-        });
+        backToFighterProficiency.setOnAction(actionEvent -> stage.setScene(fighterProficiencyScene));
 
         //Next to Save Button
-        nextToSave.setOnAction(actionEvent ->{
-                stage.setScene(saveScene);
-        });
+        nextToSave.setOnAction(actionEvent -> stage.setScene(saveScene));
 
         //JavaFX End Statements
         stage.setScene(openAndNameScene);

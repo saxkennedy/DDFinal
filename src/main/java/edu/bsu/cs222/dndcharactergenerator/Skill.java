@@ -27,14 +27,11 @@ public enum Skill {
     public final String pdfStringName;
     public final String checkBoxIdentifier;
 
-    Skill(boolean isFighterOption, String viewName, AbilityScoreModifier abilityScoreModifier, String pdfStringName, String checkBoxIdentifier){
-        this.abilityScoreModifier =abilityScoreModifier;
-        this.viewName=viewName;
-        this.isFighterOption=isFighterOption;
+    Skill(boolean isFighterOption, String viewName, AbilityScoreModifier abilityScoreModifier, String pdfStringName, String checkBoxIdentifier) {
+        this.abilityScoreModifier = abilityScoreModifier;
+        this.viewName = viewName;
+        this.isFighterOption = isFighterOption;
         this.pdfStringName = pdfStringName;
-        this.checkBoxIdentifier =checkBoxIdentifier;
+        this.checkBoxIdentifier = checkBoxIdentifier;
     }
-    private void putModifier(){
-    }
-
 }

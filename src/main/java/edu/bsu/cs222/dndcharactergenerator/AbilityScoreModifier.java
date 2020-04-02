@@ -17,19 +17,6 @@ public enum AbilityScoreModifier implements CharacterAttribute {
         this.abilityScore = abilityScore;
     }
 
-    public static AbilityScore getAbilityScore(AbilityScoreModifier modifier) {
-        AbilityScore newAbilityScore = null;
-        switch(modifier) {
-            case STR_MOD: newAbilityScore = AbilityScore.STR;
-            case DEX_MOD: newAbilityScore = AbilityScore.DEX;
-            case CON_MOD: newAbilityScore = AbilityScore.CON;
-            case INT_MOD: newAbilityScore = AbilityScore.INT;
-            case WIS_MOD: newAbilityScore = AbilityScore.WIS;
-            case CHA_MOD: newAbilityScore = AbilityScore.CHA;
-        }
-        return newAbilityScore;
-    }
-
     @Override
     public String getPdfGeneratorName() {
         return this.pdfGeneratorName;

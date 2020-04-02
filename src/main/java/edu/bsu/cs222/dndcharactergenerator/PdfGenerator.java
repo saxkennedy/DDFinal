@@ -1,6 +1,5 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
@@ -73,7 +72,7 @@ public class PdfGenerator {
     }
     private void writeSkills() throws IOException{
         for(Skill skill: Skill.values()){
-            if(character.selectedSkillsMap.containsKey(skill)==true){
+            if(character.selectedSkillsMap.containsKey(skill)){
                 setField(skill.pdfStringName,String.valueOf(character.getAttribute(skill.abilityScoreModifier)+character.proficiencyViaFighterLevel));
                 PDField fieldForCasting=form.getField(skill.checkBoxIdentifier);
                 ((PDCheckBox) fieldForCasting).check();

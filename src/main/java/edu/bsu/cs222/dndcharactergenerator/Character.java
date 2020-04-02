@@ -62,10 +62,6 @@ public class Character {
         attributeMap.put(modifier, modifierValue);
         runModifierTasks(modifier, modifierValue);
     }
-    public int getAbilityScoreModifier(AbilityScore abilityScore){
-        AbilityScoreModifier modifier = abilityScore.modifier;
-        return attributeMap.get(modifier);
-    }
 
     private void runModifierTasks(AbilityScoreModifier modifier, int modifierValue) {
         setSkills(modifier, modifierValue);
@@ -128,13 +124,11 @@ public class Character {
     private int modifierCalculation(int mainStatValue) {
         int minusTen = mainStatValue - 10;
         float divideInHalf = (float) (minusTen / 2);
-        int floored = (int) Math.floor(divideInHalf);
-        return floored;
+        return (int) Math.floor(divideInHalf);
     }
 
     public int getAttribute(CharacterAttribute specifier) {
-        int value = attributeMap.get(specifier);
-        return value;
+        return attributeMap.get(specifier);
     }
 
     public Race getRace() {

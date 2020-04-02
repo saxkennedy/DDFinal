@@ -23,15 +23,6 @@ public enum AbilityScore implements CharacterAttribute {
         this.savingThrowProficiency =savingThrowProficiency;
     }
 
-    public static AbilityScore getAbilityScoreFromString(String abilityScore) {
-        for (AbilityScore newAbilityScore : AbilityScore.values()) {
-            if (newAbilityScore.viewName.equals(abilityScore)) {
-                return newAbilityScore;
-            }
-        }
-        return null;
-    }
-
     @Override
     public String getPdfGeneratorName() {
         return pdfGeneratorName;
