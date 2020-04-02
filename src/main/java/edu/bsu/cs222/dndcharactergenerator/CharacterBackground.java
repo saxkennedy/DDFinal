@@ -98,7 +98,7 @@ public enum CharacterBackground implements CharacterDescriptor{
             "them. They will shield you from the law or anyone\n" +
             "else searching for you, though they w ill not risk\n" +
             "their lives for you."),
-    GUILDARTISAN("Guild Artisan",Skills.INSIGHT,Skills.PERSUASION,"You are a member of an artisan’s guild, skilled in\n" +
+    GUILDARTISAN("Guild Artisan",Skills.INSIGHT,Skills.PERSUASION,"You are a member of an artisan guild, skilled in\n" +
             "a particular field and closely associated with other\n" +
             "artisans. You are an established part of the\n" +
             "mercantile world, freed by talent and wealth from the\n" +

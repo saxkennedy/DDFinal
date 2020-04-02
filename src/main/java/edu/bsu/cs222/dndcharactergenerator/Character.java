@@ -55,11 +55,16 @@ public class Character {
         setAbilityScoreModifier(abilityScore, value);
     }
 
+
     private void setAbilityScoreModifier(AbilityScore abilityScore, int mainAbilityScoreValue) {
         AbilityScoreModifier modifier = abilityScore.modifier;
         int modifierValue = modifierCalculation(mainAbilityScoreValue);
         attributeMap.put(modifier, modifierValue);
         runModifierTasks(modifier, modifierValue);
+    }
+    public int getAbilityScoreModifier(AbilityScore abilityScore){
+        AbilityScoreModifier modifier = abilityScore.modifier;
+        return attributeMap.get(modifier);
     }
 
     private void runModifierTasks(AbilityScoreModifier modifier, int modifierValue) {
@@ -115,9 +120,9 @@ public class Character {
         for (CharacterAttribute abilityScoreModifier : AbilityScoreModifier.values()) {
             attributeMap.put(abilityScoreModifier, 0);
         }
-        for (CharacterAttribute abilityScore : AbilityScoreSavingThrow.values()) {
+        /*for (CharacterAttribute abilityScore : AbilityScoreSavingThrow.values()) {
             attributeMap.put(abilityScore, 0);
-        }
+        }*/
         for (CharacterAttribute vitalityModifier : VitalityModifier.values()) {
             attributeMap.put(vitalityModifier, 0);
         }
@@ -157,11 +162,6 @@ public class Character {
             setAbilityScoreModifier(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
         }
     }
-
-    /*public RacialAttribute getRacialAttribute() {                     #####################################################################################################################################
-        return racialAttribute;
-    }*/
-
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute == attribute) return;
         if (this.racialAttribute != null) {
@@ -236,7 +236,8 @@ public class Character {
                     gnomeSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
                     break;
                 case HALFELF:
-                    String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
+                    //Below for iteration 3.  Not ready yet.
+                    /*String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
                     HBox halfElfHbox = new HBox();
                     halfElfHbox.setAlignment(Pos.CENTER);
                     final int maxBoxCount = 2;
@@ -270,7 +271,7 @@ public class Character {
                         halfElfHbox.getChildren().add(selBox);
                         halfElfCheckboxes[i] = selBox;
                     }
-                    subRaceVbox.getChildren().addAll(halfElfHbox);
+                    subRaceVbox.getChildren().addAll(halfElfHbox);*/
                     break;
                 case HALFORC:
                     break;
@@ -296,10 +297,6 @@ public class Character {
                     subRaceVbox.getChildren().addAll(halflingSubRace);
                     halflingSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
                     break;
-            /*case ZEROMAN:
-                imageLocationString=null;
-                racialLabelString="NO RACE SELECTED!  YOU MIGHT WANNA FIX THIS!";
-                break;*/
                 case ZEROMAN:
                     break;
             }

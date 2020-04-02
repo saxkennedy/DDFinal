@@ -1,5 +1,6 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
+import javafx.scene.layout.Background;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
@@ -38,7 +39,10 @@ public class PdfGenerator {
             Map<CharacterAttribute, Integer> characterAttributes = character.getCharacterAttributes();
             writeCharacterAttributes(characterAttributes);
             writeCharacterName(character.getName());
-            writeStyle();
+            writeDescriptionField();
+            writeSavingThrows();
+            setField("Background",character.chosenBackground.viewName);
+            setField("Race ",character.getRace().raceName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +51,6 @@ public class PdfGenerator {
     private void writeCharacterName(String name) throws IOException {
         setField("CharacterName", name);
     }
-
     private void writeCharacterAttributes(Map<CharacterAttribute, Integer> stats) throws IOException {
         for(Map.Entry<CharacterAttribute, Integer> entry : stats.entrySet()) {
             setField(entry.getKey().getPdfGeneratorName(), String.valueOf(entry.getValue()));
@@ -59,10 +62,10 @@ public class PdfGenerator {
         fieldToWrite.setValue(value);
     }
 
-    private void writeStyle() throws IOException {
+    private void writeDescriptionField() throws IOException {
         String traitToWrite = character.getStyle() + "\n\nSecond Wind:\nYou have a limited well of stamina that you can draw on to protect yourself from harm.  " +
                 "On your turn, you can use a bonus action to regain hit " +
-                "points equal to 1d10+your fighter level (1).";
+                "points equal to 1d10+your fighter level (1).\n\nBACKGROUND: "+character.chosenBackground.viewName+":\n" + character.chosenBackground.description+"\n\nBACKGROUND FEATURE:\n"+character.chosenBackground.feature;
         setField("Features and Traits", traitToWrite);
     }
 
@@ -72,7 +75,14 @@ public class PdfGenerator {
         COSDocument lowTemplate = template.getDocument();
         newCharacterSheet = new PDDocument(lowTemplate);
     }
-
+    private void writeSavingThrows() throws IOException {
+        for (AbilityScore abilityScore : AbilityScore.values())
+        {
+            System.out.println(character.getAbilityScoreModifier(abilityScore));
+            String savingThrow = String.valueOf(abilityScore.savingThrowProficiency+character.getAbilityScoreModifier(abilityScore));
+            setField(abilityScore.pdfSavingThrowName,savingThrow);
+        }
+    }
     private void getAcroFormFromTemplate() {
         PDDocumentCatalog catalog = newCharacterSheet.getDocumentCatalog();
         form = catalog.getAcroForm();
