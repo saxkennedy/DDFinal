@@ -72,9 +72,6 @@ public class View extends Application {
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
             abilityInQuestion.setOnAction(e -> {
                 character.setAbilityScore(abilityScore, abilityInQuestion.getValue());
-                System.out.println("Set Character Attribute");
-                System.out.printf("STR: %s",character.getCharacterAttributes());
-                System.out.println();
             });
         }
 
@@ -88,9 +85,6 @@ public class View extends Application {
                 for (Race race : Race.values()) {
                     if (races.getValue().equals(race.viewName)) {
                         character.setRace(race);
-                        System.out.println("Set Race");
-                        System.out.printf("STR: %s",character.getCharacterAttributes());
-                        System.out.println();
                     }
                 }
         });
@@ -288,7 +282,6 @@ public class View extends Application {
 
         //Next to Save Button
         nextToSave.setOnAction(actionEvent ->{
-                System.out.println(character.selectedSkillsMap);
                 stage.setScene(saveScene);
         });
 

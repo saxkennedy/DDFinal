@@ -1,10 +1,7 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.lang.ref.SoftReference;
 
 public class CharacterTest {
     Character character = new Character();
@@ -55,20 +52,20 @@ public class CharacterTest {
     @Test
     public void testCheckBoxFlipper(){
         character.checkCounter = 0;
-        character.checkBoxFlipper(Skills.ACROBATICS);
-        Assertions.assertEquals(Skills.ACROBATICS,character.fighterSkill1);
+        character.checkBoxFlipper(Skill.ACROBATICS);
+        Assertions.assertEquals(Skill.ACROBATICS,character.fighterSkill1);
     }
 
     @Test
     public void testsetProficiencySkillsMap(){
-        character.backgroundSkill1=Skills.ACROBATICS;
-        character.backgroundSkill2=Skills.HISTORY;
-        character.fighterSkill1=Skills.ATHLETICS;
-        character.fighterSkill2=Skills.ANIMALHANDLING;
+        character.backgroundSkill1= Skill.ACROBATICS;
+        character.backgroundSkill2= Skill.HISTORY;
+        character.fighterSkill1= Skill.ATHLETICS;
+        character.fighterSkill2= Skill.ANIMALHANDLING;
 
         character.setProficiencySkillsMap();
 
-        for(Skills s : character.selectedSkillsMap.keySet()){
+        for(Skill s : character.selectedSkillsMap.keySet()){
             int actual = character.selectedSkillsMap.get(s);
             Assertions.assertEquals(2,actual);
         }

@@ -1,10 +1,11 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import javafx.scene.layout.Background;
+import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
+import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
 import java.io.File;
@@ -41,8 +42,10 @@ public class PdfGenerator {
             writeCharacterName(character.getName());
             writeDescriptionField();
             writeSavingThrows();
+            writeSkills();
             setField("Background",character.chosenBackground.viewName);
             setField("Race ",character.getRace().raceName);
+            setField("Initiative",String.valueOf(character.getAttribute(AbilityScore.DEX)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,7 +71,18 @@ public class PdfGenerator {
                 "points equal to 1d10+your fighter level (1).\n\nBACKGROUND: "+character.chosenBackground.viewName+":\n" + character.chosenBackground.description+"\n\nBACKGROUND FEATURE:\n"+character.chosenBackground.feature;
         setField("Features and Traits", traitToWrite);
     }
-
+    private void writeSkills() throws IOException{
+        for(Skill skill: Skill.values()){
+            if(character.selectedSkillsMap.containsKey(skill)==true){
+                setField(skill.pdfStringName,String.valueOf(character.getAttribute(skill.abilityScoreModifier)+character.proficiencyViaFighterLevel));
+                PDField fieldForCasting=form.getField(skill.checkBoxIdentifier);
+                ((PDCheckBox) fieldForCasting).check();
+            }
+            else {
+                setField(skill.pdfStringName,String.valueOf(character.getAttribute(skill.abilityScoreModifier)));
+            }
+        }
+    }
     private void getPDDocumentFromTemplate() throws IOException {
         InputStream stream = getClass().getClassLoader().getResourceAsStream("blank_character.pdf");
         PDDocument template = PDDocument.load(stream);
@@ -78,8 +92,7 @@ public class PdfGenerator {
     private void writeSavingThrows() throws IOException {
         for (AbilityScore abilityScore : AbilityScore.values())
         {
-            System.out.println(character.getAbilityScoreModifier(abilityScore));
-            String savingThrow = String.valueOf(abilityScore.savingThrowProficiency+character.getAbilityScoreModifier(abilityScore));
+            String savingThrow = String.valueOf(abilityScore.savingThrowProficiency+character.getAttribute(abilityScore.modifier));
             setField(abilityScore.pdfSavingThrowName,savingThrow);
         }
     }
