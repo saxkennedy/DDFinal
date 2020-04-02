@@ -36,69 +36,63 @@ This is insight that we will take into consideration when modeling the future it
 ###User Story:
 
 #####As a 5E D&D player, I want to make a level 1 fighter
-- I want the program to create random stats for me using traditional die-rolling methods.
-- I want to choose a name.
-- I want to choose a race from core 5E PHB.
-    - I want to choose a subrace if applicable
-- I want to choose my fighting style.
-- I would like to have the option to leave customization blank if I am undecided on something
-- I would like to go back and change something if I change my mind
-
-#####New for Iteration 2: 
-- I want to choose my skills.
-- I want to choose my background.
-- I want to choose the name of my save file name.
+- I will choose a name.
+- I will choose a race from core 5E PHB.
+    - I will choose a subrace if applicable
+- I need the program to create random stats for me using traditional die-rolling methods, but give me the option to not use them.
+- I will choose my fighting style.
+- I will choose my background
+- I will choose my skills
+- I need to have the option to leave customization blank if I am undecided on something
+- I need the ability to go back and change something if I change my mind
 
 #####As a Dnd player, I require a character sheet to be filled out for me
-- I want to choose whether to save this character sheet or not
-    - I want to choose the location to save this file
+- I need to choose whether to save this character sheet or not
+    - I need to choose the location to save this file
 
-###Acceptance Test Case:  (Iteration 2)
-1. All items from Iteration 1 test case.
-2. Can you select and reselect skills and backgrounds?  In this case select Entertainer, then Animal Handling and Athletics.
-Then go back and change your background to Urchin, and choose acrobatics and athletics.
-3. Can you rename your save file?  Rename your save file to "Imanawesometester."
-
-###Acceptance Test Peer Thoughts (Iteration 2)
-Acceptance Tester 1:
-
-Acceptance Tester 2:
-
-Acceptance Tester 3:
-
-###Acceptance Test Case:  (Iteration 1)
+###Acceptance Test Case:
 1.  Can you create a character named “Trash Boat” that is a “Hill Dwarf” with 16 dexterity 
 and has the “Archery” fighting style. Can you go back and change your character's name 
 to “Dr.Pepper” and change your race to “Dragonborn”
 2.  With a program that is already running and a character already created, can you save
  the generated pdf to the desktop
-###Acceptance Test Peer Thoughts (Iteration 1)
+3.  Can you select and reselect skills and backgrounds?  In this case select Entertainer, then Animal Handling and Athletics.
+Then go back and change your background to Urchin, and choose acrobatics and athletics.
+
+###Acceptance Test Peer Thoughts
 Acceptance Tester 1:
 
-**Erik Arteaga**\
-I was able to fully complete both portions of the acceptance test. I especially appreciated 
-the PNGs not having a fixed color background. I enjoyed being able to go back and change 
-my previously selected character attributes.
+This acceptance test was very user friendly and I was able to complete it with no issues what so ever.
+I loved being able to go back and change my abilities and other options when I decided to change my mind.
+Overall I was satisfied with the program and could see myself or someone else using this.
 
 Acceptance Tester 2:
 
-**Chloe Martinez**\
-There was no problem in completing both scenarios I was given. My favorite part of this 
-program was being able to save the character stats onto a document in a pdf form. It 
-allows me to not calculate stats by myself. However, I would like to change the name 
-of the document when I save it.
+The test I was given to preform was simple and straight forward. There was not a single page I didn't know
+how to complete or not know what to expect. I would very much like to create my own fighter now and I feel
+like this test gave me the tools to know how to easily traverse this program.
 
 Acceptance Tester 3:
 
-**Noah Hensley**\
-I was able to use the program to follow the instructions successfully. Also, it’s not 
-entirely clear on what the dice roll numbers are for when you pick your stats. If you 
-could select only from the randomly generated values (with a chance to override them 
-later), I think it would make more sense to those unfamiliar with 5th edition D&D. I 
-do like that it plugs everything into a printable sheet for the user at the end.
+I completed the acceptance test a lot more smoothly than I originally thought I would because how clear the
+interface was. If it weren't for the easy to read instructions and user friendly capability of the program,
+I can see where there would be many issues. I really enjoyed the scrolling box with the backgrounds, that was
+probably my favorite feature.
 
+Acceptance Tester 4:
 
-#####PHOTOGRAPHIC CONTENT:  All Images below available for unlimited non-commercial (personal use) courtesy of the listed websites.  Should the program ever be used for commercial purposes, these pictures would be discarded.
+After completing the acceptance test given to me I can fairly say that it handles pretty smoothly and does a great
+job of accomplishing its goal. The backgrounds were a nice addition to the program and Im glad to see how they went
+about installing them into it.
+
+Acceptance Tester 5:
+
+After a few minutes of clicking through the program trying to complete the acceptance test, I managed to get through it. 
+I really appreciated the nice UI design that made everything easy to find and made sure you had completed everything 
+that was important to creating my character. I would like to see a feature to rename my pdf file to whatever I choose though.
+
+##PHOTOGRAPHIC CONTENT:  
+#####All Images below available for unlimited non-commercial (personal use) courtesy of the listed websites.  Should the program ever be used for commercial purposes, these pictures would be discarded.
 DragonBorn Fighter:  kindpng.com\
 Dwarven Fighter: pngfind.com\
 Elven Fighter:  uihere.com\
