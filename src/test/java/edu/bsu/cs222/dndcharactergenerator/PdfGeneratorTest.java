@@ -23,7 +23,7 @@ public class PdfGeneratorTest {
         character.setName("Lieutenant Data");
         character.setRace(Race.ELF);
         character.setRacialAttribute(RacialAttribute.HIGHELF);
-        character.setStyle("foo-bar");
+        character.setStyle("Archery");
 
         PdfGenerator generator = new PdfGenerator.Builder()
                 .setCharacter(character)
@@ -42,9 +42,9 @@ public class PdfGeneratorTest {
     }
 
     @Test
-    public void testWriteCharacterName(){
+    public void testCharacterName() {
         String expected = "Lieutenant Data";
-        System.out.println(testForm.getField("CharacterName"));
-        Assertions.assertEquals(expected,testForm.getField("CharacterName"));
+        Assertions.assertEquals(expected, testForm.getField("CharacterName").getValueAsString());
     }
+
 }
