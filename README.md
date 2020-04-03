@@ -13,7 +13,7 @@ without having to go through the hundreds of pages in the books of D&D character
 We also provide a savable pdf that will contain your filled out character sheet for your 
 newly created character!
 
-##Iteration 2:
+##Iteration 2: 
 
 #####Added Features
 - Background selection
