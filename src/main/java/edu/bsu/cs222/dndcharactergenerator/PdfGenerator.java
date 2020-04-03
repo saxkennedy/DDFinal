@@ -1,11 +1,14 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
+import javafx.scene.control.ComboBox;
 import org.apache.pdfbox.cos.COSDocument;
+import org.apache.pdfbox.cos.COSString;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,10 +68,11 @@ public class PdfGenerator {
     }
 
     private void writeDescriptionField() throws IOException {
-        String traitToWrite = character.getStyle() + "\n\nSecond Wind:\nYou have a limited well of stamina that you can draw on to protect yourself from harm.  " +
+        String traitToWrite = "FIGHTER TRAITS:\n"+character.getStyle() + "\n\nSecond Wind:\nYou have a limited well of stamina that you can draw on to protect yourself from harm.  " +
                 "On your turn, you can use a bonus action to regain hit " +
                 "points equal to 1d10+your fighter level (1).\n\nBACKGROUND: "+character.chosenBackground.viewName+":\n" + character.chosenBackground.description+"\n\nBACKGROUND FEATURE:\n"+character.chosenBackground.feature;
-        setField("Features and Traits", traitToWrite);
+        setField("Features and Traits",traitToWrite);
+
     }
     private void writeSkills() throws IOException{
         for(Skill skill: Skill.values()){

@@ -25,8 +25,8 @@ public class Character {
     Skill backgroundSkill2;
     Skill fighterSkill1;
     Skill fighterSkill2;
-    int checkCounter=0;
-    public int proficiencyViaFighterLevel =2;
+    int checkCounter = 0;
+    public int proficiencyViaFighterLevel = 2;
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
@@ -34,7 +34,7 @@ public class Character {
 
     public Map<Skill, Integer> skillMap = new HashMap<>();
 
-    public Map<Skill,Integer> selectedSkillsMap = new HashMap<>();
+    public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
     public CharacterBackground chosenBackground;
 
     private void zeroOutStatsIfEmpty() {
@@ -74,26 +74,28 @@ public class Character {
                 break;
         }
     }
-    public void checkBoxFlipper(Skill skill){
-        if (checkCounter==0 || (checkCounter>1 && checkCounter % 2 == 0)){
-            fighterSkill1=skill;
-        }
-        else{
-            fighterSkill2=skill;
+
+    public void checkBoxFlipper(Skill skill) {
+        if (checkCounter == 0 || (checkCounter > 1 && checkCounter % 2 == 0)) {
+            fighterSkill1 = skill;
+        } else {
+            fighterSkill2 = skill;
         }
         checkCounter++;
     }
-    public void setProficiencySkillsMap(){
+
+    public void setProficiencySkillsMap() {
         selectedSkillsMap.clear();
-        selectedSkillsMap.put(backgroundSkill1,2);
-        selectedSkillsMap.put(backgroundSkill2,2);
-        selectedSkillsMap.put(fighterSkill1,2);
-        selectedSkillsMap.put(fighterSkill2,2);
+        selectedSkillsMap.put(backgroundSkill1, 2);
+        selectedSkillsMap.put(backgroundSkill2, 2);
+        selectedSkillsMap.put(fighterSkill1, 2);
+        selectedSkillsMap.put(fighterSkill2, 2);
     }
-    private void setSkills(AbilityScoreModifier modifier,int modifierValue) {
-        for(Skill skill : Skill.values()){
-            if (skill.abilityScoreModifier.equals(modifier)){
-                skillMap.put(skill,modifierValue);
+
+    private void setSkills(AbilityScoreModifier modifier, int modifierValue) {
+        for (Skill skill : Skill.values()) {
+            if (skill.abilityScoreModifier.equals(modifier)) {
+                skillMap.put(skill, modifierValue);
             }
         }
     }
@@ -153,6 +155,7 @@ public class Character {
             setAbilityScoreModifier(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
         }
     }
+
     public void setRacialAttribute(RacialAttribute attribute) {
         if (this.racialAttribute == attribute) return;
         if (this.racialAttribute != null) {
@@ -178,11 +181,11 @@ public class Character {
         this.style = style;
     }
 
-    public String getStyleDescription(String style){
+    public String getStyleDescription(String style) {
         String styleDescription;
         switch (style) {
             case "Archery":
-                styleDescription ="+2 bonus to attack rolls made with ranged weapons";
+                styleDescription = "+2 bonus to attack rolls made with ranged weapons";
                 break;
             case "Defense":
                 styleDescription = "+1 bonus to AC while wearing armor";
@@ -206,28 +209,29 @@ public class Character {
         }
         return styleDescription;
     }
-    public VBox subRaceVbox= new VBox();
 
-    public void racialSceneOptionSetter (){
+    public VBox subRaceVbox = new VBox();
+
+    public void racialSceneOptionSetter() {
         subRaceVbox.getChildren().clear();
         subRaceVbox.setAlignment(Pos.CENTER);
         subRaceVbox.setBackground(Background.EMPTY);
         subRaceVbox.setSpacing(10);
-            switch (race) {
-                case DWARF:
-                    ComboBox<String> dwarfSubRace = new ComboBox<>();
-                    dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
-                    subRaceVbox.getChildren().addAll(dwarfSubRace);
-                    dwarfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
-                    break;
-                case GNOME:
-                    ComboBox<String> gnomeSubRace = new ComboBox<>();
-                    gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
-                    subRaceVbox.getChildren().addAll(gnomeSubRace);
-                    gnomeSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
-                    break;
-                case HALFELF:
-                    //Below for iteration 3.  Not ready yet.
+        switch (race) {
+            case DWARF:
+                ComboBox<String> dwarfSubRace = new ComboBox<>();
+                dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
+                subRaceVbox.getChildren().addAll(dwarfSubRace);
+                dwarfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
+                break;
+            case GNOME:
+                ComboBox<String> gnomeSubRace = new ComboBox<>();
+                gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
+                subRaceVbox.getChildren().addAll(gnomeSubRace);
+                gnomeSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
+                break;
+            case HALFELF:
+                //Below for iteration 3.  Not ready yet.
                     /*String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
                     HBox halfElfHbox = new HBox();
                     halfElfHbox.setAlignment(Pos.CENTER);
@@ -263,39 +267,39 @@ public class Character {
                         halfElfCheckboxes[i] = selBox;
                     }
                     subRaceVbox.getChildren().addAll(halfElfHbox);*/
-                    break;
-                case HALFORC:
-                    break;
-                case DRAGONBORN:
-                    ComboBox<String> breathWeaponSelection = new ComboBox<>();
-                    breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
-                            "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
-                    subRaceVbox.getChildren().addAll(breathWeaponSelection);
-                    breathWeaponSelection.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue())));
-                    break;
-                case ELF:
-                    ComboBox<String> elfSubRace = new ComboBox<>();
-                    elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
-                    subRaceVbox.getChildren().addAll(elfSubRace);
-                    break;
-                case HUMAN:
-                    break;
-                case TIEFLING:
-                    break;
-                case HALFLING:
-                    ComboBox<String> halflingSubRace = new ComboBox<>();
-                    halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
-                    subRaceVbox.getChildren().addAll(halflingSubRace);
-                    halflingSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
-                    break;
-                case ZEROMAN:
-                    break;
-            }
+                break;
+            case HALFORC:
+                break;
+            case DRAGONBORN:
+                ComboBox<String> breathWeaponSelection = new ComboBox<>();
+                breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
+                        "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
+                subRaceVbox.getChildren().addAll(breathWeaponSelection);
+                breathWeaponSelection.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue())));
+                break;
+            case ELF:
+                ComboBox<String> elfSubRace = new ComboBox<>();
+                elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
+                subRaceVbox.getChildren().addAll(elfSubRace);
+                break;
+            case HUMAN:
+                break;
+            case TIEFLING:
+                break;
+            case HALFLING:
+                ComboBox<String> halflingSubRace = new ComboBox<>();
+                halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
+                subRaceVbox.getChildren().addAll(halflingSubRace);
+                halflingSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
+                break;
+            case ZEROMAN:
+                break;
         }
+    }
 
 
-    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background){
-        final int maxBoxCount=2;
+    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background) {
+        final int maxBoxCount = 2;
         CheckBox[] fighterBoxes = new CheckBox[Skill.values().length];
         ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
             private int listenedCount = 0;
@@ -320,23 +324,22 @@ public class Character {
                 }
             }
         };
-        int counter=0;
+        int counter = 0;
 
-        for (Skill skill : Skill.values()){
+        for (Skill skill : Skill.values()) {
             CheckBox selbox = new CheckBox(skill.viewName);
             selbox.selectedProperty().addListener(listener0);
-            if ((skill.isFighterOption) && (!skill.equals(background.proficiency1)&&(!skill.equals(background.proficiency2))))
-            {
+            if ((skill.isFighterOption) && (!skill.equals(background.proficiency1) && (!skill.equals(background.proficiency2)))) {
                 innerProficiencyVbox.getChildren().add(selbox);
-                selbox.setOnAction(actionEvent ->{
-                    if(selbox.isSelected()){
-                    checkBoxFlipper(skill);
-                }
+                selbox.setOnAction(actionEvent -> {
+                    if (selbox.isSelected()) {
+                        checkBoxFlipper(skill);
+                    }
                     setProficiencySkillsMap();
                 });
 
             }
-            fighterBoxes[counter]=selbox;
+            fighterBoxes[counter] = selbox;
             counter++;
         }
     }
