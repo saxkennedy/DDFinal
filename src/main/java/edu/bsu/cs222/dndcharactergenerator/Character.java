@@ -27,6 +27,7 @@ public class Character {
     Skill fighterSkill2;
     int checkCounter = 0;
     public int proficiencyViaFighterLevel = 2;
+    public String racialUniqueAttribute="";
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
@@ -138,6 +139,7 @@ public class Character {
     }
 
     public void setRace(Race race) {
+        racialUniqueAttribute="";
         if (this.race == race) return;
         if (this.race != null) {
             implementAbilityScoreAffector(this.race, -1);
@@ -275,7 +277,11 @@ public class Character {
                 breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
                         "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
                 subRaceVbox.getChildren().addAll(breathWeaponSelection);
-                breathWeaponSelection.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue())));
+                breathWeaponSelection.setOnAction(actionEvent -> {
+                            setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue()));
+                            racialUniqueAttribute = breathWeaponSelection.getValue();
+                        }
+                );
                 break;
             case ELF:
                 ComboBox<String> elfSubRace = new ComboBox<>();
