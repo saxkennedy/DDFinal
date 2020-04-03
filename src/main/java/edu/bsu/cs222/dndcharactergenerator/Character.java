@@ -281,6 +281,7 @@ public class Character {
                 ComboBox<String> elfSubRace = new ComboBox<>();
                 elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
                 subRaceVbox.getChildren().addAll(elfSubRace);
+                elfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue())));
                 break;
             case HUMAN:
                 break;
