@@ -1,3 +1,4 @@
+Reference material only! list of all the fields that are in the blank_character.pdf
 ClassLevel{type: PDTextField value: null}
 Background{type: PDTextField value: null}
 PlayerName{type: PDTextField value: null}

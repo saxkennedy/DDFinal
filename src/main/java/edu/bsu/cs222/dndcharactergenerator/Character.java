@@ -148,9 +148,9 @@ public class Character {
         implementAbilityScoreAffector(race, 1);
     }
 
-    private void implementAbilityScoreAffector(AbilityScoreAffecter affecter, int additionOrSubtraction) {
+    private void implementAbilityScoreAffector(AbilityScoreChanger modifier, int additionOrSubtraction) {
         zeroOutStatsIfEmpty();
-        for (Map.Entry<AbilityScore, Integer> entry : affecter.getAbilityScoreChanges().entrySet()) {
+        for (Map.Entry<AbilityScore, Integer> entry : modifier.getAbilityScoreChanges().entrySet()) {
             AbilityScore specifier = entry.getKey();
             int valueToBeAddedOrSubtracted = additionOrSubtraction * entry.getValue();
             attributeMap.put(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
@@ -271,6 +271,9 @@ public class Character {
                     subRaceVbox.getChildren().addAll(halfElfHbox);*/
                 break;
             case HALFORC:
+            case HUMAN:
+            case TIEFLING:
+            case ZEROMAN:
                 break;
             case DRAGONBORN:
                 ComboBox<String> breathWeaponSelection = new ComboBox<>();
@@ -289,17 +292,11 @@ public class Character {
                 subRaceVbox.getChildren().addAll(elfSubRace);
                 elfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue())));
                 break;
-            case HUMAN:
-                break;
-            case TIEFLING:
-                break;
             case HALFLING:
                 ComboBox<String> halflingSubRace = new ComboBox<>();
                 halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
                 subRaceVbox.getChildren().addAll(halflingSubRace);
                 halflingSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
-                break;
-            case ZEROMAN:
                 break;
         }
     }

@@ -1,17 +1,24 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CharacterTest {
-    Character character = new Character();
+    Character character;
+
+    @BeforeEach
+    public void setup() {
+        character = new Character();
+        character.setName("Test");
+    }
 
     @Test
-    public void testSetAbilityScore(){
-        character.setAbilityScore(AbilityScore.STR,10);
-        int expected  = 10;
+    public void testSetAbilityScore() {
+        character.setAbilityScore(AbilityScore.STR, 10);
+        int expected = 10;
         int actual = character.getAttribute(AbilityScore.STR);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -57,17 +64,17 @@ public class CharacterTest {
     }
 
     @Test
-    public void testsetProficiencySkillsMap(){
-        character.backgroundSkill1= Skill.ACROBATICS;
-        character.backgroundSkill2= Skill.HISTORY;
-        character.fighterSkill1= Skill.ATHLETICS;
-        character.fighterSkill2= Skill.ANIMALHANDLING;
+    public void testSetProficiencySkillsMap() {
+        character.backgroundSkill1 = Skill.ACROBATICS;
+        character.backgroundSkill2 = Skill.HISTORY;
+        character.fighterSkill1 = Skill.ATHLETICS;
+        character.fighterSkill2 = Skill.ANIMALHANDLING;
 
         character.setProficiencySkillsMap();
 
-        for(Skill s : character.selectedSkillsMap.keySet()){
+        for (Skill s : character.selectedSkillsMap.keySet()) {
             int actual = character.selectedSkillsMap.get(s);
-            Assertions.assertEquals(2,actual);
+            Assertions.assertEquals(2, actual);
         }
     }
 

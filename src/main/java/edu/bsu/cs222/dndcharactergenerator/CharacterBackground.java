@@ -1,6 +1,6 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-public enum CharacterBackground implements CharacterDescriptor{
+public enum CharacterBackground {
     ACOLYTE("Acolyte", Skill.INSIGHT, Skill.RELIGION,
             "You have spent your life in the service of a temple\n" +
                     "to a specific god or pantheon of gods. You act as an\n" +
