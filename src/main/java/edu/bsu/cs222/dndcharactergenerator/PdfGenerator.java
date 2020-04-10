@@ -48,6 +48,7 @@ public class PdfGenerator {
             setField("Background", character.chosenBackground.viewName);
             setField("Race ", character.getRace().raceName);
             setField("Initiative", String.valueOf(character.getAttribute(AbilityScore.DEX)));
+            setField("Speed",String.valueOf(character.getRace().speed));
         } catch (IOException e) {
             e.printStackTrace();
         }
