@@ -113,7 +113,7 @@ public class PdfGenerator {
     }
 
     public void writeNewCharacterSheet(File file) throws IOException {
-        newCharacterSheet.save(file);
+        newCharacterSheet.save(file+".pdf");
         newCharacterSheet.close();
     }
 }

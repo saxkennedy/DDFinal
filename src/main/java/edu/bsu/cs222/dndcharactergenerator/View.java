@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -217,12 +218,23 @@ public class View extends Application {
 
         //Save Button
         save.setOnAction(actionEvent -> {
-            File saveFile = new File(saveLocation.showDialog(stage) + "/" + character.getName() + ".pdf");
-            PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
+            JFrame parent = new JFrame();
             try {
-                generator.writeNewCharacterSheet(saveFile);
-            } catch (IOException e) {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            } catch (Exception e) {
                 e.printStackTrace();
+            }
+            PdfGenerator generator = new PdfGenerator.Builder().setCharacter(character).build();
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Name your file!");
+            int userSelection = fileChooser.showSaveDialog(parent);
+
+            if(userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                try {
+                    generator.writeNewCharacterSheet(fileToSave);
+                }catch(Exception e){
+                }
             }
             stage.close();
         });
