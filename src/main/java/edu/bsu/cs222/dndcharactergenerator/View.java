@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.IOException;
 
 public class View extends Application {
 
@@ -23,63 +22,55 @@ public class View extends Application {
         launch((args));
     }
 
+    private VBox buildVbox(int spacing, Pos pos, Background background) {
+        VBox vbox= new VBox(spacing);
+        vbox.setAlignment(pos);
+        vbox.setBackground(background);
+        return vbox;
+    }
+    private HBox buildHbox(int spacing, Pos pos){
+        HBox hBox = new HBox(spacing);
+        hBox.setAlignment(pos);
+        return hBox;
+    }
     @Override
     public void start(Stage stage) {
         Character character = new Character();
-        Color bgColor = Color.NAVAJOWHITE;
-        character.chosenBackground=null;
-
-        //***1st Name Scene***
-        VBox nameVbox = new VBox();
-        nameVbox.setAlignment(Pos.CENTER);
-        nameVbox.setSpacing(20);
-        nameVbox.setBackground(Background.EMPTY);
-        Scene openAndNameScene = new Scene(nameVbox, 550, 850, bgColor);
+        //Scene 1
+        VBox nameVbox= buildVbox(20,Pos.CENTER, Background.EMPTY);
+        Scene openAndNameScene = new Scene(nameVbox,550,850,Color.NAVAJOWHITE);
         Image fighterImage = new Image("/dwarfImage.png", true);
-        ImageView fighterImageView = new ImageView();
-        fighterImageView.setImage(fighterImage);
+        ImageView fighterImageView = new ImageView(fighterImage);
         Label enterName = new Label("Enter your name below, bold adventurer!  Then press 'GO!'\n\n" +
                 " *Leaving this blank is fine, you can always change it later!");
-        TextField characterName = new TextField();
-        Button go = new Button("GO!");
-        nameVbox.getChildren().addAll(fighterImageView, enterName, characterName, go);
-
-
-        //***2nd Core Stats/Race Selection Scene***
-        VBox coreInfoVbox = new VBox();
-        coreInfoVbox.setAlignment(Pos.CENTER);
-        coreInfoVbox.setSpacing(10);
-        coreInfoVbox.setBackground(Background.EMPTY);
-        Scene coreAttributesScene = new Scene(coreInfoVbox, 550, 850, bgColor);
+        TextField characterName= new TextField();
+        Button nextToCoreAndRaceSelection = new Button("GO!");
+        nameVbox.getChildren().addAll(fighterImageView, enterName, characterName, nextToCoreAndRaceSelection);
+        //Scene 2
+        VBox coreStatsAndRacialVbox = buildVbox(10,Pos.CENTER, Background.EMPTY);
+        VBox coreStatsVbox = buildVbox(10,Pos.CENTER,Background.EMPTY);
+        Scene coreAttributesScene = new Scene(coreStatsAndRacialVbox,550,850, Color.NAVAJOWHITE);
         Label raceSelection = new Label("Choose from one of the below races!");
         Label statGeneration = new Label("Fill out your rolled stats below.\n" +
                 "We have provided a dice roller that uses standard rules,\n" +
                 "Feel free to insert your own values, or take ours!");
+        Label rolledStats = new Label("");
         Button diceRoller = new Button("Roll the Dice!");
         Button nextToCombatStyle = new Button("Next (Combat Style)");
         Button backToName = new Button("Back (Name Screen)");
-        HBox coreStatsButtons = new HBox(backToName, nextToCombatStyle);
-        coreStatsButtons.setAlignment(Pos.CENTER);
-        coreStatsButtons.setSpacing(25);
-        Label rolledStats = new Label("");
-        VBox coreStatsVbox = new VBox();
-        coreStatsVbox.setAlignment(Pos.CENTER);
-        coreStatsVbox.setSpacing(10);
-        coreStatsVbox.setBackground(Background.EMPTY);
-        for (AbilityScore abilityScore: AbilityScore.values()) {
+        HBox coreStatsButtonsHbox = buildHbox(25,Pos.CENTER);
+        coreStatsButtonsHbox.getChildren().addAll(backToName, nextToCombatStyle);
+        for (AbilityScore abilityScore: AbilityScore.values()) {//TODO FIX ABILITYSCORE LOOP BASED UPON INCOMING MODEL CHANGES
             Label abilityLabel = new Label(abilityScore.viewName);
             ComboBox<Integer> abilityInQuestion = new ComboBox();
             abilityInQuestion.getItems().addAll(character.statNumbers);
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
             abilityInQuestion.setOnAction(e -> character.setAbilityScore(abilityScore, abilityInQuestion.getValue()));
         }
-
         ComboBox<String> races = new ComboBox<>();
         races.getItems().addAll(character.raceNames);
-        coreInfoVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtons);
-        //Dice Roller Button
+        coreStatsAndRacialVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtonsHbox);
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(DiceRoller.getStats().toString()));
-        //Race Selection
         races.setOnAction(actionEvent -> {
                 for (Race race : Race.values()) {
                     if (races.getValue().equals(race.viewName)) {
@@ -87,24 +78,17 @@ public class View extends Application {
                     }
                 }
         });
-
-        //***3rd Scene Combat Style***
-        VBox combatStyle = new VBox();
-        combatStyle.setAlignment(Pos.CENTER);
-        combatStyle.setSpacing(15);
-        combatStyle.setBackground(Background.EMPTY);
-        Scene combatStyleScene = new Scene(combatStyle, 550, 850, bgColor);
+        //Scene 3
+        VBox combatStyleVbox = buildVbox(15,Pos.CENTER,Background.EMPTY);
+        Scene combatStyleScene = new Scene(combatStyleVbox,550,850,Color.NAVAJOWHITE);
         Label combatStyleLabel = new Label("Select a combat style!");
         Label styleDescription = new Label("");
         Button nextToRacial = new Button("Next (Racial)");
         Button backToCore = new Button("Back (Core and Race Selection)");
-        HBox combatStyleButtons = new HBox(backToCore, nextToRacial);
-        combatStyleButtons.setAlignment(Pos.CENTER);
-        combatStyleButtons.setSpacing(25);
+        HBox combatStyleButtonsHbox = buildHbox(25,Pos.CENTER);
+        combatStyleButtonsHbox.getChildren().addAll(backToCore,nextToRacial);
+        VBox combatStyleButtonVbox = buildVbox(15,Pos.CENTER,Background.EMPTY);
         ToggleGroup styleGroup = new ToggleGroup();
-        VBox combatStyleButtonVbox = new VBox();
-        combatStyleButtonVbox.setSpacing(15);
-        combatStyleButtonVbox.setAlignment(Pos.CENTER);
         for(String style : character.styles){
             RadioButton button = new RadioButton(style);
             button.setUserData(style);
@@ -119,41 +103,22 @@ public class View extends Application {
                 character.setStyle(fullStyle);
             }
         });
-        combatStyle.getChildren().addAll(combatStyleLabel, combatStyleButtonVbox, styleDescription, combatStyleButtons);
-
-         //***4th Scene Racial Options***
-        VBox racialVbox = new VBox();
-        racialVbox.setAlignment(Pos.CENTER);
-        racialVbox.setSpacing(10);
-        racialVbox.setBackground(Background.EMPTY);
-        Scene racialScene = new Scene(racialVbox, 550, 850, bgColor);
+        combatStyleVbox.getChildren().addAll(combatStyleLabel, combatStyleButtonVbox, styleDescription, combatStyleButtonsHbox);
+        //Scene 4
+        VBox racialVbox = buildVbox(10,Pos.CENTER,Background.EMPTY);
+        Scene racialScene = new Scene(racialVbox, 550, 850, Color.NAVAJOWHITE);
         Label racialAttributesHeader = new Label("Specific Racial Options");
-        Button backToCombatStyle = new Button("Back (to Core Attributes)");
         Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will affect values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
+        Button backToCombatStyle = new Button("Back (to Core Attributes)");
         Button nextToBackground = new Button("Next (to Backgrounds");
-        HBox racialButtons = new HBox(backToCombatStyle, nextToBackground);
-        racialButtons.setAlignment(Pos.BOTTOM_CENTER);
-        racialButtons.setSpacing(25);
-
-        nextToRacial.setOnAction(Event -> {
-            character.racialSceneOptionSetter();
-            ImageView racialImageView = new ImageView();
-            Image racialImage = new Image(character.getRace().picture);
-            racialImageView.setImage(racialImage);
-            Label racialLabel= new Label(character.getRace().label);
-            racialVbox.getChildren().addAll(racialAttributesHeader,racialLabel,racialImageView, character.subRaceVbox, makeSure, racialButtons);
-            stage.setScene(racialScene);
-        });
-
-        //***5th Scene Background****
-        VBox backgroundVbox = new VBox();
-        backgroundVbox.setAlignment(Pos.CENTER);
-        backgroundVbox.setSpacing(30);
-        backgroundVbox.setBackground(Background.EMPTY);
-        Scene backgroundScene= new Scene(backgroundVbox, 550,850,bgColor);
+        HBox racialButtonsHbox = buildHbox(25,Pos.BOTTOM_CENTER);
+        racialButtonsHbox.getChildren().addAll(backToCombatStyle, nextToBackground);
+        //Scene 5
+        VBox backgroundVbox = buildVbox(30,Pos.CENTER,Background.EMPTY);
+        Scene backgroundScene= new Scene(backgroundVbox, 550,850,Color.NAVAJOWHITE);
         Label backgroundLabel=new Label("Choose your Background");
         Button backToRacial =new Button("Back (to Racial Options)");
-        Button nextToFighterProficiency = new Button("Next (To Fighter Proficiencies");
+        Button nextToProficiency = new Button("Next (To Fighter Proficiencies");
         ComboBox<String> backgroundComboBox = new ComboBox<>();
         TextArea descriptionFeatures= new TextArea();
         descriptionFeatures.setWrapText(true);
@@ -174,49 +139,31 @@ public class View extends Application {
                     }
                 }
         });
-        HBox skillsButtons = new HBox(backToRacial,nextToFighterProficiency);
-        skillsButtons.setAlignment(Pos.BOTTOM_CENTER);
-        skillsButtons.setSpacing(25);
-        backgroundVbox.getChildren().addAll(backgroundLabel,backgroundComboBox,descriptionFeaturesScrollPane,skillsButtons);
+        HBox skillButtonsHbox = buildHbox(25,Pos.BOTTOM_CENTER);
+        skillButtonsHbox.getChildren().addAll(backToRacial,nextToProficiency);
+        backgroundVbox.getChildren().addAll(backgroundLabel,backgroundComboBox,descriptionFeaturesScrollPane,skillButtonsHbox);
         stage.setScene(backgroundScene);
-
-        //***6th Scene Fighter Proficiencies***
-        VBox fighterProficiencyVBox =new VBox();
-        fighterProficiencyVBox.setAlignment(Pos.CENTER);
-        fighterProficiencyVBox.setSpacing(10);
-        fighterProficiencyVBox.setBackground(Background.EMPTY);
-        VBox innerProficiencyVbox = new VBox();
-        innerProficiencyVbox.setAlignment(Pos.CENTER);
-        innerProficiencyVbox.setSpacing(20);
-        innerProficiencyVbox.setBackground(Background.EMPTY);
-
-        Scene fighterProficiencyScene = new Scene(fighterProficiencyVBox,550,850,bgColor);
+        //Scene 6
+        VBox outerProficiencyVbox =buildVbox(10,Pos.CENTER,Background.EMPTY);
+        VBox innerProficiencyVbox = buildVbox(20,Pos.CENTER,Background.EMPTY);
+        Scene fighterProficiencyScene = new Scene(outerProficiencyVbox,550,850,Color.NAVAJOWHITE);
         Label fighterProficiencyLabel = new Label("Choose your two fighter proficiencies!\nWe have removed those you already get from your Background!");
         Button backToBackground= new Button("Back (to Background)");
         Button nextToSave = new Button("Next (to Save Options)");
-        HBox fighterProficiencyButtons=new HBox(backToBackground,nextToSave);
-        fighterProficiencyButtons.setAlignment(Pos.BOTTOM_CENTER);
-        fighterProficiencyButtons.setSpacing(25);
-
-
-
-        fighterProficiencyVBox.getChildren().addAll(fighterProficiencyLabel,innerProficiencyVbox,fighterProficiencyButtons);
+        HBox proficiencyButtonsHBox=buildHbox(25,Pos.CENTER);
+        proficiencyButtonsHBox.getChildren().addAll(backToBackground,nextToSave);
+        outerProficiencyVbox.getChildren().addAll(fighterProficiencyLabel,innerProficiencyVbox,proficiencyButtonsHBox);
         stage.setScene(fighterProficiencyScene);
-
-        //***7th Scene Save Options***
-        VBox saveLocationVbox = new VBox();
-        saveLocationVbox.setAlignment(Pos.CENTER);
-        saveLocationVbox.setSpacing(50);
-        saveLocationVbox.setBackground(Background.EMPTY);
-        Scene saveScene = new Scene(saveLocationVbox, 550, 850, bgColor);
+        //Scene 7
+        VBox saveLocationVbox = buildVbox(50,Pos.CENTER,Background.EMPTY);
+        Scene saveScene = new Scene(saveLocationVbox, 550, 850, Color.NAVAJOWHITE);
         Label saveLabel = new Label("Please select a path to save your PDF to.");
         DirectoryChooser saveLocation = new DirectoryChooser();
         saveLocation.setInitialDirectory(new File("src"));
         Button save = new Button("Select Save Location (Program then closes)");
-        Button backToFighterProficiency = new Button("Back (to Skills & Background)");
-        saveLocationVbox.getChildren().addAll(saveLabel, save, backToFighterProficiency);
-
-        //Save Button
+        Button backToProficiency = new Button("Back (to Skills & Background)");
+        saveLocationVbox.getChildren().addAll(saveLabel, save, backToProficiency);
+        //Scene 8
         save.setOnAction(actionEvent -> {
             JFrame parent = new JFrame();
             try {
@@ -228,7 +175,6 @@ public class View extends Application {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Name your file!");
             int userSelection = fileChooser.showSaveDialog(parent);
-
             if(userSelection == JFileChooser.APPROVE_OPTION) {
                 File fileToSave = fileChooser.getSelectedFile();
                 try {
@@ -239,55 +185,42 @@ public class View extends Application {
             stage.close();
         });
 
-        //***PAGE TRAVERSAL BUTTONS***
-        //GO! button
-        go.setOnAction(actionEvent -> {
+        nextToCoreAndRaceSelection.setOnAction(actionEvent -> {
             character.setName(characterName.getText());
             stage.setScene(coreAttributesScene);
         });
-
-        //Back to Name Button
-        backToName.setOnAction(actionEvent -> stage.setScene(openAndNameScene));
-
-        //Next to Combat Style Button
         nextToCombatStyle.setOnAction(actionEvent ->{
                 if(races.getSelectionModel().isEmpty()) {
                     character.setRace(Race.ZEROMAN);
                 }
                 stage.setScene(combatStyleScene);
                 });
-
-        //Back to Core
-        backToCore.setOnAction(actionEvent -> stage.setScene(coreAttributesScene));
-
-        //Back to Combat Style
-        backToCombatStyle.setOnAction(actionEvent -> {
-            racialVbox.getChildren().clear();
-            stage.setScene(combatStyleScene);
+        nextToRacial.setOnAction(Event -> {
+            character.racialSceneOptionSetter();
+            Image racialImage = new Image(character.getRace().picture);
+            ImageView racialImageView = new ImageView(racialImage);
+            Label racialLabel= new Label(character.getRace().label);
+            racialVbox.getChildren().addAll(racialAttributesHeader,racialLabel,racialImageView, character.subRaceVbox, makeSure, racialButtonsHbox);
+            stage.setScene(racialScene);
         });
-
-        //Next to Background Button
         nextToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
-
-        //Back to Background Button
-        backToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
-
-        //Back to Racial Button
-        backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
-        //Next to Fighter Proficiency
-        nextToFighterProficiency.setOnAction(actionEvent -> {
+        nextToProficiency.setOnAction(actionEvent -> {
             innerProficiencyVbox.getChildren().clear();
             character.selectFighterProficiency(innerProficiencyVbox,character.chosenBackground);
             stage.setScene(fighterProficiencyScene);
         });
-
-        //Back to Fighter Proficiency
-        backToFighterProficiency.setOnAction(actionEvent -> stage.setScene(fighterProficiencyScene));
-
-        //Next to Save Button
         nextToSave.setOnAction(actionEvent -> stage.setScene(saveScene));
 
-        //JavaFX End Statements
+        backToName.setOnAction(actionEvent -> stage.setScene(openAndNameScene));
+        backToCore.setOnAction(actionEvent -> stage.setScene(coreAttributesScene));
+        backToCombatStyle.setOnAction(actionEvent -> {
+            racialVbox.getChildren().clear();
+            stage.setScene(combatStyleScene);
+        });
+        backToRacial.setOnAction(actionEvent -> stage.setScene(racialScene));
+        backToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
+        backToProficiency.setOnAction(actionEvent -> stage.setScene(fighterProficiencyScene));
+
         stage.setScene(openAndNameScene);
         stage.setTitle("Dungeons and Dragons Fighter Generator");
         stage.show();

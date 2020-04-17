@@ -36,7 +36,7 @@ public class Character {
     public Map<Skill, Integer> skillMap = new HashMap<>();
 
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
-    public CharacterBackground chosenBackground;
+    public CharacterBackground chosenBackground=null;
 
     private void zeroOutStatsIfEmpty() {
         if (attributeMap.isEmpty()) {
@@ -341,7 +341,6 @@ public class Character {
                     }
                     setProficiencySkillsMap();
                 });
-
             }
             fighterBoxes[counter] = selbox;
             counter++;
