@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 
 public class View extends Application {
 
@@ -33,6 +34,7 @@ public class View extends Application {
         hBox.setAlignment(pos);
         return hBox;
     }
+
     @Override
     public void start(Stage stage) {
         Character character = new Character();
@@ -190,7 +192,8 @@ public class View extends Application {
                 File fileToSave = fileChooser.getSelectedFile();
                 try {
                     generator.writeNewCharacterSheet(fileToSave);
-                }catch(Exception e){
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             stage.close();

@@ -1,14 +1,11 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import javafx.scene.control.ComboBox;
 import org.apache.pdfbox.cos.COSDocument;
-import org.apache.pdfbox.cos.COSString;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
-import org.apache.pdfbox.pdmodel.interactive.form.PDTextField;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +13,8 @@ import java.io.InputStream;
 import java.util.Map;
 
 public class PdfGenerator {
-    private Character character;
+    private final Character character;
     private PDDocument newCharacterSheet; // in memory pdf
-
     private PDAcroForm form; // edits newCharacterSheet's forms
 
     public static final class Builder {
