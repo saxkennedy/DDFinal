@@ -3,7 +3,7 @@ package edu.bsu.cs222.dndcharactergenerator;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum RacialAttribute implements AbilityScoreChanger {
+public enum Subrace implements AbilityScoreChanger {
     HILLDWARF(0, 0, 0, 0, 1, 0, "Hill Dwarf: +1 WIS"),
     MOUNTAINDWARF(2, 0, 0, 0, 0, 0, "Mountain Dwarf: +2 STR"),
     HIGHELF(0, 0, 0, 1, 0, 0, "High Elf: +1 INT"),
@@ -23,13 +23,14 @@ public enum RacialAttribute implements AbilityScoreChanger {
     GREENDRAGON(0, 0, 0, 0, 0, 0, "Green Dragon: Poison"),
     REDDRAGON(0, 0, 0, 0, 0, 0, "Red Dragon: Fire"),
     SILVERDRAGON(0, 0, 0, 0, 0, 0, "Silver Dragon: Cold"),
-    WHITEDRAGON(0, 0, 0, 0, 0, 0, "White Dragon: Cold");
+    WHITEDRAGON(0, 0, 0, 0, 0, 0, "White Dragon: Cold"),
+    NA(0,0,0,0,0,0,"No subraces for your race!");
 
 
     private Map<AbilityScore, Integer> attributes;
     public final String attributeName;
 
-    RacialAttribute(int str, int dex, int con, int intel, int wis, int cha, String attributeName) {
+    Subrace(int str, int dex, int con, int intel, int wis, int cha, String attributeName) {
         attributes = new HashMap<>();
         attributes.put(AbilityScore.STR, str);
         attributes.put(AbilityScore.DEX, dex);

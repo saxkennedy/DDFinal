@@ -2,10 +2,7 @@ package edu.bsu.cs222.dndcharactergenerator;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 
 import java.util.HashMap;
@@ -15,7 +12,7 @@ public class Character {
     private String name;
     private String style;
     private Race race;
-    private RacialAttribute racialAttribute;
+    private Subrace subrace;
     private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
@@ -38,22 +35,36 @@ public class Character {
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
     public CharacterBackground chosenBackground=null;
 
-    private void zeroOutStatsIfEmpty() {
-        if (attributeMap.isEmpty()) {
-            populateAttributesWithZero();
+    Character(){populateAttributesWithZero();}
+
+    public void buildfinalCharacterStats(){
+        this.addRaceValues();
+        this.addSubraceValues();
+    }
+
+    private void addRaceValues(){
+        for(Map.Entry<AbilityScore,Integer> entry : this.race.getAbilityScoreChanges().entrySet()) {
+            AbilityScore score = entry.getKey();
+            int originalValue = entry.getValue();
+            int newValue = attributeMap.get(score) + originalValue;
+            attributeMap.put(score,newValue);
+            setAbilityScoreModifier(score,newValue);
+        }
+    }
+
+    private void addSubraceValues(){
+        for(Map.Entry<AbilityScore,Integer> entry : this.subrace.getAbilityScoreChanges().entrySet()) {
+            AbilityScore score = entry.getKey();
+            int originalValue = entry.getValue();
+            int newValue = attributeMap.get(score) + originalValue;
+            attributeMap.put(score,newValue);
+            setAbilityScoreModifier(score,newValue);
         }
     }
 
     public void setAbilityScore(AbilityScore abilityScore, int value) {
-        zeroOutStatsIfEmpty();
-        if (race != null) {
-            implementAbilityScoreAffector(this.race, -1);
-            attributeMap.put(abilityScore, value);
-            implementAbilityScoreAffector(this.race, 1);
-        } else {
-            attributeMap.put(abilityScore, value);
-        }
-        setAbilityScoreModifier(abilityScore, value);
+        attributeMap.put(abilityScore,value);
+        setAbilityScoreModifier(abilityScore,value);
     }
 
 
@@ -139,33 +150,11 @@ public class Character {
     }
 
     public void setRace(Race race) {
-        racialUniqueAttribute="";
-        if (this.race == race) return;
-        if (this.race != null) {
-            implementAbilityScoreAffector(this.race, -1);
-        }
         this.race = race;
-        implementAbilityScoreAffector(race, 1);
+        if(this.race.subraces ==null) this.subrace = Subrace.NA;
     }
 
-    private void implementAbilityScoreAffector(AbilityScoreChanger modifier, int additionOrSubtraction) {
-        zeroOutStatsIfEmpty();
-        for (Map.Entry<AbilityScore, Integer> entry : modifier.getAbilityScoreChanges().entrySet()) {
-            AbilityScore specifier = entry.getKey();
-            int valueToBeAddedOrSubtracted = additionOrSubtraction * entry.getValue();
-            attributeMap.put(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
-            setAbilityScoreModifier(specifier, attributeMap.get(specifier) + valueToBeAddedOrSubtracted);
-        }
-    }
-
-    public void setRacialAttribute(RacialAttribute attribute) {
-        if (this.racialAttribute == attribute) return;
-        if (this.racialAttribute != null) {
-            implementAbilityScoreAffector(this.racialAttribute, -1);
-        }
-        this.racialAttribute = attribute;
-        implementAbilityScoreAffector(attribute, 1);
-    }
+    public void setSubrace(Subrace subrace) { this.subrace = subrace; }
 
     public void setName(String name) {
         this.name = name;
@@ -212,96 +201,6 @@ public class Character {
         return styleDescription;
     }
 
-    public VBox subRaceVbox = new VBox();
-
-    public void racialSceneOptionSetter() {
-        subRaceVbox.getChildren().clear();
-        subRaceVbox.setAlignment(Pos.CENTER);
-        subRaceVbox.setBackground(Background.EMPTY);
-        subRaceVbox.setSpacing(10);
-        switch (race) {
-            case DWARF:
-                ComboBox<String> dwarfSubRace = new ComboBox<>();
-                dwarfSubRace.getItems().addAll("Hill Dwarf: +1 WIS", "Mountain Dwarf: +2 STR");
-                subRaceVbox.getChildren().addAll(dwarfSubRace);
-                dwarfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(dwarfSubRace.getValue())));
-                break;
-            case GNOME:
-                ComboBox<String> gnomeSubRace = new ComboBox<>();
-                gnomeSubRace.getItems().addAll("Forest Gnome: +1 DEX", "Rock Gnome: +1 CON");
-                subRaceVbox.getChildren().addAll(gnomeSubRace);
-                gnomeSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(gnomeSubRace.getValue())));
-                break;
-            case HALFELF:
-                //Below for iteration 3.  Not ready yet.
-                    /*String[] statsForBoxes = new String[]{"STR", "DEX", "CON", "INT", "WIS", "CHA"};
-                    HBox halfElfHbox = new HBox();
-                    halfElfHbox.setAlignment(Pos.CENTER);
-                    final int maxBoxCount = 2;
-                    final CheckBox[] halfElfCheckboxes = new CheckBox[statsForBoxes.length];
-                    ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
-                        private int listenedCount = 0;
-
-                        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                            if (newValue) {
-                                listenedCount++;
-                                if (listenedCount == maxBoxCount) {
-                                    for (CheckBox selBox : halfElfCheckboxes) {
-                                        if (!selBox.isSelected()) {
-                                            selBox.setDisable(true);
-                                        }
-                                    }
-                                }
-                            } else {
-                                if (listenedCount == maxBoxCount) {
-                                    for (CheckBox selBox : halfElfCheckboxes) {
-                                        selBox.setDisable(false);
-                                    }
-                                }
-                                listenedCount--;
-                            }
-                        }
-                    };
-                    for (int i = 0; i < statsForBoxes.length; i++) {
-                        CheckBox selBox = new CheckBox(statsForBoxes[i]);
-                        selBox.selectedProperty().addListener(listener);
-                        halfElfHbox.getChildren().add(selBox);
-                        halfElfCheckboxes[i] = selBox;
-                    }
-                    subRaceVbox.getChildren().addAll(halfElfHbox);*/
-                break;
-            case HALFORC:
-            case HUMAN:
-            case TIEFLING:
-            case ZEROMAN:
-                break;
-            case DRAGONBORN:
-                ComboBox<String> breathWeaponSelection = new ComboBox<>();
-                breathWeaponSelection.getItems().addAll("Black Dragon: Acid", "Blue Dragon: Lightning", "Brass Dragon: Fire", "Bronze Dragon: Lightning", "Copper Dragon: Acid",
-                        "Gold Dragon: Fire", "Green Dragon: Poison", "Red Dragon: Fire", "Silver Dragon: Cold", "White Dragon: Cold");
-                subRaceVbox.getChildren().addAll(breathWeaponSelection);
-                breathWeaponSelection.setOnAction(actionEvent -> {
-                            setRacialAttribute(stringToRacialAttribute(breathWeaponSelection.getValue()));
-                            racialUniqueAttribute = breathWeaponSelection.getValue();
-                        }
-                );
-                break;
-            case ELF:
-                ComboBox<String> elfSubRace = new ComboBox<>();
-                elfSubRace.getItems().addAll("High Elf: +1 INT", "Wood Elf: +1 WIS", "Drow: +1 CHA");
-                subRaceVbox.getChildren().addAll(elfSubRace);
-                elfSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(elfSubRace.getValue())));
-                break;
-            case HALFLING:
-                ComboBox<String> halflingSubRace = new ComboBox<>();
-                halflingSubRace.getItems().addAll("Lightfoot: +1 CHA", "Stout: +1 CON");
-                subRaceVbox.getChildren().addAll(halflingSubRace);
-                halflingSubRace.setOnAction(actionEvent -> setRacialAttribute(stringToRacialAttribute(halflingSubRace.getValue())));
-                break;
-        }
-    }
-
-
     public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background) {
         final int maxBoxCount = 2;
         CheckBox[] fighterBoxes = new CheckBox[Skill.values().length];
@@ -345,14 +244,5 @@ public class Character {
             fighterBoxes[counter] = selbox;
             counter++;
         }
-    }
-
-    public static RacialAttribute stringToRacialAttribute(String racialAttribute) {
-        for (RacialAttribute attribute : RacialAttribute.values()) {
-            if (attribute.attributeName.equals(racialAttribute)) {
-                return attribute;
-            }
-        }
-        return null;
     }
 }

@@ -36,6 +36,7 @@ public class View extends Application {
     @Override
     public void start(Stage stage) {
         Character character = new Character();
+        Handbook book = new Handbook();
         //Scene 1
         VBox nameVbox= buildVbox(20,Pos.CENTER, Background.EMPTY);
         Scene openAndNameScene = new Scene(nameVbox,550,850,Color.NAVAJOWHITE);
@@ -165,6 +166,7 @@ public class View extends Application {
         saveLocationVbox.getChildren().addAll(saveLabel, save, backToProficiency);
         //Scene 8
         save.setOnAction(actionEvent -> {
+            character.buildfinalCharacterStats();
             JFrame parent = new JFrame();
             try {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -195,14 +197,21 @@ public class View extends Application {
                 }
                 stage.setScene(combatStyleScene);
                 });
+        VBox subRaceVbox = new VBox();
+        ComboBox<Subrace> subraceComboBox = new ComboBox<>();
+
         nextToRacial.setOnAction(Event -> {
-            character.racialSceneOptionSetter();
+            subRaceVbox.getChildren().clear();
+            subraceComboBox.getItems().addAll(book.getSubracesOfRace(character.getRace()));
+            subRaceVbox.getChildren().addAll(subraceComboBox);
             Image racialImage = new Image(character.getRace().picture);
             ImageView racialImageView = new ImageView(racialImage);
             Label racialLabel= new Label(character.getRace().label);
-            racialVbox.getChildren().addAll(racialAttributesHeader,racialLabel,racialImageView, character.subRaceVbox, makeSure, racialButtonsHbox);
+            racialVbox.getChildren().addAll(racialAttributesHeader,racialLabel,racialImageView, subRaceVbox, makeSure, racialButtonsHbox);
             stage.setScene(racialScene);
         });
+
+        subraceComboBox.setOnAction(e-> character.setSubrace(subraceComboBox.getValue()));
         nextToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
         nextToProficiency.setOnAction(actionEvent -> {
             innerProficiencyVbox.getChildren().clear();
