@@ -73,7 +73,7 @@ public class View extends Application {
         coreStatsAndRacialVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtonsHbox);
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(DiceRoller.getStats().toString()));
         races.setOnAction(actionEvent -> {
-                for (Race race : Race.values()) {
+                for (Race race : book.getRaces()) {
                     if (races.getValue().equals(race.viewName)) {
                         character.setRace(race);
                     }
@@ -112,6 +112,15 @@ public class View extends Application {
         Label makeSure = new Label("Make sure you have selected all desired fields, options, and/or boxes. \nIf you left anything blank, related fields in the pdf will be affected!\n For example, failing to enter a Constitution score will affect values for: \n-Fortitude save\n-Constitution Modifier\n-Hit points\nNo one wants a Constition score of 0,1, or 2!");
         Button backToCombatStyle = new Button("Back (to Core Attributes)");
         Button nextToBackground = new Button("Next (to Backgrounds");
+        VBox subRaceVbox = buildVbox(20,Pos.CENTER,Background.EMPTY);
+        ComboBox<String> subraceComboBox = new ComboBox<>();
+        subraceComboBox.setOnAction(actionEvent -> {
+            for (Subrace subrace : Subrace.values()) {
+                if (subraceComboBox.getValue().equals(subrace.attributeName)) {
+                    character.setSubrace(subrace);
+                        }
+                    }
+                });
         HBox racialButtonsHbox = buildHbox(25,Pos.BOTTOM_CENTER);
         racialButtonsHbox.getChildren().addAll(backToCombatStyle, nextToBackground);
         //Scene 5
@@ -197,21 +206,22 @@ public class View extends Application {
                 }
                 stage.setScene(combatStyleScene);
                 });
-        VBox subRaceVbox = new VBox();
-        ComboBox<Subrace> subraceComboBox = new ComboBox<>();
+
 
         nextToRacial.setOnAction(Event -> {
+            subraceComboBox.getItems().clear();
             subRaceVbox.getChildren().clear();
-            subraceComboBox.getItems().addAll(book.getSubracesOfRace(character.getRace()));
-            subRaceVbox.getChildren().addAll(subraceComboBox);
+            for(Subrace subrace : book.getSubracesOfRace(character.getRace())){
+                subraceComboBox.getItems().add(subrace.attributeName);
+            }
             Image racialImage = new Image(character.getRace().picture);
             ImageView racialImageView = new ImageView(racialImage);
             Label racialLabel= new Label(character.getRace().label);
-            racialVbox.getChildren().addAll(racialAttributesHeader,racialLabel,racialImageView, subRaceVbox, makeSure, racialButtonsHbox);
+            racialVbox.getChildren().addAll(racialAttributesHeader,racialLabel,racialImageView, subraceComboBox, makeSure, racialButtonsHbox);
             stage.setScene(racialScene);
         });
 
-        subraceComboBox.setOnAction(e-> character.setSubrace(subraceComboBox.getValue()));
+
         nextToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
         nextToProficiency.setOnAction(actionEvent -> {
             innerProficiencyVbox.getChildren().clear();

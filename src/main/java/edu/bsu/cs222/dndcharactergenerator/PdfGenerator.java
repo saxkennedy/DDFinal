@@ -72,7 +72,7 @@ public class PdfGenerator {
     private void writeDescriptionField() throws IOException {
         String racialSpecial = "";
         if (character.getRace().equals(Race.DRAGONBORN)) {
-            racialSpecial = "Dragonborn Breath Attack:\n" + character.racialUniqueAttribute;
+            racialSpecial = "Dragonborn Breath Attack:\n" + character.getSubrace().attributeName;
         }
         String traitToWrite = racialSpecial + "\n\nFIGHTER TRAITS:\n" + character.getStyle() + "\n\nSecond Wind:\nYou have a limited well of stamina that you can draw on to protect yourself from harm.  " +
                 "On your turn, you can use a bonus action to regain hit " +

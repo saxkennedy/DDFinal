@@ -24,7 +24,6 @@ public class Character {
     Skill fighterSkill2;
     int checkCounter = 0;
     public int proficiencyViaFighterLevel = 2;
-    public String racialUniqueAttribute="";
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
@@ -104,7 +103,7 @@ public class Character {
         selectedSkillsMap.put(fighterSkill2, 2);
     }
 
-    private void setSkills(AbilityScoreModifier modifier, int modifierValue) {
+    public void setSkills(AbilityScoreModifier modifier, int modifierValue) {
         for (Skill skill : Skill.values()) {
             if (skill.abilityScoreModifier.equals(modifier)) {
                 skillMap.put(skill, modifierValue);
@@ -153,7 +152,7 @@ public class Character {
         this.race = race;
         if(this.race.subraces ==null) this.subrace = Subrace.NA;
     }
-
+    public Subrace getSubrace(){return this.subrace;}
     public void setSubrace(Subrace subrace) { this.subrace = subrace; }
 
     public void setName(String name) {
