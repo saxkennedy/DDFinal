@@ -20,6 +20,8 @@ import java.io.IOException;
 public class View extends Application {
 
     public static void main(String[] args) {
+        BackgroundParser parser = new BackgroundParser();
+        parser.runParser();
         launch((args));
     }
 
@@ -37,6 +39,7 @@ public class View extends Application {
 
     @Override
     public void start(Stage stage) {
+
         Character character = new Character();
         Handbook book = new Handbook();
         //Scene 1
