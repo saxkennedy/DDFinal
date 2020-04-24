@@ -104,7 +104,7 @@ public class View extends Application {
         styleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (styleGroup.getSelectedToggle() != null) {
                 String style = styleGroup.getSelectedToggle().getUserData().toString();
-                styleDescription.setText(character.getStyleDescription(style));
+                styleDescription.setText(book.getStyleDescription(style));
                 String fullStyle = style + ":\n" + styleDescription.getText();
                 character.setStyle(fullStyle);
             }
