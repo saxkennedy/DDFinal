@@ -24,7 +24,7 @@
     "bgSkill1": "Acrobatics",
     "bgSkill2": "Performance",
     "description": "GRANTED SKILL PROFICIENCIES: Acrobatics, Performance\nYou thrive in front of an audience. You know how to\nentrance them, entertain them, and even inspire them.\nYour poetics can stir the hearts of those who hear you,\nawakening grief or joy, laughter or anger. Your music\nraises their spirits or captures their sorrow. Your dance\nsteps captivate, your humor cuts to the quick. Whatever\ntechniques you use, your art is your life.",
-    "feature": "BY POPULAR DEMAND: You can always find a place to perform, usually in an\ninn or tavern but possibly with a circus, at a theater, or\\n\" +\n            \"even in a the court of a noble. At such a place, you receive free\nlodging and food of a modest or comfortable standard\n(depending on the quality of the establishment), as\nlong as you perform each night. In addition, your\nperformance makes you something of a local figure.\nWhen strangers recognize you in a town where you have\nperformed, they typically take a liking to you."
+    "feature": "BY POPULAR DEMAND: You can always find a place to perform, usually in an\ninn or tavern but possibly with a circus, at a theater, or\neven in a the court of a noble. At such a place, you receive free\nlodging and food of a modest or comfortable standard\n(depending on the quality of the establishment), as\nlong as you perform each night. In addition, your\nperformance makes you something of a local figure.\nWhen strangers recognize you in a town where you have\nperformed, they typically take a liking to you."
   },
   {"viewName": "Folk Hero",
     "bgSkill1": "Animal Handling",

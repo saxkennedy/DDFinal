@@ -83,7 +83,7 @@ I could click through the pages without selecting certain things and come back t
 and it still printed out fine. At no point was I confused or stuck with this program.
 
 Acceptance Tester 4 - It looks very nice and would be very usefule for someone creating a level 1 fighter. 
-I would like there to be more class options. Still it is a great program and 
+I would like there to be more background and race options. Still it is a great program and 
 I was able to do all the testswith no problems 
 
 Acceptance Tester 5 - I don't know a lot about dungeons and dragons but 
