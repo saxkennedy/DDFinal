@@ -151,4 +151,21 @@ public class Character {
     public void setStyle(String style) {
         this.style = style;
     }
+    public void skillAllocate(Skill skill) {
+        int counter = 0;
+        if (counter == 0 || (counter > 1 && counter % 2 == 0)) {
+            fighterSkill1 = skill;
+        } else {
+            fighterSkill2 = skill;
+        }
+        counter++;
+    }
+
+    public void setProficiencySkillMap(){
+        selectedSkillsMap.clear();
+        selectedSkillsMap.put(backgroundSkill1, 2);
+        selectedSkillsMap.put(backgroundSkill2, 2);
+        selectedSkillsMap.put(fighterSkill1, 2);
+        selectedSkillsMap.put(fighterSkill2, 2);
+}
 }
