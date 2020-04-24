@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
+
+@SuppressWarnings("ALL")
 public class View extends Application {
 
     public static void main(String[] args) throws IOException {
@@ -70,7 +70,7 @@ public class View extends Application {
         coreStatsButtonsHbox.getChildren().addAll(backToName, nextToCombatStyle);
         for (AbilityScore abilityScore: AbilityScore.values()) {//TODO FIX ABILITYSCORE LOOP BASED UPON INCOMING MODEL CHANGES
             Label abilityLabel = new Label(abilityScore.viewName);
-            ComboBox<Integer> abilityInQuestion = new ComboBox();
+            ComboBox<Integer> abilityInQuestion = new ComboBox<>();
             abilityInQuestion.getItems().addAll(character.statNumbers);
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
             abilityInQuestion.setOnAction(e -> character.setAbilityScore(abilityScore, abilityInQuestion.getValue()));

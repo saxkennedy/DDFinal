@@ -1,15 +1,9 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import com.sun.tools.javac.comp.Todo;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.CheckBox;
-import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class Character {
     private String name;
     private String style;
@@ -28,40 +22,44 @@ public class Character {
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
     }
+
     public Map<Skill, Integer> skillMap = new HashMap<>();
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
 
-    public CharacterBackground chosenBackground=null;
+    public CharacterBackground chosenBackground = null;
 
-    Character(){populateAttributesWithZero();}
-    public void buildfinalCharacterStats(){
+    Character() {
+        populateAttributesWithZero();
+    }
+
+    public void buildfinalCharacterStats() {
         this.addRaceValues();
         this.addSubraceValues();
     }
 
-    private void addRaceValues(){
-        for(Map.Entry<AbilityScore,Integer> entry : this.race.getAbilityScoreChanges().entrySet()) {
+    private void addRaceValues() {
+        for (Map.Entry<AbilityScore, Integer> entry : this.race.getAbilityScoreChanges().entrySet()) {
             AbilityScore score = entry.getKey();
             int originalValue = entry.getValue();
             int newValue = attributeMap.get(score) + originalValue;
-            attributeMap.put(score,newValue);
-            setAbilityScoreModifier(score,newValue);
+            attributeMap.put(score, newValue);
+            setAbilityScoreModifier(score, newValue);
         }
     }
 
-    private void addSubraceValues(){
-        for(Map.Entry<AbilityScore,Integer> entry : this.subrace.getAbilityScoreChanges().entrySet()) {
+    private void addSubraceValues() {
+        for (Map.Entry<AbilityScore, Integer> entry : this.subrace.getAbilityScoreChanges().entrySet()) {
             AbilityScore score = entry.getKey();
             int originalValue = entry.getValue();
             int newValue = attributeMap.get(score) + originalValue;
-            attributeMap.put(score,newValue);
-            setAbilityScoreModifier(score,newValue);
+            attributeMap.put(score, newValue);
+            setAbilityScoreModifier(score, newValue);
         }
     }
 
     public void setAbilityScore(AbilityScore abilityScore, int value) {
-        attributeMap.put(abilityScore,value);
-        setAbilityScoreModifier(abilityScore,value);
+        attributeMap.put(abilityScore, value);
+        setAbilityScoreModifier(abilityScore, value);
     }
 
 
@@ -131,10 +129,16 @@ public class Character {
 
     public void setRace(Race race) {
         this.race = race;
-        if(this.race.subraces ==null) this.subrace = Subrace.NA;
+        if (this.race.subraces == null) this.subrace = Subrace.NA;
     }
-    public Subrace getSubrace(){return this.subrace;}
-    public void setSubrace(Subrace subrace) { this.subrace = subrace; }
+
+    public Subrace getSubrace() {
+        return this.subrace;
+    }
+
+    public void setSubrace(Subrace subrace) {
+        this.subrace = subrace;
+    }
 
     public void setName(String name) {
         this.name = name;
