@@ -40,7 +40,6 @@ public class PdfGenerator {
     private void setField(String key, String value) {
         PDField fieldToWrite = form.getField(key);
         try {
-            System.setProperty("pdfbox.fontcache", "/resources/.pdfbox.cache");
             fieldToWrite.setValue(value);
         } catch (Exception ignored) {
 
