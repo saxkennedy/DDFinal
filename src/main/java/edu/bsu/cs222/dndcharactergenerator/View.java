@@ -24,8 +24,6 @@ import java.util.Map;
 public class View extends Application {
 
     public static void main(String[] args) throws IOException {
-        BackgroundParser parser = new BackgroundParser();
-        parser.setBackgroundFromJson();
         launch((args));
     }
 
@@ -142,7 +140,6 @@ public class View extends Application {
         TextArea descriptionFeatures= new TextArea();
         descriptionFeatures.setWrapText(true);
         ScrollPane descriptionFeaturesScrollPane=new ScrollPane();
-        //for(CharacterBackgroundEnum viewName : CharacterBackgroundEnum.values()){
         for(CharacterBackground background : book.characterBackgroundArray){
         backgroundComboBox.getItems().add(background.getViewName());
         }
@@ -307,7 +304,7 @@ public class View extends Application {
                 innerProficiencyVbox.getChildren().add(selbox);
                 selbox.setOnAction(actionEvent -> {
                     if (selbox.isSelected()) {
-                        checkBoxFlipper(skill,character);
+                        skillAllocate(skill,character);
                     }
                     Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
                     selectedSkillsMap.clear();
@@ -322,7 +319,7 @@ public class View extends Application {
         }
     }
 
-    public void checkBoxFlipper(Skill skill,Character character) {
+    public void skillAllocate(Skill skill, Character character) {
         int checkCounter = 0;
         if (checkCounter == 0 || (checkCounter > 1 && checkCounter % 2 == 0)) {
             character.fighterSkill1 = skill;
