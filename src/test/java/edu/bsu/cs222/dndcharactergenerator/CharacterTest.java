@@ -50,7 +50,7 @@ public class CharacterTest {
     @Test
     public void testSetRacialAttribute(){
         character.setRace(Race.HALFELF);
-        character.setRacialAttribute(RacialAttribute.HIGHELF);
+        character.setSubrace(Subrace.HIGHELF);
         int expected = 1;
         int actual = character.getAttribute(AbilityScore.INT);
         Assertions.assertEquals(expected,actual);
@@ -117,9 +117,4 @@ public class CharacterTest {
         String actual = character.getStyleDescription("Archery");
         Assertions.assertEquals(expected,actual);
     }
-
-
-
-
-
 }

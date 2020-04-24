@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class PdfGeneratorTest {
-    private static Character character = new Character();
+    private static final Character character = new Character();
     private File writtenPDf = null;
     private PDDocument testDoc;
     private PDAcroForm testForm;
@@ -22,7 +22,7 @@ public class PdfGeneratorTest {
     public void setup() {
         character.setName("Lieutenant Data");
         character.setRace(Race.ELF);
-        character.setRacialAttribute(RacialAttribute.HIGHELF);
+        character.setSubrace(Subrace.HIGHELF);
         character.setStyle("Archery");
 
         PdfGenerator generator = new PdfGenerator.Builder()

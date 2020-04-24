@@ -1,12 +1,10 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import com.sun.tools.javac.comp.Todo;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +13,7 @@ public class Character {
     private String style;
     private Race race;
     private Subrace subrace;
-    private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
+    private final Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
     String[] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON", "Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT"};
@@ -33,26 +31,29 @@ public class Character {
     public Map<Skill, Integer> skillMap = new HashMap<>();
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
 
-    public CharacterBackground chosenBackground=null;
+    public CharacterBackground chosenBackground = null;
 
-    Character(){populateAttributesWithZero();}
-    public void buildfinalCharacterStats(){
+    Character() {
+        populateAttributesWithZero();
+    }
+
+    public void buildfinalCharacterStats() {
         this.addRaceValues();
         this.addSubraceValues();
     }
 
-    private void addRaceValues(){
-        for(Map.Entry<AbilityScore,Integer> entry : this.race.getAbilityScoreChanges().entrySet()) {
+    private void addRaceValues() {
+        for (Map.Entry<AbilityScore, Integer> entry : race.getAbilityScoreChanges().entrySet()) {
             AbilityScore score = entry.getKey();
             int originalValue = entry.getValue();
             int newValue = attributeMap.get(score) + originalValue;
-            attributeMap.put(score,newValue);
-            setAbilityScoreModifier(score,newValue);
+            attributeMap.put(score, newValue);
+            setAbilityScoreModifier(score, newValue);
         }
     }
 
-    private void addSubraceValues(){
-        for(Map.Entry<AbilityScore,Integer> entry : this.subrace.getAbilityScoreChanges().entrySet()) {
+    private void addSubraceValues() {
+        for (Map.Entry<AbilityScore, Integer> entry : this.subrace.getAbilityScoreChanges().entrySet()) {
             AbilityScore score = entry.getKey();
             int originalValue = entry.getValue();
             int newValue = attributeMap.get(score) + originalValue;
