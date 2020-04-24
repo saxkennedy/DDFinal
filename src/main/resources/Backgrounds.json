@@ -1,14 +1,12 @@
 [
     {
-      "index":0,
       "viewName":"Acolyte",
       "bgSkill1":"Insight",
       "bgSkill2": "Religion",
-      "description":"GRANTED SKILL PROFICIENCIES: Insight, Religion\nYou have spent your life in the service of a temple\nto a specific god or pantheon of gods. You act as an\nintermediary between the realm of the holy and the\nmortal world, performing sacred rites and offering\nsacrifices in order to conduct worshipers into the\npresence of the divine. You are not necessarily a\ncleric-performing sacred rites is not the same thing as\nchanneling divine power.\nChoose a god, a pantheon of gods, or some other\nquasi-divine being from among those listed in appendix B\nor those specified by your DM, and work with your\nDM to detail the nature of your religious service.\nWere you a lesser functionary in a temple, raised from\nchildhood to assist the priests in the sacred rites? Or\nwere you a high priest who suddenly experienced a call\nto serve your god in a different way? Perhaps you were\nthe leader of a small cult outside of any established\ntemple structure, or even an occult group.",
+      "description":"GRANTED SKILL PROFICIENCIES: Insight, Religion\nYou have spent your life in the service of a temple\nto a specific god or pantheon of gods. You act as an\nintermediary between the realm of the holy and the\nmortal world, performing sacred rites and offering\nsacrifices in order to conduct worshipers into the\npresence of the divine. You are not necessarily a\ncleric performing sacred rites is not the same thing as\nchanneling divine power.\nChoose a god, a pantheon of gods, or some other\nquasi-divine being from among those listed in appendix B\nor those specified by your DM, and work with your\nDM to detail the nature of your religious service.\nWere you a lesser functionary in a temple, raised from\nchildhood to assist the priests in the sacred rites? Or\nwere you a high priest who suddenly experienced a call\nto serve your god in a different way? Perhaps you were\nthe leader of a small cult outside of any established\ntemple structure, or even an occult group.",
       "feature":"SHELTER OF THE FAITHFUL: As an acolyte, you command the respect of those who\nshare your faith, and you can perform the religious\nceremonies of your deity. You and your adventuring\ncompanions can expect to receive free healing and\ncare at a temple, shrine, or other established presence\nof your faith, though you must provide any material\ncomponents needed for spells. Those who share\nyour religion will support you (but only you) at a\nmodest lifestyle.\nYou might also have ties to a specific temple dedicated\nto your chosen deity or pantheon, and you have a\nresidence there. This could be the temple where you\nused to serve, if you remain on good terms with it, or a\ntemple where you have found a new home. While near\nyour temple, you can call upon the priests for assistance,\nprovided the assistance you ask for is not absurd!"
     },
     {
-      "index":1,
       "viewName":"Charlatan",
       "bgSkill1": "Deception",
       "bgSkill2": "Sleight of Hand",
@@ -16,11 +14,40 @@
       "feature":"FALSE IDENTITY: You have created a second identity that includes\ndocumentation, established acquaintances, and\ndisguises that allow you to assume that persona.\nAdditionally, you can forge documents including official\npapers and personal letters, as long as you have seen an\nexample of the kind of document or the handwriting you\nare trying to copy."
     },
     {
-      "index":2,
       "viewName":"Criminal",
       "bgSkill1":"Deception",
       "bgSkill2":"Stealth",
       "description":"GRANTED SKILL PROFICIENCIES: Deception, Stealth\nYou are an experienced criminal with a history of\nbreaking the law. You have spent a lot of time among\nother criminals and still have contacts within the\ncriminal underworld. You are far closer than m ost people\nto the world of murder, theft, and violence that pervades\nthe underbelly of civilization, and you have survived up to\nthis point by flouting the rules and regulations of society.",
       "feature":"CRIMINAL CONTACT: You have a reliable and trustworthy contact who acts as\nyour liaison to a network of other criminals. You know\nhow to get messages to and from your contact, even\nover great distances; specifically, you know the local\nmessengers, corrupt caravan masters, and seedy sailors\nwho can deliver messages for you."
-    }
-  ]
+    },
+  {"viewName":"Entertainer",
+    "bgSkill1": "Acrobatics",
+    "bgSkill2": "Performance",
+    "description": "You thrive in front of an audience. You know how to\nentrance them, entertain them, and even inspire them.\nYour poetics can stir the hearts of those who hear you,\nawakening grief or joy, laughter or anger. Your music\nraises their spirits or captures their sorrow. Your dance\nsteps captivate, your humor cuts to the quick. Whatever\ntechniques you use, your art is your life.",
+    "feature": "BY POPULAR DEMAND: You can always find a place to perform, usually in an\ninn or tavern but possibly with a circus, at a theater, or\\n\" +\n            \"even in a the court of a noble. At such a place, you receive free\nlodging and food of a modest or comfortable standard\n(depending on the quality of the establishment), as\nlong as you perform each night. In addition, your\nperformance makes you something of a local figure.\nWhen strangers recognize you in a town where you have\nperformed, they typically take a liking to you."
+  },
+  {"viewName": "Folk Hero",
+    "bgSkill1": "Animal Handling",
+    "bgSkill2": "Survival",
+    "description": "You come from a humble social rank, but you are\ndestined for so much more. Already the people of\nyour home village regard you as their champion, and\nnyour destiny calls you to stand against the tyrants and\nmonsters that threaten the common folk everywhere.",
+    "feature": "RUSTIC HOSPITALITY: Since you come from the ranks of the common folk,\nyou fit in among them with ease. You can find a place\nto hide, rest, or recuperate among other commoners,\nunless you have shown yourself to be a danger to\nthem. They will shield you from the law or anyone\nelse searching for you, though they w ill not risk\ntheir lives for you."
+  },
+  {"viewName": "",
+    "bgSkill1": "",
+    "bgSkill2": "",
+    "description": "",
+    "feature": ""
+  },
+  {"viewName": "",
+    "bgSkill1": "",
+    "bgSkill2": "",
+    "description": "",
+    "feature": ""
+  },
+  {"viewName": "",
+  "bgSkill1": "",
+  "bgSkill2": "",
+  "description": "",
+  "feature": ""
+}
+]
