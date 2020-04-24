@@ -51,7 +51,7 @@ As a 5E D&D player who is playing a fighter in an upcoming campaign, I want to b
 - Have a character speed determined from my chosen race.
 #####Story 4
 As a 5E D&D player who is playing a fighter in an upcoming campaign, I want to be able to do the following with the program:
--I want the option to leave an entire section of the character sheet blank if I am undecided on something, and still be able to generate the sheet.
+- I want the option to leave an entire section of the character sheet blank if I am undecided on something, and still be able to generate the sheet.
 - I can have the ability to go back and change something if I change my mind
 #####Story 5
 As a Dnd player, I require a character sheet to be filled out for me and printed to a pdf.
