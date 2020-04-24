@@ -22,24 +22,6 @@ public class CharacterTest {
     }
 
     @Test
-    public void testSetAbilityScoreThenSetRace(){
-        character.setAbilityScore(AbilityScore.STR,10);
-        character.setRace(Race.DRAGONBORN);
-        int expected = 12;
-        int actual = character.getAttribute(AbilityScore.STR);
-        Assertions.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void testSetRaceThenSetAbilityScore(){
-        character.setRace(Race.DRAGONBORN);
-        character.setAbilityScore(AbilityScore.STR,10);
-        int expected = 12;
-        int actual = character.getAttribute(AbilityScore.STR);
-        Assertions.assertEquals(expected,actual);
-    }
-
-    @Test
     public void testSetAbilityScoreModifier(){
         character.setAbilityScore(AbilityScore.STR,20);
         int expected = 5;
@@ -48,18 +30,9 @@ public class CharacterTest {
     }
 
     @Test
-    public void testSetRacialAttribute(){
-        character.setRace(Race.HALFELF);
-        character.setRacialAttribute(RacialAttribute.HIGHELF);
-        int expected = 1;
-        int actual = character.getAttribute(AbilityScore.INT);
-        Assertions.assertEquals(expected,actual);
-    }
-
-    @Test
     public void testCheckBoxFlipper(){
-        character.checkCounter = 0;
-        character.checkBoxFlipper(Skill.ACROBATICS);
+        character.counter = 0;
+        character.skillAllocate(Skill.ACROBATICS);
         Assertions.assertEquals(Skill.ACROBATICS,character.fighterSkill1);
     }
 
@@ -70,7 +43,7 @@ public class CharacterTest {
         character.fighterSkill1 = Skill.ATHLETICS;
         character.fighterSkill2 = Skill.ANIMALHANDLING;
 
-        character.setProficiencySkillsMap();
+        character.setProficiencySkillMap();
 
         for (Skill s : character.selectedSkillsMap.keySet()) {
             int actual = character.selectedSkillsMap.get(s);
@@ -112,9 +85,10 @@ public class CharacterTest {
 
     @Test
     public void testGetStyleDescription(){
+        Handbook book = new Handbook();
         character.setStyle("Archery");
         String expected = "+2 bonus to attack rolls made with ranged weapons";
-        String actual = character.getStyleDescription("Archery");
+        String actual = book.getStyleDescription("Archery");
         Assertions.assertEquals(expected,actual);
     }
 

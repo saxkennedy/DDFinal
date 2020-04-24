@@ -1,12 +1,15 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
+import java.lang.Object;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
+import org.apache.pdfbox.pdmodel.font.FontCache;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,9 +20,9 @@ public class PdfGenerator {
     private PDDocument newCharacterSheet; // in memory pdf
     private PDAcroForm form; // edits newCharacterSheet's forms
 
+
     public static final class Builder {
         private Character character;
-
         public Builder setCharacter(Character character) {
             this.character = character;
             return this;
@@ -45,27 +48,31 @@ public class PdfGenerator {
             setField("Race ", character.getRace().raceName);
             setField("Initiative", String.valueOf(character.getAttribute(AbilityScore.DEX)));
             setField("Speed",String.valueOf(character.getRace().speed));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
-    private void writeCharacterName(String name) throws IOException {
+    private void writeCharacterName(String name) {
         setField("CharacterName", name);
     }
 
-    private void writeCharacterAttributes(Map<CharacterAttribute, Integer> stats) throws IOException {
+    private void writeCharacterAttributes(Map<CharacterAttribute, Integer> stats) {
         for (Map.Entry<CharacterAttribute, Integer> entry : stats.entrySet()) {
             setField(entry.getKey().getPdfGeneratorName(), String.valueOf(entry.getValue()));
         }
     }
 
-    private void setField(String key, String value) throws IOException {
+    private void setField(String key, String value) {
         PDField fieldToWrite = form.getField(key);
-        fieldToWrite.setValue(value);
+        try {
+            System.setProperty("pdfbox.fontcache","/resources/.pdfbox.cache");
+            fieldToWrite.setValue(value);
+        }catch(Exception ignored){
+
+        }
     }
 
-    private void writeDescriptionField() throws IOException {
+    private void writeDescriptionField(){
         String racialSpecial = "";
         if (character.getRace().equals(Race.DRAGONBORN)) {
             racialSpecial = "Dragonborn Breath Attack:\n" + character.getSubrace().attributeName;
@@ -96,7 +103,7 @@ public class PdfGenerator {
         newCharacterSheet = new PDDocument(lowTemplate);
     }
 
-    private void writeSavingThrows() throws IOException {
+    private void writeSavingThrows() {
         for (AbilityScore abilityScore : AbilityScore.values()) {
             String savingThrow = String.valueOf(abilityScore.savingThrowProficiency + character.getAttribute(abilityScore.modifier));
             setField(abilityScore.pdfSavingThrowName, savingThrow);
