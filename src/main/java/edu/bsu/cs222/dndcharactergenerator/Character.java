@@ -16,8 +16,6 @@ public class Character {
     private final Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
-    String[] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON", "Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT"};
-    String[] styles = new String[]{"Archery", "Defense", "Dueling", "Great Weapon Fighting", "Protection", "Two-Weapon Fighting",};
     Skill backgroundSkill1;
     Skill backgroundSkill2;
     Skill fighterSkill1;
@@ -87,23 +85,6 @@ public class Character {
         }
     }
 
-    public void checkBoxFlipper(Skill skill) {
-        if (checkCounter == 0 || (checkCounter > 1 && checkCounter % 2 == 0)) {
-            fighterSkill1 = skill;
-        } else {
-            fighterSkill2 = skill;
-        }
-        checkCounter++;
-    }
-
-    public void setProficiencySkillsMap() {
-        selectedSkillsMap.clear();
-        selectedSkillsMap.put(backgroundSkill1, 2);
-        selectedSkillsMap.put(backgroundSkill2, 2);
-        selectedSkillsMap.put(fighterSkill1, 2);
-        selectedSkillsMap.put(fighterSkill2, 2);
-    }
-
     public void setSkills(AbilityScoreModifier modifier, int modifierValue) {
         for (Skill skill : Skill.values()) {
             if (skill.abilityScoreModifier.equals(modifier)) {
@@ -170,50 +151,5 @@ public class Character {
 
     public void setStyle(String style) {
         this.style = style;
-    }
-
-    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background) {
-        final int maxBoxCount = 2;
-        CheckBox[] fighterBoxes = new CheckBox[Skill.values().length];
-        ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
-            private int listenedCount = 0;
-
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    listenedCount++;
-                    if (listenedCount == maxBoxCount) {
-                        for (CheckBox selBox : fighterBoxes) {
-                            if (!selBox.isSelected()) {
-                                selBox.setDisable(true);
-                            }
-                        }
-                    }
-                } else {
-                    if (listenedCount == maxBoxCount) {
-                        for (CheckBox selBox : fighterBoxes) {
-                            selBox.setDisable(false);
-                        }
-                    }
-                    listenedCount--;
-                }
-            }
-        };
-        int counter = 0;
-
-        for (Skill skill : Skill.values()) {
-            CheckBox selbox = new CheckBox(skill.viewName);
-            selbox.selectedProperty().addListener(listener0);
-            if ((skill.isFighterOption) && (!skill.equals(background.getBgSkill1()) && (!skill.equals(background.getGetBgSkill2())))) {
-                innerProficiencyVbox.getChildren().add(selbox);
-                selbox.setOnAction(actionEvent -> {
-                    if (selbox.isSelected()) {
-                        checkBoxFlipper(skill);
-                    }
-                    setProficiencySkillsMap();
-                });
-            }
-            fighterBoxes[counter] = selbox;
-            counter++;
-        }
     }
 }
