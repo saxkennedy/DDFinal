@@ -32,20 +32,9 @@ public class Character {
     }
     public Map<Skill, Integer> skillMap = new HashMap<>();
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
-    public CharacterBackground[] characterBackgroundArray;
 
     public CharacterBackground chosenBackground=null;
 
-    public CharacterBackground[] generateBackgroundArray(){
-        BackgroundParser parser = new BackgroundParser();
-        try {
-            characterBackgroundArray =parser.setBackgroundFromJson();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-      return characterBackgroundArray;
-
-    }
     Character(){populateAttributesWithZero();}
     public void buildfinalCharacterStats(){
         this.addRaceValues();

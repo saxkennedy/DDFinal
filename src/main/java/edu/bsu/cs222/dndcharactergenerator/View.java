@@ -139,14 +139,14 @@ public class View extends Application {
         descriptionFeatures.setWrapText(true);
         ScrollPane descriptionFeaturesScrollPane=new ScrollPane();
         //for(CharacterBackgroundEnum viewName : CharacterBackgroundEnum.values()){
-        for(CharacterBackground background : character.characterBackgroundArray){
+        for(CharacterBackground background : book.characterBackgroundArray){
         backgroundComboBox.getItems().add(background.getViewName());
         }
         backgroundComboBox.setOnAction(actionEvent ->{
             descriptionFeatures.clear();
             descriptionFeaturesScrollPane.setContent(descriptionFeatures);
             //for( CharacterBackgroundEnum text : CharacterBackgroundEnum.values()) {
-            for(CharacterBackground text : character.characterBackgroundArray){
+            for(CharacterBackground text : book.characterBackgroundArray){
                 if (backgroundComboBox.getValue().equals(text.getViewName())){
                     descriptionFeatures.setText("DESCRIPTION\n"+text.getDescription()+"\n\nFEATURES\n"+text.getFeature());
                     character.chosenBackground=text;
