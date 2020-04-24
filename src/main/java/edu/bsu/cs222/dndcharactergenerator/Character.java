@@ -1,10 +1,12 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
+import com.sun.tools.javac.comp.Todo;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,14 +30,23 @@ public class Character {
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
     }
-
     public Map<Skill, Integer> skillMap = new HashMap<>();
-
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
-    public CharacterBackgroundEnum chosenBackground=null;
+    public CharacterBackground[] characterBackgroundArray;
 
+    public CharacterBackground chosenBackground=null;
+
+    public CharacterBackground[] generateBackgroundArray(){
+        BackgroundParser parser = new BackgroundParser();
+        try {
+            characterBackgroundArray =parser.setBackgroundFromJson();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+      return characterBackgroundArray;
+
+    }
     Character(){populateAttributesWithZero();}
-
     public void buildfinalCharacterStats(){
         this.addRaceValues();
         this.addSubraceValues();
@@ -200,7 +211,7 @@ public class Character {
         return styleDescription;
     }
 
-    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackgroundEnum background) {
+    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background) {
         final int maxBoxCount = 2;
         CheckBox[] fighterBoxes = new CheckBox[Skill.values().length];
         ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
@@ -231,7 +242,7 @@ public class Character {
         for (Skill skill : Skill.values()) {
             CheckBox selbox = new CheckBox(skill.viewName);
             selbox.selectedProperty().addListener(listener0);
-            if ((skill.isFighterOption) && (!skill.equals(background.proficiency1) && (!skill.equals(background.proficiency2)))) {
+            if ((skill.isFighterOption) && (!skill.equals(background.getBgSkill1()) && (!skill.equals(background.getGetBgSkill2())))) {
                 innerProficiencyVbox.getChildren().add(selbox);
                 selbox.setOnAction(actionEvent -> {
                     if (selbox.isSelected()) {

@@ -1,10 +1,29 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-public class Background {
+public class CharacterBackground {
     private int index;
     private String description;
     private String feature;
     private String viewName;
+
+    public String getBgSkill1() {
+        return bgSkill1;
+    }
+
+    public void setBgSkill1(String bgSkill1) {
+        this.bgSkill1 = bgSkill1;
+    }
+
+    public String getGetBgSkill2() {
+        return getBgSkill2;
+    }
+
+    public void setGetBgSkill2(String getBgSkill2) {
+        this.getBgSkill2 = getBgSkill2;
+    }
+
+    private String bgSkill1;
+    private String getBgSkill2;
 
     public int getIndex() {
         return index;

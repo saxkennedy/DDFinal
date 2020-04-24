@@ -138,18 +138,28 @@ public class View extends Application {
         TextArea descriptionFeatures= new TextArea();
         descriptionFeatures.setWrapText(true);
         ScrollPane descriptionFeaturesScrollPane=new ScrollPane();
-        for(CharacterBackgroundEnum viewName : CharacterBackgroundEnum.values()){
-            backgroundComboBox.getItems().add(viewName.viewName);
+        //for(CharacterBackgroundEnum viewName : CharacterBackgroundEnum.values()){
+        for(CharacterBackground background : character.characterBackgroundArray){
+        backgroundComboBox.getItems().add(background.getViewName());
         }
         backgroundComboBox.setOnAction(actionEvent ->{
             descriptionFeatures.clear();
             descriptionFeaturesScrollPane.setContent(descriptionFeatures);
-            for( CharacterBackgroundEnum text : CharacterBackgroundEnum.values()) {
-                if (backgroundComboBox.getValue().equals(text.viewName)){
-                    descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
+            //for( CharacterBackgroundEnum text : CharacterBackgroundEnum.values()) {
+            for(CharacterBackground text : character.characterBackgroundArray){
+                if (backgroundComboBox.getValue().equals(text.getViewName())){
+                    descriptionFeatures.setText("DESCRIPTION\n"+text.getDescription()+"\n\nFEATURES\n"+text.getFeature());
                     character.chosenBackground=text;
-                    character.backgroundSkill1=text.proficiency1;
-                    character.backgroundSkill2=text.proficiency2;
+                    for (Skill skill : Skill.values()) {
+                        if (text.getBgSkill1().equals(skill.viewName)) {
+                                character.backgroundSkill1 = skill;
+                            }
+                        if (text.getGetBgSkill2().equals(skill.viewName)) {
+                            character.backgroundSkill2 = skill;
+                        }
+                    }
+                    //character.backgroundSkill1=text.proficiency1;
+                    //character.backgroundSkill2=text.proficiency2;
                     character.setProficiencySkillsMap();
                     }
                 }

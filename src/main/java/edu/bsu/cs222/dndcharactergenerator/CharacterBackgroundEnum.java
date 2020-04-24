@@ -1,7 +1,11 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
+import java.io.IOException;
+
 public enum CharacterBackgroundEnum {
-    ACOLYTE(0,"Acolyte", Skill.INSIGHT, Skill.RELIGION,
+
+
+   /* ACOLYTE(0,"Acolyte", Skill.INSIGHT, Skill.RELIGION,
             "You have spent your life in the service of a temple\n" +
                     "to a specific god or pantheon of gods. You act as an\n" +
                     "intermediary between the realm of the holy and the\n" +
@@ -286,12 +290,14 @@ public enum CharacterBackgroundEnum {
     public final String feature;
 
 
+
+
     CharacterBackgroundEnum(int index,String viewName, Skill proficiency1, Skill proficency2, String description, String feature){
-        this.index = index;
+        this.index =index;
         this.viewName =viewName;
         this.proficiency1 =proficiency1;
         this.proficiency2=proficency2;
         this.description =description;
         this.feature = feature;
-    }
+    }*/
 }

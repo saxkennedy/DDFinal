@@ -41,7 +41,7 @@ public class PdfGenerator {
             writeDescriptionField();
             writeSavingThrows();
             writeSkills();
-            setField("Background", character.chosenBackground.viewName);
+            setField("Background", character.chosenBackground.getViewName());
             setField("Race ", character.getRace().raceName);
             setField("Initiative", String.valueOf(character.getAttribute(AbilityScore.DEX)));
             setField("Speed",String.valueOf(character.getRace().speed));
@@ -72,7 +72,7 @@ public class PdfGenerator {
         }
         String traitToWrite = racialSpecial + "\n\nFIGHTER TRAITS:\n" + character.getStyle() + "\n\nSecond Wind:\nYou have a limited well of stamina that you can draw on to protect yourself from harm.  " +
                 "On your turn, you can use a bonus action to regain hit " +
-                "points equal to 1d10+your fighter level (1).\n\nBACKGROUND: " + character.chosenBackground.viewName + ":\n" + character.chosenBackground.description + "\n\nBACKGROUND FEATURE:\n" + character.chosenBackground.feature;
+                "points equal to 1d10+your fighter level (1).\n\nBACKGROUND: " + character.chosenBackground.getViewName() + ":\n" + character.chosenBackground.getDescription() + "\n\nBACKGROUND FEATURE:\n" + character.chosenBackground.getFeature();
         setField("Features and Traits", traitToWrite);
 
     }
