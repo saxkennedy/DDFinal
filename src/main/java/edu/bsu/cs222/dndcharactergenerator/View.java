@@ -19,9 +19,9 @@ import java.io.IOException;
 
 public class View extends Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         BackgroundParser parser = new BackgroundParser();
-        parser.runParser();
+        parser.setBackgroundFromJson();
         launch((args));
     }
 
@@ -138,13 +138,13 @@ public class View extends Application {
         TextArea descriptionFeatures= new TextArea();
         descriptionFeatures.setWrapText(true);
         ScrollPane descriptionFeaturesScrollPane=new ScrollPane();
-        for(CharacterBackground viewName : CharacterBackground.values()){
+        for(CharacterBackgroundEnum viewName : CharacterBackgroundEnum.values()){
             backgroundComboBox.getItems().add(viewName.viewName);
         }
         backgroundComboBox.setOnAction(actionEvent ->{
             descriptionFeatures.clear();
             descriptionFeaturesScrollPane.setContent(descriptionFeatures);
-            for( CharacterBackground text : CharacterBackground.values()) {
+            for( CharacterBackgroundEnum text : CharacterBackgroundEnum.values()) {
                 if (backgroundComboBox.getValue().equals(text.viewName)){
                     descriptionFeatures.setText("DESCRIPTION\n"+text.description+"\n\nFEATURES\n"+text.feature);
                     character.chosenBackground=text;

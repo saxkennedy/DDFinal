@@ -23,7 +23,7 @@ public class Character {
     Skill fighterSkill1;
     Skill fighterSkill2;
     int checkCounter = 0;
-    public int proficiencyViaFighterLevel = 2;
+    int proficiencyViaFighterLevel = 2;
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
@@ -32,7 +32,7 @@ public class Character {
     public Map<Skill, Integer> skillMap = new HashMap<>();
 
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
-    public CharacterBackground chosenBackground=null;
+    public CharacterBackgroundEnum chosenBackground=null;
 
     Character(){populateAttributesWithZero();}
 
@@ -200,7 +200,7 @@ public class Character {
         return styleDescription;
     }
 
-    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background) {
+    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackgroundEnum background) {
         final int maxBoxCount = 2;
         CheckBox[] fighterBoxes = new CheckBox[Skill.values().length];
         ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
