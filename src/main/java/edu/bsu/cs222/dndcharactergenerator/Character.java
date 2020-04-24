@@ -16,7 +16,7 @@ public class Character {
     Skill backgroundSkill2;
     Skill fighterSkill1;
     Skill fighterSkill2;
-    int checkCounter = 0;
+
     int proficiencyViaFighterLevel = 2;
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
@@ -155,8 +155,8 @@ public class Character {
     public void setStyle(String style) {
         this.style = style;
     }
+    int counter;
     public void skillAllocate(Skill skill) {
-        int counter = 0;
         if (counter == 0 || (counter > 1 && counter % 2 == 0)) {
             fighterSkill1 = skill;
         } else {
