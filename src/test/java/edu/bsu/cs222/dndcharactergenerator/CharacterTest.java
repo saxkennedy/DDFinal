@@ -4,8 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CharacterTest {
     Character character;
+    Handbook handbook;
 
     @BeforeEach
     public void setup() {
@@ -34,6 +38,17 @@ public class CharacterTest {
         character.counter = 0;
         character.skillAllocate(Skill.ACROBATICS);
         Assertions.assertEquals(Skill.ACROBATICS,character.fighterSkill1);
+    }
+
+    @Test
+    public void testSetRaceAndSetAbilityScore(){
+        character.setAbilityScore(AbilityScore.STR,10);
+        character.setRace(Race.DRAGONBORN);
+        character.setSubrace(Subrace.BLACKDRAGON);
+        character.buildfinalCharacterStats();
+        int expected = 12;
+        int actual = character.getAttribute(AbilityScore.STR);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
@@ -89,7 +104,24 @@ public class CharacterTest {
         character.setStyle("Archery");
         String expected = "+2 bonus to attack rolls made with ranged weapons";
         String actual = book.getStyleDescription("Archery");
+
         Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testGetSubrace(){
+        character.setSubrace(Subrace.HILLDWARF);
+        Subrace actual = character.getSubrace();
+        Subrace expected = Subrace.HILLDWARF;
+        Assertions.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testGetCharacterAttributes(){
+        character.setAbilityScore(AbilityScore.STR,100);
+        Map<CharacterAttribute,Integer> actual = character.getCharacterAttributes();
+        int expected = 100;
+        Assertions.assertEquals(expected,actual.get(AbilityScore.STR));
     }
 
 
