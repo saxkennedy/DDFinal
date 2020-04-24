@@ -13,83 +13,83 @@ without having to go through the hundreds of pages in the books of D&D character
 We also provide a savable pdf that will contain your filled out character sheet for your 
 newly created character!
 
-##Iteration 2: 
+##Iteration 3: 
 
 #####Added Features
-- Background selection
-- Skill proficiency selection
-- Filling of associated fields on PDF
+- Speed now prints on character sheet PDF
+- User can now save their file under a different name than their character.
 
-This is the second iteration of the Level 1 Fighter D&D Character generator, it
-includes updates to features such as; traversable UI, selectable races, selectable fighting
-styles, selectable subraces, randomized dice rolling, and a pdf generator in which
-you can save your file to any location desired. Provided under "User Stories" is 
-the criteria in which we modeled our second iteration after. These are essential
-features to the program and were our top priority when building a working program.
-Under the "Acceptance Test Case" is a unique test designed by us to see if the
-common person can traverse through our program and complete the requested goals.
+This is the third iteration of the Level 1 Fighter D&D Character generator, it
+includes some bugfixes and maintenance for existing features, as well as some 
+new features such as adding speed to the PDF, and allowing a user to change the name 
+of their save file, instead of it always being the same as their character name. 
+Provided under "User Stories" is the criteria in which we modeled our third iteration after.
+These relate to essential features to the program and were our top priority when 
+building a working program for our beloved users.
+Under the "Acceptance Test Cases" are unique tests designed by us to see if the
+common person can traverse through our program and complete the requested goals. 
+These have been updated in accordance with iteration 3 changes. 
 Finally under "Acceptance Test Peer Thoughts" are a handful of responses we have
-collected after asking the subject to perform the Acceptance Test mentioned previously.
+collected after asking the subject to perform the Acceptance Tests mentioned previously.
 This is insight that we will take into consideration when modeling the future iterations.
 
 
 ###User Story:
-
-#####As a 5E D&D player, I want to make a level 1 fighter
-- I will choose a name.
-- I will choose a race from core 5E PHB.
-    - I will choose a subrace if applicable
-- I need the program to create random stats for me using traditional die-rolling methods, but give me the option to not use them.
-- I will choose my fighting style.
-- I will choose my background
-- I will choose my skills
-- I need to have the option to leave customization blank if I am undecided on something
-- I need the ability to go back and change something if I change my mind
-
-#####As a Dnd player, I require a character sheet to be filled out for me
-- I need to choose whether to save this character sheet or not
-    - I need to choose the location to save this file
+#####Story 1
+As a 5E D&D player who is playing a fighter in an upcoming campaign, I want to be able to do the following with the program:
+- Name my character.
+- Select a race from core 5E PHB.
+   		- Select a subrace from a list if a previously selected race has subraces.
+#####Story 2
+As a 5E D&D player who is playing a fighter in an upcoming campaign, I want to be able to do the following with the program:
+- Be able to have my stat rolls determined for me, OR manually input my own.
+- Choose my fighting style from a presented list of styles from the Player’s Handbook.
+#####Story 3
+As a 5E D&D player who is playing a fighter in an upcoming campaign, I want to be able to do the following with the program:
+- Select my background from a presented list of backgrounds from the Player’s Handbook
+- Select proficient skills, but also have the program automatically remove skills already   gained from my previously chosen background.
+- Have a character speed determined from my chosen race.
+#####Story 4
+As a 5E D&D player who is playing a fighter in an upcoming campaign, I want to be able to do the following with the program:
+-I want the option to leave an entire section of the character sheet blank if I am undecided on something, and still be able to generate the sheet.
+- I can have the ability to go back and change something if I change my mind
+#####Story 5
+As a Dnd player, I require a character sheet to be filled out for me and printed to a pdf.
+- This character sheet needs to be savable.
+	- I can to choose the location to save this file
+		- I can name the file whatever I would like
 
 ###Acceptance Test Case:
-1.  Can you create a character named “Trash Boat” that is a “Hill Dwarf” with 16 dexterity 
-and has the “Archery” fighting style. Can you go back and change your character's name 
-to “Dr.Pepper” and change your race to “Dragonborn”
-2.  With a program that is already running and a character already created, can you save
- the generated pdf to the desktop
-3.  Can you select and reselect skills and backgrounds?  In this case select Entertainer, then Animal Handling and Athletics.
+1. Can you create a character named “Trash Boat” that is a “Hill Dwarf” 
+with 16 dexterity and has the “Archery” fighting style. 
+Can you go back and change your character's name to “Dr.Pepper” and change your race to “Dragonborn?”
+
+2. With a program that is already running and a character already created, can you 
+save the generated pdf to a chosen location and name it what you would like?
+
+3. Can you select and reselect skills and backgrounds? In this case select Entertainer, then Animal Handling and Athletics. 
 Then go back and change your background to Urchin, and choose acrobatics and athletics.
 
 ###Acceptance Test Peer Thoughts
-Acceptance Tester 1:
+Acceptance Tester 1 - I was able to use the program very easily. 
+I could go back and change what i had selected previously. 
+When i saved the file i could name it what i liked and put it on my desktop.
 
-This acceptance test was very user friendly and I was able to complete it with no issues what so ever.
-I loved being able to go back and change my abilities and other options when I decided to change my mind.
-Overall I was satisfied with the program and could see myself or someone else using this.
+Acceptance Tester 2 - Thanks to this program I made a level 1 Hill Dwarf fighter named trash boat. 
+I would use this pprogram to make fighter characters in the future. It saves you a good amount of work.
 
-Acceptance Tester 2:
+Acceptance Tester 3 - The program was easy to use and very lightweight. 
+I could click through the pages without selecting certain things and come back to select them, 
+and it still printed out fine. At no point was I confused or stuck with this program.
 
-The test I was given to preform was simple and straight forward. There was not a single page I didn't know
-how to complete or not know what to expect. I would very much like to create my own fighter now and I feel
-like this test gave me the tools to know how to easily traverse this program.
+Acceptance Tester 4 - It looks very nice and would be very usefule for someone creating a level 1 fighter. 
+I would like there to be more class options. Still it is a great program and 
+I was able to do all the testswith no problems 
 
-Acceptance Tester 3:
-
-I completed the acceptance test a lot more smoothly than I originally thought I would because how clear the
-interface was. If it weren't for the easy to read instructions and user friendly capability of the program,
-I can see where there would be many issues. I really enjoyed the scrolling box with the backgrounds, that was
-probably my favorite feature.
-
-Acceptance Tester 4:
-
-After completing the acceptance test given to me I can fairly say that it handles pretty smoothly and does a great
-job of accomplishing its goal. The backgrounds were a nice addition to the program and Im glad to see how they went
-about installing them into it.
-
-Acceptance Tester 5:
-
-After a few minutes of clicking through the program trying to complete the acceptance test, I managed to get through it. 
-I really appreciated the nice UI design that made everything easy to find and made sure you had completed everything 
-that was important to creating my character. I would like to see a feature to rename my pdf file to whatever I choose though.
+Acceptance Tester 5 - I don't know a lot about dungeons and dragons but 
+I feel that this program would help a beginner like me a lot. It tells me exactly what I need to choose and fill out, 
+and it puts everything in its spot on the convenient pdf. I feel like I know a lot more about dungeons and 
+dragons after using this program
 
 ##PHOTOGRAPHIC CONTENT:  
 #####All Images below available for unlimited non-commercial (personal use) courtesy of the listed websites.  Should the program ever be used for commercial purposes, these pictures would be discarded.

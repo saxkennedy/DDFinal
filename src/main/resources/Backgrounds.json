@@ -1,14 +1,12 @@
 [
     {
-      "index":0,
       "viewName":"Acolyte",
       "bgSkill1":"Insight",
       "bgSkill2": "Religion",
-      "description":"GRANTED SKILL PROFICIENCIES: Insight, Religion\nYou have spent your life in the service of a temple\nto a specific god or pantheon of gods. You act as an\nintermediary between the realm of the holy and the\nmortal world, performing sacred rites and offering\nsacrifices in order to conduct worshipers into the\npresence of the divine. You are not necessarily a\ncleric-performing sacred rites is not the same thing as\nchanneling divine power.\nChoose a god, a pantheon of gods, or some other\nquasi-divine being from among those listed in appendix B\nor those specified by your DM, and work with your\nDM to detail the nature of your religious service.\nWere you a lesser functionary in a temple, raised from\nchildhood to assist the priests in the sacred rites? Or\nwere you a high priest who suddenly experienced a call\nto serve your god in a different way? Perhaps you were\nthe leader of a small cult outside of any established\ntemple structure, or even an occult group.",
+      "description":"GRANTED SKILL PROFICIENCIES: Insight, Religion\nYou have spent your life in the service of a temple\nto a specific god or pantheon of gods. You act as an\nintermediary between the realm of the holy and the\nmortal world, performing sacred rites and offering\nsacrifices in order to conduct worshipers into the\npresence of the divine. You are not necessarily a\ncleric performing sacred rites is not the same thing as\nchanneling divine power.\nChoose a god, a pantheon of gods, or some other\nquasi-divine being from among those listed in appendix B\nor those specified by your DM, and work with your\nDM to detail the nature of your religious service.\nWere you a lesser functionary in a temple, raised from\nchildhood to assist the priests in the sacred rites? Or\nwere you a high priest who suddenly experienced a call\nto serve your god in a different way? Perhaps you were\nthe leader of a small cult outside of any established\ntemple structure, or even an occult group.",
       "feature":"SHELTER OF THE FAITHFUL: As an acolyte, you command the respect of those who\nshare your faith, and you can perform the religious\nceremonies of your deity. You and your adventuring\ncompanions can expect to receive free healing and\ncare at a temple, shrine, or other established presence\nof your faith, though you must provide any material\ncomponents needed for spells. Those who share\nyour religion will support you (but only you) at a\nmodest lifestyle.\nYou might also have ties to a specific temple dedicated\nto your chosen deity or pantheon, and you have a\nresidence there. This could be the temple where you\nused to serve, if you remain on good terms with it, or a\ntemple where you have found a new home. While near\nyour temple, you can call upon the priests for assistance,\nprovided the assistance you ask for is not absurd!"
     },
     {
-      "index":1,
       "viewName":"Charlatan",
       "bgSkill1": "Deception",
       "bgSkill2": "Sleight of Hand",
@@ -16,11 +14,70 @@
       "feature":"FALSE IDENTITY: You have created a second identity that includes\ndocumentation, established acquaintances, and\ndisguises that allow you to assume that persona.\nAdditionally, you can forge documents including official\npapers and personal letters, as long as you have seen an\nexample of the kind of document or the handwriting you\nare trying to copy."
     },
     {
-      "index":2,
       "viewName":"Criminal",
       "bgSkill1":"Deception",
       "bgSkill2":"Stealth",
       "description":"GRANTED SKILL PROFICIENCIES: Deception, Stealth\nYou are an experienced criminal with a history of\nbreaking the law. You have spent a lot of time among\nother criminals and still have contacts within the\ncriminal underworld. You are far closer than m ost people\nto the world of murder, theft, and violence that pervades\nthe underbelly of civilization, and you have survived up to\nthis point by flouting the rules and regulations of society.",
       "feature":"CRIMINAL CONTACT: You have a reliable and trustworthy contact who acts as\nyour liaison to a network of other criminals. You know\nhow to get messages to and from your contact, even\nover great distances; specifically, you know the local\nmessengers, corrupt caravan masters, and seedy sailors\nwho can deliver messages for you."
-    }
-  ]
+    },
+  {"viewName":"Entertainer",
+    "bgSkill1": "Acrobatics",
+    "bgSkill2": "Performance",
+    "description": "GRANTED SKILL PROFICIENCIES: Acrobatics, Performance\nYou thrive in front of an audience. You know how to\nentrance them, entertain them, and even inspire them.\nYour poetics can stir the hearts of those who hear you,\nawakening grief or joy, laughter or anger. Your music\nraises their spirits or captures their sorrow. Your dance\nsteps captivate, your humor cuts to the quick. Whatever\ntechniques you use, your art is your life.",
+    "feature": "BY POPULAR DEMAND: You can always find a place to perform, usually in an\ninn or tavern but possibly with a circus, at a theater, or\\n\" +\n            \"even in a the court of a noble. At such a place, you receive free\nlodging and food of a modest or comfortable standard\n(depending on the quality of the establishment), as\nlong as you perform each night. In addition, your\nperformance makes you something of a local figure.\nWhen strangers recognize you in a town where you have\nperformed, they typically take a liking to you."
+  },
+  {"viewName": "Folk Hero",
+    "bgSkill1": "Animal Handling",
+    "bgSkill2": "Survival",
+    "description": "GRANTED SKILL PROFICIENCIES: Animal Handling, Survival\nYou come from a humble social rank, but you are\ndestined for so much more. Already the people of\nyour home village regard you as their champion, and\nnyour destiny calls you to stand against the tyrants and\nmonsters that threaten the common folk everywhere.",
+    "feature": "RUSTIC HOSPITALITY: Since you come from the ranks of the common folk,\nyou fit in among them with ease. You can find a place\nto hide, rest, or recuperate among other commoners,\nunless you have shown yourself to be a danger to\nthem. They will shield you from the law or anyone\nelse searching for you, though they w ill not risk\ntheir lives for you."
+  },
+  {"viewName": "Guild Artisan",
+    "bgSkill1": "Insight",
+    "bgSkill2": "Persuasion",
+    "description": "GRANTED SKILL PROFICIENCIES: Insight, Persuasion\nYou are a member of an artisan guild, skilled in\na particular field and closely associated with other\nartisans. You are an established part of the\nmercantile world, freed by talent and wealth from the\nconstraints of a feudal social order. You learned your\nskills as an apprentice to a master artisan, under the\nsponsorship of your guild, until you became a master in\nyour own right.",
+    "feature": "GUILD MEMBERSHIP: As an established and respected member of a guild, you\ncan rely on certain benefits that membership provides.\nYour fellow guild members will provide you with\nlodging and food if necessary, and pay for your funeral\nif needed. In some cities and towns, a guildhall offers a\ncentral place to meet other members of your profession,\nwhich can be a good place to meet potential patrons,\nallies, or hirelings.\nGuilds often wield tremendous political power. If\nyou are accused of a crime, your guild will support you\nif a good case can be made for your innocence or the\ncrime is justifiable. You can also gain access to powerful\npolitical figures through the guild, if you are a member\nin good standing. Such connections might require the\ndonation of money or magic items to the guild’s coffers.\nYou must pay dues of 5 gp per month to the guild. If\nyou miss payments, you must make up back dues to\nremain in the good graces of the guild."
+  },
+  {"viewName": "Hermit",
+    "bgSkill1": "Medicine",
+    "bgSkill2": "Religion",
+    "description": "GRANTED SKILL PROFICIENCIES: Medicine, Religion\nYou lived in seclusion, either in a sheltered community\nsuch as a monastery, or entirely alone, for a formative\npart of your life. In your time apart from the clamor of\nsociety, you found quiet, solitude, and perhaps some of\nthe answers you were looking for.",
+    "feature": "DISCOVERY: The quiet seclusion of your extended hermitage gave you\naccess to a unique and powerful discovery. The exact\nnature of this revelation depends on the nature of your\nseclusion. It might be a great truth about the cosmos,\nthe deities, the powerful beings of the outer planes, or\nthe forces of nature. It could be a site that no one else\nhas ever seen. You might have uncovered a fact that has\nlong been forgotten, or unearthed some relic of the past\nthat could rewrite history. It might be information that\nwould be damaging to the people who or consigned you\nto exile, and hence the reason for your return to society.\nWork with your DM to determine the details of your\ndiscovery and its impact on the campaign."
+  },
+  {"viewName": "Noble",
+  "bgSkill1": "History",
+  "bgSkill2": "Persuasion",
+  "description": "GRANTED SKILL PROFICIENCIES: History, Persuasion\nYou understand wealth, power, and privilege. You\ncarry a noble title, and your family owns land, collects\ntaxes, and wields significant political influence. You\nmight be a pampered aristocrat unfamiliar with\nwork or discomfort, a former merchant just elevated\nto the nobility, or a disinherited scoundrel with a\ndisproportionate sense of entitlement. Or you could be\nan honest, hardworking landowner who cares deeply\nabout the people who live and work on your land, keenly\naware of your responsibility to them.",
+  "feature": "POSITION OF PRIVILEGE: Thanks to your noble birth, people are inclined to\nthink the best of you. You are welcome in high society,\nand people assume you have the right to be wherever\nyou are. The common folk make every effort to\naccommodate you and avoid your displeasure, and other\npeople of high birth treat you as a member of the same\nsocial sphere. You can secure an audience with a local\nnoble if you need to."
+  },
+  {"viewName": "Outlander",
+    "bgSkill1": "Athletics",
+    "bgSkill2": "Survival",
+    "description": "GRANTED SKILL PROFICIENCIES: Athletics, Survival\nYou grew up in the wilds, far from civilization and the\ncomforts of town and technology. You’ve witnessed the\nmigration of herds larger than forests, survived weather\nmore extreme than any city dweller could comprehend,\nand enjoyed the solitude of being the only thinking\ncreature for miles in any direction. The wilds are in\nyour blood, whether you were a nomad, an explorer, a\nrecluse, a hunter gatherer, or even a marauder. Even in\nplaces where you don’t know the specific features of the\nterrain, you know the ways of the wild.",
+    "feature": "WANDERER: You have an excellent m em ory for maps and geography,\nand you can always recall the general layout of terrain,\nsettlements, and other features around you. In addition,\nyou can find food and fresh water for yourself and up to\nfive other people each day, provided that the land offers\nberries, small game, water, and so forth."
+  },
+  {"viewName": "Sage",
+    "bgSkill1": "Arcana",
+    "bgSkill2": "History",
+    "description": "GRANTED SKILL PROFICIENCIES: Arcana, History\nYou spent years learning the lore of the multiverse. You\nscoured manuscripts, studied scrolls, and listened to the\ngreatest experts on the subjects that interest you. Your\nefforts have made you a master in your fields of study.",
+    "feature": "RESEARCHER: When you attempt to learn or recall a piece of lore, if you\ndo not know that information, you often know where and\nfrom whom you can obtain it. Usually, this information\ncomes from a library, scriptorium, university, or a sage\nor other learned person or creature. Your DM might\nrule that the knowledge you seek is secreted away in an\nalmost inaccessible place, or that it simply cannot be\nfound. Unearthing the deepest secrets of the multiverse\ncan require an adventure or even a whole campaign."
+  },
+  {"viewName": "Sailor",
+    "bgSkill1": "Athletics",
+    "bgSkill2": "Perception",
+    "description": "GRANTED SKILL PROFICIENCIES: Athletics, Perception\nYou sailed on a seagoing vessel for years. In that\ntime, you faced down mighty storms, monsters of the\ndeep, and those who wanted to sink your craft to the\nbottom less depths. Your first love is the distant line of\nthe horizon, but the time has come to try your hand\nat something new.",
+    "feature": "SHIP PASSAGE: hen you need to, you can secure free passage on\na sailing ship for yourself and your adventuring\ncompanions. You might sail on the ship you served on,\nor another ship you have good relations with, perhaps\none captained by a former crewmate. Because you are\ncalling in a favor, you can not be certain of a schedule or\nroute that will meet your every need. Your Dungeon\nMaster will determine how long it takes to get where\nyou need to go. In return for your free passage, you\nand your companions are expected to assist the crew\nduring the voyage."
+  },
+  {"viewName": "Soldier",
+    "bgSkill1": "Athletics",
+    "bgSkill2": "Intimidation",
+    "description": "GRANTED SKILL PROFICIENCIES: Athletics, Intimidation\nWar has been your life for as long as you care to\nremember. You trained as a youth, studied the use of\nweapons and armor, learned basic survival techniques,\nincluding how to stay alive on the battlefield. You\nmight have been part of a standing national army or a\nmercenary company, or perhaps a member of a local\nmilitia who rose to prominence during a recent war.",
+    "feature": "MILITARY RANK: You have a military rank from your career as a soldier.\nSoldiers loyal to your former military organization\nstill recognize your authority and influence, and they\ndefer to you if they are of a lower rank. You can invoke\nyour rank to exert influence over other soldiers and\nrequisition simple equipment or horses for temporary\nuse. You can also usually gain access to friendly\nmilitary encampments and fortresses where your\nrank is recognized."
+  },
+  {"viewName": "Urchin",
+    "bgSkill1": "Sleight of Hand",
+    "bgSkill2": "Stealth",
+    "description": "GRANTED SKILL PROFICIENCIES: Sleight of Hand, Stealth\nYou grew up on the streets alone, orphaned, and poor.\nYou had no one to watch over you or to provide for\nyou, so you learned to provide for yourself. You fought\nfiercely over food and kept a constant watch out for other\ndesperate souls who might steal from you. You slept on\nrooftops and in alleyways, exposed to the elements, and\nendured sickness without the advantage of medicine or\na place to recuperate. You’ve survived despite all odds,\nand did so through cunning, strength, speed, or some\ncombination of each.",
+    "feature": "CITY SECRETS: You know the secret patterns and flow to cities and can\nfind passages through the urban sprawl that others would\nmiss. When you are not in combat, you and companions\nyou lead can travel between any two locations in the city\ntwice as fast as your speed would normally allow."
+  }
+]

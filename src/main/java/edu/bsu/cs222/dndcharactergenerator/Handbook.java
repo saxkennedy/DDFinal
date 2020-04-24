@@ -1,29 +1,32 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.CheckBox;
-import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class Handbook {
-    Handbook(){generateBackgroundArray();}
+    Handbook() {
+        generateBackgroundArray();
+    }
+
     public CharacterBackground[] characterBackgroundArray;
-    public List<Race> getRaces() { return Arrays.asList(Race.values());}
+
+    public List<Race> getRaces() {
+        return Arrays.asList(Race.values());
+    }
+
     public String[] raceNames = new String[]{"Half-Orc: +2 STR, +1 CON", "Dragonborn: +2 STR, +1 CHA", "Dwarf: +2 CON", "Elf: +2 DEX", "Gnome: +2 INT", "Half-Elf: +2 CHA", "Halfling: +2 DEX", "Human: +1 TO ALL STATS", "Tiefling: +2 CHA, +1 INT"};
     public String[] styles = new String[]{"Archery", "Defense", "Dueling", "Great Weapon Fighting", "Protection", "Two-Weapon Fighting",};
 
-    public List<Subrace> getSubracesOfRace(Race race) { return race.subraces != null ? race.subraces : Race.ZEROMAN.subraces; }
+    public List<Subrace> getSubracesOfRace(Race race) {
+        return race.subraces != null ? race.subraces : Race.ZEROMAN.subraces;
+    }
 
-    public CharacterBackground[] generateBackgroundArray(){
+    public CharacterBackground[] generateBackgroundArray() {
         BackgroundParser parser = new BackgroundParser();
         try {
-            characterBackgroundArray =parser.setBackgroundFromJson();
+            characterBackgroundArray = parser.setBackgroundFromJson();
         } catch (IOException e) {
             e.printStackTrace();
         }

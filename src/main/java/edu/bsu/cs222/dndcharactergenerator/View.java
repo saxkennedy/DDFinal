@@ -18,14 +18,12 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
+
+@SuppressWarnings("ALL")
 public class View extends Application {
 
     public static void main(String[] args) throws IOException {
-        BackgroundParser parser = new BackgroundParser();
-        parser.setBackgroundFromJson();
         launch((args));
     }
 
@@ -72,7 +70,7 @@ public class View extends Application {
         coreStatsButtonsHbox.getChildren().addAll(backToName, nextToCombatStyle);
         for (AbilityScore abilityScore: AbilityScore.values()) {//TODO FIX ABILITYSCORE LOOP BASED UPON INCOMING MODEL CHANGES
             Label abilityLabel = new Label(abilityScore.viewName);
-            ComboBox<Integer> abilityInQuestion = new ComboBox();
+            ComboBox<Integer> abilityInQuestion = new ComboBox<>();
             abilityInQuestion.getItems().addAll(character.statNumbers);
             coreStatsVbox.getChildren().addAll(abilityLabel,abilityInQuestion);
             abilityInQuestion.setOnAction(e -> character.setAbilityScore(abilityScore, abilityInQuestion.getValue()));
@@ -142,38 +140,29 @@ public class View extends Application {
         TextArea descriptionFeatures= new TextArea();
         descriptionFeatures.setWrapText(true);
         ScrollPane descriptionFeaturesScrollPane=new ScrollPane();
-        //for(CharacterBackgroundEnum viewName : CharacterBackgroundEnum.values()){
         for(CharacterBackground background : book.characterBackgroundArray){
         backgroundComboBox.getItems().add(background.getViewName());
         }
         backgroundComboBox.setOnAction(actionEvent ->{
             descriptionFeatures.clear();
             descriptionFeaturesScrollPane.setContent(descriptionFeatures);
-            //for( CharacterBackgroundEnum text : CharacterBackgroundEnum.values()) {
-            for(CharacterBackground text : book.characterBackgroundArray){
-                if (backgroundComboBox.getValue().equals(text.getViewName())){
-                    descriptionFeatures.setText("DESCRIPTION\n"+text.getDescription()+"\n\nFEATURES\n"+text.getFeature());
+            for(CharacterBackground text : book.characterBackgroundArray) {
+                if (backgroundComboBox.getValue().equals(text.getViewName())) {
+                    descriptionFeatures.setText("DESCRIPTION\n" + text.getDescription() + "\n\nFEATURES\n" + text.getFeature());
                     character.chosenBackground=text;
                     for (Skill skill : Skill.values()) {
                         if (text.getBgSkill1().equals(skill.viewName)) {
-                                character.backgroundSkill1 = skill;
-                                System.out.println(skill.viewName);
-                            }
+                            character.backgroundSkill1 = skill;
+                            System.out.println(skill.viewName);
+                        }
                         if (text.getBgSkill2().equals(skill.viewName)) {
                             character.backgroundSkill2 = skill;
                             System.out.println(skill.viewName);
                         }
                     }
-                    //character.backgroundSkill1=text.proficiency1;
-                    //character.backgroundSkill2=text.proficiency2;
-                    Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
-                    selectedSkillsMap.clear();
-                    selectedSkillsMap.put(character.backgroundSkill1, 2);
-                    selectedSkillsMap.put(character.backgroundSkill2, 2);
-                    selectedSkillsMap.put(character.fighterSkill1, 2);
-                    selectedSkillsMap.put(character.fighterSkill2, 2);
-                    }
+                    character.setProficiencySkillMap();
                 }
+            }
         });
         HBox skillButtonsHbox = buildHbox(25,Pos.BOTTOM_CENTER);
         skillButtonsHbox.getChildren().addAll(backToRacial,nextToProficiency);
@@ -303,18 +292,13 @@ public class View extends Application {
         for (Skill skill : Skill.values()) {
             CheckBox selbox = new CheckBox(skill.viewName);
             selbox.selectedProperty().addListener(listener0);
-            if ((skill.isFighterOption) && (!skill.equals(background.getBgSkill1()) && (!skill.equals(background.getBgSkill2())))) {
+            if ((skill.isFighterOption) && (!skill.viewName.equals(background.getBgSkill1()) && (!skill.viewName.equals(background.getBgSkill2())))) {
                 innerProficiencyVbox.getChildren().add(selbox);
                 selbox.setOnAction(actionEvent -> {
                     if (selbox.isSelected()) {
-                        checkBoxFlipper(skill,character);
+                        character.skillAllocate(skill);
                     }
-                    Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
-                    selectedSkillsMap.clear();
-                    selectedSkillsMap.put(character.backgroundSkill1, 2);
-                    selectedSkillsMap.put(character.backgroundSkill2, 2);
-                    selectedSkillsMap.put(character.fighterSkill1, 2);
-                    selectedSkillsMap.put(character.fighterSkill2, 2);
+                    character.setProficiencySkillMap();
                 });
             }
             fighterBoxes[counter] = selbox;
@@ -322,13 +306,5 @@ public class View extends Application {
         }
     }
 
-    public void checkBoxFlipper(Skill skill,Character character) {
-        int checkCounter = 0;
-        if (checkCounter == 0 || (checkCounter > 1 && checkCounter % 2 == 0)) {
-            character.fighterSkill1 = skill;
-        } else {
-            character.fighterSkill2 = skill;
-        }
-        checkCounter++;
-    }
+
 }

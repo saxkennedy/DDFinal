@@ -1,31 +1,28 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.CheckBox;
-import javafx.scene.layout.VBox;
-
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 public class Character {
     private String name;
     private String style;
     private Race race;
     private Subrace subrace;
-    private final Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
+    private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
 
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
     Skill backgroundSkill1;
     Skill backgroundSkill2;
     Skill fighterSkill1;
     Skill fighterSkill2;
-    int checkCounter = 0;
+
     int proficiencyViaFighterLevel = 2;
 
     public Map<CharacterAttribute, Integer> getCharacterAttributes() {
         return attributeMap;
     }
+
     public Map<Skill, Integer> skillMap = new HashMap<>();
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
 
@@ -41,7 +38,7 @@ public class Character {
     }
 
     private void addRaceValues() {
-        for (Map.Entry<AbilityScore, Integer> entry : race.getAbilityScoreChanges().entrySet()) {
+        for (Map.Entry<AbilityScore, Integer> entry : this.race.getAbilityScoreChanges().entrySet()) {
             AbilityScore score = entry.getKey();
             int originalValue = entry.getValue();
             int newValue = attributeMap.get(score) + originalValue;
@@ -55,14 +52,14 @@ public class Character {
             AbilityScore score = entry.getKey();
             int originalValue = entry.getValue();
             int newValue = attributeMap.get(score) + originalValue;
-            attributeMap.put(score,newValue);
-            setAbilityScoreModifier(score,newValue);
+            attributeMap.put(score, newValue);
+            setAbilityScoreModifier(score, newValue);
         }
     }
 
     public void setAbilityScore(AbilityScore abilityScore, int value) {
-        attributeMap.put(abilityScore,value);
-        setAbilityScoreModifier(abilityScore,value);
+        attributeMap.put(abilityScore, value);
+        setAbilityScoreModifier(abilityScore, value);
     }
 
 
@@ -132,10 +129,16 @@ public class Character {
 
     public void setRace(Race race) {
         this.race = race;
-        if(this.race.subraces ==null) this.subrace = Subrace.NA;
+        if (this.race.subraces == null) this.subrace = Subrace.NA;
     }
-    public Subrace getSubrace(){return this.subrace;}
-    public void setSubrace(Subrace subrace) { this.subrace = subrace; }
+
+    public Subrace getSubrace() {
+        return this.subrace;
+    }
+
+    public void setSubrace(Subrace subrace) {
+        this.subrace = subrace;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -152,4 +155,21 @@ public class Character {
     public void setStyle(String style) {
         this.style = style;
     }
+    int counter;
+    public void skillAllocate(Skill skill) {
+        if (counter == 0 || (counter > 1 && counter % 2 == 0)) {
+            fighterSkill1 = skill;
+        } else {
+            fighterSkill2 = skill;
+        }
+        counter++;
+    }
+
+    public void setProficiencySkillMap(){
+        selectedSkillsMap.clear();
+        selectedSkillsMap.put(backgroundSkill1, 2);
+        selectedSkillsMap.put(backgroundSkill2, 2);
+        selectedSkillsMap.put(fighterSkill1, 2);
+        selectedSkillsMap.put(fighterSkill2, 2);
+}
 }

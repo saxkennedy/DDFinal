@@ -4,8 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CharacterTest {
     Character character;
+    Handbook handbook;
 
     @BeforeEach
     public void setup() {
@@ -22,24 +26,6 @@ public class CharacterTest {
     }
 
     @Test
-    public void testSetAbilityScoreThenSetRace(){
-        character.setAbilityScore(AbilityScore.STR,10);
-        character.setRace(Race.DRAGONBORN);
-        int expected = 12;
-        int actual = character.getAttribute(AbilityScore.STR);
-        Assertions.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void testSetRaceThenSetAbilityScore(){
-        character.setRace(Race.DRAGONBORN);
-        character.setAbilityScore(AbilityScore.STR,10);
-        int expected = 12;
-        int actual = character.getAttribute(AbilityScore.STR);
-        Assertions.assertEquals(expected,actual);
-    }
-
-    @Test
     public void testSetAbilityScoreModifier(){
         character.setAbilityScore(AbilityScore.STR,20);
         int expected = 5;
@@ -48,19 +34,21 @@ public class CharacterTest {
     }
 
     @Test
-    public void testSetRacialAttribute(){
-        character.setRace(Race.HALFELF);
-        character.setSubrace(Subrace.HIGHELF);
-        int expected = 1;
-        int actual = character.getAttribute(AbilityScore.INT);
-        Assertions.assertEquals(expected,actual);
+    public void testCheckBoxFlipper(){
+        character.counter = 0;
+        character.skillAllocate(Skill.ACROBATICS);
+        Assertions.assertEquals(Skill.ACROBATICS,character.fighterSkill1);
     }
 
     @Test
-    public void testCheckBoxFlipper(){
-        character.checkCounter = 0;
-        character.checkBoxFlipper(Skill.ACROBATICS);
-        Assertions.assertEquals(Skill.ACROBATICS,character.fighterSkill1);
+    public void testSetRaceAndSetAbilityScore(){
+        character.setAbilityScore(AbilityScore.STR,10);
+        character.setRace(Race.DRAGONBORN);
+        character.setSubrace(Subrace.BLACKDRAGON);
+        character.buildfinalCharacterStats();
+        int expected = 12;
+        int actual = character.getAttribute(AbilityScore.STR);
+        Assertions.assertEquals(expected,actual);
     }
 
     @Test
@@ -70,7 +58,7 @@ public class CharacterTest {
         character.fighterSkill1 = Skill.ATHLETICS;
         character.fighterSkill2 = Skill.ANIMALHANDLING;
 
-        character.setProficiencySkillsMap();
+        character.setProficiencySkillMap();
 
         for (Skill s : character.selectedSkillsMap.keySet()) {
             int actual = character.selectedSkillsMap.get(s);
@@ -112,9 +100,24 @@ public class CharacterTest {
 
     @Test
     public void testGetStyleDescription(){
+        Handbook book = new Handbook();
         character.setStyle("Archery");
         String expected = "+2 bonus to attack rolls made with ranged weapons";
-        String actual = character.getStyleDescription("Archery");
+        String actual = book.getStyleDescription("Archery");
+
         Assertions.assertEquals(expected,actual);
     }
+
+    @Test
+    public void testGetSubrace(){
+        character.setSubrace(Subrace.HILLDWARF);
+        Subrace actual = character.getSubrace();
+        Subrace expected = Subrace.HILLDWARF;
+        Assertions.assertEquals(expected,actual);
+    }
+
+
+
+
+
 }
