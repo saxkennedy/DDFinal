@@ -292,7 +292,7 @@ public class View extends Application {
         for (Skill skill : Skill.values()) {
             CheckBox selbox = new CheckBox(skill.viewName);
             selbox.selectedProperty().addListener(listener0);
-            if ((skill.isFighterOption) && (!skill.equals(background.getBgSkill1()) && (!skill.equals(background.getBgSkill2())))) {
+            if ((skill.isFighterOption) && (!skill.viewName.equals(background.getBgSkill1()) && (!skill.viewName.equals(background.getBgSkill2())))) {
                 innerProficiencyVbox.getChildren().add(selbox);
                 selbox.setOnAction(actionEvent -> {
                     if (selbox.isSelected()) {
