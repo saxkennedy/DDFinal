@@ -11,19 +11,19 @@ public class HandbookTest {
     Handbook handbook;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         handbook = new Handbook();
     }
 
     @Test
-    public void testGetRaces(){
+    public void testGetRaces() {
         List<Race> expected = Arrays.asList(Race.values());
         List<Race> actual = handbook.getRaces();
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void testGetSubracesOfRace(){
+    public void testGetSubracesOfRace() {
         List<Subrace> expected = Race.DWARF.subraces;
         List<Subrace> actual = handbook.getSubracesOfRace(Race.DWARF);
     }

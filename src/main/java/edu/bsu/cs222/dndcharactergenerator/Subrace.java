@@ -13,7 +13,6 @@ public enum Subrace implements AbilityScoreChanger {
     ROCKGNOME(0, 0, 1, 0, 0, 0, "Rock Gnome: +1 CON"),
     LIGHTFOOT(0, 0, 0, 0, 0, 1, "Lightfoot: +1 CHA"),
     STOUT(0, 0, 1, 0, 0, 0, "Stout: +1 CON"),
-
     BLACKDRAGON(0, 0, 0, 0, 0, 0, "Black Dragon: Acid"),
     BLUEDRAGON(0, 0, 0, 0, 0, 0, "Blue Dragon: Lightning"),
     BRASSDRAGON(0, 0, 0, 0, 0, 0, "Brass Dragon: Fire"),
@@ -24,10 +23,9 @@ public enum Subrace implements AbilityScoreChanger {
     REDDRAGON(0, 0, 0, 0, 0, 0, "Red Dragon: Fire"),
     SILVERDRAGON(0, 0, 0, 0, 0, 0, "Silver Dragon: Cold"),
     WHITEDRAGON(0, 0, 0, 0, 0, 0, "White Dragon: Cold"),
-    NA(0,0,0,0,0,0,"No subraces for your race!");
+    NA(0, 0, 0, 0, 0, 0, "No subraces for your race!");
 
-
-    private Map<AbilityScore, Integer> attributes;
+    private final Map<AbilityScore, Integer> attributes;
     public final String attributeName;
 
     Subrace(int str, int dex, int con, int intel, int wis, int cha, String attributeName) {

@@ -3,34 +3,27 @@ package edu.bsu.cs222.dndcharactergenerator;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("ALL")
 public class Character {
     private String name;
     private String style;
     private Race race;
     private Subrace subrace;
-    private Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
-
+    private final Map<CharacterAttribute, Integer> attributeMap = new HashMap<>();
     Integer[] statNumbers = new Integer[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22};
     Skill backgroundSkill1;
     Skill backgroundSkill2;
     Skill fighterSkill1;
     Skill fighterSkill2;
-
     int proficiencyViaFighterLevel = 2;
-
-    public Map<CharacterAttribute, Integer> getCharacterAttributes() {
-        return attributeMap;
-    }
-
     public Map<Skill, Integer> skillMap = new HashMap<>();
     public Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
-
     public CharacterBackground chosenBackground = null;
 
     Character() {
         populateAttributesWithZero();
     }
+
+    private int counter;
 
     public void buildfinalCharacterStats() {
         this.addRaceValues();
@@ -155,7 +148,11 @@ public class Character {
     public void setStyle(String style) {
         this.style = style;
     }
-    int counter;
+
+    public Map<CharacterAttribute, Integer> getCharacterAttributes() {
+        return attributeMap;
+    }
+
     public void skillAllocate(Skill skill) {
         if (counter == 0 || (counter > 1 && counter % 2 == 0)) {
             fighterSkill1 = skill;
@@ -165,11 +162,11 @@ public class Character {
         counter++;
     }
 
-    public void setProficiencySkillMap(){
+    public void setProficiencySkillMap() {
         selectedSkillsMap.clear();
         selectedSkillsMap.put(backgroundSkill1, 2);
         selectedSkillsMap.put(backgroundSkill2, 2);
         selectedSkillsMap.put(fighterSkill1, 2);
         selectedSkillsMap.put(fighterSkill2, 2);
-}
+    }
 }

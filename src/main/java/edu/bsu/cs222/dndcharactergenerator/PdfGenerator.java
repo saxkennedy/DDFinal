@@ -1,15 +1,12 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
-import java.lang.Object;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
-import org.apache.pdfbox.pdmodel.font.FontCache;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDCheckBox;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,18 +17,6 @@ public class PdfGenerator {
     private PDDocument newCharacterSheet; // in memory pdf
     private PDAcroForm form; // edits newCharacterSheet's forms
 
-
-    public static final class Builder {
-        private Character character;
-        public Builder setCharacter(Character character) {
-            this.character = character;
-            return this;
-        }
-
-        public PdfGenerator build() {
-            return new PdfGenerator(this);
-        }
-    }
 
     private PdfGenerator(Builder builder) {
         this.character = builder.character;
@@ -47,8 +32,18 @@ public class PdfGenerator {
             setField("Background", character.chosenBackground.getViewName());
             setField("Race ", character.getRace().raceName);
             setField("Initiative", String.valueOf(character.getAttribute(AbilityScore.DEX)));
-            setField("Speed",String.valueOf(character.getRace().speed));
+            setField("Speed", String.valueOf(character.getRace().speed));
         } catch (Exception ignored) {
+        }
+    }
+
+    private void setField(String key, String value) {
+        PDField fieldToWrite = form.getField(key);
+        try {
+            System.setProperty("pdfbox.fontcache", "/resources/.pdfbox.cache");
+            fieldToWrite.setValue(value);
+        } catch (Exception ignored) {
+
         }
     }
 
@@ -62,17 +57,7 @@ public class PdfGenerator {
         }
     }
 
-    private void setField(String key, String value) {
-        PDField fieldToWrite = form.getField(key);
-        try {
-            System.setProperty("pdfbox.fontcache","/resources/.pdfbox.cache");
-            fieldToWrite.setValue(value);
-        }catch(Exception ignored){
-
-        }
-    }
-
-    private void writeDescriptionField(){
+    private void writeDescriptionField() {
         String racialSpecial = "";
         if (character.getRace().equals(Race.DRAGONBORN)) {
             racialSpecial = "Dragonborn Breath Attack:\n" + character.getSubrace().attributeName;
@@ -82,6 +67,11 @@ public class PdfGenerator {
                 "points equal to 1d10+your fighter level (1).\n\nBACKGROUND: " + character.chosenBackground.getViewName() + ":\n" + character.chosenBackground.getDescription() + "\n\nBACKGROUND FEATURE:\n" + character.chosenBackground.getFeature();
         setField("Features and Traits", traitToWrite);
 
+    }
+
+    public void writeNewCharacterSheet(File file) throws IOException {
+        newCharacterSheet.save(file + ".pdf");
+        newCharacterSheet.close();
     }
 
     private void writeSkills() throws IOException {
@@ -115,8 +105,16 @@ public class PdfGenerator {
         form = catalog.getAcroForm();
     }
 
-    public void writeNewCharacterSheet(File file) throws IOException {
-        newCharacterSheet.save(file+".pdf");
-        newCharacterSheet.close();
+    public static final class Builder {
+        private Character character;
+
+        public Builder withCharacter(Character character) {
+            this.character = character;
+            return this;
+        }
+
+        public PdfGenerator build() {
+            return new PdfGenerator(this);
+        }
     }
 }
