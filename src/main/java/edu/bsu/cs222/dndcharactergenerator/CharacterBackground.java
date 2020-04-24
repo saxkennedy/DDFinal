@@ -18,7 +18,7 @@ public class CharacterBackground {
         return bgSkill2;
     }
 
-    public void setGetBgSkill2(String getBgSkill2) {
+    public void getBgSkill2(String getBgSkill2) {
         this.bgSkill2 = bgSkill2;
     }
 

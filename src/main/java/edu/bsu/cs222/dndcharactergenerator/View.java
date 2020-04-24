@@ -1,6 +1,8 @@
 package edu.bsu.cs222.dndcharactergenerator;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,6 +18,8 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class View extends Application {
 
@@ -74,7 +78,7 @@ public class View extends Application {
             abilityInQuestion.setOnAction(e -> character.setAbilityScore(abilityScore, abilityInQuestion.getValue()));
         }
         ComboBox<String> races = new ComboBox<>();
-        races.getItems().addAll(character.raceNames);
+        races.getItems().addAll(book.raceNames);
         coreStatsAndRacialVbox.getChildren().addAll(raceSelection, races, statGeneration, diceRoller, rolledStats, coreStatsVbox, coreStatsButtonsHbox);
         diceRoller.setOnAction(actionEvent -> rolledStats.setText(DiceRoller.getStats().toString()));
         races.setOnAction(actionEvent -> {
@@ -95,7 +99,7 @@ public class View extends Application {
         combatStyleButtonsHbox.getChildren().addAll(backToCore,nextToRacial);
         VBox combatStyleButtonVbox = buildVbox(15,Pos.CENTER,Background.EMPTY);
         ToggleGroup styleGroup = new ToggleGroup();
-        for(String style : character.styles){
+        for(String style : book.styles){
             RadioButton button = new RadioButton(style);
             button.setUserData(style);
             combatStyleButtonVbox.getChildren().add(button);
@@ -162,7 +166,12 @@ public class View extends Application {
                     }
                     //character.backgroundSkill1=text.proficiency1;
                     //character.backgroundSkill2=text.proficiency2;
-                    character.setProficiencySkillsMap();
+                    Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
+                    selectedSkillsMap.clear();
+                    selectedSkillsMap.put(character.backgroundSkill1, 2);
+                    selectedSkillsMap.put(character.backgroundSkill2, 2);
+                    selectedSkillsMap.put(character.fighterSkill1, 2);
+                    selectedSkillsMap.put(character.fighterSkill2, 2);
                     }
                 }
         });
@@ -243,7 +252,7 @@ public class View extends Application {
         nextToBackground.setOnAction(actionEvent -> stage.setScene(backgroundScene));
         nextToProficiency.setOnAction(actionEvent -> {
             innerProficiencyVbox.getChildren().clear();
-            character.selectFighterProficiency(innerProficiencyVbox,character.chosenBackground);
+            selectFighterProficiency(innerProficiencyVbox,character.chosenBackground,character);
             stage.setScene(fighterProficiencyScene);
         });
         nextToSave.setOnAction(actionEvent -> stage.setScene(saveScene));
@@ -261,5 +270,65 @@ public class View extends Application {
         stage.setScene(openAndNameScene);
         stage.setTitle("Dungeons and Dragons Fighter Generator");
         stage.show();
+    }
+
+    public void selectFighterProficiency(VBox innerProficiencyVbox, CharacterBackground background,Character character) {
+        final int maxBoxCount = 2;
+        CheckBox[] fighterBoxes = new CheckBox[Skill.values().length];
+        ChangeListener<Boolean> listener0 = new ChangeListener<Boolean>() {
+            private int listenedCount = 0;
+
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    listenedCount++;
+                    if (listenedCount == maxBoxCount) {
+                        for (CheckBox selBox : fighterBoxes) {
+                            if (!selBox.isSelected()) {
+                                selBox.setDisable(true);
+                            }
+                        }
+                    }
+                } else {
+                    if (listenedCount == maxBoxCount) {
+                        for (CheckBox selBox : fighterBoxes) {
+                            selBox.setDisable(false);
+                        }
+                    }
+                    listenedCount--;
+                }
+            }
+        };
+        int counter = 0;
+
+        for (Skill skill : Skill.values()) {
+            CheckBox selbox = new CheckBox(skill.viewName);
+            selbox.selectedProperty().addListener(listener0);
+            if ((skill.isFighterOption) && (!skill.equals(background.getBgSkill1()) && (!skill.equals(background.getBgSkill2())))) {
+                innerProficiencyVbox.getChildren().add(selbox);
+                selbox.setOnAction(actionEvent -> {
+                    if (selbox.isSelected()) {
+                        checkBoxFlipper(skill,character);
+                    }
+                    Map<Skill, Integer> selectedSkillsMap = new HashMap<>();
+                    selectedSkillsMap.clear();
+                    selectedSkillsMap.put(character.backgroundSkill1, 2);
+                    selectedSkillsMap.put(character.backgroundSkill2, 2);
+                    selectedSkillsMap.put(character.fighterSkill1, 2);
+                    selectedSkillsMap.put(character.fighterSkill2, 2);
+                });
+            }
+            fighterBoxes[counter] = selbox;
+            counter++;
+        }
+    }
+
+    public void checkBoxFlipper(Skill skill,Character character) {
+        int checkCounter = 0;
+        if (checkCounter == 0 || (checkCounter > 1 && checkCounter % 2 == 0)) {
+            character.fighterSkill1 = skill;
+        } else {
+            character.fighterSkill2 = skill;
+        }
+        checkCounter++;
     }
 }
