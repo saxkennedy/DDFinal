@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class CharacterTest {
     Character character;
+    Handbook handbook;
 
     @BeforeEach
     public void setup() {
@@ -58,8 +59,8 @@ public class CharacterTest {
 
     @Test
     public void testCheckBoxFlipper(){
-        character.checkCounter = 0;
-        character.checkBoxFlipper(Skill.ACROBATICS);
+        character.counter = 0;
+        character.skillAllocate(Skill.ACROBATICS);
         Assertions.assertEquals(Skill.ACROBATICS,character.fighterSkill1);
     }
 
@@ -70,7 +71,7 @@ public class CharacterTest {
         character.fighterSkill1 = Skill.ATHLETICS;
         character.fighterSkill2 = Skill.ANIMALHANDLING;
 
-        character.setProficiencySkillsMap();
+        character.setProficiencySkillMap();
 
         for (Skill s : character.selectedSkillsMap.keySet()) {
             int actual = character.selectedSkillsMap.get(s);
@@ -114,7 +115,7 @@ public class CharacterTest {
     public void testGetStyleDescription(){
         character.setStyle("Archery");
         String expected = "+2 bonus to attack rolls made with ranged weapons";
-        String actual = character.getStyleDescription("Archery");
+        String actual = handbook.getStyleDescription("Archery");
         Assertions.assertEquals(expected,actual);
     }
 
