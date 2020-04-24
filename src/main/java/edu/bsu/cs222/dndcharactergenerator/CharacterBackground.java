@@ -14,16 +14,16 @@ public class CharacterBackground {
         this.bgSkill1 = bgSkill1;
     }
 
-    public String getGetBgSkill2() {
-        return getBgSkill2;
+    public String getBgSkill2() {
+        return bgSkill2;
     }
 
     public void setGetBgSkill2(String getBgSkill2) {
-        this.getBgSkill2 = getBgSkill2;
+        this.bgSkill2 = bgSkill2;
     }
 
     private String bgSkill1;
-    private String getBgSkill2;
+    private String bgSkill2;
 
     public int getIndex() {
         return index;

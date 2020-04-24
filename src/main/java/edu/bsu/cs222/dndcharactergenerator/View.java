@@ -153,9 +153,11 @@ public class View extends Application {
                     for (Skill skill : Skill.values()) {
                         if (text.getBgSkill1().equals(skill.viewName)) {
                                 character.backgroundSkill1 = skill;
+                                System.out.println(skill.viewName);
                             }
-                        if (text.getGetBgSkill2().equals(skill.viewName)) {
+                        if (text.getBgSkill2().equals(skill.viewName)) {
                             character.backgroundSkill2 = skill;
+                            System.out.println(skill.viewName);
                         }
                     }
                     //character.backgroundSkill1=text.proficiency1;
